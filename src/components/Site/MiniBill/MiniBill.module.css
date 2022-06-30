@@ -1,0 +1,90 @@
+.checkoutForm {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px 0;
+  margin: 24px 0;
+}
+
+.checkoutFormWrapper {
+  width: 100%;
+  gap: 0 10px;
+}
+
+.checkoutFormWrapper div {
+  width: 90%;
+}
+
+.checkoutForm input {
+  outline: none;
+  border: 1px solid #ccc;
+  padding: 15px;
+  width: 100%;
+  transition:0.1s;
+}
+.checkoutForm input:focus{
+  outline:2px solid #7fad39;
+  border-color: #fff;
+}
+.checkoutBox {
+  background-color: #e2e2e2;
+  padding: 0 20px;
+  height: max-content;
+}
+
+.orderTitle {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 30px;
+  margin-top: 2rem;
+}
+
+.checkoutBox h5 {
+  font-weight: 800;
+  color: #5b5b5b;
+}
+
+.checkoutBox div {
+  margin-bottom: 20px;
+}
+
+.discount {
+  color: red;
+}
+
+.label_name {
+  margin-bottom: 12px;
+}
+
+.total {
+  padding-top: 20px;
+  border-top: 1px solid #000;
+}
+
+.checkoutBtn a {
+  border: none;
+  margin: 12px 0;
+  outline: none;
+  width: 100%;
+  padding: 10px;
+  background-color: #7fad39;
+  color: #fff;
+  font-weight: bold;
+}
+.notify{
+  position: absolute;
+  bottom: 0;
+}
+.inputForm{
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .checkoutBtn a {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 13px 0;
+  }
+
+  
+}

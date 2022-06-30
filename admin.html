@@ -18,18 +18,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .vertical-nav {
-            min-width: 13rem;
-            width: 13rem;
+            /* min-width: 13rem;
+            width: 13rem; */
+            width: 100%;
             height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+            /* position: fixed; */
+            box-shadow: 3px 3px 20px rgb(172 172 172 / 60%);
             transition: all 0.4s;
         }
 
         .navbar ul li a {
-            font-size: 12px;
+            font-size: 1rem;
         }
 
         .navbar ul li {
@@ -37,8 +36,6 @@
         }
 
         .page-content {
-            width: calc(100% - 17rem);
-            margin-left: 13rem;
             transition: all 0.4s;
         }
 
@@ -51,7 +48,7 @@
             margin: 0;
         }
 
-        @media (max-width: 768px) {
+        /* @media (max-width: 768px) {
             #sidebar {
                 margin-left: -17rem;
             }
@@ -69,7 +66,7 @@
                 margin-left: 17rem;
                 width: calc(100% - 17rem);
             }
-        }
+        } */
 
         .media-body {
             text-align: center;
@@ -114,16 +111,25 @@
         .nav-item {
             color: #1A358F;
             font-weight: 600;
+            padding:10px 0px 10px 25px !important ;
+            background-color: #f8f9fa;
+
         }
 
         .nav-items {
             color: #75767E;
-            padding: 0 !important;
-            padding-left: 25px !important;
+            padding-left: 24px !important;
+        }
+        .nav-items .nav-link{
+            font-size: 0.9rem !important;
+        }
+        .nav-items:hover{
+            background-color:  white !important;
         }
 
-        .nav-items:hover {
+        .nav-item:hover {
             color: #1A358F;
+            background-color: #fff;
         }
 
         /* .color-text{
@@ -155,109 +161,136 @@
             font-weight: 500;
             padding: 2px 8px;
         }
-        .output button:hover{
+        .nav-link {
+            width: 100%;
+            height: 100%;
+            font-size: 1.6rem;
+            padding: 6px 0;
+        }
+
+        .output button:hover {
             background-color: #1A358F;
             color: #ffffff;
         }
+
         .user .name-user {
             font-weight: 500;
+        }
+
+        .content {
+            background-color: #F5F5F5;
+            width: 100%;
+          height: 100vh;
+          padding: 12px;
+        }
+        .wrapSidebar{
+        }
+        .navbar {
+            padding-top: 0;
+            min-width: 272px;
         }
     </style>
 </head>
 
 <body>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <div class="navbar">
-        <div class="vertical-nav bg-white" id="sidebar">
-            <div class="py-4 px-3 mb-1 bg-white">
-                <div class="media d-flex align-items-center"><img src="image 63.png" alt="" width="65"
-                        class="mr-3  shadow-sm">
-                    <div class="media-body">
-                        <h6 class="m-0 ml-5"><i class="far fa-bell"></i></h6>
-                    </div>
-                </div>
-            </div>
-            <p class="text-gray font-weight-bold text-uppercase px-3 small pb-2 mb-0">Hệ Thống Quản Lý Cửa Hàng</p>
-            <ul class="nav flex-column bg-white mb-0">
-                <li class="nav-item">
-                    <a href="" class="nav-link   bg-light">
-                        <i class="far fa-home-lg-alt"></i>
-                        Dashboard
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a href="" class="nav-link   bg-light">
-                        <i class="far fa-laptop"></i>
-                        Thiết bị
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link   bg-light">
-                        <i class="fas fa-envelope"></i>
-                        Yêu cầu
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class=" collapsed accordion-header nav-link  bg-light" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        <i class="far fa-cog"></i> Quản lý
-                    </a>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample">
-                        <div class="">
-                            <ul class="nav flex-column bg-white mb-0">
-                                <li class="nav-items cb nav-link   bg-light">
-                                    <a href="" class="nav-link   bg-light">
-                                        Quản lý quyền bán hàng
-                                    </a>
-                                </li>
-                                <li class="nav-items cb nav-link   bg-light">
-                                    <a href="" class="nav-link   bg-light">
-                                        Quản lý quyền bán hàng
-                                    </a>
-                                </li>
-                                <li class="nav-items cb nav-link   bg-light">
-                                    <a href="" class="nav-link   bg-light">
-                                        Quản lý quyền bán hàng
-                                    </a>
-                                </li>
-                                <li class="nav-items cb nav-link   bg-light">
-                                    <a href="" class="nav-link   bg-light">
-                                        Quản lý quyền bán hàng
-                                    </a>
-                                </li>
-
-                            </ul>
+    <div class="row">
+        <div class="navbar col-lg-2 col-md-3">
+            <div class="vertical-nav bg-white wrapSidebar" id="sidebar">
+                <div class="py-4 px-3 mb-1 bg-white">
+                    <div class="media d-flex align-items-center"><img src="" alt="" width="65"
+                            class="mr-3  shadow-sm">
+                        <div class="media-body">
+                            <h6 class="m-0 ml-5"><i class="far fa-bell"></i></h6>
                         </div>
                     </div>
-                </li>
-
-                <li class="nav-item">
-                    <a href="" class="nav-link   bg-light">
-                        <i class="fad fa-clipboard"></i>
-                        Nội quy
-                    </a>
-                </li>
-            </ul>
-            <div class="user">
-                <div class="img-user">
-                    <img src="https://img.docbao.vn/images/fullsize/2018/03/08/co-gai-9.jpg" width="40" alt="">
                 </div>
-                <div class="output">
-                    <div class="name-user">
-                        Trần Văn Hòa
+                <p class="text-gray font-weight-bold text-uppercase px-3 small pb-2 mb-0">Hệ Thống Quản Lý Cửa Hàng</p>
+                <ul class="nav flex-column bg-white mb-0">
+                    <li class="nav-item">
+                        <a href="" class="nav-link   ">
+                            <i class="far fa-home-lg-alt"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a href="" class="nav-link   ">
+                            <i class="far fa-laptop"></i>
+                            Thiết bị
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link   ">
+                            <i class="fas fa-envelope"></i>
+                            Yêu cầu
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class=" collapsed accordion-header nav-link  " type="button"
+                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                            aria-controls="flush-collapseOne">
+                            <i class="far fa-cog"></i> Quản lý
+                        </a>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="">
+                                <ul class="nav flex-column bg-white mb-0">
+                                    <li class="nav-items cb nav-link   ">
+                                        <a href="" class="nav-link  ">
+                                            Quản lý quyền bán hàng
+                                        </a>
+                                    </li>
+                                    <li class="nav-items cb nav-link  ">
+                                        <a href="" class="nav-link   ">
+                                            Quản lý quyền bán hàng
+                                        </a>
+                                    </li>
+                                    <li class="nav-items cb nav-link   ">
+                                        <a href="" class="nav-link   ">
+                                            Quản lý quyền bán hàng
+                                        </a>
+                                    </li>
+                                    <li class="nav-items cb nav-link   ">
+                                        <a href="" class="nav-link   ">
+                                            Quản lý quyền bán hàng
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="fad fa-clipboard"></i>
+                            Nội quy
+                        </a>
+                    </li>
+                </ul>
+                <div class="user">
+                    <div class="img-user">
+                        <img src="https://img.docbao.vn/images/fullsize/2018/03/08/co-gai-9.jpg" width="40" alt="">
                     </div>
-                    <div class="out">
-                        <button>
-                            Đăng xuất
-                        </button>
+                    <div class="output">
+                        <div class="name-user">
+                            Trần Văn Hòa
+                        </div>
+                        <div class="out">
+                            <button>
+                                Đăng xuất
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-    <div class="page-content p-5" id="content">
+        </div>
+        <div class="page-content col-lg-10 col-md-9" id="content">
+            <div class="content">
+                ashf
+            </div>
+        </div>
     </div>
 
 

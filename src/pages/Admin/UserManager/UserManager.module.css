@@ -1,0 +1,285 @@
+.main {
+    width: 100%;
+    background-color: #e5e5e5;
+    min-height: 100vh;
+    padding: 20px 50px;
+    flex: 1;
+}
+.main * {
+    transition: 0.3s;
+    font-size: 14px;
+}
+.control {
+    margin: 14px 0 28px 0;
+}
+p.title {
+    color: #1a358f;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+.title svg {
+    transform: translateY(2px);
+    font-size: 25px;
+    margin-right: 16px;
+}
+.search {
+    width: 744px;
+    height: 40px;
+    display: flex;
+}
+.search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 9px 16px;
+}
+.searchIcon {
+    height: 40px;
+    width: 40px;
+    background-color: #e9ebf4;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.searchIcon svg {
+    color: #1a358f;
+}
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.rightSideBtn,
+.rightSideOption {
+    display: flex;
+}
+.rightSideBtn {
+    justify-content: flex-end;
+}
+.status,
+.position {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+.statusOption,
+.positionOption {
+    z-index: 3;
+    position: absolute;
+    background-color: #fff;
+    padding: 0;
+    /* transform: translate(-9px, 35px); */
+    transform: translate(32px, 2px);
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    display: none;
+}
+
+.statusOption.active,
+.positionOption.active {
+    display: block;
+}
+.statusOption > li,
+.positionOption > li {
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+    width: 160px;
+    min-height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.status span,
+.position span {
+    flex: 1;
+    color: #75767e;
+}
+.status svg,
+.position svg {
+    color: #75767e;
+}
+.rightSideBtn button {
+    border: none;
+    border-radius: 4px;
+}
+.btnAdd {
+    height: 36px;
+    width: 170px;
+    color: #fff;
+    background-color: #1a358f;
+    margin-right: 10px;
+}
+.btnAdd svg {
+    margin-right: 8px;
+}
+.btnImport {
+    height: 40px;
+    width: 127px;
+    color: #1a358f;
+    background-color: #fff;
+}
+.btnImport svg {
+    margin-right: 8px;
+}
+.rightSideOption {
+    flex-direction: row-reverse;
+}
+
+.rightSideOption .status,
+.rightSideOption .position {
+    height: 40px;
+    width: 168px;
+    background-color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+.rightSideOption .position {
+    margin-left: 25px;
+}
+.table th {
+    font-weight: 600;
+    color: #1a358f;
+}
+.table th {
+    display: table-cell;
+    vertical-align: middle;
+}
+.tableHeader {
+    background-color: #e9ebf4;
+    font-weight: 600;
+    color: #1a358f;
+}
+.tableHeader .rs-table-cell-content {
+    height: 70px !important;
+}
+.table thead th {
+    text-align: center;
+}
+.table tbody tr {
+    height: 76px;
+    background-color: #fff;
+}
+.table tbody img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.pagination {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+.pagination span {
+    line-height: 32px;
+}
+.tableRole div {
+    width: 112px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tableRole div * {
+    font-size: 12px;
+}
+.table .on {
+    background-color: #e6f7ff;
+    color: #3488ed;
+    padding: 6px 12px;
+}
+.table .off {
+    background-color: #ebebeb;
+    color: #9f9f9f;
+    padding: 6px 12px;
+}
+.cellCenter div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* -------------------------PC--------------------- */
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+    .main {
+        width: fit-content;
+
+    }
+    .rightSideOption .status,
+    .rightSideOption .position {
+        height: 40px;
+        width: 120px;
+        padding: 8px 16px;
+    }
+    .rightSideOption .position {
+        margin-left: 20px;
+    }
+    .search {
+        width: 100%;
+    }
+    .rightSideBtn > button {
+        padding: 0;
+    }
+}
+
+/* -------------------------tablets & mobile--------------------- */
+@media only screen and (max-width: 1023px) {
+    .main {
+        padding: 0 30px;
+    }
+    .rightSideOption .status,
+    .rightSideOption .position {
+        height: 40px;
+        width: 120px;
+        padding: 8px 16px;
+    }
+    .rightSideOption .position {
+        margin-left: 20px;
+    }
+    .search {
+        width: 100%;
+    }
+    .table tbody td {
+        text-align: center;
+    }
+}
+/* -------------------------large PC--------------------- */
+@media only screen and (min-width: 1440px) {
+    .main {
+    }
+}
+
+/* -------------------------tablets--------------------- */
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+    .table tbody td {
+        font-size: 10px;
+    }
+    .table tbody img {
+        height: 35px;
+        width: 35px;
+    }
+    .search {
+        width: 90%;
+    }
+    .rightSideBtn .btnAdd,
+    .rightSideBtn .btnImport {
+        padding: 0;
+        font-size: 12px;
+    }
+    .rightSideBtn .btnAdd {
+        width: 175px;
+    }
+    .tableRole div {
+        width: 80px;
+        font-size: 11px;
+    }
+}
+
+/* -------------------------mobile--------------------- */
+@media only screen and (min-width: 481px) and (max-width: 739px) {
+}
+
+/* -------------------------small mobile--------------------- */
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+}
