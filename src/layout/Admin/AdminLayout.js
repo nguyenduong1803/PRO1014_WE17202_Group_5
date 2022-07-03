@@ -19,6 +19,9 @@ import OrderManager from "../../pages/Admin/OrderManager/OrderManager";
 import OrderDetail from "../../pages/Admin/OrderManager/OrderDetail/OrderDetail";
 import EditProduct from "../../pages/Admin/Equipmentmanagement/EditProduct/EditProduct";
 import AddPostDetail from "../../pages/Admin/ManagePosts/AddPostDetail/AddPostDetail"
+import ProductCategory from "../../pages/Admin/ProductCategory/ProductCategory";
+import AddCategory from "../../pages/Admin/ProductCategory/AddCategory/AddCategory";
+import EditCategory from "../../pages/Admin/ProductCategory/EditCategory/EditCategory";
 
 function AdminLayout() {
   return (
@@ -60,6 +63,19 @@ function AdminLayout() {
                   path="/admin/chi-tiet-don-hang"
                   component={OrderDetail}
                 />
+                <Route
+                  path="/admin/phan-loai-danh-muc"
+                  component={ProductCategory}
+                />
+                <Route
+                  path="/admin/them-dang-muc"
+                  component={AddCategory}
+                />
+                <Route
+                  path="/admin/sua-danh-muc"
+                  component={EditCategory}
+                />
+                
               </Switch>
               </BlogProvider>
             </DataProvider>

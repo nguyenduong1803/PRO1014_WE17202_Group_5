@@ -2,11 +2,9 @@ import React, { useState } from 'react'
 import styles from './Register.module.css'
 import FBImg from '../../../assets/images/social-icons/FBImg.png'
 import GmailImg from '../../../assets/images/social-icons/GmailImg.png'
-import logoMau from "../../../assets/images/logomau.png"
+import logoMau from "../../../assets/img/logoSea.png"
+
 import { Link } from "react-router-dom";
-
-
-
 
 function Register() {
     function detectBlank(e) {
@@ -35,8 +33,8 @@ function Register() {
 
 
     return (
-        <div className={`${styles.main} row`}>
-            <div className={`${styles.sideBar} col-3`}>
+        <div className={`${styles.main} d-flex`}>
+            <div className={`${styles.sideBar}`}>
 
                 <div className={`${styles.signUp}`}>
                     <Link to="/" className={`${styles.logo}`}>
@@ -83,7 +81,7 @@ function Register() {
 
                         <p style={{ textAlign: `center` }}>
                             Bạn đã có tài khoản ?
-                            <Link to="/dang-nhap">
+                            <Link to="/admin/dang-nhap">
 
                                 <span
                                     className={`${styles.changeForm}`}

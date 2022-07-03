@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './Login.module.css'
 import FBImg from '../../../assets/images/social-icons/FBImg.png'
 import GmailImg from '../../../assets/images/social-icons/GmailImg.png'
-import logoMau from "../../../assets/images/logomau.png"
+import logoMau from "../../../assets/img/logoSea.png"
 import { Link } from "react-router-dom";
 import { setUserSession } from '../../../utils/Common'
 import axios from 'axios'
@@ -58,8 +58,8 @@ function Login(self) {
             });
     };
     return (
-        <div className={`${styles.main} row`}>
-            <div className={`${styles.sideBar} col-3`}>
+        <div className={`${styles.main} d-flex`}>
+            <div className={`${styles.sideBar} `}>
 
                 <div className={`${styles.Login}`}>
                     <Link to="/" className={`${styles.logo}`}>
@@ -114,7 +114,7 @@ function Login(self) {
                     </div>
                     <p style={{ textAlign: `center` }}>
                         Bạn chưa có tài khoản ?
-                        <Link to="/dang-ky" className={`${styles.changeForm}`}>
+                        <Link to="/admin/dang-ky" className={`${styles.changeForm}`}>
                             Đăng ký ngay
                         </Link>
                     </p>
@@ -124,6 +124,7 @@ function Login(self) {
             <div className={`${styles.banner} col-9`}>
                 <div className={`${styles.context}`}>
                     <h1>Pure Css Animated Background</h1>
+                    {/* <img src={logoMau} alt=""/> */}
                 </div>
                 <div className={`${styles.area}`}>
                     <ul className={`${styles.circles}`}>

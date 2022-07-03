@@ -11,6 +11,8 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import GroupIcon from '@mui/icons-material/Group';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import AssistantPhotoIcon from '@mui/icons-material/AssistantPhoto';
+
 function Sidebar() {
   const [showNoti, setShowNoti] = useState(false);
   let pathname = window.location.pathname.split("/")[2];
@@ -143,6 +145,18 @@ function Sidebar() {
 
             <GroupIcon className={`${styles.icon}`} />
             <span >Người dùng</span>
+          </div>
+        </NavLink>
+
+        <NavLink
+          to={`/admin/phan-loai-danh-muc`}
+          onClick={() => setShowNoti(false)}
+        >
+          <div className={styles.navLink}
+            style={pathname === `/admin/phan-loai-danh-muc` ? { backgroundColor: `#f3f5f9`, fontWeight: 400 } : {}}>
+
+            <AssistantPhotoIcon className={`${styles.icon}`} />
+            <span >Phân loại danh mục</span>
           </div>
         </NavLink>
 

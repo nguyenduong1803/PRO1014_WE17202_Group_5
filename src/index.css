@@ -115,6 +115,9 @@ ul,
 li {
   list-style: none;
 }
+input{
+  outline:none;
+}
 blockquote,
 q {
   quotes: none;
@@ -156,6 +159,8 @@ html {
   --yeallow: #f4cc3d;
   --red: #df3d3d;
   --orange: #F27400;
+  --text-color: rgba(0,0,0,0.55);
+  --primaryColor:#EA6A12;
 }
 /* 
 html::-webkit-scrollbar {
@@ -176,9 +181,3 @@ html::-webkit-scrollbar-thumb:hover {
 } */
 
 
-:root {
-  --purple: #1a358f;
-  --yeallow: #f4cc3d;
-  --red: #df3d3d;
-  --orange: #F27400;
-}

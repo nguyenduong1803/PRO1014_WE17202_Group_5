@@ -9,7 +9,7 @@ import "rsuite-table/dist/css/rsuite-table.css";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
 import Pagination from "../../../extensions/Pagination/Pagination";
 import { OrderContext } from "../../../contexts/OrderContext";
-
+import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 let PageSize = 10;
 
 const OrderManager = () => {
@@ -32,7 +32,7 @@ const OrderManager = () => {
       const firstPageIndex = (currentPage - 1) * PageSize;
       const lastPageIndex = firstPageIndex + PageSize;
       setdataSliced(
-        orders
+        orders &&  orders
           .filter((e) => e.name.toLowerCase().indexOf(searchValue) !== -1)
           .filter((e) => e.address.indexOf(sortStatus) !== -1)
           .filter((e) => e.phoneNumber.indexOf(sortPosition) !== -1)
@@ -102,6 +102,7 @@ const OrderManager = () => {
   );
   return (
     <>
+    <Sidebar/>
       <div className={styles.Account}>
         <Breadcrumbs breadItem={breadcrumItem} />
         <div className={`${styles.AccountMain} row`}>

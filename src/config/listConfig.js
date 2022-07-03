@@ -1,3 +1,7 @@
+
+import table from "../assets/img/table.png"
+import menus from "../assets/img/menu.png"
+import bill from "../assets/img/bill.png"
 // category
 export const listCategory = [
     {
@@ -35,4 +39,22 @@ export const menu = [
         name: "Liên Hệ",
         path: ""
     },
+]
+export const listMenu=[
+    {
+        name:"Danh sách bàn",
+        to:"/table",
+        icon:table
+    },
+    {
+        name:"Danh sách Menu",
+        to:"/menu",
+        icon:menus
+    },
+    {
+        name:"Hóa đơn",
+        to:"/orders",
+        icon:bill
+    },
+   
 ]
