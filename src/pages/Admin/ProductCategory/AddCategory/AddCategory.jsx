@@ -4,7 +4,7 @@ import Header from "../../../../components/Admin/Header/Header";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import Switch from "@mui/material/Switch";
 import Loadings from "../../../../components/Site/Loadings/Loadings";
-
+import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
 const AddCategory = () => {
     const [status, setStatus] = useState(true);
     const [loading, setLoading] = useState(false);
@@ -24,6 +24,7 @@ const AddCategory = () => {
       ];
   return (
     <>
+    <Sidebar/>
      {window.innerWidth <= 425 && <Header />}
       <div className={`${styles.main}`}>
         <Breadcrumbs breadItem={breadcrumItem} />

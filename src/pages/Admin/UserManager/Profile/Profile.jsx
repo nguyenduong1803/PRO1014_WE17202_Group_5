@@ -4,7 +4,7 @@ import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import { UserContext } from '../../../../contexts/UserContext';
 import { OrderContext } from '../../../../contexts/OrderContext';
 import OrderHistory from "./OrderItems/ordersHistory/orderHistory";
-
+import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
 const Profile = () => {
   const { user } = useContext(UserContext)
   const { orders } = useContext(OrderContext)
@@ -47,6 +47,8 @@ const Profile = () => {
   }
   return (
 
+    <>
+    <Sidebar/>
     <div className={`${styles.main}  `}>
       <Breadcrumbs breadItem={breadcrumItem} />
       <div className={`${styles.content} row`}>
@@ -183,6 +185,7 @@ const Profile = () => {
 
 
     </div >
+    </>
   );
 };
 

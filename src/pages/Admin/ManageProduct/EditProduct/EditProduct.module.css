@@ -154,6 +154,40 @@ input[type="number"] {
     opacity: 0.8;
     border: 1px solid #ddd;
 }
+/* form image */
+.imgsWrapper {
+    position: relative;
+    display: flex;
+}
+.imgsWrapper div,
+.imgsWrapper img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+.imgsWrapper div {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-style: dashed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imgsWrapper img + img,
+.imgsWrapper div + div {
+    margin-left: 30px;
+}
+.uploadImg > label {
+    padding: 6px 12px;
+    background-color: var(--purple);
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 40px;
+}
+.uploadImg > input[type="file"] {
+    display: none;
+}
 
 /* -------------------------mobile--------------------- */
 @media only screen and (max-width: 739px) {

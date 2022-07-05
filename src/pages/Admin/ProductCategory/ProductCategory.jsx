@@ -7,114 +7,76 @@ import SearchIcon from "@mui/icons-material/Search";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
-
+import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
+import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
 const ProductCategory = () => {
 
-    const EditCell = ({ rowData, dataKey, ...props }) => (
-        <Table.Cell {...props}>
-          <div className={styles.Celll}>
-            <Link
-              to={{
-                // pathname: `/admin/sua-san-pham`,
-                // search: `#${rowData[dataKey]}`,
-              }}
-              className={`${styles.btnEdit} `}
-              role="button"
-            >
-              Sửa
-            </Link>
-            <button
-              className={`${styles.btnDelete}`}
-            //   onClick={() => setIdProduct(rowData[dataKey])}
-              role="button"
-              data-toggle="modal"
-              data-target="#exampleModal"
-            >
-              Xóa
-            </button>
-          </div>
-        </Table.Cell>
-      );
+  const EditCell = ({ rowData, dataKey, ...props }) => (
+    <Table.Cell {...props}>
+      <div className={styles.Celll}>
+        <Link
+          to={{
+            // pathname: `/admin/sua-san-pham`,
+            // search: `#${rowData[dataKey]}`,
+          }}
+          className={`${styles.btnEdit} `}
+          role="button"
+        >
+          Sửa
+        </Link>
+        <button
+          className={`${styles.btnDelete}`}
+          //   onClick={() => setIdProduct(rowData[dataKey])}
+          role="button"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Xóa
+        </button>
+      </div>
+    </Table.Cell>
+  );
 
-      const ImageCell = ({ rowData, dataKey, ...props }) => (
-        <Table.Cell {...props} style={{ padding: 0 }}>
-          <div
-            style={{
-              width: 40,
-              height: 40,
-              background: "#f5f5f5",
-              borderRadius: 20,
-              marginTop: 2,
-              overflow: "hidden",
-              display: "inline-block",
-            }}
-          >
-            <img src={rowData[dataKey] && Object.values(rowData[dataKey]).join('')} alt="" width="100%" />
-          </div>
-        </Table.Cell>
-      );
+  const ImageCell = ({ rowData, dataKey, ...props }) => (
+    <Table.Cell {...props} style={{ padding: 0 }}>
+      <div
+        style={{
+          width: 40,
+          height: 40,
+          background: "#f5f5f5",
+          borderRadius: 20,
+          marginTop: 2,
+          overflow: "hidden",
+          display: "inline-block",
+        }}
+      >
+        <img src={rowData[dataKey] && Object.values(rowData[dataKey]).join('')} alt="" width="100%" />
+      </div>
+    </Table.Cell>
+  );
 
-    const breadcrumItem = [
-        {
-          href: "/",
-          title: "Quản lý",
-          isActive: false,
-        },
-        {
-          href: "/phan-loai-danh-muc",
-          title: "Quản lý phân loại danh mục",
-          isActive: true,
-        },
-      ];
+  const breadcrumItem = [
+    {
+      href: "/",
+      title: "Quản lý",
+      isActive: false,
+    },
+    {
+      href: "/phan-loai-danh-muc",
+      title: "Quản lý phân loại danh mục",
+      isActive: true,
+    },
+  ];
+  const handleDeleteProduct = () => {
+    console.log("delete")
+  }
   return (
     <>
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Xóa sản phẩm
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className={`${styles.modelbody} modal-body text-center`}>
-              Bạn chắc chắn muốn xóa sản phẩm ?
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className={styles.ModelBtn}
-                data-dismiss="modal"
-              >
-                Quay lại
-              </button>
-              <button
-                data-dismiss="modal"
-                // onClick={(e) => handleDeleteProduct(idProduct)}
-                type="button"
-                className={styles.ModelBtnDelete}
-                role="button"
-              >
-                Xóa
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Sidebar />
+      <ModalDelete
+        idProduct={1}
+        handleDeleteProduct={handleDeleteProduct}
+      />
       <div className={`${styles.Equipment}`}>
         <Breadcrumbs breadItem={breadcrumItem} />
         <div className={`${styles.EquipmentMain} row`}>
@@ -127,7 +89,7 @@ const ProductCategory = () => {
               <input
                 type="text"
                 placeholder="Tìm kiếm "
-                // onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
+              // onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
               />
               <div className={`${styles.searchIcon}`}>
                 <SearchIcon />
@@ -155,9 +117,9 @@ const ProductCategory = () => {
         <div className={styles.profile}>
           <div className={`${styles.Profiletable} mt-4`}>
             <Table
-            //   data={dataSliced.filter((e) =>
-            //     e.name.toLowerCase().includes(searchValue)
-            //   )}
+              //   data={dataSliced.filter((e) =>
+              //     e.name.toLowerCase().includes(searchValue)
+              //   )}
               rowHeight={55}
               height={600}
             >
@@ -180,25 +142,25 @@ const ProductCategory = () => {
                   Mã danh mục
                 </Table.HeaderCell>
                 <Table.Cell dataKey="_id" />
-              </Table.Column> 
+              </Table.Column>
 
               <Table.Column align="center" width={250}>
                 <Table.HeaderCell className={styles.HeaderCell}>
                   Tên danh mục
                 </Table.HeaderCell>
                 <Table.Cell dataKey="_id" />
-              </Table.Column> 
+              </Table.Column>
               <Table.Column align="center" width={250}>
                 <Table.HeaderCell className={styles.HeaderCell}>
                   Loại danh mục
                 </Table.HeaderCell>
                 <Table.Cell dataKey="_id" />
-              </Table.Column>                    
+              </Table.Column>
               <Table.Column align="center" width={150} fixed="right">
                 <Table.HeaderCell className={styles.HeaderCell}>
                   Quản lý
                 </Table.HeaderCell>
-                <EditCell  />
+                <EditCell />
               </Table.Column>
             </Table>
           </div>

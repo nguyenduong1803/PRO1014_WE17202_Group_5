@@ -3,10 +3,11 @@ import styles from "../EditProduct/EditProduct.module.css";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import Switch from "@mui/material/Switch";
 import axios from "axios";
-import {useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Header from "../../../../components/Admin/Header/Header";
 import { DataContext } from "../../../../contexts/DataContext";
-
+import ShowCategory from "../../../../components/Admin/ShowCategory/ShowCategory"
+import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
 function EditProduct() {
   const { data } = useContext(DataContext);
   const [status, setStatus] = useState(true);
@@ -14,16 +15,17 @@ function EditProduct() {
   const [saleDateStart, setSaleDateStart] = useState();
   const [saleDateEnd, setSaleDateEnd] = useState();
   const [img, setImg] = useState("");
-  const History = useHistory();
+  const [imgUrls, setImgUrls] = useState("");
+  const [imgBase64, setImgBase64] = useState("");
+
+  const history = useHistory();
   const [imgs, setImgs] = useState([]);
 
 
   const idProduct = window.location.hash.split("#")[1];
   const productDetailt = data && data.find((e) => e?._id === idProduct);
- // console.log(productDetailt.timeCreate);
-  const abc = productDetailt?.timeCreate;
-  const acb = abc.split(",");
- const cvf = acb[0]
+  // console.log(productDetailt.timeCreate);
+  
   const [registerForm, setRegisterForm] = useState({
     name: productDetailt?.name,
     _id: productDetailt?._id,
@@ -36,8 +38,15 @@ function EditProduct() {
     comment: [],
     status: productDetailt?.status,
     unit: "Kg",
-   // timeDiscount: [{ start: productDetailt?.timeCreate, end: productDetailt?.timeCreate }],
+    // timeDiscount: [{ start: productDetailt?.timeCreate, end: productDetailt?.timeCreate }],
   });
+  function getBase64(file, cb) {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      return cb(reader.result);
+    };
+  }
 
   useEffect(() => {
     if (saleDateStart && saleDateEnd) {
@@ -75,14 +84,21 @@ function EditProduct() {
     setRegisterForm({
       ...registerForm,
       [event.target.name]: event.target.value,
-      
+
     });
   };
 
   function getImg(e) {
-    const urlImg = URL.createObjectURL(e.target.files[0]);
-    setImg(urlImg);
+    for (let i = 0; i < e.target.files.length; i++) {
+      setImgUrls((prev) => [...prev, URL.createObjectURL(e.target.files[i])]);
+
+      getBase64(e.target.files[i], (result) => {
+        setImgBase64((prev) => [...prev, result]);
+      });
+
+    }
   }
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -97,24 +113,25 @@ function EditProduct() {
     formData.append("status", registerForm.status);
     formData.append("unit", registerForm.unit);
     formData.append("timeCreate", registerForm.timeCreate);
-     formData.append("images", imgs);
-    axios.put("http://localhost:5000/api/products/" + idProduct,formData, {
+    formData.append("images", imgs);
+    axios.put("http://localhost:5000/api/products/" + idProduct, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZTI1MzQwOWQ0YThiYjRlMWU1ZTYiLCJpYXQiOjE2NTU3OTkyMjJ9.gpm8o8864y8Y79qwoi5z4jBMIdrl8nvEcOPm44l8CEA",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZTI1MzQwOWQ0YThiYjRlMWU1ZTYiLCJpYXQiOjE2NTU3OTkyMjJ9.gpm8o8864y8Y79qwoi5z4jBMIdrl8nvEcOPm44l8CEA",
       },
     })
-    .then((res) => {
-      console.log(res.data);
-     // History.push("/admin/quan-ly-san-pham");
-    })
-    .catch((err) => console.log(err));
-   
+      .then((res) => {
+        console.log(res.data);
+        // History.push("/admin/quan-ly-san-pham");
+      })
+      .catch((err) => console.log(err));
+
   };
 
   return (
     <>
+      <Sidebar />
       {window.innerWidth <= 425 && <Header />}
       <div className={`${styles.main}`}>
         <Breadcrumbs breadItem={breadcrumItem} />
@@ -129,32 +146,34 @@ function EditProduct() {
           >
             <div className={`${styles.formRow} `}>
               <div className={`${styles.uploadImg}`}>
-                <div className={`${styles.imgWrapper}`}>
-                  { <img src={productDetailt?.images[0]} alt="img" />}
-                  {/* <input
+              <div className={`${styles.imgsWrapper}`}>
+                    {imgUrls ? (
+                      imgUrls.map((e, index) => (
+                        <img src={e} alt="" key={index} />
+                      ))
+                    ) : (
+                      <>
+                        <div>Chưa có ảnh</div>
+                        <div>Chưa có ảnh</div>
+                        <div>Chưa có ảnh</div>
+                      </>
+                    )}
+                  </div>
+
+
+                  <label htmlFor="upLoadImg">
+                    <p>Tải ảnh lên</p>
+
+                  </label>
+                  <input
                     id="upLoadImg"
                     type="file"
                     className={`${styles.importImg}`}
                     onChange={getImg}
-                    accept="image/png, image/png, image/jpeg"
+                    accept="image/jpeg,image/jpg"
                     multiple
                   />
-                  <label
-                    htmlFor="upLoadImg"
-                    style={
-                      img
-                        ? { transform: `translateY(-100%)`, opacity: `0` }
-                        : {}
-                    }
-                  >
-                    <p>+</p>
-                    <p>Tải ảnh lên </p>
-                  </label> */}
-                </div>
-
-                <p style={{ marginLeft: `31px`, color: `#1A358F` }}>
-                  Ảnh sản phẩm
-                </p>
+             
               </div>
               <div className={`${styles.showHideProducts} `}>
                 <label
@@ -275,7 +294,7 @@ function EditProduct() {
                     <label htmlFor="">
                       Mã sản phẩm <span>*</span>
                     </label>
-                    <input type="text" value={registerForm._id} disabled/>
+                    <input type="text" value={registerForm._id} disabled />
                   </div>
                 </div>
                 <div className={`${styles.formRight} `}>
@@ -289,6 +308,7 @@ function EditProduct() {
                     </select>
                   </div>
                 </div>
+
               </div>
               <div className={`${styles.formRow} `}>
                 <div className={`${styles.formLeft} `}>
@@ -307,40 +327,35 @@ function EditProduct() {
                     </p>
                     <input
                       type="date"
-                     // name="timeCreate"
+                      // name="timeCreate"
                       className={`${styles.saleStart}`}
                       // onChange={(e) => setSaleDateStart(e.target.value)}
                       value="25/7/2022"
-                     
+
                     />
+                  </div>
+                </div>
+                <div className={`${styles.formRight} `}>
+                  <div className={`${styles.wrapRight}`}>
+                    <label htmlFor="">
+                      Danh mục <span>*</span>
+                    </label>
+                    <select name="status" value={registerForm.status}>
+                      <option value="true">Còn hàng</option>
+                      <option value="false">Hết hàng</option>
+                    </select>
+
                   </div>
                 </div>
               </div>
             </div>
             <div className={`${styles.formRow} `}>
               <div className={`${styles.formLeft} `}>
-                {/* <div className={`${styles.wrapDate}`}>
-                  <p
-                    style={{
-                      fontStyle: `italic  `,
-                      marginRight: `20px`,
-                      display: `inline`,
-                    }}
-                  >
-                    Thời gian
-                  </p>
-                  <input
-                    type="date"
-                    className={`${styles.saleEnd}`}
-                    onChange={(e) => setSaleDateEnd(e.target.value)}
-                  />
-                </div> */}
               </div>
-
               <div className={`${styles.formRight} `}>
                 <div className={`${styles.buttonSection}`}>
                   <button type="submit" className={`${styles.btnAdd}`}>
-                   Cập nhật
+                    Cập nhật
                   </button>
                   <button className={`${styles.btnCancel}`}>Huỷ</button>
                 </div>

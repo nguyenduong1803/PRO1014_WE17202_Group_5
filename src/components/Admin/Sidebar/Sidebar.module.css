@@ -1,7 +1,7 @@
 .main {
     position: sticky;
     height: 100vh;
-    width: 256px;
+    width: 300px;
     border-right: 1px solid #ddd;
     display: flex;
     flex-direction: column;
@@ -91,7 +91,7 @@
     flex: 1;
 }
 .logoImg {
-    height: 24px;
+    height: 64px;
 }
 
 .content {
@@ -149,7 +149,7 @@
     display: flex;
     align-items: center;
     color: #1a358f;
-    padding: 12px 24px;
+    padding: 12px ;
 }
 .content .navLink:hover {
     border-radius: 4px;
@@ -165,7 +165,17 @@
     margin-right: 10px;
     height: 24px;
 }
+.accordiBtn{
+    padding: 12px !important;
+    color:#1A358F !important;
+    background-color: #fff !important;
+    border-color: #fff !important;
+    box-shadow:unset !important;
+}
 
+.accordionBtn:focus{
+
+}
 /* -------------------------tablets & mobile--------------------- */
 @media only screen and (max-width: 1023px) {
     .main {

@@ -15,16 +15,19 @@ body {
   overflow: hidden;
   background-color: #fff;
   box-shadow: 1px 4px 15px rgba(177, 177, 177, 0.2);
+  z-index: 20;
 }
 
 .navbar.active {
   width: 300px;
 }
-.main{
+
+.main {
   margin-left: 90px;
   background-color: #fbf9f1;
   height: 100vh;
 }
+
 /* .navbar:hover {
   width: 300px;
 } */
@@ -36,7 +39,7 @@ body {
   width: 100%;
 }
 
-.navbar ul li{
+.navbar ul li {
   list-style: none;
   width: 100%;
   position: relative;
@@ -47,32 +50,37 @@ body {
   color: var(--bg-primary);
 }
 
-.navbar ul li:hover a::before {
-  background-color: var(--bg-active);
+.navbar ul li:hover .navLink::before {
+  background-color: rgba(234, 106, 18, 0.1);
+  transform: translate(-50%, -50%) scale(1);
   width: 100%;
 }
+.navbar ul li:hover .imgIcon{
 
+}
 .navLink {
   position: relative;
   display: block;
+  border: none;
   width: 100%;
   display: flex;
   align-items: center;
   text-decoration: none;
   color: var(--cl-text);
   transition: .2s;
-  border:1px solid rgb(224, 224, 224);
+  border: 1px solid rgb(224, 224, 224);
 
 }
 
 .navLink::before {
   content: "";
+  width: 90px;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  transition: .2s;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  height: 90px;
+  transition: 0.5s;
 }
 
 .navLink .icon {
@@ -82,14 +90,13 @@ body {
   height: 90px;
   line-height: 90px;
   text-align: center;
-  color:#41444b;
+  color: #41444b;
 }
 
 .navLink .title {
   position: relative;
   font-size: .85em;
 }
-
 
 .navLink.toggle {
   border-bottom: 3px solid var(--primaryColor);
@@ -101,30 +108,33 @@ body {
 
 @media (max-width: 768px) {
   header {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      height: 90px;
-      background: var(--bg-secondary);
-      color: var(--cl-text);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 90px;
+    background: var(--bg-secondary);
+    color: var(--cl-text);
   }
+
   .navbar {
-      left: -90px;
+    left: -90px;
   }
 
   .navbar.active {
-      left: 0;
-      width: 100%;
+    left: 0;
+    width: 100%;
   }
 
   .navLink.toggle {
-      display: none;
+    display: none;
   }
 }
-.imgIcon{
+
+.imgIcon {
   width: 90px;
   height: 90px;
 }
+
 :root {
   --bg-primary: #41444b;
   --bg-secondary: #676c74;

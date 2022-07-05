@@ -1,8 +1,8 @@
 import React from "react";
 import breadcrumb from "../../../assets/img/breadcrumb.jpg";
-import Header from "../../../components/Site/Header/Header";
+import LayoutSite from "../../../components/Site/LayoutSite/LayoutSite"
+
 import BreadCrumbs from "../../../components/Site/BreadCrumbs/BreadCrumbs";
-import Footer from "../../../components/Site/Footer/Footer";
 import MiniBill from "../../../components/Site/MiniBill/MiniBill"
 import FormCheckout from "../../../components/Site/MiniBill/FormCheckout"
 import { DataContext } from "../../../contexts/DataContext"
@@ -26,8 +26,7 @@ const breadcrumbs = [
 function Checkout() {
   const { data, carts, bill, setBill } = React.useContext(DataContext)
   return (
-    <>
-      <Header />
+    <LayoutSite>
       <BreadCrumbs list={breadcrumbs} img={breadcrumb} />
       <div className={`container`}>
         <div className="row mt-5">
@@ -44,8 +43,7 @@ function Checkout() {
           />
         </div>
       </div>
-      <Footer />
-    </>
+    </LayoutSite>
   );
 }
 
