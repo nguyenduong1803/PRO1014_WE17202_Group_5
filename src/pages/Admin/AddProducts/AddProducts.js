@@ -6,7 +6,7 @@ import Switch from "@mui/material/Switch";
 import Header from "../../../components/Admin/Header/Header";
 import Loadings from "../../../components/Site/Loadings/Loadings";
 import { useHistory } from "react-router-dom";
-
+import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 function AddProducts() {
   const history = useHistory();
   const [status, setStatus] = useState(true);
@@ -70,19 +70,6 @@ function AddProducts() {
 
   
   function getImg(e) {
-
-    // if (e.target.files.length !== 3) {
-    //   setShowWarn(true)
-    //   document.body.classList.add('modal-open');
-    // }
-    // else {
-    //   for (let i = 0; i < e.target.files.length; i++) {
-    //     setImgUrls((prev) => [...prev, URL.createObjectURL(e.target.files[i])]);
-    //     getBase64(e.target.files[i], (result) => {
-    //       setImgBase64((prev) => [...prev, result]);
-    //     })
-    //   }
-
     for (let i = 0; i < e.target.files.length; i++) {
       setImgUrls((prev) => [...prev, URL.createObjectURL(e.target.files[i])]);
 
@@ -126,30 +113,31 @@ function AddProducts() {
 
   return (
     <>
+    <Sidebar/>
       <div className={`modal fade ${showWarn && `show`}`}
         id="exampleModalCenter"
-        tabindex="-1" role="dialog"
+        tabIndex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true"
         style={showWarn ? { display: `block`, paddingRight: `0px` } : {}}
       >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Thông báo</h5>
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLongTitle">Thông báo</h5>
 
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               chỉ được chọn 3 ảnh
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={() => setShowWarn(false)}>Close</button>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setShowWarn(false)}>Close</button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      {/* <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
       </button>
 
@@ -159,19 +147,19 @@ function AddProducts() {
         ria-labelledby="exampleModalCenterTitle"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               ...
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" >Close</button>
             </div>
           </div>
         </div>

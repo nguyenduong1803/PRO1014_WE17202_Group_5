@@ -4,7 +4,7 @@ import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { BlogContext } from "../../../../contexts/BlogContext";
 import axios from "axios";
-
+import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
 const AddPostDetail = () => {
   const [img, setImg] = useState("");
   const { blogs } = useContext(BlogContext);
@@ -77,6 +77,7 @@ const AddPostDetail = () => {
   }
   return (
     <>
+    <Sidebar/>
       <div className={styles.Article}>
         <Breadcrumbs breadItem={breadcrumItem} />
         <div>

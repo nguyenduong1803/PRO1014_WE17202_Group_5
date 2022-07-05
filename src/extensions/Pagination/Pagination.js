@@ -18,10 +18,11 @@ const Pagination = (props) => {
     siblingCount,
     pageSize,
   });
-
-  if (currentPage === 0 || paginationRange.length < 2) {
-    return null;
-  }
+  console.log(paginationRange)
+  
+  // if (currentPage === 0 || paginationRange.length < 2) {
+  //   return null;
+  // }
 
   const onNext = () => {
     onPageChange(currentPage + 1);

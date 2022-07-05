@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 import styles from "./Cart.module.css";
+import LayoutSite from "../../../components/Site/LayoutSite/LayoutSite"
+
 import breadcrumb from "../../../assets/img/breadcrumb.jpg";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import Footer from "../../../components/Site/Footer/Footer";
-import Header from "../../../components/Site/Header/Header";
 import BreadCrumbs from "../../../components/Site/BreadCrumbs/BreadCrumbs";
 import QuantityCart from "./QuantityCart"
 import { DataContext } from "../../../contexts/DataContext"
@@ -80,8 +80,7 @@ function Cart() {
     });
   });
   return (
-    <div>
-      <Header position="Giỏ hàng" />
+    <LayoutSite>
       <BreadCrumbs list={breadcrumbs} img={breadcrumb} />
       <div className="container mt-5">
         <div className={styles.listItem}>
@@ -113,8 +112,7 @@ function Cart() {
           </div>
         </div>
       </div>
-      <Footer />
-    </div>
+    </LayoutSite>
   );
 }
 

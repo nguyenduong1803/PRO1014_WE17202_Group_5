@@ -1,24 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
-import styles from "./ManagePosts.module.css";
+import styles from "./ManageProduct.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
-import { Link, useHistory } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AddIcon from "@mui/icons-material/Add";
-
-import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
+import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
 import Pagination from "../../../extensions/Pagination/Pagination";
-import { BlogContext } from "../../../contexts/BlogContext";
+import { NavLink } from "react-router-dom";
+import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
+import { DataContext } from "../../../contexts/DataContext";
 import axios from "axios";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
+import SelectPagination from "../../../components/Admin/SelectPagination/SelectPagination"
 import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
-import { tablePost } from "../../../config/tables"
-import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom"
-let PageSize = 10;
-const ManagePosts = () => {
-  let history = useHistory();
-  const { blogs } = useContext(BlogContext);
-  console.log(blogs);
+import {tableProduct} from "../../../config/tables"
+const ManageProduct = (id) => {
+  const { data, setData } = useContext(DataContext);
+  const [PageSize, setPageSize] = useState(10)
+
   const [dataSliced, setdataSliced] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
@@ -26,23 +25,53 @@ const ManagePosts = () => {
   const [sortStatus, setSortStatus] = useState("");
 
   useEffect(() => {
-    if (blogs) {
+    if (data) {
       const firstPageIndex = (currentPage - 1) * PageSize;
       const lastPageIndex = firstPageIndex + PageSize;
-      setdataSliced(blogs.slice(firstPageIndex, lastPageIndex));
+      setdataSliced(data.slice(firstPageIndex, lastPageIndex));
     }
     if (searchValue !== "" || sortPosition !== "" || sortStatus !== "") {
       const firstPageIndex = (currentPage - 1) * PageSize;
       const lastPageIndex = firstPageIndex + PageSize;
       setdataSliced(
-        blogs
-          .filter((e) => e?.title.toLowerCase().indexOf(searchValue) !== -1)
-          // .filter((e) => e.topic.indexOf(sortStatus) !== -1)
-          // .filter((e) => e.date.indexOf(sortPosition) !== -1)
+        data
+          .filter((e) => e.name.toLowerCase().indexOf(searchValue) !== -1)
+          // .filter((e) => e.address.indexOf(sortStatus) !== -1)
+          // .filter((e) => e.phoneNumber.indexOf(sortPosition) !== -1)
           .slice(firstPageIndex, lastPageIndex)
       );
     }
-  }, [history, currentPage, searchValue, sortPosition, sortStatus, blogs]);
+  }, [currentPage, searchValue, sortPosition, sortStatus, data, PageSize]);
+
+  const [idProduct, setIdProduct] = useState();
+  const handleDeleteProduct = (e) => {
+    axios
+      .delete("http://localhost:5000/api/products/" + e, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZTI1MzQwOWQ0YThiYjRlMWU1ZTYiLCJpYXQiOjE2NTU2OTU4NzZ9.fC3rv-pUyNxMEx0K12E-XWsUm8GSTK6RefKGhdFaV8o",
+        },
+      })
+      .then((res) => {
+
+        setData(data.filter((e) => e._id !== idProduct));
+      });
+
+  };
+
+  const headers = [
+    // { label: / * Nhãn để hiển thị ở đầu CSV * / , khóa: / * Khóa dữ liệu * / }
+    { label: "Ảnh sản phẩm", key: "images" },
+    { label: "Mã sản phẩm", key: "id" },
+    { label: "Tên sản phẩm", key: "name" },
+    { label: "Mô tả", key: "describe" },
+    { label: "Mã giảm giá", key: "discount" },
+    { label: "Số lượng", key: "category" },
+    { label: "Gía sản phẩm", key: "price" },
+    { label: "Thanh toán", key: "payment" },
+    { label: "Trạng thái", key: "status" },
+  ];
   const breadcrumItem = [
     {
       href: "/",
@@ -50,44 +79,26 @@ const ManagePosts = () => {
       isActive: false,
     },
     {
-      href: "/quan-ly-bai-viet",
-      title: "Quản lý bài viết",
+      href: "/quan-ly-san-pham",
+      title: "Quản lý sản phẩm",
       isActive: true,
     },
   ];
-
-  const handleDeleteProduct = (e) => {
-    axios
-      .delete("http://localhost:5000/api/blogs/" + e, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZGI4YWU2MjE1NGNhNWM1NGJjYTEiLCJpYXQiOjE2NTUzNjUwNjh9.uSL4SGxTjG7i22Y7xIhTXrrETXq3Gfhob4fKcQbkoDA",
-        },
-      })
-      .then((res) => {
-        console.log(res.data.success);
-        window.location.href = '/admin/quan-ly-bai-viet';
-      })
-      .catch((err) => console.log(err));
-  };
-
   
-  const [isBlog, setIsBlog] = useState();
   return (
     <>
       <Sidebar />
       <ModalDelete
+        idProduct={idProduct}
         handleDeleteProduct={handleDeleteProduct}
-        idProduct={isBlog}
       />
-      <div className={styles.ManagePosts}>
+      <div className={`${styles.Equipment}`}>
         <Breadcrumbs breadItem={breadcrumItem} />
-        <div className={`${styles.ManageMain} row`}>
+        <div className={`${styles.EquipmentMain} d-flex`}>
           <div className={`${styles.leftSide} col-8`}>
             <p className={`${styles.title}`}>
               <ArrowBackIcon />
-              Quản lý bài viết
+              Danh sách sản phẩm
             </p>
             <div className={`${styles.search}`}>
               <input
@@ -102,63 +113,50 @@ const ManagePosts = () => {
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
-              <Link to="/admin/them-bai-viet">
+              <NavLink to={`them-san-pham`}>
                 <button
                   style={{
-                    display: "flex",
-                    alignItems: "center",
                     backgroundColor: "#1a358f",
                     color: "#fff",
                     height: "38px",
-                    textDecoration: `none`,
                   }}
                 >
                   <AddIcon />
-                  Thêm bài viết
+                  Thêm sản phẩm
                 </button>
-              </Link>
-              <ExportReact csvData={blogs} />
+              </NavLink>
+              <ExportReact csvData={data} fileName="Danh sách sản phẩm" />
             </div>
           </div>
         </div>
-        <div className={styles.ManagePro}>
-          {/* <Tablecustom
+        <div className={styles.profile}>
+          <Tablecustom
             data={dataSliced.filter((e) =>
               e.name.toLowerCase().includes(searchValue)
             )}
-            tables={tables}
+            tables={tableProduct}
             setIdProduct={setIdProduct}
-           
-          /> */}
-          <Tablecustom
-           data={dataSliced.filter((e) =>
-            e?.title.toLowerCase().includes(searchValue)
-          )}
-            // data={dataSliced && dataSliced.filter((e) =>
-            //   e?.title.toLowerCase().includes(searchValue)
-            // )}
-            tables={tablePost}
-            setIdProduct={setIsBlog}
-
           />
+          <SelectPagination setPageSize={setPageSize} />
           <div className={`${styles.pagination} `}>
             <span style={{ marginRight: `25px` }}>
               có{" "}
               <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
-                {searchValue === "" && sortPosition === "" && sortStatus === ""
-                  ? blogs.length
-                  : blogs.filter(
+                {searchValue === ""
+                  ? data.length
+                  : data.filter(
                     (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
                   ).length}
               </span>{" "}
               bản ghi
             </span>
-            {searchValue === "" && sortPosition === "" && sortStatus === "" ? (
+
+            {searchValue === "" ? (
               <Pagination
                 className="pagination-bar"
                 currentPage={currentPage}
-                totalCount={blogs && blogs.length}
-                pageSize={10}
+                totalCount={data && data.length}
+                pageSize={PageSize}
                 onPageChange={(page) => setCurrentPage(page)}
               />
             ) : (
@@ -166,21 +164,20 @@ const ManagePosts = () => {
                 className="pagination-bar"
                 currentPage={currentPage}
                 totalCount={
-                  blogs &&
-                  blogs.filter(
+                  data &&
+                  data.filter(
                     (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
                   ).length
                 }
-                pageSize={10}
+                pageSize={PageSize}
                 onPageChange={(page) => setCurrentPage(page)}
               />
             )}
           </div>
         </div>
       </div>
-
     </>
   );
 };
 
-export default ManagePosts;
+export default ManageProduct;

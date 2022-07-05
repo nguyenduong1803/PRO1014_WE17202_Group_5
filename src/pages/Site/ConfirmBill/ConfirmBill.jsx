@@ -1,21 +1,19 @@
 import React from 'react'
-import Header from "../../../components/Site/Header/Header"
-import Footer from "../../../components/Site/Footer/Footer"
+import LayoutSite from "../../../components/Site/LayoutSite/LayoutSite"
 import BillDetail from "../../../components/Site/BillDetail/BillDetail"
 import { DataContext } from "../../../contexts/DataContext"
 
 function ConfirmBill() {
   const { bill, carts, data } = React.useContext(DataContext)
   return (
-    <div>
-      <Header />
+    <LayoutSite>
       <BillDetail
         carts={carts}
         bill={bill}
         data={data}
       />
-      <Footer />
-    </div>
+    </LayoutSite>
+
   )
 }
 

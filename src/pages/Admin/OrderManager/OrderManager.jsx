@@ -1,17 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "../OrderManager/OrderManager.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
-import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-import AddIcon from "@mui/icons-material/Add";
-import Table from "rsuite/Table";
 import "rsuite-table/dist/css/rsuite-table.css";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
 import Pagination from "../../../extensions/Pagination/Pagination";
 import { OrderContext } from "../../../contexts/OrderContext";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
+import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom"
+import {tableOrder} from "../../../config/tables"
 let PageSize = 10;
-
 const OrderManager = () => {
 
   const { orders } = useContext(OrderContext);
@@ -52,54 +50,6 @@ const OrderManager = () => {
       isActive: true,
     },
   ];
-
-  const PositionCell = ({ rowData, dataKey, ...props }) => (
-    <Table.Cell
-      {...props}
-      style={{
-        display: `flex`,
-        justifyContent: `center`,
-        alignItems: `center`,
-      }}
-    >
-      {rowData[dataKey] === true ? (
-        <div className={`${styles.on}`}>Giao hàng thành công</div>
-      ) : (
-        <div className={`${styles.off}`}>Chưa giao hàng</div>
-      )}
-    </Table.Cell>
-  );
-
-  const ItemsCell = ({ rowData, dataKey, ...props }) => (
-    <Table.Cell
-      {...props}
-      style={{
-        display: `flex`,
-        justifyContent: `center`,
-        alignItems: `center`,
-      }}
-    >
-      {rowData[dataKey].length}
-    </Table.Cell>
-  );
-
-  const EditCell = ({ rowData, dataKey, ...props }) => (
-    <Table.Cell {...props}>
-      <div className={styles.Celll}>
-        <Link
-          to={{
-            pathname: `/admin/chi-tiet-don-hang`,
-            search: `#${rowData[dataKey]}`,
-          }}
-          className={`${styles.btnEdit} `}
-          role="button"
-        >
-          {" "}
-          Chi tiết
-        </Link>
-      </div>
-    </Table.Cell>
-  );
   return (
     <>
     <Sidebar/>
@@ -127,81 +77,13 @@ const OrderManager = () => {
         </div>
         <div className={styles.AccountPro}>
           <div className={styles.ManageTable}>
-            <Table
+            <Tablecustom
               data={dataSliced.filter((e) =>
                 e.name.toLowerCase().includes(searchValue)
               )}
-              rowHeight={55}
-              height={590}
-            >
-              <Table.Column width={60} align="center" fixed>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  STT
-                </Table.HeaderCell>
-                <Table.Cell dataKey="id" />
-              </Table.Column>
-              <Table.Column width={150} align="center" fixed>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Mã đơn hàng
-                </Table.HeaderCell>
-                <Table.Cell dataKey="id" />
-              </Table.Column>
-              <Table.Column align="center" width={180}>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Tên
-                </Table.HeaderCell>
-                <Table.Cell dataKey="name" />
-              </Table.Column>
-              <Table.Column align="center" width={290}>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Email
-                </Table.HeaderCell>
-                <Table.Cell dataKey="email" />
-              </Table.Column>
-              <Table.Column align="center" width={170}>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Số điện thoại
-                </Table.HeaderCell>
-                <Table.Cell dataKey="phoneNumber" />
-              </Table.Column>
-              <Table.Column align="center" width={180}>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Địa chỉ
-                </Table.HeaderCell>
-                <Table.Cell dataKey="address" />
-              </Table.Column>
-              <Table.Column align="center" width={190}>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Tổng sản phẩm
-                </Table.HeaderCell>
-                <ItemsCell dataKey="items" />
-              </Table.Column>
-              <Table.Column align="center" width={150}>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Trạng thái
-                </Table.HeaderCell>
-                <PositionCell dataKey="status" />
-              </Table.Column>
-
-              <Table.Column align="center" width={150}>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Ngày đặt hàng
-                </Table.HeaderCell>
-                <Table.Cell dataKey="dateTimeStart" />
-              </Table.Column>
-              <Table.Column align="center" width={150}>
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Ngày hết hạn
-                </Table.HeaderCell>
-                <Table.Cell dataKey="dateTimeEnd" />
-              </Table.Column>
-              <Table.Column align="center" width={120} fixed="right">
-                <Table.HeaderCell className={styles.HeaderCell}>
-                  Quản lý
-                </Table.HeaderCell>
-                <EditCell dataKey="_id" />
-              </Table.Column>
-            </Table>
+              tables={tableOrder}
+            />
+        
           </div>
           <div className={`${styles.pagination} `}>
             <span style={{ marginRight: `25px` }}>

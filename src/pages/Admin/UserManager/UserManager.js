@@ -12,11 +12,57 @@ import { searchData } from '../../../extensions/searchData';
 import { UserContext } from '../../../contexts/UserContext';
 import avatardefault from "../../../assets/images/avatar_default.png"
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
+import SelectPagination from "../../../components/Admin/SelectPagination/SelectPagination"
+const breadcrumItem = [
+    {
+        href: "/",
+        title: "Quản lý",
+        isActive: false,
+    },
+    {
+        href: "/quan-ly-nguoi-dung",
+        title: "Quản lý người dùng",
+        isActive: true,
+    },
+];
+
+const ImageCell = ({ rowData, dataKey, ...props }) => (
+    <Table.Cell {...props} className={styles.cellCenter} >
+        <div
+            style={{
+                width: 50,
+                height: 50,
+                borderRadius: `50%`,
+                border: `1px solid #ddd`
+            }}
+        >
+            <img src={rowData[dataKey] ? rowData[dataKey] : avatardefault} alt="asd" style={{ borderRadius: `50%`, }} />
+        </div>
+    </Table.Cell>
+);
+const LinkCell = ({ rowData, dataKey, ...props }) => (
+    <Table.Cell  {...props} className={styles.cellCenter}  >
+        <Link
+            to={{
+                pathname: `/admin/chi-tiet-nguoi-dung`,
+                search: `#${rowData[dataKey]}`,
+            }}
+            style={{
+                padding: `4px 8px`,
+                borderRadius: 4,
+                border: ` 1px solid #198754`,
+                color: `#198754`,
+                fontWeight: 600,
+                textDecoration: `none`
+            }}
+        >
+            Xem chi tiết
+        </Link>
+    </Table.Cell>
+);
 function UserManager() {
     const { user } = useContext(UserContext)
-
-
-    let PageSize = 10
+    const [PageSize, setPageSize] = useState(10)
     const [dataSliced, setdataSliced] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState("");
@@ -31,61 +77,10 @@ function UserManager() {
         }
 
     }, [PageSize, currentPage, search, user]);
-    const breadcrumItem = [
-        {
-            href: "/",
-            title: "Quản lý",
-            isActive: false,
-        },
-
-        {
-            href: "/quan-ly-nguoi-dung",
-            title: "Quản lý người dùng",
-            isActive: true,
-        },
-    ];
-
-
-    const ImageCell = ({ rowData, dataKey, ...props }) => (
-        <Table.Cell {...props} className={styles.cellCenter} >
-            <div
-                style={{
-                    width: 50,
-                    height: 50,
-                    borderRadius: `50%`,
-                    border: `1px solid #ddd`
-                }}
-            >
-                <img src={rowData[dataKey] ? rowData[dataKey] : avatardefault} alt="asd" style={{ borderRadius: `50%`, }} />
-            </div>
-        </Table.Cell>
-    );
-    const LinkCell = ({ rowData, dataKey, ...props }) => (
-        <Table.Cell  {...props} className={styles.cellCenter}  >
-            <Link
-                to={{
-                    pathname: `/admin/chi-tiet-nguoi-dung`,
-                    search: `#${rowData[dataKey]}`,
-                }}
-                style={{
-                    padding: `4px 8px`,
-                    borderRadius: 4,
-                    border: ` 1px solid #198754`,
-                    color: `#198754`,
-                    fontWeight: 600,
-                    textDecoration: `none`
-                }}
-            >
-                Xem chi tiết
-            </Link>
-        </Table.Cell>
-    );
     return (
-
         <>
-        <Sidebar/>
+            <Sidebar />
             <div className={`${styles.main}`}>
-
                 <Breadcrumbs breadItem={breadcrumItem} />
                 <div className={`${styles.control} row`}>
                     <div className={`${styles.leftSide} col-8 p-0`}>
@@ -98,7 +93,6 @@ function UserManager() {
                                 <SearchIcon />
                             </div>
                         </div>
-
                     </div>
                     <div className={`${styles.rightSide} col-4`}>
                         <div className={`${styles.rightSideBtn}`}>
@@ -112,7 +106,7 @@ function UserManager() {
                     <Table
                         data={dataSliced}
                         rowHeight={55}
-                        height={600}
+                        height={600 * PageSize / 10}
                         affixHorizontalScrollbar
                     >
                         <Table.Column align="center" width={40} fixed>
@@ -177,34 +171,27 @@ function UserManager() {
                                 Quản lý
                             </Table.HeaderCell>
                             <LinkCell dataKey="_id" />
-
                         </Table.Column>
 
                     </Table>
                 </div>
-
-
+                <SelectPagination setPageSize={setPageSize} />
                 <div className={`${styles.pagination} `}>
                     <span style={{ marginRight: `25px` }}>có <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
                         {
                             searchData(user, ['email', `name`], search).length
                         }
                     </span> bản ghi</span>
-
                     <Pagination
                         className="pagination-bar"
                         currentPage={currentPage}
                         totalCount={
                             searchData(user, ['email', `name`], search).length
                         }
-                        pageSize={10}
+                        pageSize={PageSize}
                         onPageChange={(page) => setCurrentPage(page)}
                     />
                 </div>
-
-
-
-
             </div >
         </>
     )

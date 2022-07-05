@@ -11,43 +11,6 @@
     color: #dc3545;
 }
 
-.ModelBtn {
-    gap: 10px;
-    color: #198754;
-    border-color: #198754;
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-    border: 1px solid #198754;
-    padding: 0.575rem 0.75rem;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    background: #fff;
-}
-
-.ModelBtnDelete {
-    color: #dc3545;
-    border-color: #dc3545;
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    user-select: none;
-    border: 1px solid #dc3545;
-    padding: 0.575rem 0.75rem;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    background-color: #fff;
-}
 
 .ManageMain {
     margin: 0px 0 16px 0;
