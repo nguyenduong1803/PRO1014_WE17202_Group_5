@@ -1,6 +1,9 @@
 .header {
+    position: relative;
+    margin-left: 80px;
     padding: 12px 0;
     background-color: #fff;
+    box-shadow:1px 2px 20px rgba(204, 204, 204,0.5);
 }
 
 .warpInput {

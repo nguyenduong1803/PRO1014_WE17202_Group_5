@@ -4,6 +4,7 @@ import WidgetsIcon from '@mui/icons-material/Widgets';
 import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
+import Line from "../../../assets/svg/Line"
 
 function LayoutSite({ children }) {
     const refBar = React.useRef();
@@ -19,7 +20,7 @@ function LayoutSite({ children }) {
                             onClick={() => { refBar.current.classList.toggle(`${styles.active}`) }}
                         >
                             <span className={styles.icon}
-                            ><WidgetsIcon fontSize={`large`} /></span>
+                            ><WidgetsIcon fontSize={`large`}className={styles.barIcon} /></span>
                             <span className={styles.title}>Menu</span>
                         </a>
                     </li>
@@ -33,8 +34,11 @@ function LayoutSite({ children }) {
                     ))}
                 </ul>
             </nav>
-            <main className={styles.main}>
                 <Header />
+            <main className={styles.main}>
+                <div className={styles.line}>
+                <Line />
+                </div>
                 {children}
             </main>
         </>

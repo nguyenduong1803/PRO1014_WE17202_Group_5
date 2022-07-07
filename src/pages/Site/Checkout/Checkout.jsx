@@ -6,7 +6,6 @@ import BreadCrumbs from "../../../components/Site/BreadCrumbs/BreadCrumbs";
 import MiniBill from "../../../components/Site/MiniBill/MiniBill"
 import FormCheckout from "../../../components/Site/MiniBill/FormCheckout"
 import { DataContext } from "../../../contexts/DataContext"
-
 const breadcrumbs = [
   {
     title: "Trang Chủ",
@@ -43,6 +42,7 @@ function Checkout() {
           />
         </div>
       </div>
+     
     </LayoutSite>
   );
 }

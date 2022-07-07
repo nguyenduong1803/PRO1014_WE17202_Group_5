@@ -9,12 +9,12 @@ body {
 
 .navbar {
   position: fixed;
-  width: 90px;
+  width: 80px;
   height: 100%;
   transition: .5s;
   overflow: hidden;
   background-color: #fff;
-  box-shadow: 1px 4px 15px rgba(177, 177, 177, 0.2);
+  box-shadow: 1px 4px 10px rgba(177, 177, 177, 0.2);
   z-index: 20;
 }
 
@@ -23,9 +23,14 @@ body {
 }
 
 .main {
-  margin-left: 90px;
-  background-color: #fbf9f1;
+  margin-left: 80px;
+  background-image: linear-gradient(to right,#fbf8f7 ,#fbf9f0,#fbf9f0) ;
+  /* */
   height: 100vh;
+}
+.line{
+  top: 280px;
+  position: fixed;
 }
 
 /* .navbar:hover {
@@ -53,7 +58,9 @@ body {
 .navbar ul li:hover .navLink::before {
   background-color: rgba(234, 106, 18, 0.1);
   transform: translate(-50%, -50%) scale(1);
-  width: 100%;
+  width: 90%;
+  height: 70%;
+  border-radius: 20px;
 }
 .navbar ul li:hover .imgIcon{
 
@@ -69,33 +76,36 @@ body {
   color: var(--cl-text);
   transition: .2s;
   border: 1px solid rgb(224, 224, 224);
+  overflow: hidden;
+
 
 }
 
 .navLink::before {
   content: "";
-  width: 90px;
+  width: 80px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  height: 90px;
+  height: 80px;
   transition: 0.5s;
 }
 
 .navLink .icon {
   position: relative;
   display: block;
-  min-width: 90px;
-  height: 90px;
-  line-height: 90px;
+  min-width: 80px;
+  height: 80px;
+  line-height: 80px;
   text-align: center;
   color: #41444b;
 }
 
 .navLink .title {
   position: relative;
-  font-size: .85em;
+  font-size: .1.4rem;
+  font-weight: 600;
 }
 
 .navLink.toggle {
@@ -105,19 +115,21 @@ body {
 .toggle {
   cursor: pointer;
 }
-
+.barIcon{
+  color: var(--primaryColor);
+}
 @media (max-width: 768px) {
   header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 90px;
+    height: 80px;
     background: var(--bg-secondary);
     color: var(--cl-text);
   }
 
   .navbar {
-    left: -90px;
+    left: -80px;
   }
 
   .navbar.active {
@@ -131,8 +143,8 @@ body {
 }
 
 .imgIcon {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
 }
 
 :root {
