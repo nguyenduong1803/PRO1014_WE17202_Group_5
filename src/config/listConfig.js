@@ -2,6 +2,7 @@
 import table from "../assets/img/table.png"
 import menus from "../assets/img/menu.png"
 import bill from "../assets/img/bill.png"
+import Home from "../assets/img/Home.png"
 // category
 export const listCategory = [
     {
@@ -42,8 +43,13 @@ export const menu = [
 ]
 export const listMenu=[
     {
+        name:"Trang chủ",
+        to:"/",
+        icon:Home
+    },
+    {
         name:"Danh sách bàn",
-        to:"/table",
+        to:"/dat-ban",
         icon:table
     },
     {
