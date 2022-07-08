@@ -25,9 +25,7 @@ body {
 .main {
   margin-left: 80px;
   background-image: linear-gradient(to right,#fbf8f7 ,#fbf9f0,#fbf9f0) ;
-  /* */
   padding:  30px;
-  height: 100vh;
 }
 .line{
   top: 280px;
