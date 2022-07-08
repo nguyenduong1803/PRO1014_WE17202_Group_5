@@ -1,0 +1,27 @@
+.breadLink_active {
+    color: #1a358f !important;
+    margin-left: 10px;
+}
+.breadLink a {
+    color: #9f9f9f !important;
+    text-decoration: none !important;
+}
+.breadLink a:hover {
+    text-decoration: underline !important;
+}
+.breadLink + .breadLink::before,
+.breadLink_active::before {
+    content: var(--bs-breadcrumb-divider, "/") !important;
+    margin-right: 10px;
+}
+.main {
+    padding-top: 32px;
+}
+.main * {
+    display: flex;
+    align-items: center;
+}
+.settingIcon {
+    color: #9f9f9f;
+    margin-right: 10px;
+}

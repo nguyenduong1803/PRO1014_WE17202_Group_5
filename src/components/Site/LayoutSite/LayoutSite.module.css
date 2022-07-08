@@ -1,0 +1,156 @@
+/* ==========================Font========================== */
+
+
+
+
+body {
+  min-height: 100vh;
+}
+
+.navbar {
+  position: fixed;
+  width: 80px;
+  height: 100%;
+  transition: .5s;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 1px 4px 10px rgba(177, 177, 177, 0.2);
+  z-index: 20;
+}
+
+.navbar.active {
+  width: 300px;
+}
+
+.main {
+  margin-left: 80px;
+  background-image: linear-gradient(to right,#fbf8f7 ,#fbf9f0,#fbf9f0) ;
+  /* */
+  padding:  30px;
+  height: 100vh;
+}
+.line{
+  top: 280px;
+  position: fixed;
+}
+
+/* .navbar:hover {
+  width: 300px;
+} */
+
+.navbar ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.navbar ul li {
+  list-style: none;
+  width: 100%;
+  position: relative;
+
+}
+
+.navLink:hover {
+  color: var(--bg-primary);
+}
+
+.navbar ul li:hover .navLink::before {
+  background-color: rgba(234, 106, 18, 0.1);
+  transform: translate(-50%, -50%) scale(1);
+  width: 90%;
+  height: 70%;
+  border-radius: 20px;
+}
+.navbar ul li:hover .imgIcon{
+
+}
+.navLink {
+  position: relative;
+  display: block;
+  border: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--cl-text);
+  transition: .2s;
+  border: 1px solid rgb(224, 224, 224);
+  overflow: hidden;
+
+
+}
+
+.navLink::before {
+  content: "";
+  width: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  height: 80px;
+  transition: 0.5s;
+}
+
+.navLink .icon {
+  position: relative;
+  display: block;
+  min-width: 80px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  color: #41444b;
+}
+
+.navLink .title {
+  position: relative;
+  font-size: .1.4rem;
+  font-weight: 600;
+}
+
+.navLink.toggle {
+  border-bottom: 3px solid var(--primaryColor);
+}
+
+.toggle {
+  cursor: pointer;
+}
+.barIcon{
+  color: var(--primaryColor);
+}
+@media (max-width: 768px) {
+  header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+    background: var(--bg-secondary);
+    color: var(--cl-text);
+  }
+
+  .navbar {
+    left: -80px;
+  }
+
+  .navbar.active {
+    left: 0;
+    width: 100%;
+  }
+
+  .navLink.toggle {
+    display: none;
+  }
+}
+
+.imgIcon {
+  width: 80px;
+  height: 80px;
+}
+
+:root {
+  --bg-primary: #41444b;
+  --bg-secondary: #676c74;
+  --bg-active: #fdf0e7;
+  --cl-text: #383838;
+}

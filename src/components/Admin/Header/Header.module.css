@@ -1,0 +1,28 @@
+.main {
+    height: 80px;
+    display: flex;
+    position: relative;
+    min-width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    height: 100%;
+    display: flex;
+
+    align-items: center;
+}
+.logo > img {
+    object-fit: contain;
+    height: 80%;
+    padding-left: 30px;
+}
+.hamburgerIcon {
+    margin-right: 20px;
+}
+/* -------------------------PC--------------------- */
+@media only screen and (min-width: 1024px) {
+    .main {
+        display: none;
+    }
+}

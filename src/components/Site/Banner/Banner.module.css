@@ -1,0 +1,220 @@
+.hero {
+  padding-bottom: 50px;
+}
+
+.hero.heroNormal {
+  padding-bottom: 30px;
+}
+
+.hero.heroNormal .hero__categories {
+  position: relative;
+}
+
+.dropdown {
+  background: #7fad39;
+  padding: 10px 25px 10px 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dropdown li {
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.siteBtn {
+  background: #7fad39;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 800;
+}
+
+.dropdown button {
+  background: #7fad39;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 800;
+}
+
+.hero.heroNormal .hero__categories ul {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 46px;
+  width: 100%;
+  z-index: 9;
+  background: #ffffff;
+}
+
+.hero.heroNormal .hero__search {
+  margin-bottom: 0;
+}
+
+.hero__search {
+  overflow: hidden;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero__search__form {
+  width: 65%;
+  height: 50px;
+  border: 1px solid #ebebeb;
+  position: relative;
+  float: left;
+}
+
+.hero__search__form input {
+  width: 100%;
+}
+
+.hero__search__form input:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: 0 0 2rem #7fad39;
+}
+
+.hero__search__form form .hero__search__categories {
+  width: 30%;
+  float: left;
+  font-size: 16px;
+  color: #1c1c1c;
+  font-weight: 700;
+  padding-left: 18px;
+  padding-top: 11px;
+  position: relative;
+}
+
+.hero__search__form form .hero__search__categories:after {
+  position: absolute;
+  right: 0;
+  top: 14px;
+  height: 20px;
+  width: 1px;
+  background: #000000;
+  opacity: 0.1;
+  content: "";
+}
+
+.hero__search__form form .hero__search__categories span {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+}
+
+.hero__search__form form input {
+  border: none;
+  height: 48px;
+  font-size: 16px;
+  color: #b2b2b2;
+  padding-left: 20px;
+}
+
+.hero__search__form form input::placeholder {
+  color: #b2b2b2;
+}
+
+.hero__search__form form button {
+  position: absolute;
+  right: 0;
+  top: -1px;
+  height: 50px;
+}
+
+.hero__search__phone {
+  width: 30%;
+}
+
+.hero__search__phone__icon {
+  font-size: 18px;
+  color: #7fad39;
+  height: 50px;
+  width: 50px;
+  background: #f5f5f5;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  float: left;
+  margin-right: 20px;
+}
+
+.hero__search__phone__text {
+  overflow: hidden;
+}
+
+.hero__search__phone__text h5 {
+  color: #1c1c1c;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.hero__search__phone__text span {
+  font-size: 14px;
+  color: #6f6f6f;
+}
+
+.hero__item {
+  margin-top: 1rem;
+  height: 431px;
+  width: 100%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  padding-left: 75px;
+  background-repeat: no-repeat;
+  background: url("../../../assets/img/hero/banner.jpg");
+}
+
+.hero__text span {
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #7fad39;
+}
+
+.hero__text h2 {
+  font-size: 46px;
+  color: #252525;
+  line-height: 52px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.hero__text p {
+  margin-bottom: 35px;
+}
+
+.primaryBtn {
+  display: inline-block;
+  font-size: 14px;
+  padding: 10px 28px 10px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: #7fad39;
+  letter-spacing: 2px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .banner_title {
+    font-size: 1.6rem !important;
+    line-height: 2.6rem !important;
+  }
+
+  .hero__item {
+    width: 100%;
+    max-height: 280px;
+    background-size: cover;
+    padding-left: 24px;
+  }
+}
