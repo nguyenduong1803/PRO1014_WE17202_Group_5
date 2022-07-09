@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./ManageProduct.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
-import SearchIcon from "@mui/icons-material/Search";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AddIcon from "@mui/icons-material/Add";
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
@@ -15,6 +14,8 @@ import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
 import { tableProduct } from "../../../config/tables"
 import { listPagination } from "../../../config/listConfig"
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
+import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
+import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
 const ManageProduct = (id) => {
   const { data, setData } = useContext(DataContext);
   const [PageSize, setPageSize] = useState(10)
@@ -109,16 +110,7 @@ const ManageProduct = (id) => {
               Danh sách sản phẩm
             </p>
             <div className="d-flex justify-content-between align-items-center">
-              <div className={`${styles.search}`}>
-                <input
-                  type="text"
-                  placeholder="Tìm kiếm "
-                  onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
-                />
-                <div className={`${styles.searchIcon}`}>
-                  <SearchIcon />
-                </div>
-              </div>
+              <InputSearch setSearchValue={setSearchValue} />
               <SelectMui
                 list={list}
                 name="Danh mục"
@@ -128,18 +120,7 @@ const ManageProduct = (id) => {
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
-              <NavLink to={`them-san-pham`}>
-                <button
-                  style={{
-                    backgroundColor: "#1a358f",
-                    color: "#fff",
-                    height: "38px",
-                  }}
-                >
-                  <AddIcon />
-                  Thêm sản phẩm
-                </button>
-              </NavLink>
+              <ButtonAdd name="Thêm sản phẩm" path="them-san-pham" />
               <ExportReact csvData={data} fileName="Danh sách sản phẩm" />
             </div>
           </div>

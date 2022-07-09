@@ -217,3 +217,121 @@ export const tableProduct = [
     },
 
   ]
+  export const customerTable = [
+    {
+      name: "ID",
+      width: 40,
+      dataKey: "id",
+      isFixed: true,
+      type: "cell"
+    },
+    {
+      name: "Ảnh",
+      width: 80,
+      dataKey: "avatar",
+      isFixed: false,
+      type: "img"
+    },
+    {
+      name: "Tên",
+      width: 200,
+      dataKey: "name",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Email",
+      width: 250,
+      dataKey: "email",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Số điện thoại",
+      width: 190,
+      dataKey: "phone",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Địa chỉ",
+      width: 190,
+      dataKey: "address",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Ngày tháng năm sinh",
+      width: 250,
+      dataKey: "dob",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Tổng tiền đã mua",
+      width: 250,
+      dataKey: "totalPaid",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Ngày tạo tài khoản",
+      width: 150,
+      dataKey: "createdAt",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Quản lý",
+      width: 210,
+      dataKey: "_id",
+      isFixed: "right",
+      type: "postAction"
+    },
+
+  ]
+  export const categoryTable = [
+    {
+      name: "STT",
+      width: 40,
+      dataKey: "id",
+      isFixed: true,
+      type: "cell"
+    },
+    {
+      name: "Ảnh",
+      width: 130,
+      dataKey: "images",
+      isFixed: true,
+      type: "img"
+    },
+    {
+      name: "Tên danh mục",
+      width: 200,
+      dataKey: "name",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Mã danh mục",
+      width: 200,
+      dataKey: "_id",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Loại danh mục",
+      width: 190,
+      dataKey: "phone",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Quản lý",
+      width: 210,
+      dataKey: "_id",
+      isFixed: "right",
+      type: "postAction"
+    },
+
+  ]

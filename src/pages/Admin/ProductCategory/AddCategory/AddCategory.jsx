@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from "../AddCategory/AddCategory.module.css";
 import Header from "../../../../components/Admin/Header/Header";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
-import Switch from "@mui/material/Switch";
 import Loadings from "../../../../components/Site/Loadings/Loadings";
 import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
 const AddCategory = () => {

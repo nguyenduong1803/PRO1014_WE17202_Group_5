@@ -14,6 +14,7 @@ import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
 import { tablePost } from "../../../config/tables"
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom"
+import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
 let PageSize = 10;
 const ManagePosts = () => {
   let history = useHistory();
@@ -89,16 +90,8 @@ const ManagePosts = () => {
               <ArrowBackIcon />
               Quản lý bài viết
             </p>
-            <div className={`${styles.search}`}>
-              <input
-                type="text"
-                placeholder="Tìm kiếm "
-                onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
-              />
-              <div className={`${styles.searchIcon}`}>
-                <SearchIcon />
-              </div>
-            </div>
+            <InputSearch setSearchValue={setSearchValue}/>
+
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
@@ -122,15 +115,8 @@ const ManagePosts = () => {
           </div>
         </div>
         <div className={styles.ManagePro}>
-          {/* <Tablecustom
-            data={dataSliced.filter((e) =>
-              e.name.toLowerCase().includes(searchValue)
-            )}
-            tables={tables}
-            setIdProduct={setIdProduct}
-           
-          /> */}
           <Tablecustom
+          path="thong-tin-bai-viet"
            data={dataSliced.filter((e) =>
             e?.title.toLowerCase().includes(searchValue)
           )}

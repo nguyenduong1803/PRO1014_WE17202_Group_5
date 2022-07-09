@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "../OrderManager/OrderManager.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
-import SearchIcon from "@mui/icons-material/Search";
 import "rsuite-table/dist/css/rsuite-table.css";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
 import Pagination from "../../../extensions/Pagination/Pagination";
@@ -11,6 +10,7 @@ import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom"
 import { tableOrder } from "../../../config/tables"
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 import { listPagination } from "../../../config/listConfig"
+import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
 const OrderManager = () => {
 
   const { orders } = useContext(OrderContext);
@@ -39,7 +39,7 @@ const OrderManager = () => {
           .slice(firstPageIndex, lastPageIndex)
       );
     }
-  }, [currentPage, searchValue, sortPosition, sortStatus,PageSize]);
+  }, [currentPage , sortStatus,PageSize]);
   const breadcrumItem = [
     {
       href: "/",
@@ -60,16 +60,8 @@ const OrderManager = () => {
         <div className={`${styles.AccountMain} d-flex`}>
           <div className={`${styles.leftSide} col-8`}>
             <p className={`${styles.title}`}>Quản lý đơn hàng</p>
-            <div className={`${styles.search}`}>
-              <input
-                type="text"
-                placeholder="Tìm kiếm "
-                onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
-              />
-              <div className={`${styles.searchIcon}`}>
-                <SearchIcon />
-              </div>
-            </div>
+            <InputSearch setSearchValue={()=>{}}/>
+
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
@@ -106,7 +98,6 @@ const OrderManager = () => {
                 </span>{" "}
                 bản ghi
               </span>
-
               {searchValue === "" ? (
                 <Pagination
                   className="pagination-bar"

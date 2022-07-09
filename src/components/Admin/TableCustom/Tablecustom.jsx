@@ -3,7 +3,7 @@ import styles from "./Tablecustom.module.css"
 import { Link } from "react-router-dom";
 import Table from "rsuite/Table";
 import "rsuite-table/dist/css/rsuite-table.css";
-
+import Loadings from "../../../components/Site/Loadings/Loadings"
 const ImageCell = ({ rowData, dataKey, ...props }) => (
     <Table.Cell {...props} style={{ padding: 0 }}>
         <div
@@ -76,12 +76,12 @@ const IsSuccesOrder = ({ rowData, dataKey, ...props }) => (
         )}
     </Table.Cell>
 );
-const PostAction = ({ rowData, dataKey, setIsBlog, ...props }) => (
+const PostAction = ({ rowData, dataKey, setIsBlog, path, ...props }) => (
     <Table.Cell {...props}>
         <div className={styles.Celll}>
             <Link
                 to={{
-                    pathname: `/admin/thong-tin-bai-viet`,
+                    pathname: `/admin/${path}`,
                     search: `#${rowData[dataKey]}`,
                 }}
                 className={`${styles.btnEdit} `}
@@ -126,13 +126,18 @@ const EditCell = ({ rowData, dataKey, setIdProduct, ...props }) => (
         </div>
     </Table.Cell>
 );
-function Tablecustom({ tables, data, setIdProduct ,PageSize}) {
+function Tablecustom({ tables, data, setIdProduct, path }) {
+    const [loading, setLoading] = React.useState(true)
+    if (data) {
+        setLoading(false)
+    }
     return (
         <div className={`${styles.Profiletable} mt-4`}>
-            <Table
+            {loading ? <Loadings /> : <Table
                 data={data}
                 rowHeight={55}
-                height={(550* data.length)/10}
+                height={(550 * data.length) / 10}
+            // affixHorizontalScrollbar
             >
                 {
                     tables.map((table, index) => {
@@ -148,7 +153,7 @@ function Tablecustom({ tables, data, setIdProduct ,PageSize}) {
                         } else if (table.type === "comment") {
                             Component = <CommentCell dataKey={table.dataKey} />
                         } else if (table.type === "postAction") {
-                            Component = <PostAction setIsBlog={setIdProduct} dataKey={table.dataKey} />
+                            Component = <PostAction setIsBlog={setIdProduct} dataKey={table.dataKey} path={path} />
                         } else if (table.type === "orderAction") {
                             Component = <OrderDetail dataKey={table.dataKey} />
                         } else if (table.type === "isSucces") {
@@ -166,7 +171,7 @@ function Tablecustom({ tables, data, setIdProduct ,PageSize}) {
                         )
                     })
                 }
-            </Table>
+            </Table>}
         </div>
     )
 }
