@@ -11,10 +11,9 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import GroupIcon from '@mui/icons-material/Group';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
-import AssistantPhotoIcon from '@mui/icons-material/AssistantPhoto';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PostAddIcon from '@mui/icons-material/PostAdd';
-
+import CategoryIcon from '@mui/icons-material/Category';
 const listManagement = [
 
   {
@@ -36,6 +35,11 @@ const listManagement = [
     name: "Vật liệu",
     path: "quan-ly-vat-lieu",
     icon: PostAddIcon
+  },
+  {
+    name: "Danh mục",
+    path: "quan-ly-danh-muc",
+    icon: CategoryIcon
   },
 ]
 const SidebarItem = function ({ Icon, name, path, setShowNoti }) {
@@ -100,9 +104,9 @@ function Sidebar() {
     <div className={`${styles.main}`}>
       <div className={`${styles.head}`}>
         <div className={`${styles.headContent}`}>
-          <NavLink to="/admin/" >
+          <a href="/" >
             <img src={logoSea} alt="" className={styles.logoImg} />
-          </NavLink>
+          </a>
           <div
             className={`${styles.iconBell}`}
             onClick={() => setShowNoti(!showNoti)}

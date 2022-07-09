@@ -42,7 +42,7 @@ export const routerAdmin =[
     },
     {
         component :ProductCategory,
-        path:"phan-loai-danh-muc",
+        path:"quan-ly-danh-muc",
     },
     {
         component :AddCategory,
