@@ -9,12 +9,12 @@ body {
 
 .navbar {
   position: fixed;
-  width: 80px;
+  width: 70px;
   height: 100%;
   transition: .5s;
   overflow: hidden;
   background-color: #fff;
-  box-shadow: 1px 4px 10px rgba(177, 177, 177, 0.2);
+  box-shadow: 1px 4px 10px rgba(240, 240, 240, 0.2);
   z-index: 20;
 }
 
@@ -23,7 +23,7 @@ body {
 }
 
 .main {
-  margin-left: 80px;
+  margin-left: 70px;
   background-image: linear-gradient(to right,#fbf8f7 ,#fbf9f0,#fbf9f0) ;
   padding:  30px;
 }
@@ -57,7 +57,7 @@ body {
 .navbar ul li:hover .navLink::before {
   background-color: rgba(234, 106, 18, 0.1);
   transform: translate(-50%, -50%) scale(1);
-  width: 90%;
+  width: 93%;
   height: 70%;
   border-radius: 20px;
 }
@@ -74,7 +74,6 @@ body {
   text-decoration: none;
   color: var(--cl-text);
   transition: .2s;
-  border: 1px solid rgb(224, 224, 224);
   overflow: hidden;
 
 
@@ -82,26 +81,31 @@ body {
 
 .navLink::before {
   content: "";
-  width: 80px;
+  width: 70px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  height: 80px;
+  height: 70px;
   transition: 0.5s;
 }
 
 .navLink .icon {
   position: relative;
   display: block;
-  min-width: 80px;
-  height: 80px;
-  line-height: 80px;
+  min-width: 70px;
+  height: 70px;
+  line-height: 70px;
   text-align: center;
   color: #41444b;
 }
 
 .navLink .title {
+  transform: translateX(-40px);
+
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
   position: relative;
   font-size: .1.4rem;
   font-weight: 600;
@@ -114,21 +118,155 @@ body {
 .toggle {
   cursor: pointer;
 }
+.active .title{
+  transform: translateX(0);
+  transition: 0.5s cubic-bezier(0.85, 0.05, 0.595, 0.35);
+  opacity: 1;
+  visibility: visible;
+}
 .barIcon{
   color: var(--primaryColor);
 }
+
+[data-title]:hover {
+  position: relative;
+}
+
+[data-title]:hover:before {
+  position: absolute;
+  top: 50%;
+  right: -45%;
+  z-index: 20;
+  content: attr(data-title);
+  margin-top: 0;
+  width: 130px;
+  /* change it */
+  overflow: hidden;
+  word-wrap: break-word;
+  font-size: inherit;
+  color: #FFF;
+  text-shadow: 1px 1px #000;
+  text-align: center;
+  background-color: rgba(122, 122, 122, 0.4);
+  box-sizing: border-box;
+}
+
+[data-title]:hover:after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 99999;
+  content: '';
+  margin-left: -0.125em;
+  width: 0;
+  height: 0;
+  border: 0.25em dashed transparent;
+  border-bottom: 0.25em solid rgb(255, 255, 255);
+  font-size: inherit;
+
+}
+[data-tooltip] {
+  position: relative;
+  z-index: 100 !important;
+}
+/* Positioning and visibility settings of the tooltip */
+[data-tooltip]::before,
+[data-tooltip]::after {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 5px); /* 5px is the size of the arrow */
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition: 0.3s;
+  will-change: transform;
+}
+/* The actual tooltip with a dynamic width */
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+
+  /*min-width: 50px;*/
+  /*max-width: 300px;*/
+  width: max-content;
+  width: -moz-max-content;
+
+  padding: 10px 18px;
+  border-radius: 10px;
+  background-color: rgba(50, 50, 50, 1);
+  box-shadow: var(--default-box-shadow);
+
+  color: #fff;
+  font-size: 0.75rem;
+  text-align: center;
+  white-space: pre-wrap;
+
+  transform: translate(-50%, -5px) scale(0.5);
+}
+/* Tooltip arrow */
+[data-tooltip]::after {
+  content: '';
+  border-style: solid;
+  border-width: 5px 5px 0 5px; /* CSS triangle */
+  border-color: rgba(50, 50, 50, 1) transparent transparent transparent;
+
+  transform-origin: top;   /* Orientation setting for the slide-down effect */
+  transition-duration: 0s; /* If the mouse leaves the element, the transition effects for the tooltip arrow are "turned off" */
+  transform: translateX(-50%) scaleY(0);
+}
+/* Tooltip becomes visible at hover */
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+  visibility: visible;
+  opacity: 1;
+}
+/* Scales from 0.5 to 1 -> grow effect */
+[data-tooltip]:hover::before {
+  transition-delay: 0.3s;
+  transform: translate(-50%, -5px) scale(1);
+}
+/* Arrow slide down effect only on mouseenter (NOT on mouseleave) */
+[data-tooltip]:hover::after {
+  transition-delay: 0.5s; /* Starting after the grow effect */
+  transition-duration: 0.2s;
+  transform: translateX(-50%) scaleY(1);
+}
+
+/* RIGHT */
+[data-tooltip-location="right"]::before,
+[data-tooltip-location="right"]::after {
+    bottom: 50%;
+    left: calc(100% + 5px);
+}
+[data-tooltip-location="right"]::before {
+    transform: translate(5px, 50%) scale(0.5);
+}
+[data-tooltip-location="right"]:hover::before {
+    transform: translate(5px, 50%) scale(1);
+}
+[data-tooltip-location="right"]::after {
+    border-width: 5px 5px 5px 0;
+    border-color: transparent rgba(50, 50, 50, 1) transparent transparent;
+    transform-origin: right;
+    transform: translateY(50%) scaleX(0);
+}
+[data-tooltip-location="right"]:hover::after {
+    transform: translateY(50%) scaleX(1);
+}
+
 @media (max-width: 768px) {
   header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 80px;
+    height: 70px;
     background: var(--bg-secondary);
     color: var(--cl-text);
   }
 
   .navbar {
-    left: -80px;
+    left: -70px;
   }
 
   .navbar.active {
@@ -142,8 +280,8 @@ body {
 }
 
 .imgIcon {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
 }
 
 :root {

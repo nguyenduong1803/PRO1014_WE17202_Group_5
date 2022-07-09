@@ -1,8 +1,10 @@
 
-import table from "../assets/img/table.png"
-import menus from "../assets/img/menu.png"
-import bill from "../assets/img/bill.png"
-import Home from "../assets/img/Home.png"
+
+import HomeIcon from "../assets/svg/HomeSvg"
+import MenuIcon from "../assets/svg/MenuIcon"
+import OrderIcon from "../assets/svg/OrderIcon"
+import VrIcon from "../assets/svg/VrIcon"
+import FloorIcon from "../assets/svg/FloorIcon"
 // category
 export const listCategory = [
     {
@@ -18,8 +20,8 @@ export const listCategory = [
         change: "Hoa quả"
     },
     {
-        item:"Update",
-        change:""
+        item: "Update",
+        change: ""
     }
 ]
 // menu 
@@ -41,26 +43,32 @@ export const menu = [
         path: ""
     },
 ]
-export const listMenu=[
+export const listMenu = [
     {
-        name:"Trang chủ",
-        to:"/",
-        icon:Home
+        name: "Trang chủ",
+        to: "/",
+        icon: <HomeIcon width="28px" height="28px" />
     },
     {
-        name:"Danh sách bàn",
-        to:"/dat-ban",
-        icon:table
+        name: "Danh sách Menu",
+        to: "/menu",
+        icon: <MenuIcon width="32px" height="32px" />
     },
     {
-        name:"Danh sách Menu",
-        to:"/menu",
-        icon:menus
+        name: "Danh sách bàn",
+        to: "/dat-ban",
+        icon: <FloorIcon width="28px" height="28px" />
+    },
+
+    {
+        name: "Hóa đơn",
+        to: "/orders",
+        icon: <OrderIcon width="42px" height="42px" />
     },
     {
-        name:"Hóa đơn",
-        to:"/orders",
-        icon:bill
+        name: "Xem nhà hàng",
+        to: "/map",
+        icon: <VrIcon width="42px" height="42px" />
     },
-   
+
 ]
