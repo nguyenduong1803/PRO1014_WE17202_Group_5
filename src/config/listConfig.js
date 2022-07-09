@@ -72,3 +72,20 @@ export const listMenu = [
     },
 
 ]
+// page
+export const listPagination = [{
+    name: 10
+  },
+  {
+    name: 20
+  },
+  {
+    name: 40
+  },
+  {
+    name: 50
+  },
+  {
+    name: 60
+  }
+  ]

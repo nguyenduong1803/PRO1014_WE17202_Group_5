@@ -11,9 +11,10 @@ import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
 import { DataContext } from "../../../contexts/DataContext";
 import axios from "axios";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
-import SelectPagination from "../../../components/Admin/SelectPagination/SelectPagination"
 import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
-import {tableProduct} from "../../../config/tables"
+import { tableProduct } from "../../../config/tables"
+import { listPagination } from "../../../config/listConfig"
+import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 const ManageProduct = (id) => {
   const { data, setData } = useContext(DataContext);
   const [PageSize, setPageSize] = useState(10)
@@ -84,7 +85,14 @@ const ManageProduct = (id) => {
       isActive: true,
     },
   ];
-  
+  const list = [{
+    name: "meat",
+  }, {
+    name: "fish",
+  }, {
+    name: "vegetables"
+  }]
+
   return (
     <>
       <Sidebar />
@@ -100,16 +108,23 @@ const ManageProduct = (id) => {
               <ArrowBackIcon />
               Danh sách sản phẩm
             </p>
-            <div className={`${styles.search}`}>
-              <input
-                type="text"
-                placeholder="Tìm kiếm "
-                onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
-              />
-              <div className={`${styles.searchIcon}`}>
-                <SearchIcon />
+            <div className="d-flex justify-content-between align-items-center">
+              <div className={`${styles.search}`}>
+                <input
+                  type="text"
+                  placeholder="Tìm kiếm "
+                  onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
+                />
+                <div className={`${styles.searchIcon}`}>
+                  <SearchIcon />
+                </div>
               </div>
+              <SelectMui
+                list={list}
+                name="Danh mục"
+              />
             </div>
+
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
@@ -134,45 +149,53 @@ const ManageProduct = (id) => {
             data={dataSliced.filter((e) =>
               e.name.toLowerCase().includes(searchValue)
             )}
+            PageSize={PageSize}
             tables={tableProduct}
             setIdProduct={setIdProduct}
           />
-          <SelectPagination setPageSize={setPageSize} />
-          <div className={`${styles.pagination} `}>
-            <span style={{ marginRight: `25px` }}>
-              có{" "}
-              <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
-                {searchValue === ""
-                  ? data.length
-                  : data.filter(
-                    (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
-                  ).length}
-              </span>{" "}
-              bản ghi
-            </span>
 
-            {searchValue === "" ? (
-              <Pagination
-                className="pagination-bar"
-                currentPage={currentPage}
-                totalCount={data && data.length}
-                pageSize={PageSize}
-                onPageChange={(page) => setCurrentPage(page)}
-              />
-            ) : (
-              <Pagination
-                className="pagination-bar"
-                currentPage={currentPage}
-                totalCount={
-                  data &&
-                  data.filter(
-                    (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
-                  ).length
-                }
-                pageSize={PageSize}
-                onPageChange={(page) => setCurrentPage(page)}
-              />
-            )}
+          <div className={`${styles.pagination} justify-content-between`}>
+            <SelectMui
+              list={listPagination}
+              name="Số bản ghi"
+              setPageSize={setPageSize}
+            />
+            <div className="d-flex align-items-center">
+              <span style={{ marginRight: `25px` }}>
+                có{" "}
+                <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
+                  {searchValue === ""
+                    ? data.length
+                    : data.filter(
+                      (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
+                    ).length}
+                </span>{" "}
+                bản ghi
+              </span>
+
+              {searchValue === "" ? (
+                <Pagination
+                  className="pagination-bar"
+                  currentPage={currentPage}
+                  totalCount={data && data.length}
+                  pageSize={PageSize}
+                  onPageChange={(page) => setCurrentPage(page)}
+                />
+              ) : (
+                <Pagination
+                  className="pagination-bar"
+                  currentPage={currentPage}
+                  totalCount={
+                    data &&
+                    data.filter(
+                      (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
+                    ).length
+                  }
+                  pageSize={PageSize}
+                  onPageChange={(page) => setCurrentPage(page)}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

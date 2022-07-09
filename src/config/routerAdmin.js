@@ -1,6 +1,6 @@
 import Dashboard from "../pages/Admin/Dashboard/Dashboard";
 import Login from "../pages/Admin/Login/Login";
-import AddProducts from "../pages/Admin/AddProducts/AddProducts";
+import AddProducts from "../pages/Admin/ManageProduct/AddProducts/AddProducts";
 import Profile from "../pages/Admin/UserManager/Profile/Profile";
 import UserManager from "../pages/Admin/UserManager/UserManager";
 import Register from "../pages/Admin/Register/Register";

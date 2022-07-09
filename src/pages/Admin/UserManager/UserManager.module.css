@@ -2,19 +2,16 @@
     width: 100%;
     background-color: #e5e5e5;
     min-height: 100vh;
-    padding: 20px 50px;
+    padding:0 24px;
     flex: 1;
 }
-.main * {
-    transition: 0.3s;
-    font-size: 14px;
-}
+
 .control {
     margin: 14px 0 28px 0;
 }
 p.title {
     color: #1a358f;
-    font-size: 30px;
+    font-size: 23px;
     font-weight: 600;
     margin-bottom: 18px;
 }
@@ -24,7 +21,7 @@ p.title {
     margin-right: 16px;
 }
 .search {
-    width: 744px;
+    width:620px;
     height: 40px;
     display: flex;
 }
@@ -168,9 +165,9 @@ p.title {
     border-radius: 50%;
 }
 .pagination {
-    margin-top: 30px;
     display: flex;
-    justify-content: flex-end;
+    padding-top: 12px;
+    margin-bottom: 24px;
 }
 .pagination span {
     line-height: 32px;

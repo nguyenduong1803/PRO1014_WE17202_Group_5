@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AddProducts.module.css";
-import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
+import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import axios from "axios";
 import Switch from "@mui/material/Switch";
-import Header from "../../../components/Admin/Header/Header";
-import Loadings from "../../../components/Site/Loadings/Loadings";
+import Header from "../../../../components/Admin/Header/Header";
+import Loadings from "../../../../components/Site/Loadings/Loadings";
 import { useHistory } from "react-router-dom";
-import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
+import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
 function AddProducts() {
   const history = useHistory();
   const [status, setStatus] = useState(true);
@@ -195,8 +195,6 @@ function AddProducts() {
                       </>
                     )}
                   </div>
-
-
                   <label htmlFor="upLoadImg">
                     <p>Tải lên 3 ảnh</p>
 

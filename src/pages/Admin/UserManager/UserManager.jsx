@@ -12,7 +12,6 @@ import { searchData } from '../../../extensions/searchData';
 import { UserContext } from '../../../contexts/UserContext';
 import avatardefault from "../../../assets/images/avatar_default.png"
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
-import SelectPagination from "../../../components/Admin/SelectPagination/SelectPagination"
 const breadcrumItem = [
     {
         href: "/",
@@ -82,7 +81,7 @@ function UserManager() {
             <Sidebar />
             <div className={`${styles.main}`}>
                 <Breadcrumbs breadItem={breadcrumItem} />
-                <div className={`${styles.control} row`}>
+                <div className={`${styles.control} d-flex`}>
                     <div className={`${styles.leftSide} col-8 p-0`}>
                         <p className={`${styles.title}`}>
                             Danh sách người dùng
@@ -175,7 +174,6 @@ function UserManager() {
 
                     </Table>
                 </div>
-                <SelectPagination setPageSize={setPageSize} />
                 <div className={`${styles.pagination} `}>
                     <span style={{ marginRight: `25px` }}>có <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
                         {

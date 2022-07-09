@@ -31,7 +31,7 @@ p.title {
 }
 
 .search {
-    width: 744px;
+    width:620px;
     height: 40px;
     display: flex;
 }
@@ -133,8 +133,8 @@ p.title {
 
 .pagination {
     display: flex;
-    justify-content: flex-end;
     padding-top: 12px;
+    margin-bottom: 24px;
 }
 .pagination span {
     line-height: 32px;

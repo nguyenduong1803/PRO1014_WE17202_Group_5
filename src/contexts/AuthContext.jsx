@@ -1,6 +1,6 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authReducer } from "../reducers/authReducer";
+import { authReducer } from "../redux/authReducer";
 import axios from "axios";
 import { apiUrl, LOCAL_STORAGE_TOKEN_NAME } from "./constants";
 import setAuthToken from "../utils/setAuthToken";
