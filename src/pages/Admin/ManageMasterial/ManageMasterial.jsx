@@ -5,16 +5,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AddIcon from "@mui/icons-material/Add";
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
-import "rsuite-table/dist/css/rsuite-table.css";
 import Pagination from "../../../extensions/Pagination/Pagination";
 import { NavLink } from "react-router-dom";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
 import { DataContext } from "../../../contexts/DataContext";
 import axios from "axios";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
-import SelectPagination from "../../../components/Admin/SelectPagination/SelectPagination"
 import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
-const ManageMasterial = (id) => {
+import { tableProduct } from "../../../config/tables"
+import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
+const ManageProduct = (id) => {
   const { data, setData } = useContext(DataContext);
   const [PageSize, setPageSize] = useState(10)
 
@@ -84,85 +84,29 @@ const ManageMasterial = (id) => {
       isActive: true,
     },
   ];
-  const tables = [
-    {
-      name: "STT",
-      width: 60,
-      dataKey: "id",
-      isFixed: true,
-      type: "cell"
-    },
-    {
-      name: "Ảnh",
-      width: 130,
-      dataKey: "images",
-      isFixed: true,
-      type: "img"
-    },
-    {
-      name: "Mã sản phẩm",
-      width: 250,
-      dataKey: "_id",
-      isFixed: false,
-      type: "cell"
-    },
-    {
-      name: "Tên sản phẩm",
-      width: 200,
-      dataKey: "name",
-      isFixed: false,
-      type: "cell"
-    },
-    {
-      name: "Số lượng",
-      width: 130,
-      dataKey: "quantity",
-      isFixed: false,
-      type: "cell"
-    },
-    {
-      name: "Mô tả",
-      width: 150,
-      dataKey: "describe",
-      isFixed: false,
-      type: "cell"
-    },
-    {
-      name: "Mã giảm giá",
-      width: 150,
-      dataKey: "discount",
-      isFixed: false,
-      type: "cell"
-    },
-    {
-      name: "Giá sản phẩm",
-      width: 150,
-      dataKey: "price",
-      isFixed: false,
-      type: "cell"
-    },
-    {
-      name: "Thời gian tạo",
-      width: 250,
-      dataKey: "timeCreate",
-      isFixed: false,
-      type: "cell"
-    },
-    {
-      name: "Trạng thái",
-      width: 150,
-      dataKey: "status",
-      isFixed: false,
-      type: "status"
-    },
-    {
-      name: "Quản lý",
-      width: 150,
-      dataKey: "_id",
-      isFixed: "right",
-      type: "edit"
-    },
+  const list = [{
+    name: "meat",
+  }, {
+    name: "fish",
+  }, {
+    name: "vegetables"
+  }]
 
+  const listPagination = [{
+    name: 10
+  },
+  {
+    name: 20
+  },
+  {
+    name: 40
+  },
+  {
+    name: 50
+  },
+  {
+    name: 60
+  }
   ]
   return (
     <>
@@ -179,16 +123,23 @@ const ManageMasterial = (id) => {
               <ArrowBackIcon />
               Danh sách sản phẩm
             </p>
-            <div className={`${styles.search}`}>
-              <input
-                type="text"
-                placeholder="Tìm kiếm "
-                onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
-              />
-              <div className={`${styles.searchIcon}`}>
-                <SearchIcon />
+            <div className="d-flex justify-content-between align-items-center">
+              <div className={`${styles.search}`}>
+                <input
+                  type="text"
+                  placeholder="Tìm kiếm "
+                  onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
+                />
+                <div className={`${styles.searchIcon}`}>
+                  <SearchIcon />
+                </div>
               </div>
+              <SelectMui
+                list={list}
+                name="Danh mục"
+              />
             </div>
+
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
@@ -210,48 +161,56 @@ const ManageMasterial = (id) => {
         </div>
         <div className={styles.profile}>
           <Tablecustom
+          PageSize={PageSize}
             data={dataSliced.filter((e) =>
               e.name.toLowerCase().includes(searchValue)
             )}
-            tables={tables}
+            tables={tableProduct}
             setIdProduct={setIdProduct}
           />
-          <SelectPagination setPageSize={setPageSize} />
-          <div className={`${styles.pagination} `}>
-            <span style={{ marginRight: `25px` }}>
-              có{" "}
-              <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
-                {searchValue === ""
-                  ? data.length
-                  : data.filter(
-                    (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
-                  ).length}
-              </span>{" "}
-              bản ghi
-            </span>
 
-            {searchValue === "" ? (
-              <Pagination
-                className="pagination-bar"
-                currentPage={currentPage}
-                totalCount={data && data.length}
-                pageSize={PageSize}
-                onPageChange={(page) => setCurrentPage(page)}
-              />
-            ) : (
-              <Pagination
-                className="pagination-bar"
-                currentPage={currentPage}
-                totalCount={
-                  data &&
-                  data.filter(
-                    (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
-                  ).length
-                }
-                pageSize={PageSize}
-                onPageChange={(page) => setCurrentPage(page)}
-              />
-            )}
+          <div className={`${styles.pagination} justify-content-between`}>
+            <SelectMui
+              list={listPagination}
+              name="Số bản ghi"
+              setPageSize={setPageSize}
+            />
+            <div className="d-flex align-items-center">
+              <span style={{ marginRight: `25px` }}>
+                có{" "}
+                <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
+                  {searchValue === ""
+                    ? data.length
+                    : data.filter(
+                      (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
+                    ).length}
+                </span>{" "}
+                bản ghi
+              </span>
+
+              {searchValue === "" ? (
+                <Pagination
+                  className="pagination-bar"
+                  currentPage={currentPage}
+                  totalCount={data && data.length}
+                  pageSize={PageSize}
+                  onPageChange={(page) => setCurrentPage(page)}
+                />
+              ) : (
+                <Pagination
+                  className="pagination-bar"
+                  currentPage={currentPage}
+                  totalCount={
+                    data &&
+                    data.filter(
+                      (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
+                    ).length
+                  }
+                  pageSize={PageSize}
+                  onPageChange={(page) => setCurrentPage(page)}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -259,4 +218,4 @@ const ManageMasterial = (id) => {
   );
 };
 
-export default ManageMasterial;
+export default ManageProduct;

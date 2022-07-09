@@ -126,13 +126,13 @@ const EditCell = ({ rowData, dataKey, setIdProduct, ...props }) => (
         </div>
     </Table.Cell>
 );
-function Tablecustom({ tables, data, setIdProduct }) {
+function Tablecustom({ tables, data, setIdProduct ,PageSize}) {
     return (
         <div className={`${styles.Profiletable} mt-4`}>
             <Table
                 data={data}
                 rowHeight={55}
-                height={600}
+                height={(550* data.length)/10}
             >
                 {
                     tables.map((table, index) => {
