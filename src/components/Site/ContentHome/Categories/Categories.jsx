@@ -12,7 +12,7 @@ function Categories() {
         style={{ padding: "20px 0" }}
       >
         <div className={styles.title}>Categories</div>
-        <div className={styles.viewAll}>ViewAll</div>
+        <div className={styles.viewAll}>ViewAll <ChevronRightIcon/> </div>
       </div>
       <div className='row'>
         {catetoryList.map((cate, index) => {
@@ -50,8 +50,8 @@ const catetoryList = [
 
 function CategoriesItems({ img, titleName }) {
   return (
-    <div className={`${styles.categoryItems} col-lg-3 `}  >
-      <div className='text-align-center'>
+    <div className='col-lg-3'  >
+      <div className={`${styles.categoryItems} text-align-center`}>
         <img src={img} alt="" />
         <h4 className={styles.titleName}>{titleName}</h4><br />
         <p className={styles.line}></p><br />

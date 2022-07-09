@@ -1,0 +1,26 @@
+.MyCart {
+    border-radius: 50px;
+    margin-top:50px;
+    display: flex;
+    background-color: rgb(214, 220, 220);
+    position: relative;
+    height: 100px;
+    width:300px;
+    left:20%;
+}
+.title{
+    margin-left:100px;
+    padding: 20px;
+}
+.price{
+    margin-left:100px;
+    padding: 5px 20px;
+}
+.MyCart img {
+    width: 120px;
+    position: absolute;
+    height: 120px;
+    left:-10%;
+    top:-20%;
+    border-radius: 50%;
+}

@@ -3,10 +3,20 @@
     height: 150px;
     border-radius: 50%;
     position: absolute;
-animation: rotation 10s infinite alternate;
-
-    left: 57%;
+    transform: translateX(-50%);
+    left: 75%;
 }
+@keyframes rotation {
+    from {
+      transform:  translateX(-50%) rotate(0deg);
+    }
+    to {
+    transform: translateX(-50%)  rotate(360deg) ;
+    }
+  }
+  .trending:hover img{
+    animation: rotation 10s infinite alternate;
+  }
 .trending{
     position: relative;
     margin-top: 20px;
@@ -19,7 +29,7 @@ animation: rotation 10s infinite alternate;
     color: black;
     border-radius: 20px;
 }
-.trendingContent:hover{
+.trendingContent:hover {
     color: #fff;
     background-color: #EF9454;
 }
@@ -34,14 +44,6 @@ animation: rotation 10s infinite alternate;
     text-align: center;
 }
 
-@keyframes rotation {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
 
 .top{
     font-size:20px;

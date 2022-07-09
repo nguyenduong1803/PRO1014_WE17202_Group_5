@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./TrendingOrder.module.css";
 import AddIcon from '@mui/icons-material/Add';
 import SvgIcon from '../../../../../src/assets/svg/SvgIcon';
+
 function TrendingOrder({ top, img, title, price ,persons}) {
   return (
     <div className={`${styles.trending} col-lg-6`}>

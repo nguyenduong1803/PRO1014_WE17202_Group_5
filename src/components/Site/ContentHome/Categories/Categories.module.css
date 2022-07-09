@@ -9,6 +9,7 @@
     background-color: rgb(255, 255, 255);
     text-align: center;
     padding: 10px 0;
+    border-radius: 20px;
 }
 .categoryItems:hover .line{
     width: 90%;
