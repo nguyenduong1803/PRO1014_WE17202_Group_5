@@ -22,13 +22,41 @@ body {
   width: 300px;
 }
 
+.overlayImg {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  opacity: 0.5;
+  animation: rotation 10s infinite linear;
+}
+
+.shapeCircle {
+  background-image: linear-gradient(.314turn, rgba(40, 112, 222, .3) -32.12%, rgba(220, 232, 250, .35) 110.13%);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  position: absolute;
+  left: 140px;
+  z-index: 3;
+  top: 150px;
+  height: 100px;
+  width: 100px;
+  box-shadow: 0 16px 24px rgba(40,112,222,.16);
+
+}
+
 .main {
   margin-left: 70px;
-  background-image: linear-gradient(to right,#fbf8f7 ,#fbf9f0,#fbf9f0) ;
-  padding:  30px;
+  background-image: linear-gradient(to right, #fbf8f7, #fbf9f0, #fbf9f0);
+  padding: 30px;
 }
-.line{
-  top: 280px;
+
+.line {
+  top: 0;
   position: fixed;
 }
 
@@ -61,9 +89,9 @@ body {
   height: 70%;
   border-radius: 20px;
 }
-.navbar ul li:hover .imgIcon{
 
-}
+.navbar ul li:hover .imgIcon {}
+
 .navLink {
   position: relative;
   display: block;
@@ -118,141 +146,16 @@ body {
 .toggle {
   cursor: pointer;
 }
-.active .title{
+
+.active .title {
   transform: translateX(0);
   transition: 0.5s cubic-bezier(0.85, 0.05, 0.595, 0.35);
   opacity: 1;
   visibility: visible;
 }
-.barIcon{
+
+.barIcon {
   color: var(--primaryColor);
-}
-
-[data-title]:hover {
-  position: relative;
-}
-
-[data-title]:hover:before {
-  position: absolute;
-  top: 50%;
-  right: -45%;
-  z-index: 20;
-  content: attr(data-title);
-  margin-top: 0;
-  width: 130px;
-  /* change it */
-  overflow: hidden;
-  word-wrap: break-word;
-  font-size: inherit;
-  color: #FFF;
-  text-shadow: 1px 1px #000;
-  text-align: center;
-  background-color: rgba(122, 122, 122, 0.4);
-  box-sizing: border-box;
-}
-
-[data-title]:hover:after {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  z-index: 99999;
-  content: '';
-  margin-left: -0.125em;
-  width: 0;
-  height: 0;
-  border: 0.25em dashed transparent;
-  border-bottom: 0.25em solid rgb(255, 255, 255);
-  font-size: inherit;
-
-}
-[data-tooltip] {
-  position: relative;
-  z-index: 100 !important;
-}
-/* Positioning and visibility settings of the tooltip */
-[data-tooltip]::before,
-[data-tooltip]::after {
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 5px); /* 5px is the size of the arrow */
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  transition: 0.3s;
-  will-change: transform;
-}
-/* The actual tooltip with a dynamic width */
-[data-tooltip]::before {
-  content: attr(data-tooltip);
-
-  /*min-width: 50px;*/
-  /*max-width: 300px;*/
-  width: max-content;
-  width: -moz-max-content;
-
-  padding: 10px 18px;
-  border-radius: 10px;
-  background-color: rgba(50, 50, 50, 1);
-  box-shadow: var(--default-box-shadow);
-
-  color: #fff;
-  font-size: 0.75rem;
-  text-align: center;
-  white-space: pre-wrap;
-
-  transform: translate(-50%, -5px) scale(0.5);
-}
-/* Tooltip arrow */
-[data-tooltip]::after {
-  content: '';
-  border-style: solid;
-  border-width: 5px 5px 0 5px; /* CSS triangle */
-  border-color: rgba(50, 50, 50, 1) transparent transparent transparent;
-
-  transform-origin: top;   /* Orientation setting for the slide-down effect */
-  transition-duration: 0s; /* If the mouse leaves the element, the transition effects for the tooltip arrow are "turned off" */
-  transform: translateX(-50%) scaleY(0);
-}
-/* Tooltip becomes visible at hover */
-[data-tooltip]:hover::before,
-[data-tooltip]:hover::after {
-  visibility: visible;
-  opacity: 1;
-}
-/* Scales from 0.5 to 1 -> grow effect */
-[data-tooltip]:hover::before {
-  transition-delay: 0.3s;
-  transform: translate(-50%, -5px) scale(1);
-}
-/* Arrow slide down effect only on mouseenter (NOT on mouseleave) */
-[data-tooltip]:hover::after {
-  transition-delay: 0.5s; /* Starting after the grow effect */
-  transition-duration: 0.2s;
-  transform: translateX(-50%) scaleY(1);
-}
-
-/* RIGHT */
-[data-tooltip-location="right"]::before,
-[data-tooltip-location="right"]::after {
-    bottom: 50%;
-    left: calc(100% + 5px);
-}
-[data-tooltip-location="right"]::before {
-    transform: translate(5px, 50%) scale(0.5);
-}
-[data-tooltip-location="right"]:hover::before {
-    transform: translate(5px, 50%) scale(1);
-}
-[data-tooltip-location="right"]::after {
-    border-width: 5px 5px 5px 0;
-    border-color: transparent rgba(50, 50, 50, 1) transparent transparent;
-    transform-origin: right;
-    transform: translateY(50%) scaleX(0);
-}
-[data-tooltip-location="right"]:hover::after {
-    transform: translateY(50%) scaleX(1);
 }
 
 @media (max-width: 768px) {
@@ -289,4 +192,14 @@ body {
   --bg-secondary: #676c74;
   --bg-active: #fdf0e7;
   --cl-text: #383838;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -46,11 +46,19 @@ const catetoryList = [
     img: CatetoryListss,
     titleName: "Cua Con",
   },
+  {
+    img: CatetoryListss,
+    titleName: "Cua Con",
+  },
+  {
+    img: CatetoryListss,
+    titleName: "Cua Con",
+  },
 ];
 
 function CategoriesItems({ img, titleName }) {
   return (
-    <div className='col-lg-3'  >
+    <div className='col-lg-2'>
       <div className={`${styles.categoryItems} text-align-center`}>
         <img src={img} alt="" />
         <h4 className={styles.titleName}>{titleName}</h4><br />
