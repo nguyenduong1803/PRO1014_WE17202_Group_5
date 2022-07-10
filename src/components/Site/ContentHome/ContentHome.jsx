@@ -95,7 +95,7 @@ const trendingOrder = [
 ];
 function ContentHome() {
   return (
-    <div>
+    <div style={{position:"relative",zIndex:"5"}}>
       <div className="row">
         <div className="col-lg-8">
           <Banner />
@@ -137,7 +137,7 @@ function ContentHome() {
           </div>
         </div>
         <div className="col-lg-4">
-          <div className="row">
+          <div className="">
             {SaleFood.map((salefood, index) => {
               return (
                 <ContentRight

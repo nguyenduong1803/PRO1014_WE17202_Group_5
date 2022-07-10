@@ -39,7 +39,9 @@ function LayoutSite({ children }) {
             <Header />
             <main className={styles.main}>
                 <div className={styles.line}>
-                    <Line />
+                    <div className={styles.shapeCircle}></div>
+                    <img className={styles.overlayImg} src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-02.webp" alt="" />
+                    {/* <Line /> */}
                 </div>
                 {children}
             </main>
