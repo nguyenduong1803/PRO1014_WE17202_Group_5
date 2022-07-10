@@ -4,6 +4,7 @@
 }
 .wrapCaroseul{
     display: flex;
+    overflow: hidden;
     justify-content: flex-end;
     align-items: flex-end;
     height: 100vh;
@@ -19,7 +20,7 @@
     top: 33%;
     cursor: pointer;
     user-select: none;
-    /* left:calc(var(--x)); */
+    left:calc(var(--x)); 
     opacity: 0.8;
     filter: grayscale(70%);
     transition: 0.5s ease;
