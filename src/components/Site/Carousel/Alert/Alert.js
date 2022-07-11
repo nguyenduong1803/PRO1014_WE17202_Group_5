@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from "react";
 import styles from "../Alert/alert.module.css";
-import img from "../../../assets/img/alert.jpg";
+import img from "../../../../assets/img/alert2.jpg";
 import Radar from "../Radar/Radar"
 import Menu from "../Menu/Menu"
 
@@ -52,7 +52,7 @@ const Alert = ({ imageActive, onHandleClick, setOption, option }) => {
     },
     {
       bottom: "39%",
-      left: "43%",
+      left: "43%",  
 
     },
     {
