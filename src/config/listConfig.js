@@ -62,7 +62,7 @@ export const listMenu = [
 
     {
         name: "Hóa đơn",
-        to: "/orders",
+        to: "/hoa-don",
         icon: <OrderIcon width="42px" height="42px" />
     },
     {
