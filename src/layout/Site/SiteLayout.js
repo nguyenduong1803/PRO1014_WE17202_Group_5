@@ -25,7 +25,7 @@ function SiteLayout() {
             <Route exact path="/thanh-toan" component={Checkout} />
             <Route exact path="/xac-nhan-don-hang" component={ConfirmBill} />
             <Route exact path="/hoa-don" component={Orders}/>
-
+              
           </Switch>
         </DataProvider>
       </AuthContextProvider>
