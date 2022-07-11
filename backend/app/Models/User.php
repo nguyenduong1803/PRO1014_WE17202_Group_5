@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\DB;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-//
-//    public function insertUser($info) {
-//        $result = DB::insert()
-//    }
+
+    public function insertUser($params) {
+        $result = DB::insert('INSERT INTO nguoi_dung (ten, dia_chi, ngay_sinh, sdt, gioi_tinh, vai_tro, email, mat_khau) values (?, ?, ? , ?,
+                                                                                                   ?, ?,?,?)', $params);
+    }
 
 public function getAllUser() {
     $result = DB::select('Select * from nguoi_dung');
