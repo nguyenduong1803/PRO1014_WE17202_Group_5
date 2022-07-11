@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from "react-router-dom"
-import Home from "../../../assets/svg/HomeSvg"
-import SlideIcon from "../../../assets/svg/SlideIcon"
-import ArrowUp from "../../../assets/svg/ArrowUp"
-import MapIcon from "../../../assets/svg/MapIcon"
+import Home from "../../../../assets/svg/HomeSvg"
+import SlideIcon from "../../../../assets/svg/SlideIcon"
+import ArrowUp from "../../../../assets/svg/ArrowUp"
+import MapIcon from "../../../../assets/svg/MapIcon"
 import styles from "./Menu.module.css"
 
 function Menu({ setOption, onSetMap, onPrev, option }) {

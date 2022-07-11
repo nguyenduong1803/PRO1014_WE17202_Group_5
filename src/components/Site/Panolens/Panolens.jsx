@@ -2,11 +2,12 @@
 import React from 'react'
 import * as PANOLENS from "panolens";
 import * as THREE from "three"
-import Alert from '../Alert/Alert'
+import Alert from '../Carousel/Alert/Alert'
 import ThreeSixty from "react-360-view";
 import styles from "./Panolens.css";
 import moveIcon from "../../../assets/img/moveIcon.png"
-import { Contexts } from "../Contexts/Contexts"
+import { Contexts } from "../Carousel/Contexts/Contexts"
+import Cursor from './Cursor/Cursor';
 // import Radar from "../../../assets/img/radar.svg"
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -74,7 +75,7 @@ function Panolens({ img, onClickImgs, index, setOption, imageActive, onHandleCli
             z: -2000,
             name: "vị trí 1",
             modal: "",
-            img:moveIcon
+            img: moveIcon
         },
         {
             from: 0,
@@ -95,7 +96,7 @@ function Panolens({ img, onClickImgs, index, setOption, imageActive, onHandleCli
             z: -3000,
             name: "vị trí 1",
             modal: "product",
-            img:moveIcon
+            img: moveIcon
         },
         {
             modalId: 0,
@@ -106,7 +107,7 @@ function Panolens({ img, onClickImgs, index, setOption, imageActive, onHandleCli
             z: -3050,
             name: "video product",
             modal: "product",
-            img:moveIcon
+            img: moveIcon
         },
         {
             from: 4,
@@ -195,7 +196,7 @@ function Panolens({ img, onClickImgs, index, setOption, imageActive, onHandleCli
                     infospot.element.appendChild(overlay);
                     overlay.classList.add("overlay")
                     overlay.style.transition = "0.5s"
-                  
+
                     overlay.innerHTML = `<div>
                     <h2>tiitle</h2>
                     <p>content</p>
@@ -226,6 +227,7 @@ function Panolens({ img, onClickImgs, index, setOption, imageActive, onHandleCli
 
     return (
         <>
+            <Cursor />
             <div style={styles.name} id="app">
             </div>
             {modal !== -1 ?
