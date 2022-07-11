@@ -6,9 +6,15 @@
     width: 100%;
     background-color: #fff !important;
     overflow: hidden;
+  cursor: none !important;
+
     /* Hide horizontal scrollbar */
 }
 
+
+body #app {
+  cursor: none;
+}
 @keyframes zoomIn {
     from {
         transform: scale3d(1.5, 1.5, 1.5);
@@ -28,7 +34,7 @@
     animation: zoomIn 2.4s;
     -webkit-animation: zoomIn 2.4s;
     background-color: #fff;
-    cursor: all-scroll;
+    cursor: none;
 
 }
 

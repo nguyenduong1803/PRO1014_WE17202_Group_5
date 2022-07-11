@@ -9,7 +9,7 @@ function Home() {
   return (
       <LayoutSite>
         <ContentHome/>
-        
+
       </LayoutSite>
   );
 }
