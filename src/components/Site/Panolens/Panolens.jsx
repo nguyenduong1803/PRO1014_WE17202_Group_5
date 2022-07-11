@@ -2,11 +2,11 @@
 import React from 'react'
 import * as PANOLENS from "panolens";
 import * as THREE from "three"
-import Alert from '../Alert/Alert'
+import Alert from '../Carousel/Alert/Alert'
 import ThreeSixty from "react-360-view";
 import styles from "./Panolens.css";
 import moveIcon from "../../../assets/img/moveIcon.png"
-import { Contexts } from "../Contexts/Contexts"
+import { Contexts } from "../Carousel/Contexts/Contexts"
 import Cursor from './Cursor/Cursor';
 // import Radar from "../../../assets/img/radar.svg"
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
