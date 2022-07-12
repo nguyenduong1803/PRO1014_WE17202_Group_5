@@ -31,7 +31,7 @@ class AuthController extends Controller
         ];
         $modelUser = new User();
         $modelUser ->insertUser($dataInsert);
-        return response() ->json(["user" => $dataInsert, "msg" => "Register success!"],200);
+        return response() ->json(["msg" => "Register success!"],200);
     }
 
     public function login(UserLogin $request) {
@@ -43,7 +43,6 @@ class AuthController extends Controller
         } else {
             return response() ->json([ "msg" => "Login failed!"],400);
         }
-
     }
 
     public function getInfoUser() {
