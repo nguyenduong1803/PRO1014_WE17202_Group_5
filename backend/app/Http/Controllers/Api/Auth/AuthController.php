@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 
 
@@ -74,5 +75,10 @@ class AuthController extends Controller
         } else {
             return response() ->json(["msg" => "Đổi mật khẩu thất bại!"],402);
         }
+    }
+
+    public function logout(Request $request) {
+            $request->user()->token()->revoke();
+            return response() ->json(["msg" => "Đăng xuất thành công!"],200);
     }
 }
