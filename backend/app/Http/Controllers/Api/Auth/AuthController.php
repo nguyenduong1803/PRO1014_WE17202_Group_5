@@ -39,7 +39,8 @@ class AuthController extends Controller
 
     public function login(UserLogin $request) {
         $validate = $request -> validated();
-        $user = User::where('email', $validate['email'])->first();
+        $modelUser = new User();
+        $user = $modelUser -> login($validate['email']);
         if(!$user || !Hash::check($validate['mat_khau'], $user -> mat_khau)) {
             return response([
                 'message' => 'Email or password not valid!'
