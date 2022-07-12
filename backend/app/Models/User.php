@@ -18,10 +18,20 @@ class User extends Authenticatable
                                                                                                    ?, ?,?,?)', $params);
     }
 
-    public function login($params) {
-        $result = User::where('email', $params)->first();
+    public function login($email) {
+        $result = User::where('email', $email)->first();
         return $result;
     }
+
+    public function forgotPassword($email) {
+        $result = User::where('email', $email)->first();
+        return $result;
+    }
+
+    public function updateTokenForgotPassword($params) {
+        DB::update("UPDATE users SET `token_verify` = ? WHERE `id` = ?", $params);
+    }
+
 
     public function updateChangePassword($params) {
         DB::update("UPDATE users SET `mat_khau` = ? WHERE `id` = ?", $params);
