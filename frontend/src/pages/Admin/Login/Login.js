@@ -5,57 +5,65 @@ import GmailImg from '../../../assets/images/social-icons/GmailImg.png'
 import logoMau from "../../../assets/img/logoSea.png"
 import { Link } from "react-router-dom";
 import { setUserSession } from '../../../utils/Common'
-import axios from 'axios'
-
+import { useDispatch,useSelector } from "react-redux"
+import {selectAuth} from "../../../redux/selector"
+import AuthSlice, { LoginAuth } from "../../../redux/SliceReducer/AuthSlice"
 
 function Login(self) {
+    const dispatch = useDispatch();
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
-
+    const user = useSelector(selectAuth)
+    const users =user.then(res=>{console.log(res)})
+    console.log(users)
     const bodyFormData = new FormData();
     bodyFormData.append("db", "diligo_hrms");
     bodyFormData.append("login", login);
     bodyFormData.append("password", password);
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(LoginAuth({ username: "duong", password: "duong123" }))
+        console.log("submit");
+    }
 
     const handleLogin = () => {
-        setError(null);
+        // setError(null);
 
-        var inputPassword = document.getElementById("password");
-        var inputUsername = document.getElementById("username");
-        setLogin(inputUsername.value)
-        setPassword(inputPassword.value)
+        // var inputPassword = document.getElementById("password");
+        // var inputUsername = document.getElementById("username");
+        // setLogin(inputUsername.value)
+        // setPassword(inputPassword.value)
 
-        sessionStorage.setItem("username", inputUsername.value);
-        sessionStorage.setItem("password", inputPassword.value);
+        // sessionStorage.setItem("username", inputUsername.value);
+        // sessionStorage.setItem("password", inputPassword.value);
 
-        axios
-            .post("http://hrm.diligo.vn/api/auth/token", bodyFormData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            })
-            .then((response) => {
-                setUserSession(
-                    response.data.access_token,
-                    response.data.user,
-                    response.data.name,
-                    response.data.go_to_backend
-                );
-                self.history.push("/");
-            })
-            .catch((error) => {
-                if (
-                    error.response.status === 401 ||
-                    error.response.status === 400 ||
-                    error.response.status === 403
-                ) {
-                    setError(error.response.data.message);
-                } else {
-                    setError("Something went wrong! Try again later");
-                }
-            });
+        // axios
+        //     .post("http://hrm.diligo.vn/api/auth/token", bodyFormData, {
+        //         headers: {
+        //             "Content-Type": "multipart/form-data",
+        //         },
+        //     })
+        //     .then((response) => {
+        //         setUserSession(
+        //             response.data.access_token,
+        //             response.data.user,
+        //             response.data.name,
+        //             response.data.go_to_backend
+        //         );
+        //         self.history.push("/");
+        //     })
+        //     .catch((error) => {
+        //         if (
+        //             error.response.status === 401 ||
+        //             error.response.status === 400 ||
+        //             error.response.status === 403
+        //         ) {
+        //             setError(error.response.data.message);
+        //         } else {
+        //             setError("Something went wrong! Try again later");
+        //         }
+        //     });
     };
     return (
         <div className={`${styles.main} d-flex`}>
@@ -66,7 +74,9 @@ function Login(self) {
                         <img src={logoMau} alt="" />
                     </Link>
                     <h5 className={`${styles.title}`}>Chào mừng bạn quay trở lại !</h5>
-                    <div className={`${styles.form}`}>
+                    <form
+                        onSubmit={e => handleSubmit(e)}
+                        className={`${styles.form}`}>
                         <div>
 
                             <p style={{ fontWeight: `600` }}>
@@ -99,12 +109,14 @@ function Login(self) {
                                 Quên mật khẩu?
                             </a>
                         </div>
-                    </div>
-                    <button
-                        className={`${styles.btn}`}
-                        onClick={handleLogin}
+                        <button
+                            type='submit'
+                            className={`${styles.btn}`}
+                        // onClick={handleLogin}
+                        >Đăng nhập
+                        </button>
+                    </form>
 
-                    >Đăng nhập</button>
                     {error && <p className={styles.error}>{error}</p>}
 
                     <p style={{ textAlign: `center` }}>Đăng nhập với</p>
