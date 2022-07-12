@@ -1,92 +1,101 @@
 import React from "react";
-import styles from "./MenuContentOpTions.module.css";
+import styles from "./MenuContetnOptions.module.css";
+import Checkbox from "@mui/material/Checkbox";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import { red } from '@mui/material/colors';
 function MenuContentOpTions() {
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  function valuetext(value) {
+    
+  
+
+    return `${value} VNĐ`;
+  }
+  const [value, setValue] = React.useState([0, 500000]);
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
   return (
     <div className={styles.Menu}>
-      <div className={styles.options}>
-        <div class="accordion accordion-flush" id="accordionFlushExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne"
-                aria-expanded="false"
-                aria-controls="flush-collapseOne"
-              > 
-                Accordion Item #1
-              </button>
-            </h2>
-            <div
-              id="flush-collapseOne"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingOne"
-              data-bs-parent="#accordionFlushExample"
+      <div
+        class="accordion accordion-flush"
+        style={{ borderRadius: "20px" }}
+        className={styles.optionss}
+      >
+        <div className={styles.accordionItem}>
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button
+              className={styles.accordionButton}
+              class=" "
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
             >
-              <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to
-                demonstrate the <code>.accordion-flush</code> class. This is the
-                first item's accordion body.
+              <div className={styles.accordTitle}>
+                <div>
+                  <h4>Categories</h4>
+                </div>
+                <div className={styles.icon}>
+                  <ExpandMoreIcon />
+                </div>
+              </div>
+            </button>
+          </h2>{" "}
+          <div className={styles.line}></div> <br />
+          <div
+            id="flush-collapseOne"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body" style={{ padding: "0" }}>
+              <div className={styles.option}>
+                <Checkbox {...label} /> Admin Templates
               </div>
             </div>
           </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingTwo">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseTwo"
-                aria-expanded="false"
-                aria-controls="flush-collapseTwo"
-              >
-                Accordion Item #2
-              </button>
-            </h2>
-            <div
-              id="flush-collapseTwo"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingTwo"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to
-                demonstrate the <code>.accordion-flush</code> class. This is the
-                second item's accordion body. Let's imagine this being filled
-                with some actual content.
+        </div>
+      </div>
+
+      <div
+        class="accordion accordion-flush"
+        style={{ borderRadius: "20px", marginTop: "30px" }}
+        className={styles.optionss}
+      >
+        <div className={styles.accordionItem}>
+          <h2
+            class="accordion-header"
+            id="flush-headingOne"
+            className={styles.accordionButton}
+          >
+            <div className={styles.accordTitle}>
+              <div className={styles.accordTitleH4}>
+                <h4>Price</h4>
               </div>
+             
+             </div>
+          </h2>
+          <div className={styles.line}></div> <br />
+          <div className={styles.sliderPrice}>
+             <Box sx={{ width: "90%" }}>
+                <Slider
+                onChange={handleChange}
+                  getAriaLabel={() => "Price range"}
+                  min={0}
+                  step={1000}
+                  max={600000}
+                  value={value}
+                  valueLabelDisplay="auto"
+                  color="secondary"
+                  getAriaValueText={valuetext}
+                />
+              </Box>
             </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingThree">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseThree"
-                aria-expanded="false"
-                aria-controls="flush-collapseThree"
-              >
-                Accordion Item #3
-              </button>
-            </h2>
-            <div
-              id="flush-collapseThree"
-              class="accordion-collapse collapse"
-              aria-labelledby="flush-headingThree"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div class="accordion-body">
-                Placeholder content for this accordion, which is intended to
-                demonstrate the <code>.accordion-flush</code> class. This is the
-                third item's accordion body. Nothing more exciting happening
-                here in terms of content, but just filling up the space to make
-                it look, at least at first glance, a bit more representative of
-                how this would look in a real-world application.
-              </div>
-            </div>
-          </div>
+          <div class="accordion-body" style={{ padding: "0" }}></div>
         </div>
       </div>
     </div>
