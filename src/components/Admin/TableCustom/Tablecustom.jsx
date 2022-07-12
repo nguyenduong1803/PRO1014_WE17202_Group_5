@@ -127,52 +127,56 @@ const EditCell = ({ rowData, dataKey, setIdProduct, ...props }) => (
     </Table.Cell>
 );
 function Tablecustom({ tables, data, setIdProduct, path }) {
-    const [loading, setLoading] = React.useState(true)
-    if (data) {
-        setLoading(false)
-    }
+    const [loading, setLoading] = React.useState(false)
+ 
     return (
-        <div className={`${styles.Profiletable} mt-4`}>
-            {loading ? <Loadings /> : <Table
-                data={data}
-                rowHeight={55}
-                height={(550 * data.length) / 10}
-            // affixHorizontalScrollbar
-            >
-                {
-                    tables.map((table, index) => {
-                        let Component;
-                        if (table.type === "img") {
-                            Component = <ImageCell dataKey={table.dataKey} />
-                        } else if (table.type === "cell") {
-                            Component = <Table.Cell dataKey={table.dataKey} />
-                        } else if (table.type === "status") {
-                            Component = <PositionCell dataKey={table.dataKey} />
-                        } else if (table.type === "edit") {
-                            Component = <EditCell setIdProduct={setIdProduct} dataKey={table.dataKey} />
-                        } else if (table.type === "comment") {
-                            Component = <CommentCell dataKey={table.dataKey} />
-                        } else if (table.type === "postAction") {
-                            Component = <PostAction setIsBlog={setIdProduct} dataKey={table.dataKey} path={path} />
-                        } else if (table.type === "orderAction") {
-                            Component = <OrderDetail dataKey={table.dataKey} />
-                        } else if (table.type === "isSucces") {
-                            Component = <IsSuccesOrder dataKey={table.dataKey} />
-                        } else {
-                            Component = <Table.Cell dataKey={table.dataKey} />
-                        }
-                        return (
-                            <Table.Column key={index} width={table.width} align="center" fixed={table.isFixed}>
-                                <Table.HeaderCell className={styles.HeaderCell}>
-                                    {table.name}
-                                </Table.HeaderCell>
-                                {Component}
-                            </Table.Column>
-                        )
-                    })
-                }
-            </Table>}
-        </div>
+        <>
+            {loading ? <Loadings /> :
+                <div className={`${styles.Profiletable} mt-4`}>
+                    {
+                        (<Table
+                            data={data}
+                            rowHeight={55}
+                            height={data.length< 9 ||(550 * data.length) / 10}
+                            
+                        // affixHorizontalScrollbar
+                        >
+                            {
+                                tables.map((table, index) => {
+                                    let Component;
+                                    if (table.type === "img") {
+                                        Component = <ImageCell dataKey={table.dataKey} />
+                                    } else if (table.type === "cell") {
+                                        Component = <Table.Cell dataKey={table.dataKey} />
+                                    } else if (table.type === "status") {
+                                        Component = <PositionCell dataKey={table.dataKey} />
+                                    } else if (table.type === "edit") {
+                                        Component = <EditCell setIdProduct={setIdProduct} dataKey={table.dataKey} />
+                                    } else if (table.type === "comment") {
+                                        Component = <CommentCell dataKey={table.dataKey} />
+                                    } else if (table.type === "postAction") {
+                                        Component = <PostAction setIsBlog={setIdProduct} dataKey={table.dataKey} path={path} />
+                                    } else if (table.type === "orderAction") {
+                                        Component = <OrderDetail dataKey={table.dataKey} />
+                                    } else if (table.type === "isSucces") {
+                                        Component = <IsSuccesOrder dataKey={table.dataKey} />
+                                    } else {
+                                        Component = <Table.Cell dataKey={table.dataKey} />
+                                    }
+                                    return (
+                                        <Table.Column key={index} width={table.width} align="center" fixed={table.isFixed}>
+                                            <Table.HeaderCell className={styles.HeaderCell}>
+                                                {table.name}
+                                            </Table.HeaderCell>
+                                            {Component}
+                                        </Table.Column>
+                                    )
+                                })
+                            }
+                        </Table>)}
+                </div>
+            }
+        </>
     )
 }
 
