@@ -26,7 +26,7 @@ class UserForgotPassword extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email',
+            'email' => 'required|string|email|exists:users',
         ];
     }
     public function failedValidation(Validator $validator)

@@ -86,7 +86,6 @@ class AuthController extends Controller
         $validate = $request -> validated();
         $modelUser = new User();
         $user = $modelUser ->forgotPassword($validate['email']);
-        if(!isset($user)) return response() ->json(["msg" => "Email này chưa được đăng ký!"],402);
         if($validate) {
             Mail::send('emails.forgotPassword', compact('user'), function ($email) use($user) {
                 $email -> subject('Lấy lại mật khẩu!');
