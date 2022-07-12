@@ -2,7 +2,7 @@ import React from 'react'
 import MenuContentOptions from './MenuContentOptions/MenuContentOpTions';
 import LayoutSite from '../LayoutSite/LayoutSite';
 import MenuContentDetail from './MenuContentDetail/MenuContentDetail';
-import product1 from '../../../../../PRO1014_WE17202_Group_5/src/assets/img/seafood-1.jpg';
+import product1 from '../../../assets/img/seafood-1.jpg';
 const product=[
   {
     img:product1,
