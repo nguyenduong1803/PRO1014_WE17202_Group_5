@@ -42,9 +42,7 @@ class AuthController extends Controller
         $modelUser = new User();
         $user = $modelUser -> login($validate['email']);
         if(!$user || !Hash::check($validate['mat_khau'], $user -> mat_khau)) {
-            return response([
-                'message' => 'Email or password not valid!'
-            ], 401);
+            return response() ->json(["msg" => "Email hoặc mật khẩu không chính xác!"],402);
         }
         if ($validate) {
            $token =$user -> createToken("duonglt") -> accessToken;
