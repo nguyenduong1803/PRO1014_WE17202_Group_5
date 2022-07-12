@@ -8,11 +8,7 @@ function Home() {
 
   return (
       <LayoutSite>
-
-
-
-        <ContentHome />
-
+        <ContentHome/>
       </LayoutSite>
   );
 }

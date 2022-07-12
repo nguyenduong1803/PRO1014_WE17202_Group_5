@@ -11,6 +11,7 @@ import Home from "../../pages/Site/Home/Home";
 import OrderTable from "../../pages/Site/OrderTable/OrderTable";
 import Map from "../../pages/Site/Map/Map";
 import Orders from "../../pages/Site/Order/Order";
+import Menu from '../../pages/Site/Menu/Menu';
 function SiteLayout() {
   return (
     <>
@@ -25,7 +26,8 @@ function SiteLayout() {
             <Route exact path="/thanh-toan" component={Checkout} />
             <Route exact path="/xac-nhan-don-hang" component={ConfirmBill} />
             <Route exact path="/hoa-don" component={Orders}/>
-              
+            <Route exact path="/menu" component={Menu}/>
+
           </Switch>
         </DataProvider>
       </AuthContextProvider>
