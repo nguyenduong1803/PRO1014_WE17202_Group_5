@@ -25,4 +25,4 @@ Route::middleware('auth:api') -> group(function () {
     Route::get('auth/logout', [\App\Http\Controllers\Api\Auth\AuthController::class, 'logout']);
 });
 
-Route::post('auth/sendMailForgotPassword', [\App\Http\Controllers\Api\Auth\AuthController::class, 'sendMailForgotPassword']);
+Route::post('user/sendMailForgotPassword', [\App\Http\Controllers\Api\Auth\AuthController::class, 'sendMailForgotPassword']);

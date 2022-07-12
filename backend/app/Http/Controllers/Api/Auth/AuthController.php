@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -86,15 +87,18 @@ class AuthController extends Controller
         $validate = $request -> validated();
         $modelUser = new User();
         $user = $modelUser ->forgotPassword($validate['email']);
-        if($validate) {
-            Mail::send('emails.forgotPassword', compact('user'), function ($email) use($user) {
-                $email -> subject('Lấy lại mật khẩu!');
-                $email -> to($user['email'], $user['ten']);
-            });
-            return response() ->json(["msg" => "Gửi email thành công, bạn vui lòng kiểm tra tin nhắn trong email của mình!"],200);
-        } else {
-            return response() ->json(["msg" => "Gửi email thất bại!"],402);
-        }
+        $token = strtoupper(Str::random(10));
+        $params = [
+            $token,
+            $user['id']
+        ];
+        $modelUser ->updateTokenForgotPassword($params);
+        Mail::send('emails.forgotPassword', compact('user'), function ($email) use($user) {
+            $email -> subject('Lấy lại mật khẩu!');
+            $email -> to($user['email'], $user['ten']);
+        });
+        return response() ->json(["msg" => "Gửi email thành công, bạn vui lòng kiểm tra tin nhắn trong email của mình!"],200);
+
 
     }
 }

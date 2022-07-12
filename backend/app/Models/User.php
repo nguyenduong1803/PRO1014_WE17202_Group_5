@@ -28,6 +28,10 @@ class User extends Authenticatable
         return $result;
     }
 
+    public function updateTokenForgotPassword($params) {
+        DB::update("UPDATE users SET `token_verify` = ? WHERE `id` = ?", $params);
+    }
+
 
     public function updateChangePassword($params) {
         DB::update("UPDATE users SET `mat_khau` = ? WHERE `id` = ?", $params);
