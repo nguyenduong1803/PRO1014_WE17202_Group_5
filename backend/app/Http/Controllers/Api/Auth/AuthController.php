@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserChangePassword;
+use App\Http\Requests\UserForgotPassword;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserRegister;
 use App\Models\User;
@@ -81,11 +82,20 @@ class AuthController extends Controller
             return response() ->json(["msg" => "Đăng xuất thành công!"],200);
     }
 
-    public function sendMailForgotPassword() {
-        $name = 'duongdz';
-        Mail::send('emails.forgotPassword', compact('name'), function ($email) use($name) {
-            $email -> subject('Demo test email');
-            $email -> to('duongltph19040@fpt.edu.vn', $name);
-        });
+    public function sendMailForgotPassword(UserForgotPassword $request) {
+        $validate = $request -> validated();
+        $modelUser = new User();
+        $user = $modelUser ->forgotPassword($validate['email']);
+        if(!isset($user)) return response() ->json(["msg" => "Email này chưa được đăng ký!"],402);
+        if($validate) {
+            Mail::send('emails.forgotPassword', compact('user'), function ($email) use($user) {
+                $email -> subject('Lấy lại mật khẩu!');
+                $email -> to($user['email'], $user['ten']);
+            });
+            return response() ->json(["msg" => "Gửi email thành công, bạn vui lòng kiểm tra tin nhắn trong email của mình!"],200);
+        } else {
+            return response() ->json(["msg" => "Gửi email thất bại!"],402);
+        }
+
     }
 }
