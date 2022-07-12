@@ -21,4 +21,5 @@ Route::post('auth/login', [\App\Http\Controllers\Api\Auth\AuthController::class,
 
 Route::middleware('auth:api') -> group(function () {
     Route::get('auth/getInfoUser', [\App\Http\Controllers\Api\Auth\AuthController::class, 'getInfoUser']);
+    Route::post('auth/updateChangePassword', [\App\Http\Controllers\Api\Auth\AuthController::class, 'updateChangePassword']);
 });
