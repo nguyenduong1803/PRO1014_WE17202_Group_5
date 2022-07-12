@@ -18,6 +18,11 @@ class User extends Authenticatable
                                                                                                    ?, ?,?,?)', $params);
     }
 
+    public function login($params) {
+        $result = User::where('email', $params)->first();
+        return $result;
+    }
+
     public function updateChangePassword($params) {
         DB::update("UPDATE users SET `mat_khau` = ? WHERE `id` = ?", $params);
     }
