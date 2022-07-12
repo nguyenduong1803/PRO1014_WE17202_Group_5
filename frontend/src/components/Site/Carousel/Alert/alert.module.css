@@ -1,0 +1,119 @@
+.Alert {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 10;
+  top:-30px;
+}
+
+.demo {
+  width: 100%;
+}
+
+.alert_img {
+  position: fixed;
+  bottom: 0;
+  width: 20%;
+  height: 20%;
+  left: 0;
+  transition: all 0.3s ease;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* z-index: 2; */
+}
+
+.button {
+  position: fixed;
+  top: 700px;
+  left: 260px;
+}
+
+
+.dots {
+  width: 100px;
+  transition: scale 0.4s;
+}
+.dots:hover{
+  cursor: pointer;
+  background: rgb(245, 44, 44);
+}
+
+.canvas {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: red;
+  text-align: center;
+  padding: 5px;
+  color: #fff;
+  z-index: 9;
+  bottom: 39%;
+  left: 59%;
+  border-radius: 50%;
+}
+
+.zoom{
+  position:  relative ;
+ 
+}
+.zoom:hover{
+  cursor: pointer;
+opacity: 0.7;
+}
+.btn {
+  display: none;
+  transition: 0.5s;
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 114.5%;
+  top: 8.3%;
+  background-color: rgba(255, 255, 255,0.6);
+  justify-content: center;
+  border-radius: 2px;
+  box-shadow: 0px 0px 1px rgb(133, 133, 133)
+}
+.btn:hover{
+  cursor: pointer;
+opacity: 0.7;
+}
+.minimize{
+  width: 13px ;
+  height: 13px ;
+  position: relative;
+  left: 0.5px;
+  top: -4.1px;
+
+}
+.wrapZoom{
+  position: absolute;
+  background-color: rgba(255, 255, 255,0.6);
+
+  border-radius: 5px;
+  display: flex;
+  justify-content:center;
+  width: 30px ;
+  height: 30px ;
+  top: 15%;
+  left: 107%;
+  filter: grayscale(1);
+  transition: 0.2s;
+  box-shadow: 0px 0px 1px rgb(75, 75, 75)
+
+}
+
+/* ------- responsite --------- */
+
+/* @media screen and (max-width: 2560px) {
+  .Alert img {
+    position: fixed;
+    bottom: 0;
+    width: 15% !important;
+    height: 15% !important;
+    transition: all 0.5s;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+} */

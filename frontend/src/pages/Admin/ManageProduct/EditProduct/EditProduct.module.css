@@ -1,0 +1,266 @@
+.main {
+    padding: 20px 39px 30px 0;
+    background-color: #e5e5e5;
+    min-height: 100vh;
+    width: 100%;
+    transition: 0.3s;
+    padding-left: 50px;
+    flex: 1;
+}
+/* Remove Arrows Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* Remove Arrows  Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+.main p {
+    margin: 0;
+}
+.main button,
+.main input,
+.main select {
+    border: none;
+    border-radius: 4px;
+}
+.main * {
+    font-size: 14px;
+}
+.uploadImg {
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+}
+.imgWrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ddd;
+    border-style: dashed;
+    background-color: #fff;
+}
+.imgWrapper > label {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal !important;
+    position: absolute;
+}
+
+.imgWrapper input[type="file"] {
+    display: none;
+}
+.imgWrapper > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form {
+    margin-top: 40px;
+}
+.formRow {
+    margin-bottom: 24px;
+    justify-content: space-between;
+    display: flex;
+}
+.showHideProducts {
+    margin-top: 30px;
+}
+.showHideProducts label,
+.formRow label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+.showHideProducts label span,
+.formRow label span {
+    color: red;
+}
+.showHideProducts > span {
+    transform: scale(1.3);
+}
+
+.formRow .formLeft,
+.formRow .formRight {
+    width: 50%;
+}
+.formRight {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.formRight .wrapRight,
+.formLeft .wrapLeft {
+    width: 90%;
+}
+.formRow input,
+.formRow select {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    background-color: #fff;
+}
+.formRow option:hover {
+    background-color: #e9ebf4;
+}
+.formRow input:focus,
+.formRow select:focus {
+    outline: 1px solid #1a358f;
+}
+
+.saleStart,
+.saleEnd {
+    flex: 1;
+}
+
+.wrapDate {
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.buttonSection {
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse;
+}
+.buttonSection .btnAdd,
+.buttonSection .btnCancel {
+    width: 30%;
+    max-width: 192px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btnAdd {
+    color: #fff;
+    background-color: #1a358f;
+    margin-left: 38px;
+}
+.btnCancel {
+    background-color: #fff;
+    color: #1a358f;
+}
+.btnAdd:hover,
+.btnCancel:hover {
+    opacity: 0.8;
+    border: 1px solid #ddd;
+}
+/* form image */
+.imgsWrapper {
+    position: relative;
+    display: flex;
+}
+.imgsWrapper div,
+.imgsWrapper img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+.imgsWrapper div {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-style: dashed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.imgsWrapper img + img,
+.imgsWrapper div + div {
+    margin-left: 30px;
+}
+.uploadImg > label {
+    padding: 6px 12px;
+    background-color: var(--purple);
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 40px;
+}
+.uploadImg > input[type="file"] {
+    display: none;
+}
+
+/* -------------------------mobile--------------------- */
+@media only screen and (max-width: 739px) {
+    .form {
+        margin-top: 30px;
+    }
+    .formRow {
+        margin-bottom: 20px;
+    }
+    .showHideProducts {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+    .uploadImg > p {
+        margin-left: 10px !important;
+    }
+    .formRight .wrapRight,
+    .formLeft .wrapLeft,
+    .wrapDate {
+        width: 96%;
+    }
+
+    .main {
+        padding: 10px;
+    }
+    .buttonSection .btnAdd,
+    .buttonSection .btnCancel {
+        width: 40%;
+        height: 40px;
+    }
+    .buttonSection .btnAdd {
+        margin-left: 10px;
+    }
+    .wrapDate > p {
+        margin-right: 5px !important;
+        width: 30%;
+        text-align: center;
+        font-size: 13px !important;
+    }
+}
+
+/* -------------------------tablets--------------------- */
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+    .main {
+        padding: 0 39px 0px 274px;
+    }
+    .formRight .wrapRight,
+    .formLeft .wrapLeft,
+    .wrapDate {
+        width: 95%;
+    }
+    .buttonSection .btnAdd,
+    .buttonSection .btnCancel {
+        width: 40%;
+        height: 40px;
+    }
+
+    .wrapDate > p {
+        margin-right: 10px !important;
+    }
+    .buttonSection .btnAdd {
+        margin-left: 10px;
+    }
+}
+
+/* -------------------------PC--------------------- */
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+    .buttonSection .btnAdd,
+    .buttonSection .btnCancel {
+        height: 40px;
+    }
+    .buttonSection .btnAdd {
+        margin-left: 10px;
+    }
+}
