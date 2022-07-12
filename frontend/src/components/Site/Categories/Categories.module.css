@@ -1,0 +1,56 @@
+/*---------------------
+  Categories
+-----------------------*/
+
+.categories__item {
+  height: 270px;
+  position: relative;
+  margin: 0 1rem 0 0
+}
+.categories__item img {
+  width: 100%;
+}
+
+.categories__item h5 {
+  position: absolute;
+  width: 100%;
+  padding: 0 20px;
+  bottom: 20px;
+  text-align: center;
+}
+
+.categories__item h5 a {
+  text-decoration: none;
+  width: 100%;
+  font-size: 18px;
+  color: #1c1c1c;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 12px 0 10px;
+  background: #ffffff;
+  display: block;
+}
+
+.categories__slider .col-lg-3 {
+  max-width: 100%;
+}
+
+.categories__slider.owl-carousel .owl-nav button {
+  font-size: 18px;
+  color: #1c1c1c;
+  height: 70px;
+  width: 30px;
+  line-height: 70px;
+  text-align: center;
+  border: 1px solid #ebebeb;
+  position: absolute;
+  left: -35px;
+  top: 50%;
+  background: #ffffff;
+}
+
+.categories__slider.owl-carousel .owl-nav button.owl-next {
+  left: auto;
+  right: -35px;
+}

@@ -1,0 +1,71 @@
+.orderHistory{
+    width: 100%;
+    padding: 20px ;
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+.orderIdHeaderRight img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.orderIdHeader{
+    width:100%;
+    display: inline-flex;
+    justify-content:space-between !important;
+}
+.orderIdContent{
+    padding: 5px 0;
+    width: 100%;
+    display: inline-flex;
+}
+.orderIdContentLeft img{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+}
+.orderIdContentRight{
+    margin-left: 30px;
+}
+.orderIdContentRight h4{
+    font-weight:bold;
+    padding-bottom: 10px;
+}
+.orderIdContentRight p{
+    padding-bottom: 10px;
+    line-height: 1.6rem;
+    color:rgb(182, 182, 182);
+}
+.line{
+    border-bottom: 2px solid rgb(214, 213, 213);
+    margin: 20px ;
+    width:188px;
+    margin-right: -10px;
+    float: right;
+}
+.orderIdHeaderLeft{
+    padding: 10px 0;
+}
+.priceNumber{
+    padding: 5px 0;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+.lines{
+    width: 100%;
+    border-bottom: 2px solid rgb(214, 213, 213);
+
+}
+.date{
+    padding:5px 0;
+    color: rgb(182, 182, 182);
+}
+.orderIdFooter{
+    display: inline-flex;
+    width:100%;
+    justify-content: space-between;
+    padding: 10px 0;
+}

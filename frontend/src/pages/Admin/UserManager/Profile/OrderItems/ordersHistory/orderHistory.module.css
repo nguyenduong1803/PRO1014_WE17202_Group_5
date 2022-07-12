@@ -1,0 +1,41 @@
+.orders {
+    margin: 20px 10px 40px 10px;
+    background-color: #e9ebf4;
+}
+.orders .header {
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a358f;
+    color: #fff;
+    padding: 0 10px;
+}
+.orders .content {
+    height: 100px;
+    margin: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.orders .content .img {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #ddd;
+}
+
+.orders .content .desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.orders span {
+    font-weight: 600;
+}
+
+.orders h2 {
+    padding: 10px;
+}

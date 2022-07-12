@@ -1,0 +1,69 @@
+
+.wrap {
+    text-decoration: none;
+    height: 80px;
+    width: 80px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 70px;
+}
+.wrap:hover{
+    cursor: pointer;
+}
+
+
+
+.button {
+    background-color: var(--colorPrimary);
+    color: darken(var(--colorPrimary), 30);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .23), 0 3px 12px rgba(0, 0, 0, .16);
+}
+
+.tableName {
+    position: absolute;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    top: 50%;
+    font-size: 12px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--colorBlur);
+    padding: 6px;
+    border-radius:10px;
+}
+
+.pulse {
+    position: absolute;
+    z-index: 5;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid  var(--colorBlur);
+    animation: pulsate 2s ease-out infinite;
+    opacity: 0;
+}
+
+@keyframes pulsate {
+    0% {
+        -webkit-transform: scale(1);
+        opacity: 0
+    }
+
+    50% {
+        opacity: 1
+    }
+
+    to {
+        -webkit-transform: scale(1.4);
+        opacity: 0
+    }
+}

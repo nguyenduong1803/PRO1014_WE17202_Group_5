@@ -1,0 +1,128 @@
+.ProductDetails {
+  margin-top: 3rem;
+}
+.ProductDetails p,a,h3,h2,h4,h5,span{
+  line-height: 1.6rem;
+}
+
+.ProductDetails .productImg {
+  width: 100%;
+  height: auto;
+}
+.wrapPrice{
+  gap:24px;
+}
+.discount{
+  text-decoration: line-through;
+  color:rgb(152, 152, 152);
+}
+.ProductDetails .productName {
+  line-height:1.6rem;
+  font-weight: bold;
+  margin: 12px 0;
+}
+.productRating span{
+  line-height:2.2rem
+}
+.ProductDetails .productOption button {
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  height: 50px;
+}
+.quantity .productQuantity {
+  width: 100px;
+  padding: 10px 20px ;
+  outline: none;
+  border: none;
+  text-align: center;
+}
+.productOption .addToCart {
+  background-color: #7ead39;
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+}
+.productOption {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0 20px;
+  margin-top: 24px;
+}
+.ProductDetails .productRating span {
+  font-style: italic;
+  color: rgb(102, 102, 102);
+  font-weight: bold;
+}
+.ProductDetails .productPrice {
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+}
+.productStatus {
+  margin-top: 5rem;
+  border-top: 1px solid #000;
+  padding-top: 3rem;
+}
+.productStatus .StatusTitle {
+  margin-right: 12px;
+  font-weight: bold;
+}
+.descCategoryMenu {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 100px;
+  list-style: none;
+  font-weight: bold;
+}
+.descCategoryMenu li {
+  cursor: pointer;
+  min-width: 100px;
+}
+.descCategoryMenu li.active {
+  color: red;
+}
+.descCategoryMenu::before,
+.descCategoryMenu::after {
+  content: "";
+  height: 1px;
+  background-color: #000;
+  width: 20%;
+}
+.descDetail .descDetailTitle {
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 1rem; 
+}
+
+.relatedProduct{
+    margin-top: 3rem;
+}
+.productShortDesc{
+  margin-top: 12px;
+}
+@media (max-width: 576px) {
+  .addToCart,.productOption{
+    display: block;
+    margin-top: 12px;
+  }
+  .addToCart{
+    width: 100%;
+  }
+  .descCategoryMenu{
+   gap:0
+  }
+  .descCategoryMenu li{
+    width: 100%;
+    text-align: center;
+  }
+  .descCategoryMenu::after{
+    display: none;
+  }
+  .descCategoryMenu::before{
+    display: none;
+  }
+}

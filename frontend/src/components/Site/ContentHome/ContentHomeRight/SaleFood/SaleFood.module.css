@@ -1,0 +1,37 @@
+.saleFood{
+    font-weight: 550;
+    position: relative;
+    background-color: white;
+    text-align: center;
+    height: 200px;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 50px;
+    border-radius: 20px;
+    margin-top: 50px;
+    flex-direction: column;
+    justify-content:flex-end;
+    padding: 24px 20px;
+}
+.saleFood img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: -40px;
+    transform: translateX(-50%);
+    left:50%;
+    
+}
+.title{
+    font-size:30px;
+    width: 100%;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+    padding: 10px;
+    text-align: center !important;
+}
+.content{
+    color: rgb(106, 109, 111);
+    width: 100%;
+    text-align: center !important;
+}

@@ -1,0 +1,65 @@
+
+:root {
+    --color-cursor: 255,255,255;
+    --cursor-outline-shade: 0.3;
+    --cursor-size: 20px;
+    --cursor-outline-size: 70px;
+  }
+  
+  html #app,
+  body #app{
+    cursor: none;
+    background-color: #2f2c2c;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+  }
+  
+  html #app *,
+  body #app * {
+    cursor: none;
+  }
+
+  
+/* play with vars for different effets */
+  .cursorDot,
+  .cursorOutline {
+    z-index: 999;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.05s ease-in-out, transform 0.05s ease-in-out;
+
+  }
+  
+  .cursorDot {
+    box-shadow: 0px 0px 7px rgba(0, 0, 0,0.8);
+    width: var(--cursor-size);
+    height: var(--cursor-size);
+    background-color: rgba(var(--color-cursor), 1);
+    /* animation: cursorAnim2 .5s infinite alternate; */
+  }
+
+  .cursorOutline {
+    width: var(--cursor-outline-size);
+    border:6px solid rgb(255, 255, 255,0.6);
+    height: var(--cursor-outline-size);
+    animation: cursorAnim2 .6s infinite alternate;
+    box-shadow: 0px 0px 28px rgba(242, 242, 242, 0.4);
+
+
+  }
+  /* play with vars for different effets */
+  
+@keyframes cursorAnim2 {
+    from {
+        transform:translate(-50%, -50%) scale(1);
+    }
+    to {
+        transform:translate(-50%, -50%) scale(.9);
+    }
+}
+

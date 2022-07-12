@@ -1,0 +1,191 @@
+.OrderDetail {
+  padding: 0 39px 0px 50px;
+  background-color: #e5e5e5;
+  min-height: 100vh;
+  transition: 0.3s;
+  width: 100%;
+  flex: 1;
+}
+
+.DetailsMain {
+  margin: 0px 0 16px 0;
+}
+
+.fruit {
+  padding-left: 15px;
+}
+
+p.title {
+  color: #1a358f;
+  font-size: 23px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.DetailsImg {
+  width: 30%;
+}
+
+.DetailsImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-color: 4px;
+  border-radius: 100px;
+}
+
+.formRow {
+  margin-bottom: 24px;
+  margin-top: -20px;
+}
+
+.DetailsTitle {
+  padding: 50px;
+}
+
+.DetailsTitle h3 {
+  line-height: 30px;
+  font-weight: 700;
+  color: #1a358f;
+}
+
+.DetailsText {
+  padding: 50px;
+}
+
+.DetailsText p {
+  line-height: 30px;
+  font-weight: 500;
+  color: #060607;
+}
+
+.formcontrol {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: 0.15rem;
+}
+
+.from input:focus .from select:focus {
+  outline: 1px solid #a370f7;
+}
+
+.formlabel {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.Describe {
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 670px;
+}
+
+.Describe h2 {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 10px;
+  position: fixed;
+  top: 155px;
+}
+
+.DescribeText {
+  position: relative;
+  width: 100%;
+}
+
+.DescribText {
+  box-shadow: 0 0.5rem 1rem rgba(255, 251, 251, 0.15) !important;
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.DescribeOder ul li {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  color: #060607;
+  font-weight: 500;
+}
+
+.DescribeOder ul li p {
+  color: #80878d;
+  font-size: 14px;
+}
+
+.unpaid {
+  padding: 10px;
+  float: right;
+  /* color: #b02a37; */
+  font-weight: 500;
+}
+
+.DescribeImg {
+  width: 30%;
+  margin-left: 12px;
+  border: 1px solid rgb(205, 204, 204);
+}
+
+.DescribeImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 10px;
+}
+
+.fruit ul li {
+  display: flex;
+  gap: 20px;
+  padding: 5px;
+  color: #060607;
+  font-weight: 500;
+}
+
+.fruit ul li p {
+  color: #80878d;
+  font-size: 14px;
+}
+
+.fruit1  {
+  display: grid;
+  float: right;
+  padding-right: 32px;
+  /* align-items: center; */
+  color: #1a358f;
+  font-weight: 500;
+  justify-content: flex-end;
+}
+
+.fruit1 span {
+  color: #a370f7;
+}
+
+.pay {
+  width: 100%;
+  float: right;
+  gap: 10px;
+  color: #060607;
+  font-weight: 500;
+  padding: 10px;
+}
+
+.pay p {
+  color: #b02a37;
+  font-weight: 700;
+}
+
+.pay h3 {
+  gap: 10px;
+  display: flex;
+  float: right;
+  width: 100%;
+  justify-content: center;
+}

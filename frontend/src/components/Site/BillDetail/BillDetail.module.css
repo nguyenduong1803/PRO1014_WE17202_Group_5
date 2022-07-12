@@ -1,0 +1,162 @@
+.wrap_col {
+    padding-top: 48px;
+    margin-bottom: 24px;
+}
+
+.border_right {
+    border-right: 1px solid #ccc;
+
+}
+
+.wrapper {
+    border-top: 1px solid #ccc;
+}
+
+.wrapper a,
+p,
+span {
+    line-height: 2rem;
+}
+
+
+.btn_change {
+    padding: 3px 12px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #fff !important;
+    background-color: #7fad39;
+    border-radius: 4px;
+}
+
+.btn_change:hover {
+    background-color: #8dbc47;
+}
+
+.contact {
+    margin: 24px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 0 12px;
+}
+
+.boxDetail {
+    padding: 12px 0;
+}
+
+.boxDetail+.boxDetail {
+    border-top: 1px solid #ccc;
+
+}
+
+.shipMethod_titile {
+    display: inline-block;
+    margin-left: 24px;
+    line-height: 1.6rem;
+    user-select: none;
+}
+
+.button_primary {
+    text-decoration: none;
+    padding: 15px 28px;
+    user-select: none;
+    border-radius: 4px;
+    background-color: #8dbc47;
+    color: #fff;
+    font-weight: 600;
+}
+
+.button_primary:hover {
+    color: #fff !important;
+    background-color: #9ec95e;
+}
+
+.button_primary+.button_primary {
+    margin-left: 12px;
+}
+
+.btn_noSetting {
+    background-color: #fff;
+    color: #3a3a3a;
+}
+
+.btn_noSetting:hover {
+    background-color: #fff;
+    color: #3a3a3a !important;
+}
+
+.address_title {
+    font-weight: 600;
+    line-height: 2rem;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.imgBill {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.bill_price {}
+
+.wrap_name_img {
+    display: inline-block;
+}
+
+.wrapproduct {
+    padding: 12px 0;
+}
+
+
+.wrapproduct:first-child {
+    padding-top: 0;
+}
+
+
+
+.moneyItem span {
+    line-height: 2rem;
+}
+
+.border_bot {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.quantity {
+    text-align: right;
+}
+
+.total_money {
+    font-weight: 500;
+}
+
+.wrap_checkbox {
+    cursor: pointer !important;
+}
+
+.bill_active {
+    color: #7fad39;
+    background-color: rgba(245, 245, 245, 0.3);
+    border-radius: 3px;
+}
+
+.btn_confirm {
+    margin-top: 24px;
+    display: inline-block;
+    line-height: 1.3rem !important;
+    text-align: center;
+
+}
+
+@media (max-width:991px) {
+    .border_right {
+        border: none;
+    }
+}
+
+@media (max-width: 479px) {
+    .button_primary {
+        width: 100%;
+        text-align: center;
+    }
+}
