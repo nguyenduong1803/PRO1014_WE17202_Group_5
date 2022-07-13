@@ -6,18 +6,15 @@ import { OrderProvider } from "../../contexts/OrderContext.js";
 import { DataProvider } from "../../contexts/DataContext.js";
 import { BlogProvider } from "../../contexts/BlogContext.js";
 import { StyledEngineProvider } from "@mui/material";
-import { Provider } from 'react-redux'
-import store from "../../redux/store"
 function AdminLayout() {
   return (
     <div style={{ display: `flex` }}>
       <StyledEngineProvider injectFirst>
         <BrowserRouter>
-        <Provider store={store}>
           <UserProvider>
             <OrderProvider>
               <DataProvider>
-                <BlogProvider>
+                {/* <BlogProvider> */}
                   <Switch>
                     {
                       routerAdmin.map((router, index) => (
@@ -25,11 +22,11 @@ function AdminLayout() {
                       ))
                     }
                   </Switch>
-                </BlogProvider>
+                {/* </BlogProvider> */}
               </DataProvider>
             </OrderProvider>
           </UserProvider>
-          </Provider>
+     
         </BrowserRouter>
       </StyledEngineProvider>
     </div>

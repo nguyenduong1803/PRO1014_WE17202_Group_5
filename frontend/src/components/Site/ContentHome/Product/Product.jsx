@@ -3,11 +3,13 @@ import styles from './Product.module.css';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 
- function BasicRating() {
-  const [value, setValue] = React.useState(5) ;
+function BasicRating() {
+  const [value, setValue] = React.useState(5);
 
   return (
+    <>
     <Box
+      component="span"
       sx={{
         '& > legend': { mt: 2 },
       }}
@@ -19,19 +21,20 @@ import Rating from '@mui/material/Rating';
           setValue(newValue);
         }}
       />
-    
+
     </Box>
+    </>
   );
 }
-function Product({img,title,price}) {
+function Product({ img, title, price }) {
   return (
     <div className=' col-lg-4'>
-        <div className={styles.product} style={{transition:'.6s'}}>
-            <img src={img} alt="" />
-            <h4 className={styles.title}>{title}</h4>
-            <p className={styles.icon}><BasicRating/></p>
-            <p className={styles.price}>{price}</p>
-        </div>
+      <div className={styles.product} style={{ transition: '.6s' }}>
+        <img src={img} alt="" />
+        <h4 className={styles.title}>{title}</h4>
+        <div className={styles.icon}><BasicRating /></div>
+        <p className={styles.price}>{price}</p>
+      </div>
     </div>
   )
 }

@@ -33,7 +33,7 @@ function BreadCrumbs(props) {
               )
           })
         }
-        {props.subtitle && <Typography key="2" color="text.primary">
+        {props.subtitle && <Typography  component="div" key="2" color="text.primary">
           {props.subtitle}
         </Typography>}
         ,

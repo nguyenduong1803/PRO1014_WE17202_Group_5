@@ -58,6 +58,7 @@ body {
 .line {
   top: 0;
   position: fixed;
+  z-index: 1;
 }
 
 /* .navbar:hover {
