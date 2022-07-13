@@ -107,7 +107,7 @@ class AuthController extends Controller
     public function getPassForgot($id, $token) {
         $modelUser = new User();
         $user = $modelUser -> getForgotPass($id);
-        if(isset($user)) {
+        if(isset($user) && $user['token_verify'] == $token) {
             return response() ->json(["msg" => "Get link success!"],200);
         } else {
             return response() ->json(["msg" => "Get link failed!"],404);
