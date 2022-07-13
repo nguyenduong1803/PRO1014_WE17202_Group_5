@@ -4,19 +4,17 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserChangePassword;
-use App\Http\Requests\UserForgotPassword;
+use App\Http\Requests\UserGetPassForgot;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserRegister;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
-use Mail;
 
 class AuthController extends Controller
 {
@@ -83,22 +81,5 @@ class AuthController extends Controller
             return response() ->json(["msg" => "Đăng xuất thành công!"],200);
     }
 
-    public function sendMailForgotPassword(UserForgotPassword $request) {
-        $validate = $request -> validated();
-        $modelUser = new User();
-        $user = $modelUser ->forgotPassword($validate['email']);
-        $token = strtoupper(Str::random(10));
-        $params = [
-            $token,
-            $user['id']
-        ];
-        $modelUser ->updateTokenForgotPassword($params);
-        Mail::send('emails.forgotPassword', compact('user'), function ($email) use($user) {
-            $email -> subject('Lấy lại mật khẩu!');
-            $email -> to($user['email'], $user['ten']);
-        });
-        return response() ->json(["msg" => "Gửi email thành công, bạn vui lòng kiểm tra tin nhắn trong email của mình!"],200);
 
-
-    }
 }
