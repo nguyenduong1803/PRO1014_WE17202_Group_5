@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserChangePassword;
 use App\Http\Requests\UserForgotPassword;
+use App\Http\Requests\UserGetPassForgot;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserRegister;
+use App\Http\Requests\UserResetPassword;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
@@ -88,17 +90,49 @@ class AuthController extends Controller
         $modelUser = new User();
         $user = $modelUser ->forgotPassword($validate['email']);
         $token = strtoupper(Str::random(10));
-        $params = [
-            $token,
-            $user['id']
-        ];
-        $modelUser ->updateTokenForgotPassword($params);
+        if(!isset($user['token_verify'])) {
+            $params = [
+                $token,
+                $user['id']
+            ];
+            $modelUser ->updateTokenForgotPassword($params);
+        }
         Mail::send('emails.forgotPassword', compact('user'), function ($email) use($user) {
             $email -> subject('Lấy lại mật khẩu!');
             $email -> to($user['email'], $user['ten']);
         });
         return response() ->json(["msg" => "Gửi email thành công, bạn vui lòng kiểm tra tin nhắn trong email của mình!"],200);
+    }
 
+    public function getPassForgot($id, $token) {
+        $modelUser = new User();
+        $user = $modelUser -> getForgotPass($id);
+        if(isset($user)) {
+            return response() ->json(["msg" => "Get link success!"],200);
+        } else {
+            return response() ->json(["msg" => "Get link failed!"],404);
+        }
 
+    }
+
+    public function resetPassword(UserResetPassword $request) {
+        $validate = $request ->validated();
+        $modelUser = new User();
+        $user = $modelUser -> getForgotPass($validate['id']);
+        if($user['token_verify'] == $validate['token']) {
+            $params = [
+                NULL,
+                $validate['id']
+            ];
+            $modelUser -> updateTokenForgotPassword($params);
+            $params2 = [
+                bcrypt($validate['mat_khau']),
+                $validate['id']
+            ];
+            $modelUser -> updateResetPassword($params2);
+            return response() ->json(["msg" => "Đặt lại mật khẩu thành công!"],200);
+        } else {
+            return response() ->json(["msg" => "Đặt lại mật khẩu thất bại!"],404);
+        }
     }
 }
