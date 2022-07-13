@@ -96,6 +96,7 @@ class AuthController extends Controller
                 $user['id']
             ];
             $modelUser ->updateTokenForgotPassword($params);
+            $user['token_verify'] = $token;
         }
         Mail::send('emails.forgotPassword', compact('user'), function ($email) use($user) {
             $email -> subject('Lấy lại mật khẩu!');
@@ -107,7 +108,7 @@ class AuthController extends Controller
     public function getPassForgot($id, $token) {
         $modelUser = new User();
         $user = $modelUser -> getForgotPass($id);
-        if(isset($user) && $user['token_verify'] == $token) {
+        if($user['token_verify'] === $token) {
             return response() ->json(["msg" => "Get link success!"],200);
         } else {
             return response() ->json(["msg" => "Get link failed!"],404);
@@ -119,7 +120,7 @@ class AuthController extends Controller
         $validate = $request ->validated();
         $modelUser = new User();
         $user = $modelUser -> getForgotPass($validate['id']);
-        if($user['token_verify'] == $validate['token']) {
+        if($user['token_verify'] === $validate['token']) {
             $params = [
                 NULL,
                 $validate['id']
