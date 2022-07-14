@@ -44,4 +44,8 @@ class User extends Authenticatable
     public function updateChangePassword($params) {
         DB::update("UPDATE users SET `mat_khau` = ? WHERE `id` = ?", $params);
     }
+
+    public function updateInfo($params) {
+        DB::update("UPDATE users SET `ten` = ?, `dia_chi` = ?, `ngay_sinh` = ?, `sdt` = ?, `gioi_tinh` = ?, `email` = ? WHERE `id` = ?", $params);
+    }
 }
