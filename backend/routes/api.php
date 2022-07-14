@@ -21,4 +21,16 @@ Route::post('auth/login', [\App\Http\Controllers\Api\Auth\AuthController::class,
 
 Route::middleware('auth:api') -> group(function () {
     Route::get('auth/getInfoUser', [\App\Http\Controllers\Api\Auth\AuthController::class, 'getInfoUser']);
+    Route::post('auth/updateChangePassword', [\App\Http\Controllers\Api\Auth\AuthController::class, 'updateChangePassword']);
+    Route::get('auth/logout', [\App\Http\Controllers\Api\Auth\AuthController::class, 'logout']);
 });
+
+
+Route::group(['namespace' => 'User', 'prefix' => 'user'], function(){
+    Route::post('sendMailForgotPassword', [\App\Http\Controllers\Api\User\UserController::class, 'sendMailForgotPassword']);
+    Route::get('getPassForgot/{id}/{token}', [\App\Http\Controllers\Api\User\UserController::class, 'getPassForgot']) -> name('user.getPassForgot');
+    Route::post('resetPassword', [\App\Http\Controllers\Api\User\UserController::class, 'resetPassword']);
+});
+
+
+

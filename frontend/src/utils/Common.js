@@ -21,15 +21,10 @@ export const getUser = () => {
     return sessionStorage.getItem("go_to_backend") || null;
   };
   
-  export const setUserSession = (token, user, name,link,uid) => {
+  export const setTokenSession = (token) => {
     sessionStorage.setItem("access_token", token);
-    sessionStorage.setItem("uid", JSON.stringify(user));
-    sessionStorage.setItem("name", name);
-    sessionStorage.setItem("go_to_backend", link);
   };
   export const removeUserSession = () => {
     sessionStorage.removeItem("access_token");
-    sessionStorage.removeItem("uid");
-    sessionStorage.removeItem("name");
   };
   

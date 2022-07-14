@@ -1,15 +1,17 @@
 import React from 'react'
 import styles from "./LayoutSite.module.css"
-import { styled } from '@mui/material/styles';
 import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
-import Line from "../../../assets/svg/Line"
 import BarIcon from "../../../assets/svg/BarIcon"
+
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import Footer from '../../../components/Site/FooterContent/Footer';
+
 function LayoutSite({ children }) {
+  
     return (
+
         <>
             <Navbar />
             <Header />
@@ -22,6 +24,7 @@ function LayoutSite({ children }) {
                 {children}
             </main>
             <Footer/>
+
         </>
 
     )
