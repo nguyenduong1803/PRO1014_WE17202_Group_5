@@ -16,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 
 // Authentication
-Route::post('auth/register', [\App\Http\Controllers\Api\Auth\AuthController::class, 'register']);
-Route::post('auth/login', [\App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
 
-Route::middleware('auth:api') -> group(function () {
-    Route::get('auth/getInfoUser', [\App\Http\Controllers\Api\Auth\AuthController::class, 'getInfoUser']);
-    Route::post('auth/updateChangePassword', [\App\Http\Controllers\Api\Auth\AuthController::class, 'updateChangePassword']);
-    Route::get('auth/logout', [\App\Http\Controllers\Api\Auth\AuthController::class, 'logout']);
+Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function(){
+    Route::post('register', [\App\Http\Controllers\Api\Auth\AuthController::class, 'register']);
+    Route::post('login', [\App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
+});
+
+Route::group(['namespace' => 'Auth', 'prefix' => 'auth', 'middleware' => ['auth:api']], function(){
+    Route::get('getInfoUser', [\App\Http\Controllers\Api\Auth\AuthController::class, 'getInfoUser']);
+    Route::post('updateChangePassword', [\App\Http\Controllers\Api\Auth\AuthController::class, 'updateChangePassword']);
+    Route::get('logout', [\App\Http\Controllers\Api\Auth\AuthController::class, 'logout']);
 });
 
 
@@ -32,6 +35,7 @@ Route::group(['namespace' => 'User', 'prefix' => 'user'], function(){
     Route::post('resetPassword', [\App\Http\Controllers\Api\User\UserController::class, 'resetPassword']);
     Route::post('updateInfo', [\App\Http\Controllers\Api\User\UserController::class, 'updateInfo']) -> middleware('auth:api');
 });
+
 
 
 
