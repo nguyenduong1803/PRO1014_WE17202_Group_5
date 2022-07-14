@@ -19,13 +19,11 @@ import { getToken } from '../utils/Common';
 export const selectUser = (state) => state.AuthSlice.user
 export const isSuccess = (state) => state.AuthSlice.isSuccess
 export const token = (state) => state.AuthSlice.token
-
 export const selectLoading = (state) => state.AuthSlice.status
 
 export const remainingSelector = createSelector(selectUser, isSuccess, selectLoading,
-    (user, success, selectLoading) => {
-        console.log(user,success)
-        return success===true ? user :{}
+    (user, success, loading) => {
+        return success === true && loading==='idle' ? user : {}
     })
 
 
