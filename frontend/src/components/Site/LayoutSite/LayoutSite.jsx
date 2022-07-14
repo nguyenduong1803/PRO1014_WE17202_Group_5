@@ -17,9 +17,8 @@ import Footer from '../../../components/Site/FooterContent/Footer';
 function LayoutSite({ children }) {
     const load = useSelector(selectLoading)
     return (
-
         <>
-            {load === "loading" ? <Loadings /> : ""}
+            {/* {load === "loading" ? <Loadings /> : ""} */}
             <Navbar />
             <Header />
             <main className={styles.main}>
@@ -28,13 +27,9 @@ function LayoutSite({ children }) {
                     <img className={styles.overlayImg} src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-02.webp" alt="" />
                     {/* <Line /> */}
                 </div>
-
-                <div className="position-relative" style={{zIndex:20}}>{children}</div>
+                <div className="position-relative" style={{ zIndex: 20 }}>{children}</div>
             </main>
-
-                {children}
-            </main>
-            <Footer/>
+            <Footer />
 
         </>
 

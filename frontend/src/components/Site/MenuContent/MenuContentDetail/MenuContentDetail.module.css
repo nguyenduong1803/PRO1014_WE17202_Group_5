@@ -5,9 +5,10 @@
 }
 
 .MenuContentDetail{
+    width: 100%;
     margin:0 10px;
-    padding: 10px;
-    background-color: rgba(222, 222, 222, 0.5) !important;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.9) !important;
     border-radius: 10px;
     font-size:12px;
     margin-bottom: 24px;
