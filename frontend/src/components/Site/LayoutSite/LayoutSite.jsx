@@ -5,20 +5,25 @@ import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
 import BarIcon from "../../../assets/svg/BarIcon"
 
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Footer from '../../../components/Site/FooterContent/Footer';
+
 function LayoutSite({ children }) {
   
     return (
-        <> 
-                <Navbar />
-                <Header />
-                <main className={styles.main}>
-                    <div className={styles.line}>
-                        <div className={styles.shapeCircle}></div>
-                        <img className={styles.overlayImg} src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-02.webp" alt="" />
-                        {/* <Line /> */}
-                    </div>
-                    {children}
-                </main>
+
+        <>
+            <Navbar />
+            <Header />
+            <main className={styles.main}>
+                <div className={styles.line}>
+                    <div className={styles.shapeCircle}></div>
+                    <img className={styles.overlayImg} src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-02.webp" alt="" />
+                    {/* <Line /> */}
+                </div>
+                {children}
+            </main>
+            <Footer/>
 
         </>
 

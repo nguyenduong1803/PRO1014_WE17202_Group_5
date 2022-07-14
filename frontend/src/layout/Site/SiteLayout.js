@@ -10,6 +10,9 @@ import OrderTable from "../../pages/Site/OrderTable/OrderTable";
 import Map from "../../pages/Site/Map/Map";
 import Orders from "../../pages/Site/Order/Order";
 import Menu from '../../pages/Site/Menu/Menu';
+
+import OrderDetail from '../../pages/Site/OrderDetail/OrderDetail';
+
 import Login from "../../pages/Site/Login/Login"
 import Register from "../../pages/Site/Register/Register";
 const routerSite = [
@@ -24,11 +27,13 @@ const routerSite = [
   { path: "/menu", component: Menu, },
   { path: "/map", component: Map, },
 ]
+
 function SiteLayout() {
   return (
     <>
         {/* <DataProvider> */}
           <Switch>
+
               {
                 routerSite.map((router, index) => {
                   return <Route

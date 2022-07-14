@@ -4,15 +4,15 @@ import Checkbox from "@mui/material/Checkbox";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import { red } from '@mui/material/colors';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 function MenuContentOpTions() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   function valuetext(value) {
-    
-  
-
     return `${value} VNĐ`;
   }
   const [value, setValue] = React.useState([0, 500000]);
@@ -80,7 +80,7 @@ function MenuContentOpTions() {
              </div>
           </h2>
           <div className={styles.line}></div> <br />
-          <div className={styles.sliderPrice}>
+          <div className={styles.sliderPrice} style={{color: 'white !important'}}>
              <Box sx={{ width: "90%" }}>
                 <Slider
                 onChange={handleChange}
@@ -98,6 +98,48 @@ function MenuContentOpTions() {
           <div class="accordion-body" style={{ padding: "0" }}></div>
         </div>
       </div>
+      <div
+        class="accordion accordion-flush"
+        style={{ borderRadius: "20px", marginTop: "30px" }}
+        className={styles.optionss}
+      >
+        <div className={styles.accordionItem}>
+          <h2
+            class="accordion-header"
+            id="flush-headingOne"
+            className={styles.accordionButton}
+          >
+            <div className={styles.accordTitle}>
+              <div className={styles.accordTitleH4}>
+                <h4>Tags</h4>
+              </div>
+             
+             </div>
+          </h2>
+          <div className={styles.line}></div> <br />
+          <div className={styles.sliderPrice} style={{color: 'white !important'}}>
+          <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          // value={ac}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+            </div>
+          <div class="accordion-body" style={{ padding: "0" }}></div>
+        </div>
+      </div>
+
+
     </div>
   );
 }

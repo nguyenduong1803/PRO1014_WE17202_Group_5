@@ -22,16 +22,17 @@
     margin-top: 20px;
 }
 .trendingContent{
-    background-color: rgb(222, 218, 218);
+    background-color: rgba(255, 255, 255,0.5);
     height:220px;
     width: 300px;
+    border: 1px solid#fff;
     padding: 20px;
     color: black;
     border-radius: 20px;
 }
 .trendingContent:hover {
-    color: #fff;
-    background-color: #EF9454;
+    color: #333;
+    background-color:white;
 }
 .icon {
     margin-top: -3px;

@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './MenuContentDetail.module.css';
+import Button from '@mui/material/Button';
 function MenuContentDetail({img,title,content}) {
   return (
     <div className='col-lg-4'>
@@ -13,7 +14,7 @@ function MenuContentDetail({img,title,content}) {
             </div>
             <div className={styles.list}>
                 <div>Quantity</div>
-                <div>Orders</div>
+                <div><Button  size="small">Primary</Button></div>
             </div>
             </div>
         </div>
