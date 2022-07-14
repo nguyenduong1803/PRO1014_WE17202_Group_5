@@ -4,12 +4,20 @@ import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
 import BarIcon from "../../../assets/svg/BarIcon"
+
 import { selectLoading } from "../../../redux/selector"
 import Loadings from "../../../components/Site/Loadings/Loadings"
 import { useSelector } from 'react-redux'
+
+
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Footer from '../../../components/Site/FooterContent/Footer';
+
+
 function LayoutSite({ children }) {
     const load = useSelector(selectLoading)
     return (
+
         <>
             {load === "loading" ? <Loadings /> : ""}
             <Navbar />
@@ -20,8 +28,14 @@ function LayoutSite({ children }) {
                     <img className={styles.overlayImg} src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-02.webp" alt="" />
                     {/* <Line /> */}
                 </div>
+
                 <div className="position-relative" style={{zIndex:20}}>{children}</div>
             </main>
+
+                {children}
+            </main>
+            <Footer/>
+
         </>
 
     )

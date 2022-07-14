@@ -4,6 +4,7 @@ function Menu() {
   return (
     <div>
         <MenuContent/>
+
     </div>
   )
 }

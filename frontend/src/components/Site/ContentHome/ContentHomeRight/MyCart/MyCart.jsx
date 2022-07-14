@@ -8,7 +8,7 @@ function MyCart({ img, title, price }) {
       </div>
       <div>
         <h4 className={styles.title}>{title}</h4>
-        <p className={styles.price}>{price}</p>
+        <p className={styles.price}>Price : {price}</p>
       </div>
     </div>
   );

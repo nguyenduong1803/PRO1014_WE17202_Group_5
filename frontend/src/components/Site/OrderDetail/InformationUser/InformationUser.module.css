@@ -1,0 +1,35 @@
+.member{
+    /* background-color: #fff; */
+    border-radius: 20px;
+    padding:20px ;
+    background-color:#fff;
+    line-height: 1.6rem;
+    font-size: .8rem;
+    position: relative;
+}
+.member h4{
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+}
+.info{
+    text-align: center;
+    border-bottom: 1px solid rgb(217, 217, 217);
+}
+.info button{
+    color: #EA6A12;
+    margin: 10px;
+    border-radius: 40px;
+    border: 1px solid #EA6A12;
+}
+.info button:hover{
+    border: 1px solid #EA6A12;
+}
+.contacts{
+    color:#EA6A12;
+    padding: 5px;
+    font-size: 1rem;
+}
+.content{
+    color:#6d6c6c;
+}

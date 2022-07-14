@@ -28,8 +28,16 @@ class User extends Authenticatable
         return $result;
     }
 
+    public function getForgotPass($id) {
+        $result = User::where('id', $id)->first();
+        return $result;
+    }
+
     public function updateTokenForgotPassword($params) {
         DB::update("UPDATE users SET `token_verify` = ? WHERE `id` = ?", $params);
+    }
+    public function updateResetPassword($params) {
+        DB::update("UPDATE users SET `mat_khau` = ? WHERE `id` = ?", $params);
     }
 
 
