@@ -110,7 +110,7 @@ const ManagePosts = () => {
                   Thêm bài viết
                 </button>
               </Link>
-              <ExportReact csvData={blogs} />
+              {/* <ExportReact csvData={blogs} /> */}
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ const ManagePosts = () => {
 
           />
           <div className={`${styles.pagination} `}>
-            <span style={{ marginRight: `25px` }}>
+            {/* <span style={{ marginRight: `25px` }}>
               có{" "}
               <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
                 {searchValue === "" && sortPosition === "" && sortStatus === ""
@@ -138,7 +138,7 @@ const ManagePosts = () => {
                   ).length}
               </span>{" "}
               bản ghi
-            </span>
+            </span> */}
             {searchValue === "" && sortPosition === "" && sortStatus === "" ? (
               <Pagination
                 className="pagination-bar"

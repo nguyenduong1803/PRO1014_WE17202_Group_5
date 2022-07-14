@@ -10,9 +10,8 @@ function AuthenProvider({ children }) {
     const user = useSelector(selectUser)
     // const remainingSelector = useSelector(remainingSelector)
     const remaining = useSelector(remainingSelector)
-    console.log(remaining, user)
     useEffect(() => {
-        if (getToken() !== undefined) {
+        if (getToken() !== undefined && getToken()) {
             dispatch(getUserAuth())
         }
     }, [])

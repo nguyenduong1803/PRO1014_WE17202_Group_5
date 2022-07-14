@@ -128,7 +128,7 @@ const EditCell = ({ rowData, dataKey, setIdProduct, ...props }) => (
 );
 function Tablecustom({ tables, data, setIdProduct, path }) {
     const [loading, setLoading] = React.useState(false)
- 
+
     return (
         <>
             {loading ? <Loadings /> :
@@ -137,8 +137,8 @@ function Tablecustom({ tables, data, setIdProduct, path }) {
                         (<Table
                             data={data}
                             rowHeight={55}
-                            height={data.length< 9 ||(550 * data.length) / 10}
-                            
+                            height={data.length > 9 ? (550 * data.length) / 10 : 600}
+
                         // affixHorizontalScrollbar
                         >
                             {

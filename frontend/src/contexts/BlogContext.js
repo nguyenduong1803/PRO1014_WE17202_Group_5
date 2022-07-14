@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { createContext, useState } from "react";
 
 
-const BlogContext = createContext("");
+const BlogContext = createContext({});
 
 function BlogProvider({children}) {
     const [blogs, setBlogs] = useState([]);
