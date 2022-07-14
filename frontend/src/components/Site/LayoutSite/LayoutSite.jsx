@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import Line from "../../../assets/svg/Line"
 import BarIcon from "../../../assets/svg/BarIcon"
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Footer from '../../../components/Site/FooterContent/Footer';
 function LayoutSite({ children }) {
     return (
         <>
@@ -20,7 +21,7 @@ function LayoutSite({ children }) {
                 </div>
                 {children}
             </main>
-
+            <Footer/>
         </>
 
     )

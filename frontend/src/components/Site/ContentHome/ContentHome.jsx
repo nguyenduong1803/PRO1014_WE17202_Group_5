@@ -150,7 +150,8 @@ function ContentHome() {
             })}
           </div>
           <div className="MyCart">
-            <div style={{padding: '20px 0',fontSize: '20px',borderBottom: '3px solid black',width:'100%'}}>
+            <div style={{backgroundColor:'rgba(255, 255, 255,0.5)',border:'1px solid #fff',padding:'23px',borderRadius:'20px',marginTop:'40px',paddingBottom:'40px'}}>
+            <div style={{padding: '20px 0',fontSize: '20px',borderBottom: '1px solid #8A8480',width:'100%'}}>
               <h3>Top Farouites</h3>
             </div>
             <div className="col-lg-4">
@@ -167,9 +168,12 @@ function ContentHome() {
                 })
               }
             </div>
+            </div>
+            <div style={{backgroundColor:'rgba(255, 255, 255,0.5)',border:'1px solid #fff',padding:'23px',borderRadius:'20px',marginTop:'40px',paddingBottom:'40px'}}>
             <div style={{width:'300px',marginTop:'20px',borderRadius:'20px'}} >
               <h3>Quảng Cáo</h3> <br />
               <img src={product3} alt="" style={{borderRadius:'20px'}} />
+            </div>
             </div>
           </div>
         </div>

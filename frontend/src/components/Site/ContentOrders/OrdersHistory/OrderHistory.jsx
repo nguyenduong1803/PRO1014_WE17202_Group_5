@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./OrderHistory.module.css";
 function OrderHistory({id,img,title,content,price,imgUser,Date}) {
   return (
-    <div className="col-lg-4">
+    <div className="col-lg-3">
       <div className={styles.orderHistory}>
         <div className={styles.orderIdHeader} >
             <div className={styles.orderIdHeaderLeft}>
