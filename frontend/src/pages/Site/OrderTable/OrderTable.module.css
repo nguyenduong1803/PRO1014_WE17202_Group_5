@@ -1,0 +1,26 @@
+:root{
+    --borderColor: rgb(255, 255, 255);
+}
+.borderBottom{
+    border-bottom: 1px solid var(--borderColor);
+    width: 100%;
+}
+.borderRight{
+    border-right: 1px solid var(--borderColor);
+    height: 100%;
+}
+.borderLeft{
+    border-left: 1px solid var(--borderColor);
+    height: 100%;
+}
+.borderLeftRight{
+    border-left: 1px solid var(--borderColor);
+    height: 100%;
+    border-right: 1px solid var(--borderColor);
+}
+.borderTopBot{
+    border-top: 1px solid var(--borderColor);
+    height: 100%;
+    border-bottom: 1px solid var(--borderColor);
+}
+

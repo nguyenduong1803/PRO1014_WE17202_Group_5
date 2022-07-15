@@ -9,7 +9,7 @@ import Calendar from '../Calendar/Calendar'
 import { InputPassword, InputTextField } from './InputMui'
 import UploadImage from './UploadImage'
 import BannerAnimation from './BannerAnimation'
-import { registerAccount } from '../../../redux/SliceReducer/AccountSlice'
+import { registerAccounts } from '../../../redux/SliceReducer/AccountSlice'
 
 
 function ContentRegister() {
@@ -68,7 +68,7 @@ const FormRegister = () => {
     }
     const handleRegister = (e) => {
         e.preventDefault()
-        dispatch(registerAccount(formRegister))
+        dispatch(registerAccounts(formRegister))
     }
 
     // {

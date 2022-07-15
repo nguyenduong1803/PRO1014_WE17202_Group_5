@@ -22,22 +22,6 @@ const AuthSlice = createSlice({
         isSuccess: getToken() ? true : false
     },
     reducers: {
-        login: (state) => {
-            return state
-        },
-        loginSuccess: (state) => {
-            return state
-        },
-        loginFailure: (state) => {
-            return state
-        },
-        getUser: (state) => {
-            return state
-        },
-        logout: (state) => {
-            return state
-        },
-        
     },
     extraReducers: buiders => {
         buiders
