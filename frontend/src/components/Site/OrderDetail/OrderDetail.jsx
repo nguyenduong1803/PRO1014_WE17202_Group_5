@@ -41,6 +41,8 @@ function OrderDetail() {
         <div className="col-lg-9">
           <ListOrder />
           <Status />
+          
+          
         </div>
       </div>
     </LayoutSite>

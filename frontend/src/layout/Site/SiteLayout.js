@@ -10,9 +10,13 @@ import OrderTable from "../../pages/Site/OrderTable/OrderTable";
 import Map from "../../pages/Site/Map/Map";
 import Orders from "../../pages/Site/Order/Order";
 import Menu from '../../pages/Site/Menu/Menu';
+<<<<<<< HEAD
+import OrderDetail from '../../pages/Site/OrderDetail/OrderDetail';
+=======
 
 import OrderDetail from '../../pages/Site/OrderDetail/OrderDetail';
 
+>>>>>>> 72bd3f311b116fea8af9eb4ef0b69e1ba2002eb4
 import Login from "../../pages/Site/Login/Login"
 import Register from "../../pages/Site/Register/Register";
 const routerSite = [
@@ -26,14 +30,23 @@ const routerSite = [
   { path: "/hoa-don", component: Orders, },
   { path: "/menu", component: Menu, },
   { path: "/map", component: Map, },
+  { path: "/chi-tiet-hoa-don", component: OrderDetail , },
+  
 ]
+<<<<<<< HEAD
+=======
 
+>>>>>>> 72bd3f311b116fea8af9eb4ef0b69e1ba2002eb4
 function SiteLayout() {
   return (
     <>
         {/* <DataProvider> */}
           <Switch>
+<<<<<<< HEAD
+            
+=======
 
+>>>>>>> 72bd3f311b116fea8af9eb4ef0b69e1ba2002eb4
               {
                 routerSite.map((router, index) => {
                   return <Route
