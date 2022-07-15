@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./OrderHistory.module.css";
+import {Link} from 'react-router-dom';
 function OrderHistory({id,img,title,content,price,imgUser,Date}) {
   return (
     <div className="col-lg-3">
@@ -47,7 +48,7 @@ function OrderHistory({id,img,title,content,price,imgUser,Date}) {
                 <p>{price}</p>
             </div>
             <div className={styles.orderIdFooterRight}>
-                <p>Icon</p>
+                <Link to='/chi-tiet-hoa-don'>Xem Chi Tiết</Link>
             </div>
         </div>
       </div>

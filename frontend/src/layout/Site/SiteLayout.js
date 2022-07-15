@@ -24,6 +24,8 @@ const routerSite = [
   { path: "/hoa-don", component: Orders, },
   { path: "/menu", component: Menu, },
   { path: "/map", component: Map, },
+  { path: "/chi-tiet-hoa-don", component: OrderDetail , },
+  
 ]
 function SiteLayout() {
   return (
