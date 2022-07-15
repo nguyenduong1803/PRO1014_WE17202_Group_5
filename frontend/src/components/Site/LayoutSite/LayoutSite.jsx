@@ -4,16 +4,11 @@ import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
 import BarIcon from "../../../assets/svg/BarIcon"
-<<<<<<< HEAD
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import Footer from '../../../components/Site/FooterContent/Footer';
-=======
-
->>>>>>> 930eddf1f72283af5c29cc459031f0dd501bc254
 function LayoutSite({ children }) {
   
     return (
-<<<<<<< HEAD
         <>
             <Navbar />
             <Header />
@@ -26,20 +21,6 @@ function LayoutSite({ children }) {
                 {children}
             </main>
             <Footer/>
-=======
-        <> 
-                <Navbar />
-                <Header />
-                <main className={styles.main}>
-                    <div className={styles.line}>
-                        <div className={styles.shapeCircle}></div>
-                        <img className={styles.overlayImg} src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-02.webp" alt="" />
-                        {/* <Line /> */}
-                    </div>
-                    {children}
-                </main>
-
->>>>>>> 930eddf1f72283af5c29cc459031f0dd501bc254
         </>
 
     )

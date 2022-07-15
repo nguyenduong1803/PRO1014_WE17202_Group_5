@@ -10,9 +10,7 @@ import OrderTable from "../../pages/Site/OrderTable/OrderTable";
 import Map from "../../pages/Site/Map/Map";
 import Orders from "../../pages/Site/Order/Order";
 import Menu from '../../pages/Site/Menu/Menu';
-<<<<<<< HEAD
 import OrderDetail from '../../pages/Site/OrderDetail/OrderDetail';
-=======
 import Login from "../../pages/Site/Login/Login"
 import Register from "../../pages/Site/Register/Register";
 const routerSite = [
@@ -27,25 +25,12 @@ const routerSite = [
   { path: "/menu", component: Menu, },
   { path: "/map", component: Map, },
 ]
->>>>>>> 930eddf1f72283af5c29cc459031f0dd501bc254
 function SiteLayout() {
   return (
     <>
         {/* <DataProvider> */}
           <Switch>
-<<<<<<< HEAD
-            <Route exact path="/" component={Home} />
-            <Route exact path="/dang-nhap" component={Auth} />
-            <Route exact path="/gio-hang" component={Cart} />
-            <Route exact path="/dat-ban" component={OrderTable} />
-            <Route exact path="/map" component={Map} />
-            <Route exact path="/thanh-toan" component={Checkout} />
-            <Route exact path="/xac-nhan-don-hang" component={ConfirmBill} />
-            <Route exact path="/hoa-don" component={Orders}/>
-            <Route exact path="/menu" component={Menu}/>
-            <Route exact path="/chi-tiet-don-hang" component={OrderDetail}/>
-
-=======
+            
               {
                 routerSite.map((router, index) => {
                   return <Route
@@ -54,7 +39,6 @@ function SiteLayout() {
                     component={router.component} />
                 })
               }
->>>>>>> 930eddf1f72283af5c29cc459031f0dd501bc254
           </Switch>
         {/* </DataProvider> */}
     </>
