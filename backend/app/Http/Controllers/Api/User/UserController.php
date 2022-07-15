@@ -7,6 +7,7 @@ use App\Http\Requests\UserForgotPassword;
 use App\Http\Requests\UserResetPassword;
 use App\Http\Requests\UserUpdateInfo;
 use App\Models\User;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -68,6 +69,9 @@ class UserController extends Controller
 
     public function updateInfo(UserUpdateInfo $request) {
         $validate = $request -> validated();
+        $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath(), [
+            'folder' => 'avatar'
+        ])->getSecurePath();
         $user = Auth::user();
         $modelUser = new User();
         $updateTen = isset($validate['ten']) ? $validate['ten'] : $user['ten'];
@@ -83,6 +87,7 @@ class UserController extends Controller
             $updateSdt,
             $updateGioiTinh,
             $updateEmail,
+            $uploadedFileUrl,
             $user['id']
         ];
         $modelUser -> updateInfo($params);
