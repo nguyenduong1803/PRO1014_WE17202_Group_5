@@ -4,22 +4,19 @@ import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
 import BarIcon from "../../../assets/svg/BarIcon"
-<<<<<<< HEAD
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import Footer from '../../../components/Site/FooterContent/Footer';
-function LayoutSite({ children }) {
-  
-    return (
-=======
 
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import Footer from '../../../components/Site/FooterContent/Footer';
+function LayoutSite({ children }) {
+
+
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Footer from '../../../components/Site/FooterContent/Footer';
 
 function LayoutSite({ children }) {
   
     return (
 
->>>>>>> 72bd3f311b116fea8af9eb4ef0b69e1ba2002eb4
         <>
             <Navbar />
             <Header />
@@ -32,10 +29,7 @@ function LayoutSite({ children }) {
                 {children}
             </main>
             <Footer/>
-<<<<<<< HEAD
-=======
 
->>>>>>> 72bd3f311b116fea8af9eb4ef0b69e1ba2002eb4
         </>
 
     )
