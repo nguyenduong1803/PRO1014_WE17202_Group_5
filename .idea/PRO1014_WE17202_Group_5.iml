@@ -134,6 +134,11 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/league/oauth2-server" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/league/event" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/league/uri" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/cloudinary/cloudinary_php" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/cloudinary/transformation-builder-sdk" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/cloudinary-labs/cloudinary-laravel" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/shrikeh/teapot" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/teapot/status-code" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

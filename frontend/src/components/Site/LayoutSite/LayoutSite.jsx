@@ -12,6 +12,11 @@ import { useSelector } from 'react-redux'
 
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import Footer from '../../../components/Site/FooterContent/Footer';
+function LayoutSite({ children }) {
+
+
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Footer from '../../../components/Site/FooterContent/Footer';
 
 
 function LayoutSite({ children }) {

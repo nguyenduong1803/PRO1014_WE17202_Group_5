@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserForgotPassword;
 use App\Http\Requests\UserResetPassword;
+use App\Http\Requests\UserUpdateInfo;
 use App\Models\User;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail;
 
@@ -62,5 +65,33 @@ class UserController extends Controller
         } else {
             return response() ->json(["msg" => "Đặt lại mật khẩu thất bại!"],404);
         }
+    }
+
+    public function updateInfo(UserUpdateInfo $request) {
+        $validate = $request -> validated();
+        $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath(), [
+            'folder' => 'avatar'
+        ])->getSecurePath();
+        $user = Auth::user();
+        $modelUser = new User();
+        $updateTen = isset($validate['ten']) ? $validate['ten'] : $user['ten'];
+        $updateDiaChi = isset($validate['dia_chi']) ? $validate['dia_chi'] : $user['dia_chi'];
+        $updateNgaySinh = isset($validate['ngay_sinh']) ? $validate['ngay_sinh'] : $user['ngay_sinh'];
+        $updateSdt = isset($validate['sdt']) ? $validate['sdt'] : $user['sdt'];
+        $updateGioiTinh = isset($validate['gioi_tinh']) ? $validate['gioi_tinh'] : $user['gioi_tinh'];
+        $updateEmail = isset($validate['email']) ? $validate['email'] : $user['email'];
+        $params = [
+            $updateTen,
+            $updateDiaChi,
+            $updateNgaySinh,
+            $updateSdt,
+            $updateGioiTinh,
+            $updateEmail,
+            $uploadedFileUrl,
+            $user['id']
+        ];
+        $modelUser -> updateInfo($params);
+        return response() ->json(["msg" => "Cập nhật thông tin tài khoản thành công!"],200);
+
     }
 }

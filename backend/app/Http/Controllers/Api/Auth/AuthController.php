@@ -8,6 +8,7 @@ use App\Http\Requests\UserGetPassForgot;
 use App\Http\Requests\UserLogin;
 use App\Http\Requests\UserRegister;
 use App\Models\User;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,9 @@ class AuthController extends Controller
     public function register(UserRegister $request) {
         $validate = $request -> validated();
         $validate['mat_khau'] = bcrypt($validate['mat_khau']);
+        $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath(), [
+            'folder' => 'avatar'
+        ])->getSecurePath();
         $dataInsert = [
             $validate['ten'],
             $validate['dia_chi'],
@@ -30,7 +34,8 @@ class AuthController extends Controller
             $validate['gioi_tinh'],
             $validate['vai_tro'],
             $validate['email'],
-            $validate['mat_khau']
+            $validate['mat_khau'],
+            $uploadedFileUrl
         ];
         $modelUser = new User();
         $modelUser ->insertUser($dataInsert);

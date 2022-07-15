@@ -9,7 +9,6 @@ import Home from "../../pages/Site/Home/Home";
 import OrderTable from "../../pages/Site/OrderTable/OrderTable";
 import Map from "../../pages/Site/Map/Map";
 import Orders from "../../pages/Site/Order/Order";
-import Menu from '../../pages/Site/Menu/Menu';
 
 import OrderDetail from '../../pages/Site/OrderDetail/OrderDetail';
 
@@ -27,15 +26,15 @@ const routerSite = [
   { path: "/hoa-don", component: Orders, },
   { path: "/menu", component: Menu, },
   { path: "/map", component: Map, },
-  { path: "*", component: PageNotFound, },
-]
+
+  { path: "/chi-tiet-hoa-don", component: OrderDetail , },
+  
 
 function SiteLayout() {
   return (
     <>
         {/* <DataProvider> */}
           <Switch>
-
               {
                 routerSite.map((router, index) => {
                   return <Route

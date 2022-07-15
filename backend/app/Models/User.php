@@ -14,8 +14,8 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     public function insertUser($params) {
-        DB::insert('INSERT INTO users (ten, dia_chi, ngay_sinh, sdt, gioi_tinh, vai_tro, email, mat_khau) values (?, ?, ? , ?,
-                                                                                                   ?, ?,?,?)', $params);
+        DB::insert('INSERT INTO users (ten, dia_chi, ngay_sinh, sdt, gioi_tinh, vai_tro, email, mat_khau, img) values (?, ?, ? , ?,
+                                                                                                   ?, ?,?,?, ?)', $params);
     }
 
     public function login($email) {
@@ -43,5 +43,9 @@ class User extends Authenticatable
 
     public function updateChangePassword($params) {
         DB::update("UPDATE users SET `mat_khau` = ? WHERE `id` = ?", $params);
+    }
+
+    public function updateInfo($params) {
+        DB::update("UPDATE users SET `ten` = ?, `dia_chi` = ?, `ngay_sinh` = ?, `sdt` = ?, `gioi_tinh` = ?, `email` = ?, `img` = ? WHERE `id` = ?", $params);
     }
 }
