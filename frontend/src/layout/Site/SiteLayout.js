@@ -15,6 +15,7 @@ import OrderDetail from '../../pages/Site/OrderDetail/OrderDetail';
 
 import Login from "../../pages/Site/Login/Login"
 import Register from "../../pages/Site/Register/Register";
+import PageNotFound from "../../pages/Site/PageNotFound/PageNotFound";
 const routerSite = [
   { path: "/", component: Home, },
   { path: "/dang-nhap", component: Login, },
@@ -26,6 +27,7 @@ const routerSite = [
   { path: "/hoa-don", component: Orders, },
   { path: "/menu", component: Menu, },
   { path: "/map", component: Map, },
+  { path: "*", component: PageNotFound, },
 ]
 
 function SiteLayout() {

@@ -9,19 +9,17 @@ function Table({colors,name,status}) {
     //     "--clr": "#b145e9"
     // },
     return (
-        <>
             <div className={styles.wrap} style={rootColor} >
                 <div className={styles.pulse}></div>
                 <div className={styles.button}>
                     <span></span>
                 </div>
                 <h4 className={styles.tableName}>{name}</h4>
-                <Chair position="bottom" />
-                <Chair position="left" />
-                <Chair position="right" />
-                <Chair position="top" />
+                <Chair position="bottom"cordinate="-32px" />
+                <Chair position="left" cordinate="-40px"/>
+                <Chair position="right" cordinate="-40px"/>
+                <Chair position="top" cordinate="-32px"/>
             </div>
-        </>
     )
 }
 

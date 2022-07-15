@@ -38,12 +38,12 @@ export default function ProfileAvatar() {
                 </ListItemIcon>
                     Settings</a></li>
                 <li>
-                    <Link className="dropdown-item d-flex align-items-center" to="/"
+                    <div className="dropdown-item d-flex align-items-center" to="/"
                         onClick={handleLogout}
                     > <ListItemIcon>
                             <Logout fontSize="medium" />
                         </ListItemIcon>
-                        Logout</Link></li>
+                        Logout</div></li>
             </ul>
         </div>
     );

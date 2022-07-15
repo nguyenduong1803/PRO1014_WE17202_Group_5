@@ -1,29 +1,39 @@
-.MenuContentDetail img{
+.MenuContentDetail img {
     width: 100%;
     border-radius: 10px;
 
 }
 
-.MenuContentDetail{
+.MenuContentDetail {
     width: 100%;
-    margin:0 10px;
+    margin: 0 10px;
     padding: 12px;
     background-color: rgba(255, 255, 255, 0.9) !important;
     border-radius: 10px;
-    font-size:12px;
+    box-shadow: 5px 10px 30px -10px rgb(0 0 0 / 30%);
+    font-size: 12px;
     margin-bottom: 24px;
+    transition: 0.4s;
 }
-.list{
+
+.MenuContentDetail:hover {
+    transform:translateY(-3px);
+    box-shadow: 5px 10px 30px -7px rgb(0 0 0 / 50%);
+}
+
+.list {
     margin-top: 10px;
-    display:inline-flex;
+    display: inline-flex;
     width: 100%;
     justify-content: space-between;
-    line-height:1.2rem;
+    line-height: 1.2rem;
 }
-.list button{
+
+.list button {
     color: #404042;
     text-transform: none;
 }
-.content{
+
+.content {
     line-height: 1.2rem;
 }
