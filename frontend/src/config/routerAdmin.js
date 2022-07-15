@@ -1,9 +1,7 @@
 import Dashboard from "../pages/Admin/Dashboard/Dashboard";
-import Login from "../pages/Admin/Login/Login";
 import AddProducts from "../pages/Admin/ManageProduct/AddProducts/AddProducts";
 import Profile from "../pages/Admin/UserManager/Profile/Profile";
 import UserManager from "../pages/Admin/UserManager/UserManager";
-import Register from "../pages/Admin/Register/Register";
 import ManagePosts from "../pages/Admin/ManagePosts/ManagePosts";
 import ManageProduct from "../pages/Admin/ManageProduct/ManageProduct";
 import ManageMasterial from "../pages/Admin/ManageMasterial/ManageMasterial"
@@ -20,10 +18,7 @@ export const routerAdmin =[
         component :Dashboard,
         path:"dashboard",
     },
-    {
-        component :Login,
-        path:"dang-nhap",
-    },
+   
     {
         component :OrderManager,
         path:"quan-ly-don-hang",
@@ -60,10 +55,7 @@ export const routerAdmin =[
         component :Profile,
         path:"chi-tiet-nguoi-dung",
     },
-    {
-        component :Register,
-        path:"dang-ky",
-    },
+   
     {
         component :ManagePosts,
         path:"quan-ly-bai-viet",

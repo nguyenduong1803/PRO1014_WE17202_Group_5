@@ -1,14 +1,21 @@
+import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom'
+import { AuthenProvider } from './contexts/AuthenContext';
 import AdminLayout from "./layout/Admin/AdminLayout";
 import SiteLayout from "./layout/Site/SiteLayout";
+import store from './redux/store';
 
 function App() {
   return (
     <>
-        <Switch>
-          <Route path="/admin/*" component={AdminLayout} />
-          <Route path="/*" component={SiteLayout} />
-        </Switch>
+      <Provider store={store}>
+        <AuthenProvider>
+          <Switch>
+            <Route path="/admin/*" component={AdminLayout} />
+            <Route path="/*" component={SiteLayout} />
+          </Switch>
+        </AuthenProvider>
+      </Provider>
     </>
   );
 }

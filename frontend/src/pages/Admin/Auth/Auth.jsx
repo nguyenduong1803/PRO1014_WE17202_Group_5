@@ -3,7 +3,10 @@ import { useState } from "react";
 
 export default function App() {
   const [activeclassName, setActiveclassName] = useState(true);
-
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log("submit")
+}
   return (
     <div className="Auth">
       <div
@@ -13,7 +16,7 @@ export default function App() {
         id="container"
       >
         <div className="form-container sign-up-container">
-          <form action="#">
+          <form action="#" onSubmit={handleSubmit}>
             <h1>Tạo tài khoản</h1>
             <div className="social-container"></div>
             <span>Hoặc sử dụng email để đăng ký</span>

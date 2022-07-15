@@ -18,8 +18,30 @@ class User extends Authenticatable
                                                                                                    ?, ?,?,?)', $params);
     }
 
-    public function getUser($email) {
-        $result = DB::table('users')->where('email', $email)->first();
+    public function login($email) {
+        $result = User::where('email', $email)->first();
         return $result;
+    }
+
+    public function forgotPassword($email) {
+        $result = User::where('email', $email)->first();
+        return $result;
+    }
+
+    public function getForgotPass($id) {
+        $result = User::where('id', $id)->first();
+        return $result;
+    }
+
+    public function updateTokenForgotPassword($params) {
+        DB::update("UPDATE users SET `token_verify` = ? WHERE `id` = ?", $params);
+    }
+    public function updateResetPassword($params) {
+        DB::update("UPDATE users SET `mat_khau` = ? WHERE `id` = ?", $params);
+    }
+
+
+    public function updateChangePassword($params) {
+        DB::update("UPDATE users SET `mat_khau` = ? WHERE `id` = ?", $params);
     }
 }

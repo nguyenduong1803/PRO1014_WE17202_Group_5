@@ -6,7 +6,6 @@ import { OrderProvider } from "../../contexts/OrderContext.js";
 import { DataProvider } from "../../contexts/DataContext.js";
 import { BlogProvider } from "../../contexts/BlogContext.js";
 import { StyledEngineProvider } from "@mui/material";
-
 function AdminLayout() {
   return (
     <div style={{ display: `flex` }}>
@@ -15,7 +14,7 @@ function AdminLayout() {
           <UserProvider>
             <OrderProvider>
               <DataProvider>
-                <BlogProvider>
+                {/* <BlogProvider> */}
                   <Switch>
                     {
                       routerAdmin.map((router, index) => (
@@ -23,10 +22,11 @@ function AdminLayout() {
                       ))
                     }
                   </Switch>
-                </BlogProvider>
+                {/* </BlogProvider> */}
               </DataProvider>
             </OrderProvider>
           </UserProvider>
+     
         </BrowserRouter>
       </StyledEngineProvider>
     </div>
