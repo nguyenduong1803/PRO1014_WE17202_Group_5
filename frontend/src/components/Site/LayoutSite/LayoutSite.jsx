@@ -7,16 +7,11 @@ import BarIcon from "../../../assets/svg/BarIcon"
 
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import Footer from '../../../components/Site/FooterContent/Footer';
-function LayoutSite({ children }) {
 
-
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
-import Footer from '../../../components/Site/FooterContent/Footer';
 
 function LayoutSite({ children }) {
   
     return (
-
         <>
             <Navbar />
             <Header />

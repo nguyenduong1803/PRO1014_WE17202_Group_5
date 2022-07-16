@@ -1,0 +1,26 @@
+.row{
+    padding: 20px 40px;
+}
+.col9{
+    background-color:rgb(103, 104, 107);
+    border-radius: 20px;
+    padding: 20px 40px;
+}
+.col3{
+    background-color:aqua;
+}
+.products{
+    display: flex;
+    text-align: center;
+}
+
+.title{
+    font-size: 1.6rem;
+    font-weight: 550;
+    padding: 20px 0;
+    border-bottom: 1px solid rgb(217, 217, 217);
+    margin-bottom: 40px;
+}
+.products img{
+    width:300px;
+}
