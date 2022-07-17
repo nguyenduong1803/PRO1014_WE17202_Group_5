@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserChangePassword;
+use App\Http\Requests\User\UserChangePassword;
+use App\Http\Requests\User\UserLogin;
+use App\Http\Requests\User\UserRegister;
 use App\Http\Requests\UserGetPassForgot;
-use App\Http\Requests\UserLogin;
-use App\Http\Requests\UserRegister;
 use App\Models\User;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+use Laravel\Passport\HasApiTokens;
 
 
 class AuthController extends Controller
