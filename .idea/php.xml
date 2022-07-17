@@ -128,6 +128,11 @@
       <path value="$PROJECT_DIR$/backend/vendor/league/oauth2-server" />
       <path value="$PROJECT_DIR$/backend/vendor/league/event" />
       <path value="$PROJECT_DIR$/backend/vendor/league/uri" />
+      <path value="$PROJECT_DIR$/backend/vendor/cloudinary/cloudinary_php" />
+      <path value="$PROJECT_DIR$/backend/vendor/cloudinary/transformation-builder-sdk" />
+      <path value="$PROJECT_DIR$/backend/vendor/cloudinary-labs/cloudinary-laravel" />
+      <path value="$PROJECT_DIR$/backend/vendor/shrikeh/teapot" />
+      <path value="$PROJECT_DIR$/backend/vendor/teapot/status-code" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
