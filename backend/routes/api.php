@@ -29,6 +29,13 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function(){
     Route::post('login', [\App\Http\Controllers\Api\Auth\AuthController::class, 'login']);
 });
 
+Route::group(['namespace' => 'Product', 'prefix' => 'product'], function(){
+    Route::middleware('auth:api') -> group(function () {
+        Route::post('create', [\App\Http\Controllers\Api\Product\ProductController::class, 'create']);
+    });
+    Route::post('upload', [\App\Http\Controllers\Api\Product\ProductController::class, 'uploadFile']);
+});
+
 
 Route::group(['namespace' => 'User', 'prefix' => 'user'], function(){
     Route::post('sendMailForgotPassword', [\App\Http\Controllers\Api\User\UserController::class, 'sendMailForgotPassword']);

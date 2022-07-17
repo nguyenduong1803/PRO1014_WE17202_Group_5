@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserForgotPassword;
-use App\Http\Requests\UserResetPassword;
-use App\Http\Requests\UserUpdateInfo;
+use App\Http\Requests\User\UserForgotPassword;
+use App\Http\Requests\User\UserResetPassword;
+use App\Http\Requests\User\UserUpdateInfo;
 use App\Models\User;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail;
