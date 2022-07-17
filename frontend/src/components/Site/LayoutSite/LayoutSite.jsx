@@ -4,7 +4,7 @@ import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
 import BarIcon from "../../../assets/svg/BarIcon"
-
+import Line from "../../../assets/svg/Line"
 import { selectLoading } from "../../../redux/selector"
 import Loadings from "../../../components/Site/Loadings/Loadings"
 import { useSelector } from 'react-redux'
@@ -24,9 +24,10 @@ function LayoutSite({ children }) {
             <Header />
             <main className={styles.main}>
                 <div className={styles.line}>
-                    <div className={styles.shapeCircle}></div>
+                    {/* <div className={styles.shapeCircle}></div> */}
                     <img className={styles.overlayImg} src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-02.webp" alt="" />
-                    {/* <Line /> */}
+                    {/* <div className={styles.overlayQ}><img  src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-01.webp" alt="" /></div> */}
+                   <div className={styles.bgrLine}> <Line /></div>
                 </div>
                 <div className="position-relative" style={{ zIndex: 2 }}>{children}</div>
             </main>

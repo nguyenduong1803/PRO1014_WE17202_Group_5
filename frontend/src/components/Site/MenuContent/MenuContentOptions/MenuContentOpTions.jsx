@@ -20,15 +20,13 @@ function MenuContentOpTions() {
   return (
     <div className={styles.Menu}>
       <div
-        class="accordion accordion-flush"
         style={{ borderRadius: "20px" }}
         className={styles.optionss}
       >
         <div className={styles.accordionItem}>
-          <h2 class="accordion-header" id="flush-headingOne">
+          <h2 className="accordion-header " id="flush-headingOne">
             <button
-              className={styles.accordionButton}
-              class=" "
+              className={`${styles.accordionButton} d-flex justify-content-between align-items-center`}
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseOne"
@@ -39,20 +37,22 @@ function MenuContentOpTions() {
                 <div>
                   <h4>Categories</h4>
                 </div>
-                <div className={styles.icon}>
-                  <ExpandMoreIcon />
-                </div>
+
+              </div>
+              <div className={styles.icon}>
+                <ExpandMoreIcon />
               </div>
             </button>
+
           </h2>{" "}
           <div className={styles.line}></div> <br />
           <div
             id="flush-collapseOne"
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse show"
             aria-labelledby="flush-headingOne"
             data-bs-parent="#accordionFlushExample"
           >
-            <div class="accordion-body" style={{ padding: "0" }}>
+            <div className="accordion-body" style={{ padding: "0" }}>
               <div className={styles.option}>
                 <Checkbox {...label} /> Admin Templates
               </div>
@@ -62,13 +62,11 @@ function MenuContentOpTions() {
       </div>
 
       <div
-        class="accordion accordion-flush"
         style={{ borderRadius: "20px", marginTop: "30px" }}
         className={styles.optionss}
       >
         <div className={styles.accordionItem}>
           <h2
-            class="accordion-header"
             id="flush-headingOne"
             className={styles.accordionButton}
           >
@@ -76,36 +74,34 @@ function MenuContentOpTions() {
               <div className={styles.accordTitleH4}>
                 <h4>Price</h4>
               </div>
-             
-             </div>
+
+            </div>
           </h2>
           <div className={styles.line}></div> <br />
-          <div className={styles.sliderPrice} style={{color: 'white !important'}}>
-             <Box sx={{ width: "90%" }}>
-                <Slider
+          <div className={styles.sliderPrice} style={{ color: 'white !important' }}>
+            <Box sx={{ width: "90%" }}>
+              <Slider
                 onChange={handleChange}
-                  getAriaLabel={() => "Price range"}
-                  min={0}
-                  step={1000}
-                  max={600000}
-                  value={value}
-                  valueLabelDisplay="auto"
-                  color="secondary"
-                  getAriaValueText={valuetext}
-                />
-              </Box>
-            </div>
-          <div class="accordion-body" style={{ padding: "0" }}></div>
+                getAriaLabel={() => "Price range"}
+                min={0}
+                step={1000}
+                max={600000}
+                value={value}
+                valueLabelDisplay="auto"
+                color="secondary"
+                getAriaValueText={valuetext}
+              />
+            </Box>
+          </div>
+          <div className="accordion-body" style={{ padding: "0" }}></div>
         </div>
       </div>
       <div
-        class="accordion accordion-flush"
         style={{ borderRadius: "20px", marginTop: "30px" }}
         className={styles.optionss}
       >
         <div className={styles.accordionItem}>
           <h2
-            class="accordion-header"
             id="flush-headingOne"
             className={styles.accordionButton}
           >
@@ -113,29 +109,29 @@ function MenuContentOpTions() {
               <div className={styles.accordTitleH4}>
                 <h4>Tags</h4>
               </div>
-             
-             </div>
+
+            </div>
           </h2>
           <div className={styles.line}></div> <br />
-          <div className={styles.sliderPrice} style={{color: 'white !important'}}>
-          <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          // value={ac}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-            </div>
-          <div class="accordion-body" style={{ padding: "0" }}></div>
+          <div className={styles.sliderPrice} style={{ color: 'white !important' }}>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  // value={ac}
+                  label="Age"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </div>
+          <div className="accordion-body" style={{ padding: "0" }}></div>
         </div>
       </div>
 

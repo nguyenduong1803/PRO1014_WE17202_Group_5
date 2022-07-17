@@ -4,6 +4,11 @@
     z-index: 1;
     border-top-left-radius: 20px;
 }
+.Menu{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 26px;
+}
 
 .accordionItem{
     border: 2px solid #fff;
@@ -32,12 +37,14 @@
 }
 .line{
     width: 30px;
-    border-bottom: 3px solid #EA6A12;
+    border-bottom: 3px solid  var(--primaryColor);
     margin-left: 7px;
     margin-top: 10px;
 }
 .accordTitle{
     background-color:none !important;
+}
+.accordionButton{
     display:flex;
     width: 100%;
     justify-content:space-between;

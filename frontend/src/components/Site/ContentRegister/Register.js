@@ -162,7 +162,7 @@ const FormRegister = () => {
                     </Link>
                 </p>
             </div>
-            <p>{isSuccess ? "đang nhập thành công" : "đang nhập thất bại"}</p>
+            <p>{isSuccess ? "đang ký thành công" : "đang ký thất bại"}</p>
         </form>
     )
 }

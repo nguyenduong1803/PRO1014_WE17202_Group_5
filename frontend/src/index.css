@@ -153,13 +153,39 @@ html {
   position: relative;
   min-height: 100vh;
 }
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+   * {
+    scrollbar-width: auto;
+    scrollbar-color:  var(--primaryColor) rgba(234, 106, 18,0.5);
+  }
+
+   /* Chrome, Edge, and Safari */ 
+   *::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background-color: linear-gradient(to right, #fbf8f7, #fbf9f0, #fbf9f0);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color:var(--primaryPink) ;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  } 
+  .MuiSlider-colorSecondary{
+   color: var(--primaryPink) !important;
+  }
 :root {
   --purple: #1a358f;
   --yeallow: #f4cc3d;
   --red: #df3d3d;
   --orange: #F27400;
   --text-color: rgba(0,0,0,0.55);
-  --primaryColor:#EA6A12;
+  --primaryColor:#ff7272;
+  --primaryPink:#ff7272;
+
 }
 
 

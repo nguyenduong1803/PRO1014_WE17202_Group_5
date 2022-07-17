@@ -1,5 +1,5 @@
 .header{
-    background-color:#EA6A12;
+    background-color:var(--primaryColor);
     border-radius: 10px !important;
     font-size: 1.7rem !important;
     color: white !important;
@@ -23,7 +23,7 @@ table{
 .title{
     font-weight: 300;
     font-size:1rem;
-    color:#EA6A12;
+    color:var(--primaryColor);
 }
 .name{
     font-size: 1rem;

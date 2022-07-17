@@ -1,4 +1,5 @@
 import React from 'react'
+import DrawerMui from '../../../components/Site/DrawerMui/DrawerMui'
 import LayoutSite from '../../../components/Site/LayoutSite/LayoutSite'
 import RectangleTable from '../../../components/Site/Table/RectangleTable'
 import Table from "../../../components/Site/Table/Table"
@@ -11,10 +12,7 @@ function OrderTable() {
                 <div className="row">
 
                     <div className="col-2">
-
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-1"
+                        <DrawerMui
                         />
                     </div>
                     <div className="col-2" >
@@ -22,16 +20,9 @@ function OrderTable() {
                             colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
                             name="A-2"
                         />
-
                     </div>
-                    <div className="col-2" >
-                        <div className={styles.borderLeft}>
-                        </div>
-
-                    </div>
-                    <div className="col-2">
-                        <div className={styles.borderRight}>
-                        </div>
+                    <div className="col-4" >
+                       <div className={`${styles.borderLeftRight} `}></div>
                     </div>
                     <div className="col-2">
                         <RectangleTable
@@ -60,7 +51,7 @@ function OrderTable() {
                         />
                     </div>
                     <div className="col-4">
-                        <div className={styles.borderLeftRight}>
+                        <div className={`${styles.borderLeftRight} `}>
                         </div>
                     </div>
                     <div className="col-2">

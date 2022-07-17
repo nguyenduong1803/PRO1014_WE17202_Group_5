@@ -4,7 +4,7 @@ function BannerAnimation() {
   return (
     <div className={`${styles.banner} col-9`}>
     <div className={`${styles.context}`}>
-        <h1>Pure Css Animated Background</h1>
+        <h1>Welcome to Seafood restaurant</h1>
     </div>
     <div className={`${styles.area}`}>
         <ul className={`${styles.circles}`}>
