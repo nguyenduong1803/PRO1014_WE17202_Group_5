@@ -86,9 +86,7 @@
     border-bottom: 32px solid #f3f3f4;
     height: 50%;
 }
-.rightSide .topRight > canvas {
 
-}
 .rightSide .staffRequest {
     background-color: #fff;
     flex: 1;

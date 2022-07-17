@@ -1,26 +1,86 @@
-.row{
-    padding: 20px 40px;
-}
-.col9{
-    background-color:rgb(103, 104, 107);
-    border-radius: 20px;
-    padding: 20px 40px;
-}
-.col3{
-    background-color:aqua;
-}
+
 .products{
     display: flex;
     text-align: center;
 }
 
 .title{
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: 550;
     padding: 20px 0;
     border-bottom: 1px solid rgb(217, 217, 217);
-    margin-bottom: 40px;
 }
 .products img{
     width:300px;
+}
+.detailContent{
+    padding: 20px;
+    width: 100%;
+    display:inline-flex;
+    justify-content:space-between;
+}
+.line{
+    border-bottom: 1px solid rgb(255, 218, 200);
+}
+.container{
+    background-color:rgb(255, 255, 255,0.5);
+    border-radius: 20px;
+    padding: 20px 40px;
+    margin-top: 24px;
+}
+.buttonedit{
+    display:inline-flex;
+    justify-content:space-between;
+    width: 100%;
+
+}
+.button{
+    background-color: #ff5722 !important;
+    border-radius: 20px !important;
+    text-transform: none !important;
+}
+.content{
+    margin-bottom: 30px;
+}
+.img img{
+    width: 50px;
+    height: 50px;
+    border-radius:50%;
+}
+.name {
+    font-size:1rem;
+    padding: 10px 0;
+    font-weight: 550;
+}
+.header{
+    display:inline-flex;
+    width: 100%;
+    justify-content:space-between;
+    padding-bottom: 10px;
+}
+.days{
+    color: #ff5722;
+}
+.col9Title{
+    font-size:.8rem;
+    padding: 10px 0px;
+    font-weight: 500;
+}
+
+.col9Content{
+    font-size: .7rem;
+    line-height:1rem;
+}
+.footer button{
+    margin-top: 10px;
+    padding: 6px 20px;
+    margin-left: 10px;
+}
+.comment{
+    margin-bottom: 20px;
+    color:rgb(138, 138, 138);
+
+}
+.container{
+    margin-bottom: 20px !important;
 }

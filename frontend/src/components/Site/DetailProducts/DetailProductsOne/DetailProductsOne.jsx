@@ -1,91 +1,88 @@
 import React from "react";
 import styles from "./DetailProductsOne.module.css";
-import Box from '@mui/material/Box';
-import Rating from '@mui/material/Rating';
-import AddLocationIcon from '@mui/icons-material/AddLocation';
-import PhoneIcon from '@mui/icons-material/Phone';
+import products1 from "../../../../assets/img/seafood-1.jpg";
 import Button from '@mui/material/Button';
-
-function BasicRating() {
-  const [value, setValue] = React.useState(5);
-
-  return (
-    <>
-    <Box
-      component="span"
-      sx={{
-        '& > legend': { mt: 2 },
-      }}
-    >
-      <Rating
-        name="simple-controlled"
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      />
-
-    </Box>
-    </>
-  );
-}
+const listproductsDetail = [
+  {
+    img: products1,
+    name: "Tôm Càng Xanh",
+    content: "Lorem ipsum",
+  },
+  {
+    img: products1,
+    name: "Tôm Càng Xanh",
+    content: "Lorem ipsum",
+  },
+  {
+    img: products1,
+    name: "Tôm Càng Xanh",
+    content: "Lorem ipsum",
+  },
+  
+];
 function DetailProductsOne() {
   return (
-    <div>
-      <div className= {`${styles.row} row`}>
-        <div className={`${styles.col9} col-lg-7`}>
-          <div className="col-lg-8">
-            <div className={styles.header}>
-              <div className={styles.headerImg}>
-                <img src="https://templates.iqonic.design/aprycot/html/dashboard/dist/assets/images/layouts/29.png" alt="" />
-              </div>
-              <div className={styles.headerName}>
-               <p> A-Z TO PIZA</p>
-               <p className={styles.icon}><BasicRating/></p>
-              </div>
-            </div>
-            <div className={styles.content}>
-              <div className={styles.titleContent}>
-                <div className={styles.title}>
-                  Cafe, Healthy Food, Beverages, Salad, Desserts
-                </div>
-                <div className={styles.date}>9:30 AM -11:30 PM (Today)</div>
-              </div>
-              <div className={styles.nameContent}>
-                <h4>Restro Near Me</h4>
-                <div className={styles.phone}><AddLocationIcon/> 6391 Elgin St. Celina, Delaware 10299</div>
-                <div className={styles.phone}><PhoneIcon/> (480) 555-0103</div>
-              </div>
-              <div className={styles.nameContent}>
-                <h4>Address</h4>
-                <div className={styles.phone}><AddLocationIcon/> 4140 Parker Rd. Allentown, New Mexico 31134</div>
-              </div>
-            </div>
-            <div className={styles.footer}>
-            <Button variant="contained"  className={styles.button}>
-        Check Menu
-    </Button><Button variant="contained"  className={styles.button}>
-        Check Menu
-    </Button><Button variant="contained"  className={styles.button}>
-        Check Menu
-    </Button>
-            </div>
-          </div>
-          <div className={`${styles.col3} col-lg-1`}>
-            <img src="https://templates.iqonic.design/aprycot/html/dashboard/dist/assets/images/layouts/32.png" alt="" />
-          </div>
+    <div className={styles.container}>
+      <h4 className={styles.title}>Product Details</h4>
+      <div className={`${styles.row} row`}>
+        <div className={`${styles.col5} col-lg-5`}>
+          <img
+            src="https://templates.iqonic.design/aprycot/html/dashboard/dist/assets/images/layouts/dish-detail/01.png"
+            alt=""
+          />
         </div>
-        <div className="col-lg-1"></div>
-        <div className={`${styles.col5} col-lg-4`}>
-            <div className={styles.containers}>
-                <h4 className={styles.title}>Gallery</h4>
-                <div className={styles.imgDetail}>
-                <div className={styles.img}><img src="https://templates.iqonic.design/aprycot/html/dashboard/dist/assets/images/layouts/30.png" alt="" /></div>
-                <div className={styles.img}><img src="https://templates.iqonic.design/aprycot/html/dashboard/dist/assets/images/layouts/30.png" alt="" /></div>
-                </div>
-                <div className={styles.img}><img src="https://templates.iqonic.design/aprycot/html/dashboard/dist/assets/images/layouts/31.png" alt="" /></div>
-                                
+        <div className={`${styles.col5} col-lg-7`}>
+          <div className="colums">
+            <h5 className={styles.titleContent}>Veg Burger</h5>
+            <p className={styles.content}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu erat
+              adipiscing convallis libero elit et eros pellentesque. Sapien,
+              fringilla eget egestas eget. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Eu erat adipiscing convallis libero
+              elit et eros pellentesque. Sapien, fringilla eget egestas eget.
+            </p>
+          </div>
+          <div className="colums">
+            <h5 className={styles.titleContent}>Ingredients</h5>
+            <div className="contentIng">
+              {/* <div className={styles.img}>
+            <img src="" alt="" />
             </div>
+            <div className={styles.detail}>
+              <p>Name</p>
+              <p>Content</p>
+            </div> */}
+              <div
+                style={{
+                  width: "100%",
+                  padding: "10px 0px",
+                  display: "flex",
+                  textAlign: "center",
+                }}
+                className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2 g-lg-3"
+              >
+                {listproductsDetail.map((ele, index) => (
+                  <div key={index} style={{ width: "200px",display:'flex' }} className="col-lg-4">
+                    <div className={styles.colImg}>
+                      <img src={ele.img} alt="" />
+                    </div>
+                    <div>
+                      <div className={styles.contents}>
+                        <p>{ele.name}</p>
+                      </div>
+                      <div className={styles.contents}>
+                        <p>{ele.content}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <Button variant="contained"  className={styles.button}>
+        View Of Ingredients
+    </Button>
+          </div>
+          
         </div>
       </div>
     </div>
