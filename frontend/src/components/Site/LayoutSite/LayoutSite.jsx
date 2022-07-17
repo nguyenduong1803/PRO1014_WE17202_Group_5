@@ -12,12 +12,10 @@ import { useSelector } from 'react-redux'
 
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import Footer from '../../../components/Site/FooterContent/Footer';
-function LayoutSite({ children }) {
-
+import BarArrow from '../../../assets/svg/BarArrow'
 
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import Footer from '../../../components/Site/FooterContent/Footer';
-
 
 function LayoutSite({ children }) {
     const load = useSelector(selectLoading)
@@ -54,7 +52,7 @@ const Navbar = () => {
                         onClick={() => { refBar.current.classList.toggle(`${styles.active}`) }}
                     >
                         <span className={styles.icon}
-                        ><BarIcon width="25px" className={styles.barIcon} /></span>
+                        ><BarArrow width="25px" className={styles.barIcon} /></span>
                         <span className={styles.title}>Menu</span>
                     </a>
                 </li>

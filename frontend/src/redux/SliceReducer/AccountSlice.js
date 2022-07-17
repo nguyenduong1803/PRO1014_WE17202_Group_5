@@ -4,12 +4,13 @@ const api = "http://127.0.0.1:8000/api/"
 const AccountSlice = createSlice({
     name: "register",
     initialState: {
-        account: [],
+        account: {},
         status: "idle",
-        isSuccess: false
+        isSuccess: false,
+        mess:{}
     },
     reducers: {
-       
+
     },
     extraReducers: buiders => {
         buiders
@@ -17,23 +18,33 @@ const AccountSlice = createSlice({
                 state.status = "loading"
             })
             .addCase(registerAccounts.fulfilled, (state) => {
-                state.token = "register"
+                state.status = "idle"
+
+            }).addCase(isRegisterSuccess.fulfilled, (state,action)=>{
+                state.mess = action.payload
             })
     }
 })
-export const registerAccounts = createAsyncThunk("auth/registerAccounts", async (payload, action) => {
-    await axios.post(api + "api/auth/register", payload, {
+export const isRegisterSuccess =createAsyncThunk("register/isRegisterSuccess",(payload,action)=>{
+    return payload
+})
+export const registerAccounts = createAsyncThunk("register/registerAccounts", async (payload, action) => {
+    await axios.post(api + "auth/register", payload, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
     }).then((response) => {
         console.log(response)
+        action.dispatch(isRegisterSuccess(response.data.msg))
     }).catch((error) => {
         console.log(error)
+        action.dispatch(isRegisterSuccess(error.response.data[0]))
+
     })
 })
-export const forgotPasswords = createAsyncThunk("auth/forgotPasswords", async (payload, action) => {
-    await axios.post(api + "api/auth/register", payload, {
+
+export const forgotPasswords = createAsyncThunk("register/forgotPasswords", async (payload, action) => {
+    await axios.post(api + "auth/register", payload, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
