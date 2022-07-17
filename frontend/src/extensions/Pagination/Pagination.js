@@ -32,7 +32,7 @@ const Pagination = (props) => {
     onPageChange(currentPage - 1);
   };
 
-  let lastPage = paginationRange[paginationRange.length - 1];
+  let lastPage = paginationRange ?paginationRange[paginationRange?.length - 1] :10;
   return (
     <ul
       className={classnames("pagination-container", { [className]: className })}
@@ -45,7 +45,7 @@ const Pagination = (props) => {
       >
         <div className="arrow left" />
       </li>
-      {paginationRange.map((pageNumber,index) => {
+      {paginationRange?.map((pageNumber,index) => {
         if (pageNumber === DOTS) {
           return <li className="pagination-item dots" key={index}>&#8230;</li>;
         }

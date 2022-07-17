@@ -13,7 +13,7 @@
   right: 0;
   bottom: 0;
   z-index: 20;
-  background-color: rgba(255, 255, 255,0.8);
+  background-color: rgba(255, 255, 255,0.95);
 }
 .loader1 span {
    vertical-align:middle;
@@ -23,8 +23,8 @@
    width:36px;
    height:36px;
    margin:3px 2px;
-   -webkit-animation:loader1 0.7s linear infinite alternate;
-   animation:loader1 0.7s linear infinite alternate;
+   -webkit-animation:loader1 0.6s linear infinite alternate;
+   animation:loader1 0.6s linear infinite alternate;
 }
 .loader1 span:nth-child(1) {
    -webkit-animation-delay:-1s;

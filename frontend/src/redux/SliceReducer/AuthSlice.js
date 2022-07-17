@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
-import { getToken, setTokenSession } from "../../utils/Common"
+import { getToken, removeUserSession, setTokenSession } from "../../utils/Common"
 const api = "http://127.0.0.1:8000/api/"
 // initState: {
 //     username: "",
@@ -22,24 +22,12 @@ const AuthSlice = createSlice({
         isSuccess: getToken() ? true : false
     },
     reducers: {
-        login: (state, action) => {
-            return state
-        },
-        loginSuccess: (state, action) => {
-
-        },
-        loginFailure: (state, action) => {
-
-        },
-        getUser: (state, action) => {
-            return state
-        }
     },
     extraReducers: buiders => {
         buiders
-            .addCase(LoginAuth.pending, (state, action) => {
+            .addCase(LoginAuth.pending, (state) => {
                 state.status = "loading"
-            }).addCase(LoginAuth.fulfilled, (state, action) => {
+            }).addCase(LoginAuth.fulfilled, (state) => {
                 state.status = "idle"
             }).addCase(getUserAuth.fulfilled, (state, action) => {
                 state.status = "idle"
@@ -52,6 +40,13 @@ const AuthSlice = createSlice({
             }).addCase(loginFailure.fulfilled, (state, action) => {
                 state.status = "idle"
                 state.isSuccess = action.payload
+            }).addCase(logOut.pending, (state) => {
+                state.status = "loading"
+            }).addCase(logOut.fulfilled, (state) => {
+                state.status = "idle"
+                state.token = ""
+                state.isSuccess = false
+                state.user = {}
             })
     }
 })
@@ -72,7 +67,6 @@ export const LoginAuth = createAsyncThunk("auth/login", async (payload, action) 
             console.log(err)
             status = err.response.status
             action.dispatch(loginFailure(err.response.status))
-
         })
     return { token, status }
 })
@@ -92,7 +86,6 @@ export const getUserAuth = createAsyncThunk("auth/getUser", async () => {
 })
 const loginSuccess = createAsyncThunk("auth/loginSuccess", async (token) => {
     let user;
-    console.log(token)
     await setTokenSession(token)
     await axios.get(api + "auth/getInfoUser",
         { headers: { "Authorization": `Bearer ${getToken()}` } })
@@ -106,4 +99,25 @@ const loginSuccess = createAsyncThunk("auth/loginSuccess", async (token) => {
 const loginFailure = createAsyncThunk("auth/loginFailure", (err) => {
     return err
 })
+export const logOut = createAsyncThunk("auth/logout", async (payload, action) => {
+    await axios.get(api + "api/auth/logout",
+        { headers: { "Authorization": `Bearer ${action.getState().token}` } })
+        .then(res => {
+            console.log(res)
+        }).catch((error) => {
+            console.log(error)
+        });
+    await removeUserSession()
+})
+
+// {
+//     "ten": "duong test 2",
+//     "dia_chi": "hcm",
+//     "ngay_sinh": "1998-12-22",
+//     "sdt": "0934565787",
+//     "gioi_tinh": 0,
+//     "vai_tro": 0,
+//     "email": "duongtest2@gmail.com",
+//     "mat_khau": "12345678"
+// }
 export default AuthSlice

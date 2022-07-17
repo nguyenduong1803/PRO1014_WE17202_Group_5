@@ -13,6 +13,8 @@ import AddPostDetail from "../pages/Admin/ManagePosts/AddPostDetail/AddPostDetai
 import ProductCategory from "../pages/Admin/ProductCategory/ProductCategory";
 import AddCategory from "../pages/Admin/ProductCategory/AddCategory/AddCategory";
 import EditCategory from "../pages/Admin/ProductCategory/EditCategory/EditCategory";
+import PageNotFound from "../pages/Site/PageNotFound/PageNotFound";
+
 export const routerAdmin =[
     {
         component :Dashboard,
@@ -75,5 +77,9 @@ export const routerAdmin =[
     {
         component :Article,
         path:"thong-tin-bai-viet",
+    },
+    {
+        component :PageNotFound,
+        path:"*",
     },
 ]

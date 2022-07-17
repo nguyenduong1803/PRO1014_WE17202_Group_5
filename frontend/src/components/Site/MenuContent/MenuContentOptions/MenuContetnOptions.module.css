@@ -4,6 +4,7 @@
     z-index: 1;
     border-top-left-radius: 20px;
 }
+
 .accordionItem{
     border: 2px solid #fff;
     padding: 20px;
@@ -37,10 +38,7 @@
 }
 .accordTitle{
     background-color:none !important;
-    display:inline-flex;
+    display:flex;
     width: 100%;
     justify-content:space-between;
-}
-.icon{
-    margin-left: 100px;
 }

@@ -44,7 +44,7 @@ const product=[
 function MenuContent() {
   return (
     <LayoutSite>
-        <div className='row'>
+        <div className='row position-relative' >
         <div className='col-lg-3'>
             <MenuContentOptions/>
         </div>

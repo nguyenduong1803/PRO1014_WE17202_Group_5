@@ -11,8 +11,8 @@ function App() {
       <Provider store={store}>
         <AuthenProvider>
           <Switch>
-            <Route path="/admin/*" component={AdminLayout} />
-            <Route path="/*" component={SiteLayout} />
+            <Route exact path="/admin/*" component={AdminLayout} />
+            <Route exact path="/*" component={SiteLayout} />
           </Switch>
         </AuthenProvider>
       </Provider>

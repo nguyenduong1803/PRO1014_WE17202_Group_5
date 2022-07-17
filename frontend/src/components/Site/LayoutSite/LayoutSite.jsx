@@ -5,14 +5,21 @@ import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
 import BarIcon from "../../../assets/svg/BarIcon"
 
+import { selectLoading } from "../../../redux/selector"
+import Loadings from "../../../components/Site/Loadings/Loadings"
+import { useSelector } from 'react-redux'
+
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import Footer from '../../../components/Site/FooterContent/Footer';
 
+import BarArrow from '../../../assets/svg/BarArrow'
+
 
 function LayoutSite({ children }) {
-  
+    const load = useSelector(selectLoading)
     return (
         <>
+            {load === "loading" ? <Loadings /> : ""}
             <Navbar />
             <Header />
             <main className={styles.main}>
@@ -21,9 +28,9 @@ function LayoutSite({ children }) {
                     <img className={styles.overlayImg} src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-02.webp" alt="" />
                     {/* <Line /> */}
                 </div>
-                {children}
+                <div className="position-relative" style={{ zIndex: 2 }}>{children}</div>
             </main>
-            <Footer/>
+            <Footer />
 
         </>
 
@@ -43,7 +50,7 @@ const Navbar = () => {
                         onClick={() => { refBar.current.classList.toggle(`${styles.active}`) }}
                     >
                         <span className={styles.icon}
-                        ><BarIcon width="25px" className={styles.barIcon} /></span>
+                        ><BarArrow width="25px" className={styles.barIcon} /></span>
                         <span className={styles.title}>Menu</span>
                     </a>
                 </li>

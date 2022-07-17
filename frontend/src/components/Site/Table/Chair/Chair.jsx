@@ -1,28 +1,29 @@
 import React from 'react'
 import styles from './Chair.module.css'
-function Chair({ position }) {
+function Chair({ position, cordinate, left, right = false }) {
     let styleChair
 
     if (position === "top") {
         styleChair = {
-            top: "-44px",
-            transform: "rotate(180deg)"
+            top: cordinate,
+            transform: `rotate(180deg) ${right? "translateX(130%)":""} ${left? "translateX(-135%)":""}`
         }
     } else if (position === "bottom") {
         styleChair = {
-            bottom: "-44px",
+            bottom: cordinate,
+            transform: `${right? "translateX(130%)":""} ${left? "translateX(-135%)":""}`
         }
     } else if (position === "left") {
         styleChair = {
-            left: "-54px",
+            left: cordinate,
             top: "50%",
-            transform: "rotate(90deg) translateX(-50%)"
+            transform: "rotate(90deg) translateX(-60%)"
         }
     } else if (position === "right") {
         styleChair = {
-            right: "-54px",
-            top:"50%",
-            transform: "rotate(-90deg) translateX(47%)"
+            right: cordinate,
+            top: "50%",
+            transform: "rotate(-90deg) translateX(60%)"
         }
     }
     return (
