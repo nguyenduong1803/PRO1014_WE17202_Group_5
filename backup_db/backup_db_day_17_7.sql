@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2022 at 07:25 PM
+-- Generation Time: Jul 17, 2022 at 11:03 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -24,6 +24,66 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `code_sale`
+--
+
+CREATE TABLE `code_sale` (
+  `id` int(11) NOT NULL,
+  `code` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expired_at` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NULL DEFAULT NULL,
+  `delete_at` timestamp NULL DEFAULT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `is_delete` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `directory`
+--
+
+CREATE TABLE `directory` (
+  `id` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `id_material` int(11) NOT NULL COMMENT 'Id của bảng vật liệu',
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `emotions`
+--
+
+CREATE TABLE `emotions` (
+  `id` int(11) NOT NULL,
+  `value` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `cancel_at` timestamp NULL DEFAULT NULL,
+  `is_delete` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `gender`
 --
 
@@ -39,6 +99,33 @@ CREATE TABLE `gender` (
 INSERT INTO `gender` (`id`, `name`) VALUES
 (1, 'Nam'),
 (2, 'Nữ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images_product`
+--
+
+CREATE TABLE `images_product` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `id_product_img` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_at` timestamp NULL DEFAULT NULL,
+  `is_delete` int(11) NOT NULL DEFAULT 1,
+  `delete_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `images_product`
+--
+
+INSERT INTO `images_product` (`id`, `id_user`, `id_product_img`, `path`, `create_at`, `update_at`, `is_delete`, `delete_at`) VALUES
+(7, NULL, 'MQM1BKFTZ8', 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1658048083/product/obv3uj7oqe5comymhibq.jpg', '2022-07-17 08:54:44', NULL, 1, NULL),
+(8, NULL, 'MQM1BKFTZ8', 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1658048085/product/vc2ukxjdp4fiqxdsefen.jpg', '2022-07-17 08:54:46', NULL, 1, NULL),
+(9, NULL, 'MLRAFIRJ0Q', 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1658048504/product/qoewndtz2wdcqpsqprbb.jpg', '2022-07-17 09:01:46', NULL, 1, NULL),
+(10, NULL, 'MLRAFIRJ0Q', 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1658048506/product/p6mig9c53gsp84alhqqd.jpg', '2022-07-17 09:01:48', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -75,6 +162,7 @@ INSERT INTO `oauth_access_tokens` (`id`, `user_id`, `client_id`, `name`, `scopes
 ('5e0c781745c64915c193c1be346d06fa5203e55514c809fda560a98d3c590ffdf505cfb94cb6946f', 4, 1, 'duonglt', '[]', 0, '2022-07-12 08:46:55', '2022-07-12 08:46:55', '2023-07-12 15:46:55'),
 ('72526b6c35bd7fb45268db0dfd5bf5985a3cc6f31c4ad48ec2b04a122bec6f1d283de449407273bb', 5, 1, 'duonglt', '[]', 0, '2022-07-13 18:23:14', '2022-07-13 18:23:14', '2023-07-14 01:23:14'),
 ('8a0aff81bb1036702e1e79cc8a8e40ffe776876582c063635f97dbad76939fa74f3a26c5c0a78bc6', 4, 1, 'duonglt', '[]', 1, '2022-07-12 09:21:57', '2022-07-12 09:21:57', '2023-07-12 16:21:57'),
+('9ee187fe6b1efd21d0ab409a91f1bd007694c43f551da4dba31bbcb6a19d6c1abf274843551e02ec', 5, 1, 'duonglt', '[]', 0, '2022-07-16 09:28:17', '2022-07-16 09:28:17', '2023-07-16 16:28:17'),
 ('a1071ce532e910bf285e2e78de5138139ed990f6c7c1189a1f7e26e2d392a2007dc070bc0bc6db95', NULL, 1, 'duonglt', '[]', 0, '2022-07-11 12:42:00', '2022-07-11 12:42:00', '2023-07-11 19:42:00'),
 ('a7ef5bd360fddfe0231a4a728879cb423e29319844aefb305dfca3ebcb0546f0c97aac560ac9171d', 4, 1, 'duonglt', '[]', 1, '2022-07-12 09:15:27', '2022-07-12 09:15:27', '2023-07-12 16:15:27'),
 ('b4f4609c38847b0d722fa5050f321a1822d15b0b5a6d1e00ca080a8fdf2ef97f296ebe1437f8837d', 4, 1, 'duonglt', '[]', 0, '2022-07-12 09:03:22', '2022-07-12 09:03:22', '2023-07-12 16:03:22'),
@@ -142,17 +230,42 @@ INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `u
 
 CREATE TABLE `product` (
   `id` int(11) NOT NULL,
-  `ten` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ma_danh_muc` int(11) NOT NULL,
-  `gia_tien` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_directory` int(11) DEFAULT NULL,
+  `short_desscription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_code_sale` int(11) DEFAULT NULL COMMENT 'Mã giảm giá',
   `is_status_product` int(11) NOT NULL DEFAULT 1,
-  `id_user` int(11) NOT NULL,
-  `id_cart` int(11) NOT NULL,
-  `time_complete` datetime DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `id_cart` int(11) DEFAULT NULL,
+  `full_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Mô tả sản phẩm (ckeditor/text)',
+  `time_complete` datetime DEFAULT NULL COMMENT 'Thời gian hoàn thành',
+  `id_img` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_at` timestamp NULL DEFAULT NULL,
   `delete_at` timestamp NULL DEFAULT NULL,
   `is_delete` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `name`, `id_directory`, `short_desscription`, `price`, `id_code_sale`, `is_status_product`, `id_user`, `id_cart`, `full_description`, `time_complete`, `id_img`, `create_at`, `update_at`, `delete_at`, `is_delete`) VALUES
+(1, 'San pham test', NULL, 'san pham so 1 viet nam test 1', '4424244', NULL, 1, NULL, NULL, NULL, NULL, 'MQM1BKFTZ8', '2022-07-17 08:54:46', NULL, NULL, 1),
+(2, 'San pham test', NULL, 'san pham so 1 viet nam test 1', '4424244', NULL, 1, NULL, NULL, NULL, NULL, 'MLRAFIRJ0Q', '2022-07-17 09:01:48', NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rates`
+--
+
+CREATE TABLE `rates` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `num` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -197,6 +310,25 @@ INSERT INTO `status_delete` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `status_emotions`
+--
+
+CREATE TABLE `status_emotions` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `status_emotions`
+--
+
+INSERT INTO `status_emotions` (`id`, `name`) VALUES
+(1, 'Thích'),
+(2, 'Không thích');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `status_product`
 --
 
@@ -232,6 +364,7 @@ CREATE TABLE `users` (
   `vai_tro` int(1) NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `delete_at` int(11) DEFAULT NULL,
+  `is_delete` int(11) DEFAULT 1,
   `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token_verify` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Token dùng để verify khi user quên mật khẩu ...',
   `img` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
@@ -241,26 +374,66 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `ten`, `mat_khau`, `dia_chi`, `ngay_sinh`, `sdt`, `gioi_tinh`, `luong`, `ma_hd`, `vai_tro`, `create_at`, `delete_at`, `email`, `token_verify`, `img`) VALUES
-(1, 'duong test 2', '$2y$10$3A/7BjM8euQ4StBkE.7LeOdUQcPRbQGEL16b.5/mAOk57GBsZXlsW', 'hcm', '1998-12-22', '0934565787', 1, NULL, NULL, 2, '2022-07-11 18:27:59', NULL, 'duongtest3@gmail.com', NULL, NULL),
-(2, 'duong test 4', '$2y$10$cfzKzK0JJWv0Nxg1hbkaLu5Bb15tsgO76Pbkz3KW3fj39ZniMcyyW', 'hcm 2', '1998-12-22', '0934555767', 2, NULL, NULL, 3, '2022-07-11 18:49:14', NULL, 'duongtest4@gmail.com', NULL, NULL),
-(3, 'duong test 5', '$2y$10$4bcaUqnJ5XJXlGhlVHhPLOwMXr9/Qi9GMw69vKmPVpYcmYx2EpxGe', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-12 00:35:04', NULL, 'duongtest5@gmail.com', NULL, NULL),
-(4, 'duong test 6', '$2y$10$ti3mDKaWx1Bc1lWMVjR0n.pj0ryw56Zptwz8phSD646Ak8Rt5VCoC', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-12 00:56:11', NULL, 'duongtest6@gmail.com', NULL, NULL),
-(5, 'duong dep zai', '$2y$10$RwDl2GP7bl9CI6f2i70ZPe5uC0RFL0B0mLWRCgjggr.Jvg1PX14Qy', 'viet nam 1', '2000-03-28', '0934565888', 1, NULL, NULL, 1, '2022-07-12 17:58:21', NULL, 'duongltph19040@fpt.edu.vn', '1SN35Z8GL6', NULL),
-(6, 'duong test 8', '$2y$10$r3nrJW9.zM3FSHvbUpE4Pu68ydpfBef8dFmCsY2u.XaJGzhfvGxkm', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-15 16:23:17', NULL, 'duongtest8@gmail.com', NULL, NULL),
-(7, 'duong test 9', '$2y$10$cJ3IbQLpwbZxnW72DJULS.WioIc6Jm8U.eAUnVfXbaG37Hix5ZbxC', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-15 16:32:42', NULL, 'duongtest9@gmail.com', NULL, 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1657902759/mgjj5dsngk6uw9lbmzp8.png'),
-(8, 'duong test 10', '$2y$10$w4u.qBNqdQSX1GgIYKuhK.GuZBnHFnK6h1a3OnZSZE4CJQvsaj03u', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-15 16:33:34', NULL, 'duongtest10@gmail.com', NULL, 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1657902811/wnfwjg8y9gdsockxmtvb.jpg'),
-(9, 'duong test 11', '$2y$10$QYpHe0douZQ/HXtkPuLyPOXcbhVSUeUtsZsnnAFM/la6pRNGIu2bm', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-15 16:35:50', NULL, 'duongtest11@gmail.com', NULL, 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1657902947/avatar/mtmt3hgi1aw628hbljv0.png');
+INSERT INTO `users` (`id`, `ten`, `mat_khau`, `dia_chi`, `ngay_sinh`, `sdt`, `gioi_tinh`, `luong`, `ma_hd`, `vai_tro`, `create_at`, `delete_at`, `is_delete`, `email`, `token_verify`, `img`) VALUES
+(1, 'duong test 2', '$2y$10$3A/7BjM8euQ4StBkE.7LeOdUQcPRbQGEL16b.5/mAOk57GBsZXlsW', 'hcm', '1998-12-22', '0934565787', 1, NULL, NULL, 2, '2022-07-11 18:27:59', NULL, 1, 'duongtest3@gmail.com', NULL, NULL),
+(2, 'duong test 4', '$2y$10$cfzKzK0JJWv0Nxg1hbkaLu5Bb15tsgO76Pbkz3KW3fj39ZniMcyyW', 'hcm 2', '1998-12-22', '0934555767', 2, NULL, NULL, 3, '2022-07-11 18:49:14', NULL, 1, 'duongtest4@gmail.com', NULL, NULL),
+(3, 'duong test 5', '$2y$10$4bcaUqnJ5XJXlGhlVHhPLOwMXr9/Qi9GMw69vKmPVpYcmYx2EpxGe', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-12 00:35:04', NULL, 1, 'duongtest5@gmail.com', NULL, NULL),
+(4, 'duong test 6', '$2y$10$ti3mDKaWx1Bc1lWMVjR0n.pj0ryw56Zptwz8phSD646Ak8Rt5VCoC', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-12 00:56:11', NULL, 1, 'duongtest6@gmail.com', NULL, NULL),
+(5, 'duong dep zai', '$2y$10$RwDl2GP7bl9CI6f2i70ZPe5uC0RFL0B0mLWRCgjggr.Jvg1PX14Qy', 'viet nam 1', '2000-03-28', '0934565888', 1, NULL, NULL, 1, '2022-07-12 17:58:21', NULL, 1, 'duongltph19040@fpt.edu.vn', '1SN35Z8GL6', NULL),
+(6, 'duong test 8', '$2y$10$r3nrJW9.zM3FSHvbUpE4Pu68ydpfBef8dFmCsY2u.XaJGzhfvGxkm', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-15 16:23:17', NULL, 1, 'duongtest8@gmail.com', NULL, NULL),
+(7, 'duong test 9', '$2y$10$cJ3IbQLpwbZxnW72DJULS.WioIc6Jm8U.eAUnVfXbaG37Hix5ZbxC', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-15 16:32:42', NULL, 1, 'duongtest9@gmail.com', NULL, 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1657902759/mgjj5dsngk6uw9lbmzp8.png'),
+(8, 'duong test 10', '$2y$10$w4u.qBNqdQSX1GgIYKuhK.GuZBnHFnK6h1a3OnZSZE4CJQvsaj03u', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-15 16:33:34', NULL, 1, 'duongtest10@gmail.com', NULL, 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1657902811/wnfwjg8y9gdsockxmtvb.jpg'),
+(9, 'duong test 11', '$2y$10$QYpHe0douZQ/HXtkPuLyPOXcbhVSUeUtsZsnnAFM/la6pRNGIu2bm', 'yen lang, hn', '2000-08-22', '0934565787', 1, NULL, NULL, 1, '2022-07-15 16:35:50', NULL, 1, 'duongtest11@gmail.com', NULL, 'https://res.cloudinary.com/dlvtzpxce/image/upload/v1657902947/avatar/mtmt3hgi1aw628hbljv0.png');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `code_sale`
+--
+ALTER TABLE `code_sale`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_PRODUCT_COMMENTS` (`id_product`),
+  ADD KEY `FK_USER_COMMENTS` (`id_user`),
+  ADD KEY `FK_STATUS_DELETE_COMMENT` (`is_delete`);
+
+--
+-- Indexes for table `directory`
+--
+ALTER TABLE `directory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `emotions`
+--
+ALTER TABLE `emotions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_EMTIONS` (`value`),
+  ADD KEY `FK_EMTIONS_USER` (`id_user`),
+  ADD KEY `FK_EMTIONS_PRODUCT` (`id_product`),
+  ADD KEY `FK_EMOTIONS_STATUS_DELETE` (`is_delete`);
+
+--
 -- Indexes for table `gender`
 --
 ALTER TABLE `gender`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `images_product`
+--
+ALTER TABLE `images_product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_IMAGES_USER` (`id_user`),
+  ADD KEY `FK_IMAGES_STATUS_DELETE` (`is_delete`),
+  ADD KEY `FK_IMG_PRODUCT` (`id_product_img`);
 
 --
 -- Indexes for table `oauth_access_tokens`
@@ -289,7 +462,18 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_USER` (`id_user`),
   ADD KEY `FK_STATUS_DELETE` (`is_delete`),
-  ADD KEY `FK_STATUS_PRODUCT` (`is_status_product`);
+  ADD KEY `FK_STATUS_PRODUCT` (`is_status_product`),
+  ADD KEY `FK_PRODUCT_CODE_SALE` (`id_code_sale`),
+  ADD KEY `FK_PRODUCT_DIRECTORY` (`id_directory`),
+  ADD KEY `FK_IMG_PRODUCT` (`id_img`);
+
+--
+-- Indexes for table `rates`
+--
+ALTER TABLE `rates`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_RATE_PRODUCT` (`id_product`),
+  ADD KEY `FK_RATE_USER` (`id_user`);
 
 --
 -- Indexes for table `roles`
@@ -315,17 +499,42 @@ ALTER TABLE `status_product`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_Gender` (`gioi_tinh`),
-  ADD KEY `FK_Role` (`vai_tro`);
+  ADD KEY `FK_Role` (`vai_tro`),
+  ADD KEY `FK_STATUS_DELETE_USER_1` (`is_delete`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `code_sale`
+--
+ALTER TABLE `code_sale`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `emotions`
+--
+ALTER TABLE `emotions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `gender`
 --
 ALTER TABLE `gender`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `images_product`
+--
+ALTER TABLE `images_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -343,6 +552,12 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `rates`
+--
+ALTER TABLE `rates`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -356,19 +571,54 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `FK_PRODUCT_COMMENTS` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `FK_STATUS_DELETE_COMMENT` FOREIGN KEY (`is_delete`) REFERENCES `status_delete` (`id`),
+  ADD CONSTRAINT `FK_USER_COMMENTS` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `emotions`
+--
+ALTER TABLE `emotions`
+  ADD CONSTRAINT `FK_EMOTIONS_STATUS_DELETE` FOREIGN KEY (`is_delete`) REFERENCES `status_delete` (`id`),
+  ADD CONSTRAINT `FK_EMTIONS` FOREIGN KEY (`value`) REFERENCES `emotions` (`id`),
+  ADD CONSTRAINT `FK_EMTIONS_PRODUCT` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `FK_EMTIONS_USER` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `images_product`
+--
+ALTER TABLE `images_product`
+  ADD CONSTRAINT `FK_IMAGES_STATUS_DELETE` FOREIGN KEY (`is_delete`) REFERENCES `status_delete` (`id`),
+  ADD CONSTRAINT `FK_IMAGES_USER` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
+  ADD CONSTRAINT `FK_IMG_PRODUCT` FOREIGN KEY (`id_img`) REFERENCES `images_product` (`id_product_img`),
+  ADD CONSTRAINT `FK_PRODUCT_CODE_SALE` FOREIGN KEY (`id_code_sale`) REFERENCES `code_sale` (`id`),
+  ADD CONSTRAINT `FK_PRODUCT_DIRECTORY` FOREIGN KEY (`id_directory`) REFERENCES `directory` (`id`),
   ADD CONSTRAINT `FK_STATUS_DELETE` FOREIGN KEY (`is_delete`) REFERENCES `status_delete` (`id`),
   ADD CONSTRAINT `FK_STATUS_PRODUCT` FOREIGN KEY (`is_status_product`) REFERENCES `status_product` (`id`),
   ADD CONSTRAINT `FK_USER` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `rates`
+--
+ALTER TABLE `rates`
+  ADD CONSTRAINT `FK_RATE_PRODUCT` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `FK_RATE_USER` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `FK_Gender` FOREIGN KEY (`gioi_tinh`) REFERENCES `gender` (`id`),
-  ADD CONSTRAINT `FK_Role` FOREIGN KEY (`vai_tro`) REFERENCES `roles` (`id`);
+  ADD CONSTRAINT `FK_Role` FOREIGN KEY (`vai_tro`) REFERENCES `roles` (`id`),
+  ADD CONSTRAINT `FK_STATUS_DELETE_USER_1` FOREIGN KEY (`is_delete`) REFERENCES `status_delete` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
