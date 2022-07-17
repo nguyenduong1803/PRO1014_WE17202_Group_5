@@ -15,30 +15,49 @@ const categories = [
   {
     name: "Hoa quả sạch",
     img: cat1,
-    to: "/"
+    to: "/",
+    ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
+    price: "$14",
+    content:
+      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually .",
   },
   {
-    name: "Hoa quả sấy",
-    img: cat2,
-    to: "/"
+    name: "Hoa quả sạch",
+    img: cat1,
+    to: "/",
+    ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
+    price: "$14",
+    content:
+      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually.",
   },
   {
-    name: "Rau củ quả",
-    img: cat3,
-    to: "/"
+    name: "Hoa quả sạch",
+    img: cat1,
+    to: "/",
+    ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
+    price: "$14",
+    content:
+      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually.",
   },
   {
-    name: "Nước trái cây",
-    img: cat4,
-    to: "/"
+    name: "Hoa quả sạch",
+    img: cat1,
+    to: "/",
+    ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
+    price: "$14",
+    content:
+      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually.",
   },
   {
-    name: "Thịt sạch",
-    img: cat5,
-    to: "/"
+    name: "Hoa quả sạch",
+    img: cat1,
+    to: "/",
+    ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
+    price: "$14",
+    content:
+      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually.",
   },
-
-]
+];
 function Categories() {
   const renderNextButton = ({ isDisabled }) => {
     return (
@@ -77,7 +96,6 @@ function Categories() {
           renderPrevButton={renderPrevButton}
           renderNextButton={renderNextButton}
         />
-
       </div>
     </div>
   );
@@ -89,21 +107,63 @@ const itemsSlide = categories.map((cate, index) => (
     name={cate.name}
     img={cate.img}
     to={cate.to}
+    content={cate.content}
+    ingredient={cate.ingredient}
+    price={cate.price}
   />
-))
+));
 
-function CategoryItem({ img, name, to }) {
+function CategoryItem({ img, name, to ,content,price,ingredient}) {
   return (
-    <>
-      <div className="col">
-        <div className={styles.categories__item}>
-          <img src={img} alt="danhmuc"/>
-          <h5>
-            <Link to={to}>{name}</Link>
-          </h5>
-        </div>
-      </div>,
-    </>
-  )
+    // <div class={styles.containers}>
+    //   <div className={styles.categories__item}>
+    //     <img src={img} alt="danhmuc" />
+    //     <div className={styles.contentBox}>
+    //       <h4>
+    //         <Link to={to} className={styles.name}>
+    //           {name}
+    //         </Link>
+    //       </h4>
+    //       <p>{content}</p>
+    //       <p>{ingredient}</p>
+    //       <div className={styles.btn}>
+    //         <h2 className={styles.price}>{price}</h2>
+    //         <a href="#">Order Now</a>
+    //       </div>
+    //     </div>
+    //   </div>
+      
+    // </div>
+    <div className={styles.containers}>
+    {/* <img src={img}/> */}
+    <img src="https://firebasestorage.googleapis.com/v0/b/cajaregistradora-776cc.appspot.com/o/pngwing.com(2).png?alt=media&token=bde13cf8-4b17-4da9-90cf-c16db83b2e1f" alt="" />
+    <div className={styles.contentBox}>
+      <h4 className={styles.name}>{name}</h4>
+      <p>{content}</p>
+      <p>{ingredient}</p>
+      <div className={styles.btn}>
+        <h2 className={styles.price}>{price}</h2>
+        <a href="#">Order Now</a>
+      </div>
+    </div>
+  </div>
+  );
+}
+{
+  /* <div class="container">
+  <img src="https://firebasestorage.googleapis.com/v0/b/cajaregistradora-776cc.appspot.com/o/pngwing.com(2).png?alt=media&token=bde13cf8-4b17-4da9-90cf-c16db83b2e1f" />
+  <div class="content-box">
+    <h4 class="name">Veggie Burguer</h4>
+    <p>
+      A burguer typically considered a sandwich, consisting of one or more
+      cooked patties-usually placed inside a sliced bread roll or bun
+    </p>
+    <p>Onion, Lettuce, Tomatoe, Patty, Cheese</p>
+    <div class="btn">
+      <h2 class="price">$ 5</h2>
+      <a href="#">Order Now</a>
+    </div>
+  </div>
+</div>; */
 }
 export default Categories;

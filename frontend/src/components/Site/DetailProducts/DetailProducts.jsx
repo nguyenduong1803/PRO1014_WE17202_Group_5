@@ -14,5 +14,4 @@ function DetailProducts() {
     </LayoutSite>
   );
 }
-
 export default DetailProducts;
