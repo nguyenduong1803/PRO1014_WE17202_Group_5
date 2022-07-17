@@ -3,33 +3,40 @@ import styles from './Register.module.css'
 import FBImg from '../../../assets/images/social-icons/FBImg.png'
 import GmailImg from '../../../assets/images/social-icons/GmailImg.png'
 import logoMau from "../../../assets/img/logoSea.png"
-import {useDispatch} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom";
 import Calendar from '../Calendar/Calendar'
 import { InputPassword, InputTextField } from './InputMui'
 import UploadImage from './UploadImage'
 import BannerAnimation from './BannerAnimation'
 import { registerAccounts } from '../../../redux/SliceReducer/AccountSlice'
+import Loadings from '../Loadings/Loadings'
+import { selectIsuccess, selectLoadingRegister } from '../../../redux/selector'
 
 
 function ContentRegister() {
+    const load = useSelector(selectLoadingRegister)
+
     return (
-        <div className={`${styles.main} d-flex`}>
-            <div className={`${styles.sideBar}`}>
-                <div className={`${styles.signUp}`}>
-                    <Link to="/" className={`${styles.logo}`}>
-                        <img src={logoMau} alt="" />
-                    </Link>
-                    <h4 className={`${styles.title}`}>Đăng ký tài khoản</h4>
-                    <FormRegister />
+        <>
+            {load === "loading" ? <Loadings /> : ""}
+            <div className={`${styles.main} d-flex`}>
+                <div className={`${styles.sideBar}`}>
+                    <div className={`${styles.signUp}`}>
+                        <Link to="/" className={`${styles.logo}`}>
+                            <img src={logoMau} alt="" />
+                        </Link>
+                        <h4 className={`${styles.title}`}>Đăng ký tài khoản</h4>
+                        <FormRegister />
+                    </div>
                 </div>
+                <BannerAnimation />
             </div>
-            <BannerAnimation />
-        </div>
+        </>
     )
 }
 const FormRegister = () => {
-    const dispatch= useDispatch()
+    const dispatch = useDispatch()
     const [password, setPassword] = useState({
         amount: '',
         password: '',
@@ -48,18 +55,17 @@ const FormRegister = () => {
     })
 
     const { email, name, dob, address, phone, gender, image } = input
-    console.log(dob.getFullYear(), dob.getMonth() + 1, dob.getDate())
     const ngaySinh = `${dob.getFullYear()}-${dob.getMonth() + 1}-${dob.getDate()}`
-
     const formRegister = new FormData();
     formRegister.append("ten", name)
     formRegister.append("email", email)
     formRegister.append("ngay_sinh", ngaySinh)
     formRegister.append("dia_chi", address)
     formRegister.append("sdt", phone)
-    formRegister.append("vai_tro", 0)
+    formRegister.append("vai_tro", 1)
     formRegister.append("gioi_tinh", 1)
     formRegister.append("mat_khau", password.password)
+    formRegister.append("file", image)
     const handleChangeInputRadio = (e, inputType) => {
         setInput(prev => {
             prev.gender = e.target.value
@@ -69,19 +75,27 @@ const FormRegister = () => {
     const handleRegister = (e) => {
         e.preventDefault()
         dispatch(registerAccounts(formRegister))
+        // setInput({
+        //     email: '',
+        //     name: '',
+        //     dob: new Date('2000-08-18'),
+        //     address: '',
+        //     phone: '',
+        //     gender: '',
+        //     image: ''
+        // })
+        // setPassword({
+        //     amount: '',
+        //     password: '',
+        //     weight: '',
+        //     weightRange: '',
+        //     showPassword: false,
+        // })
     }
-
-    // {
-    //     "ten": "duong test 2",
-    //     "dia_chi": "hcm",
-    //     "ngay_sinh": "1998-12-22",
-    //     "sdt": "0934565787",
-    //     "gioi_tinh": 0,
-    //     "vai_tro": 0,
-    //     "email": "duongtest2@gmail.com",
-    //     "mat_khau": "12345678"
-    // }
+    const isSuccess = useSelector(selectIsuccess)
+    console.log(isSuccess)
     return (
+
         <form className={`${styles.form}`} >
             <div className="d-flex m-3" style={{ gap: "1rem" }}>
                 <div>
@@ -148,6 +162,7 @@ const FormRegister = () => {
                     </Link>
                 </p>
             </div>
+            <p>{isSuccess ? "đang nhập thành công" : "đang nhập thất bại"}</p>
         </form>
     )
 }

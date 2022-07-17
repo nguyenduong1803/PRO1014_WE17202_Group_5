@@ -18,7 +18,7 @@ function UploadImage({ setInput, inputType, value }) {
     return (
         <>
             {
-                file ? <Avatar
+                value ? <Avatar
                     alt="Remy Sharp"
                     src={file}
                     sx={{ width: 66, height: 66,border:"1px solid #ccc" }}

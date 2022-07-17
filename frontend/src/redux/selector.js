@@ -20,6 +20,9 @@ export const selectUser = (state) => state.AuthSlice.user
 export const isSuccess = (state) => state.AuthSlice.isSuccess
 export const token = (state) => state.AuthSlice.token
 export const selectLoading = (state) => state.AuthSlice.status
+// register
+export const selectLoadingRegister = (state) => state.AccountSlice.status
+export const selectIsuccess = (state) => state.AccountSlice.mess
 
 export const remainingSelector = createSelector(selectUser, isSuccess, selectLoading,
     (user, success, loading) => {

@@ -28,7 +28,7 @@ function BasicRating() {
 }
 function Product({ img, title, price }) {
   return (
-    <div className=' col-lg-4'>
+    <div className=' col-lg-3'>
       <div className={styles.product} style={{ transition: '.6s' }}>
         <img src={img} alt="" />
         <h4 className={styles.title}>{title}</h4>
