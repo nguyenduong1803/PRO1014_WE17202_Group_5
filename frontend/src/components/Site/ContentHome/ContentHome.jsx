@@ -15,6 +15,8 @@ import MyCart from "../../Site/ContentHome/ContentHomeRight/MyCart/MyCart";
 // import product6 from "../../../../src/assets/img/seafood-10.jpg";
 // import product7 from "../../../../src/assets/img/seafood-10.jpg";
 // import product8 from "../../../../src/assets/img/seafood-10.jpg";
+import Slider from './Slider/Slider';
+import ButtonCart from './ButtonCart/ButtonCart';
 const mycart = [
   {
     img: product1,
@@ -112,6 +114,7 @@ function ContentHome() {
               );
             })}
           </div>
+          <ButtonCart/>
           <div
             className="justify-content-between d-flex align-items-center "
             style={{ padding: "10px 0" }}
@@ -176,7 +179,12 @@ function ContentHome() {
             </div>
             </div>
           </div>
+          
         </div>
+      </div>
+      <div className="container">
+        <Slider/>
+       
       </div>
     </div>
   );

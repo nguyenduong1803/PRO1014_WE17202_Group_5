@@ -7,6 +7,10 @@
     font-size: .8rem;
     position: relative;
 }
+.member:hover{
+    cursor: pointer !important;
+
+}
 .member h4{
     font-weight: bold;
     text-align: center;
@@ -23,7 +27,9 @@
     border: 1px solid #EA6A12;
 }
 .info button:hover{
-    border: 1px solid #EA6A12;
+    color: #0b0b0b;
+
+    border: 1px solid #0b0b0b;
 }
 .contacts{
     color:#EA6A12;

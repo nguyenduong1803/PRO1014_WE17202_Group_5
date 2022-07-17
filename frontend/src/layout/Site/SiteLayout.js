@@ -10,11 +10,15 @@ import OrderTable from "../../pages/Site/OrderTable/OrderTable";
 import Map from "../../pages/Site/Map/Map";
 import Orders from "../../pages/Site/Order/Order";
 
+import Menu from '../../pages/Site/Menu/Menu';
 import OrderDetail from '../../pages/Site/OrderDetail/OrderDetail';
-
 import Login from "../../pages/Site/Login/Login"
 import Register from "../../pages/Site/Register/Register";
+import DetailProduct from "../../pages/Site/DetailProducts/DetailProducts";
+
+
 import PageNotFound from "../../pages/Site/PageNotFound/PageNotFound";
+
 const routerSite = [
   { path: "/", component: Home, },
   { path: "/dang-nhap", component: Login, },
@@ -28,7 +32,10 @@ const routerSite = [
   { path: "/map", component: Map, },
 
   { path: "/chi-tiet-hoa-don", component: OrderDetail , },
+  { path: "/chi-tiet-don-hang", component: DetailProduct , },
   
+
+]
 
 function SiteLayout() {
   return (
