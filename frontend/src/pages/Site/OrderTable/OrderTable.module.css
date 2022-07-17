@@ -23,4 +23,7 @@
     height: 100%;
     border-bottom: 1px solid var(--borderColor);
 }
+.background{
+    background-color: rgb(228, 180, 180) !important;
+}
 

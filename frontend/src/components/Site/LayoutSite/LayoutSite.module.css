@@ -23,15 +23,33 @@ body {
 }
 
 .overlayImg {
+  position: absolute;
   display: flex;
-  height: 100%;
-  width: 100%;
+  height: 100vw;
+  width: 100vw;
   justify-content: center;
   margin: 0 auto;
   opacity: 0.5;
   animation: rotation 10s infinite linear;
 }
+.bgrLine{
+  top: 200px;
+  position: relative;
+  z-index: 1;
+  width: 120%;
+  left: -20px;
+}
+.overlayQ{
+  display: flex;
 
+  width: 100vw;
+  height: 400px;
+  position: relative;
+  justify-content: center;
+  margin: 0 auto;
+
+  z-index: 2;
+}
 .shapeCircle {
   background-image: linear-gradient(.314turn, rgba(40, 112, 222, .3) -32.12%, rgba(220, 232, 250, .35) 110.13%);
   -webkit-backdrop-filter: blur(4px);
@@ -41,7 +59,7 @@ body {
   border-radius: 100%;
   position: absolute;
   left: 140px;
-  z-index: 3;
+  z-index: 2;
   top: 150px;
   height: 100px;
   width: 100px;
@@ -50,9 +68,10 @@ body {
 }
 
 .main {
-  margin-left: 70px;
+  box-sizing: border-box;
+  margin-left: 54px;
   background-image: linear-gradient(to right, #fbf8f7, #fbf9f0, #fbf9f0);
-  padding: 30px;
+  padding: 24px 0 24px 30px;
 }
 
 .line {

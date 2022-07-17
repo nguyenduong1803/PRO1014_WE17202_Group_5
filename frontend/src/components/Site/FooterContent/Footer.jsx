@@ -190,10 +190,10 @@ function Footer() {
             <div className="footer__copyright">
               <div className="footer__copyright__text">
                 <p>
-                  Copyright ©2022 by Diligo Holdings. All Right Reserved.{" "}
+                  Copyright ©2022 by group 5. All Right Reserved.{" "}
                   <FavoriteIcon /> by{" "}
-                  <a href="https://diligo.vn/" target="_blank">
-                    Diligo
+                  <a href="/" target="_blank">
+                    Group 5
                   </a>
                 </p>
               </div>

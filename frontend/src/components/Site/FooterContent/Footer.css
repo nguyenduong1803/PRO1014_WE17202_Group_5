@@ -1,4 +1,3 @@
-
 .footer_home {
 	background: #F3F6FA;
 	padding-top: 70px;
@@ -52,7 +51,7 @@
 
 .footer__widget p {
 	font-size: 14px;
-	line-height:1.6rem;
+	line-height: 1.6rem;
 
 	color: #1c1c1c;
 	margin-bottom: 30px;
@@ -115,7 +114,7 @@
 
 .footer__copyright {
 	border-top: 1px solid #ebebeb;
-	padding: 15px 0;
+	padding: 25px 0 15px 0;
 	overflow: hidden;
 	margin-top: 20px;
 }
@@ -132,9 +131,13 @@
 }
 
 .footer_home {
-	background: #F3F6FA;
-	padding-top: 70px;
+	position: relative;
+	padding-top: 40px;
+	background: rgb(255 255 255/40%);
+	-webkit-backdrop-filter: blur(4px);
+	backdrop-filter: blur(4px);
 	padding-bottom: 0;
+	z-index: 2;
 }
 
 .footer__about {
@@ -377,19 +380,19 @@
 	padding:0;
 	background: #262626;
   } */
-  
-  .footer__widget__social ul {
+
+.footer__widget__social ul {
 	display: flex;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-  }
-  
-  .footer__widget__social ul li {
+}
+
+.footer__widget__social ul li {
 	list-style: none;
-  }
-  
-  .footer__widget__social ul li a {
+}
+
+.footer__widget__social ul li a {
 	width: 40px;
 	height: 40px;
 	background-color: #fff;
@@ -403,21 +406,21 @@
 	overflow: hidden;
 	border: 3px solid #fff;
 	z-index: 1;
-  }
-  
-  .footer__widget__social ul li a .icon {
+}
+
+.footer__widget__social ul li a .icon {
 	position: relative;
 	color: #262626;
 	transition: .5s;
 	z-index: 3;
-  }
-  
-  .footer__widget__social ul li a:hover .icon {
+}
+
+.footer__widget__social ul li a:hover .icon {
 	color: #fff;
 	transform: rotateY(360deg);
-  }
-  
-  .footer__widget__social ul li a:before {
+}
+
+.footer__widget__social ul li a:before {
 	content: "";
 	position: absolute;
 	top: 100%;
@@ -427,25 +430,25 @@
 	background: #f00;
 	transition: .5s;
 	z-index: 2;
-  }
-  
-  .footer__widget__social ul li a:hover:before {
+}
+
+.footer__widget__social ul li a:hover:before {
 	top: 0;
-  }
-  
-   .footer__widget__social ul li:nth-child(1) a:before{
+}
+
+.footer__widget__social ul li:nth-child(1) a:before {
 	background: #3b5999;
-	color:rgb(0, 0, 0);
-  }
-  
-   .footer__widget__social ul li:nth-child(2) a:before{
+	color: rgb(0, 0, 0);
+}
+
+.footer__widget__social ul li:nth-child(2) a:before {
 	background: #55acee;
-  }
-  
-   .footer__widget__social ul li:nth-child(3) a:before {
+}
+
+.footer__widget__social ul li:nth-child(3) a:before {
 	background: #0077b5;
-  }
-  
-   .footer__widget__social ul li:nth-child(4) a:before {
+}
+
+.footer__widget__social ul li:nth-child(4) a:before {
 	background: #dd4b39;
-  }
+}

@@ -8,6 +8,7 @@
     bottom: -48px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    z-index: 2;
 }
 
 .wrap::after {

@@ -39,12 +39,20 @@
     margin-left: 20px;
     width: 25px;
     height: 25px;
-    background-color: #EA6A12;
+    background-color: var(--primaryColor);
     border-radius: 50%;
     color: #fff;
     text-align: center;
 }
-
+.iconView{
+    border-radius: 50%;
+    background: var(--primaryColor);
+    height: 25px;
+    display: inline-block;
+    
+    color: white;
+    width: 25px;
+}
 
 .top{
     font-size:20px;

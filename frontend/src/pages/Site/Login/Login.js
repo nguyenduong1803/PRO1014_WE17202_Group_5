@@ -11,6 +11,7 @@ import { LoginAuth } from "../../../redux/SliceReducer/AuthSlice"
 import Loadings from "../../../components/Site/Loadings/Loadings"
 import { InputPassword } from '../../../components/Site/ContentRegister/InputMui'
 import { FormControl } from '@mui/material'
+import BannerAnimation from '../../../components/Site/ContentRegister/BannerAnimation'
 function Login(self) {
     return (
         <div className={`${styles.main} d-flex`}>
@@ -36,30 +37,7 @@ function Login(self) {
                 </div>
 
             </div>
-            <div className={`${styles.banner} col-9`}>
-                <div className={`${styles.context}`}>
-                    <h1>Pure Css Animated Background</h1>
-                    {/* <img src={logoMau} alt=""/> */}
-                </div>
-                <div className={`${styles.area}`}>
-                    <ul className={`${styles.circles}`}>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div >
-            </div>
+            <BannerAnimation/>
         </div>
     )
 }

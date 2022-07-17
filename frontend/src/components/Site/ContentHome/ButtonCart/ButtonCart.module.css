@@ -1,0 +1,222 @@
+.control_center {
+	position: fixed;
+	right: 0;
+	top:0;
+	z-index: 10;
+}
+.open .option_btn{
+	right: 235px;
+	box-shadow:none;
+	background-color: transparent;
+
+}
+.option_btn {
+	height: 52px;
+	width: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	position: absolute;
+	transition:.3s;
+	background-color: var(--primaryColor);
+	box-shadow:-4px 2px 15px rgba(39, 39, 39,0.3);
+	border-top-left-radius: 17px;
+	border-bottom-left-radius: 17px;
+	right: 0;
+	cursor: pointer;
+	z-index: 9;
+}
+.num_count {
+	position: absolute;
+	user-select: none;
+	cursor: default;
+	font-size: 0.6rem;
+	background: #fff; 
+	width: 1.2rem;
+	height: 1.2rem;
+	color: var(--primaryColor);
+	border:0.5px solid var(--primaryColor);
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	top: 6px;
+	left: -2px;
+	box-sizing: border-box;
+  }
+.option_btn:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 1;
+	visibility: visible;
+	transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+}
+
+.option_btn:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	visibility: hiddden;
+	transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+}
+
+.option_btn.open:after {
+	opacity: 0;
+	visibility: hiddden;
+	transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+}
+
+.option_btn.open:before {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+}
+
+.left_sidebar {
+	list-style: none;
+	background-color: #ffffff;
+	height: 100%;
+	width: 300px;
+	padding: 70px 12px 12px 12px;
+	margin: 0;
+	margin-right: -25px;
+	border-radius: 20px;
+	box-shadow: 0px 2px 20px 2px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.left_sidebar li {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 20px;
+	height: 50px;
+	width: 100%;
+	margin-right: 20px;
+	display: block;
+	cursor: pointer;
+	opacity: 0;
+}
+
+
+.left_sidebar {
+	opacity: 0;
+	visibility: hidden;
+}
+
+
+.open .left_sidebar {
+	animation-name: leftslide;
+	animation-duration: .3s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+	animation-direction: alternate;
+}
+.open .left_sidebar li {
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-delay: 1.7s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+}
+
+.open .left_sidebar li:nth-child(1) {
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-delay: .3s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+}
+.open .left_sidebar li:nth-child(2){
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-delay: .5s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+}
+.open .left_sidebar li:nth-child(3){
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-delay: .7s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+}
+.open .left_sidebar li:nth-child(4){
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-delay: .9s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+}
+.open .left_sidebar li:nth-child(5){
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-delay: 1.1s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+}
+.open .left_sidebar li:nth-child(6){
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-delay: 1.3s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+}
+.open .left_sidebar li:nth-child(7){
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-delay: 1.5s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+}
+.open .left_sidebar li:nth-child(8){
+	animation-name: fadeIn;
+	animation-duration: .3s;
+	animation-delay: 1.7s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in-out;
+}
+@keyframes rightslide {
+	from {
+		opacity: 0;
+		visibility: hidden;
+		transform: translate(-30%, 0);
+	}
+
+	to {
+		opacity: 1;
+		visibility: visible;
+		transform: translate(0, 0);
+	}
+}
+
+@keyframes leftslide {
+	from {
+		opacity: 0;
+		visibility: hidden;
+		transform: translate(30%, 0);
+	}
+
+	to {
+		opacity: 1;
+		visibility: visible;
+		transform: translate(0, 0);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opcity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

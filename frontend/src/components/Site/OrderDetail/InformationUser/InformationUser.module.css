@@ -21,10 +21,10 @@
     border-bottom: 1px solid rgb(217, 217, 217);
 }
 .info button{
-    color: #EA6A12;
+    color: var(--primaryColor);
     margin: 10px;
     border-radius: 40px;
-    border: 1px solid #EA6A12;
+    border: 1px solid var(--primaryColor);
 }
 .info button:hover{
     color: #0b0b0b;
@@ -32,7 +32,7 @@
     border: 1px solid #0b0b0b;
 }
 .contacts{
-    color:#EA6A12;
+    color:var(--primaryColor);
     padding: 5px;
     font-size: 1rem;
 }

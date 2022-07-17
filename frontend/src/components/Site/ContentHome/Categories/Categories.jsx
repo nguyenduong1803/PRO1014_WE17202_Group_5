@@ -12,7 +12,7 @@ function Categories() {
         style={{ padding: "20px 0" }}
       >
         <div className={styles.title}>Categories</div>
-        <div className={styles.viewAll}>ViewAll <ChevronRightIcon/> </div>
+        <div className={styles.viewAll}>ViewAll <span className={styles.icon}><ChevronRightIcon/></span> </div>
       </div>
       <div className='row'>
         {catetoryList.map((cate, index) => {

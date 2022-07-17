@@ -1,5 +1,5 @@
 .line{
-    border-bottom: 2px solid orange;
+    border-bottom: 2px solid var( --primaryColor);
     width:30px;
     transition: all 0.4s;
     margin: 0 auto;
@@ -26,14 +26,18 @@
     width: 50%;
 }
 .icon{
+    position: relative;
+    top:-2px;
     border-radius: 50%;
-    background: var(--orange);
+    background: var(--primaryColor);
     height: 25px;
     margin:0 auto;
     color: white;
     width: 25px;
+    display: inline-block;
 }
 .categoryItems:hover .icon{
     background-color: white;
-    color: var(--orange);
+    color: var(--primaryColor);
+    border:0.5px solid #ccc;
 }

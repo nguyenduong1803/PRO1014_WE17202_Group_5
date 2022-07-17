@@ -1,23 +1,32 @@
 import React from 'react'
-import './ButtonCart.scss';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import styles from "./ButtonCart.module.css"
+import OrderIcon from "../../../../assets/svg/OrderIcon"
+import BarArrow from '../../../../assets/svg/BarArrow'
 function ButtonCart() {
-  return (<div>
-        <div className='container'>
-  <div className="interior">
-    <a className="btn" href="#open-modal"><ShoppingCartIcon/></a>
-  </div>
-</div>
-<div id="open-modal" className="modal-window">
-  <div>
-    <a href="#" title="Close" className="modal-close">Close</a>
-    <h1>Voilà!</h1>
-    <div>A CSS-only modal based on the :target pseudo-class. Hope you find it helpful.</div>
-    <div><small>Check out 👇</small></div>
-      Your new favorite eyedropper tool!
-  </div>
-</div>
-</div>
+
+  const [toggle, setToggle] = React.useState(false)
+  const handleClick = () => {
+    setToggle(!toggle)
+  }
+  return (
+    <div className={`${styles.control_center} ${toggle ? styles.open : ""}`}>
+      <div className={`${styles.option_btn} ${toggle ? styles.open : ""}`} onClick={handleClick}>
+        {toggle ? <BarArrow width="25px" /> :
+          <><OrderIcon width="42px" height="42px" fill="#fff" />
+           <span className={styles.num_count}>13</span></>}
+
+
+      </div>
+      <div className={`${styles.left_sidebar}`}>
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+        </ul>
+        <button className="btn btn-primary">Đặt Món</button>
+      </div>
+    </div>
   )
 }
 
