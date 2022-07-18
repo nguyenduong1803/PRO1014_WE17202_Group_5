@@ -28,17 +28,16 @@ class ProductCreate extends FormRequest
         return [
             'name' => 'required|max:255|string',
             'short_desscription' => 'required|max:255|string',
-//            'id_directory' => 'nullable|int',
+            'id_directory' => 'nullable|integer',
             'price' => 'required|max:50|string',
-//            'id_code_sale' => 'nullable|int',
-//            'is_status_product' => 'nullable|int',
-//            'id_user' => 'nullable|int',
-//            'id_cart' => 'nullable|int',
-//            'full_description' => 'nullable|string',
-//            'time_complete' => 'nullable|datetime',
-//            'is_delete' => 'nullable|int',
-//            'update_at' => 'nullable|timestamp',
-//            'delete_at' => 'nullable|timestamp'
+            'id_code_sale' => 'nullable|integer',
+            'is_status_product' => 'nullable|integer',
+            'id_cart' => 'nullable|integer',
+            'full_description' => 'nullable|string',
+            'time_complete' => 'nullable|datetime',
+            'is_delete' => 'nullable|integer',
+            'update_at' => 'nullable|timestamp',
+            'delete_at' => 'nullable|timestamp'
         ];
     }
     public function failedValidation(Validator $validator)

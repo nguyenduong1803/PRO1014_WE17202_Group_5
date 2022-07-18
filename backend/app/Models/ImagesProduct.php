@@ -11,7 +11,7 @@ class ImagesProduct extends Model
     use HasFactory;
     public function insert($params) {
         DB::insert('INSERT INTO images_product
-    ( id_product_img , path)
-    values (? , ?)', $params);
+    (id_user , id_product_img , path)
+    values (? , ? , ?)', $params);
     }
 }
