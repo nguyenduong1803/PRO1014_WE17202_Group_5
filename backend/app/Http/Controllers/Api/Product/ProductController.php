@@ -51,4 +51,10 @@ class ProductController extends Controller
         $modelProduct ->create($paramsProduct);
         return response() ->json(["msg" => "Thêm mới sản phẩm thành công!", "status" => true],200);
     }
+
+    public function getListProduct(Request $request) {
+        $modelProduct = new Product();
+        $result = $modelProduct ->listsProduct($request);
+        return $result;
+    }
 }

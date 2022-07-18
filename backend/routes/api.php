@@ -33,7 +33,7 @@ Route::group(['namespace' => 'Product', 'prefix' => 'product'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\Product\ProductController::class, 'create']);
     });
-    Route::post('upload', [\App\Http\Controllers\Api\Product\ProductController::class, 'uploadFile']);
+    Route::get('getLists', [\App\Http\Controllers\Api\Product\ProductController::class, 'getListProduct']);
 });
 
 
