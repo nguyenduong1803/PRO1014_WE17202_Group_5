@@ -26,8 +26,8 @@ class UserChangePassword extends FormRequest
     public function rules()
     {
         return [
-            'mat_khau_cu' => 'required|min:6|max:255',
-            'mat_khau' => 'required|min:6|max:255|confirmed',
+            'mat_khau_cu' => 'required|min:6|max:255|string',
+            'mat_khau' => 'required|min:6|max:255|confirmed|string',
             //
         ];
     }

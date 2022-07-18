@@ -27,7 +27,7 @@ class UserResetPassword extends FormRequest
     {
         return [
             'mat_khau' => 'required|min:6|max:255|confirmed',
-            'id' => 'required|int|exists:users',
+            'id' => 'required|integer|exists:users',
             'token' => 'required|string'
         ];
     }

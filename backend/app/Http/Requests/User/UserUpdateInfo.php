@@ -30,7 +30,7 @@ class UserUpdateInfo extends FormRequest
             'dia_chi' => 'string|max:100',
             'ngay_sinh' => 'date',
             'sdt' => 'string|max:50',
-            'gioi_tinh' => 'int',
+            'gioi_tinh' => 'integer',
             'email' => 'string|email|unique:users',
         ];
     }
