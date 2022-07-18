@@ -34,6 +34,7 @@ Route::group(['namespace' => 'Product', 'prefix' => 'product'], function(){
         Route::post('create', [\App\Http\Controllers\Api\Product\ProductController::class, 'create']);
     });
     Route::get('getLists', [\App\Http\Controllers\Api\Product\ProductController::class, 'getListProduct']);
+    Route::get('detail/{id}', [\App\Http\Controllers\Api\Product\ProductController::class, 'getDetailProduct']);
 });
 
 

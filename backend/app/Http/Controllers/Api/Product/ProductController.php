@@ -57,4 +57,11 @@ class ProductController extends Controller
         $result = $modelProduct ->listsProduct($request);
         return $result;
     }
+
+    public function getDetailProduct($id) {
+        $modelProduct = new Product();
+        $result = $modelProduct ->detailProduct($id);
+        if(isset($result)) return response() ->json(["data" => $result, "status" => true],200);
+        else return response() ->json(["msg" =>"Lấy chi tiết sản phẩm thất bại!", "status" => false],402);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use http\Env\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,9 @@ class Product extends Model
             -> simplePaginate($limitPage);
         $data->appends(['q' => $search]);
         return $data;
-
+    }
+    public function detailProduct($id) {
+        $data = Product::where('id', $id)->first();
+        return $data;
     }
 }
