@@ -21,7 +21,9 @@ class Product extends Model
         $search = $request -> get('q');
         $sortDateCreateAt = $request -> get('sortCreateAt');
         $limitPage = $request -> get('limit') ? $request -> get('limit'): 10;
-        $data = Product::query() -> where('name', 'like', '%' . $search . '%')
+        $data = Product::query()
+            -> where('is_delete', '1')
+            -> where('name', 'like', '%' . $search . '%')
             -> orderBy('create_at', $sortDateCreateAt)
             -> simplePaginate($limitPage);
         $data->appends(['q' => $search]);
@@ -30,5 +32,14 @@ class Product extends Model
     public function detailProduct($id) {
         $data = Product::where('id', $id)->first();
         return $data;
+    }
+    public function checkProductDeleted($id) {
+        $data = Product::query() -> where('id', $id)
+            -> where('is_delete', 2)
+         -> first();
+        return $data;
+    }
+    public function deleteProduct($params) {
+        DB::update("UPDATE products SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
     }
 }

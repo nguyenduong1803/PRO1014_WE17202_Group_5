@@ -64,4 +64,19 @@ class ProductController extends Controller
         if(isset($result)) return response() ->json(["data" => $result, "status" => true],200);
         else return response() ->json(["msg" =>"Lấy chi tiết sản phẩm thất bại!", "status" => false],402);
     }
+    public function deleteProduct($id) {
+        $modelProduct = new Product();
+        $timeStamp = date("Y-m-d H:i:s",time());
+        $params = [
+            2,
+            $timeStamp,
+            $id
+        ];
+        $result = $modelProduct -> checkProductDeleted($id);
+        if(isset($result)) return response() ->json(["msg" => "Sản phẩm đã bị xoá!", "status" => false],404);
+        else {
+            $modelProduct -> deleteProduct($params);
+            return response() ->json(["msg" => "Xoá sản phẩm thành công!", "status" => true],200);
+        }
+    }
 }
