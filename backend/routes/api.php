@@ -42,7 +42,9 @@ Route::group(['namespace' => 'Product', 'prefix' => 'product'], function(){
 Route::group(['namespace' => 'Tables', 'prefix' => 'tables'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\Tables\TablesControllers::class, 'create']);
+        Route::post('update', [\App\Http\Controllers\Api\Tables\TablesControllers::class, 'update']);
     });
+    Route::get('lists', [\App\Http\Controllers\Api\Tables\TablesControllers::class, 'getLists']);
 });
 
 
