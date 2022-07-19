@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\ProductCreate;
+use App\Http\Requests\Product\ProductUpdate;
 use App\Models\ImagesProduct;
 use App\Models\Product;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
@@ -31,9 +32,7 @@ class ProductController extends Controller
             $validate['id_cart'],
             $validate['full_description'],
             $validate['time_complete'],
-            $validate['is_delete'],
             $validate['update_at'],
-            $validate['delete_at'],
             $uniIdImg
         ];
         foreach ($request->file('img') as $imagefile) {
@@ -78,5 +77,40 @@ class ProductController extends Controller
             $modelProduct -> deleteProduct($params);
             return response() ->json(["msg" => "Xoá sản phẩm thành công!", "status" => true],200);
         }
+    }
+    public function update(ProductUpdate $request, $id) {
+        $validate = $request -> validated();
+        $user = Auth::user();
+        $modelProduct = new Product();
+        $detailProduct = $modelProduct ->detailProduct($id);
+        if(!isset($detailProduct)) return response() ->json(["msg" => "Không tìm thấy sản phẩm!", "status" => false],404);
+        $updateName = isset($validate['name']) ? $validate['name'] : $detailProduct['name'];
+        $updateShortDes = isset($validate['short_description']) ? $validate['short_description'] : $detailProduct['short_description'];
+        $updateIdDirectory = isset($validate['id_directory']) ? $validate['id_directory'] : $detailProduct['id_directory'];
+        $updatePrice = isset($validate['price']) ? $validate['price'] : $detailProduct['price'];
+        $updateIdCodeSale = isset($validate['id_code_sale']) ? $validate['id_code_sale'] : $detailProduct['id_code_sale'];
+        $updateIsStatusProduct = isset($validate['is_status_product']) ? $validate['is_status_product'] : $detailProduct['is_status_product'];
+        $updateIdCart = isset($validate['id_cart']) ? $validate['id_cart'] : $detailProduct['id_cart'];
+        $updateFullDes = isset($validate['full_description']) ? $validate['full_description'] : $detailProduct['full_description'];
+        $updateTimeComplete = isset($validate['time_complete']) ? $validate['time_complete'] : $detailProduct['time_complete'];
+        $updateIdUser = $user['id'];
+        $updateTimeUpdateAt = date("Y-m-d H:i:s",time());
+        $params = [
+            $updateName,
+            $updateShortDes,
+            $updateIdDirectory,
+            $updatePrice,
+            $updateIdCodeSale,
+            $updateIsStatusProduct,
+            $updateIdCart,
+            $updateFullDes,
+            $updateTimeComplete,
+            $updateIdUser,
+            $updateTimeUpdateAt,
+            $id
+        ];
+        $modelProduct -> updateProduct($params);
+        return response() ->json(["msg" => "Cập nhật sản phẩm thành công!", "status" => true],200);
+
     }
 }
