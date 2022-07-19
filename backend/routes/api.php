@@ -39,6 +39,12 @@ Route::group(['namespace' => 'Product', 'prefix' => 'product'], function(){
     Route::get('detail/{id}', [\App\Http\Controllers\Api\Product\ProductController::class, 'getDetailProduct']);
 });
 
+Route::group(['namespace' => 'Tables', 'prefix' => 'tables'], function(){
+    Route::middleware('auth:api') -> group(function () {
+        Route::post('create', [\App\Http\Controllers\Api\Tables\TablesControllers::class, 'create']);
+    });
+});
+
 
 Route::group(['namespace' => 'User', 'prefix' => 'user'], function(){
     Route::post('sendMailForgotPassword', [\App\Http\Controllers\Api\User\UserController::class, 'sendMailForgotPassword']);
