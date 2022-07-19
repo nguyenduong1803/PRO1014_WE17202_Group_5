@@ -8,7 +8,7 @@ function UploadImage({ setInput, inputType, value }) {
     const [file, setFile] = React.useState("")
     const handleChangeInput = (e) => {
         setInput(prev => {
-            prev[inputType] = e.target.value
+            prev[inputType] = e.target.files[0]
             return { ...prev }
         })
         const file = URL.createObjectURL(e.target.files[0]);

@@ -9,7 +9,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../../../contexts/AuthenContext'
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar'
 import { Link } from 'react-router-dom'
-
+import logo from "../../../assets/img/logoSea.png"
 
 function Header() {
 
@@ -17,8 +17,12 @@ function Header() {
     return (
         <header className={styles.header}>
             <div className="row">
-                <div className="col-lg-6 col-md-6">
+                <div className="col-lg-1">
+                    <img src={logo} className={styles.logo} alt="" />
+                </div>
+                <div className="col-lg-5 col-md-6">
                     <div className={styles.search}>
+
                         <div className={styles.warpInput}>
                             <input
                                 className={styles.searchInput}

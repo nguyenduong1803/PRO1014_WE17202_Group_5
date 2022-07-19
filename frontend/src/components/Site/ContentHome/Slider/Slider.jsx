@@ -19,7 +19,7 @@ const categories = [
     ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
     price: "$14",
     content:
-      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually .",
+      "A burguer typically considered a sandwich, consisting.",
   },
   {
     name: "Hoa quả sạch",
@@ -28,7 +28,7 @@ const categories = [
     ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
     price: "$14",
     content:
-      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually.",
+      "A burguer typically considered a sandwich, consisting.",
   },
   {
     name: "Hoa quả sạch",
@@ -37,7 +37,7 @@ const categories = [
     ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
     price: "$14",
     content:
-      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually.",
+      "A burguer typically considered a sandwich, consisting.",
   },
   {
     name: "Hoa quả sạch",
@@ -46,7 +46,7 @@ const categories = [
     ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
     price: "$14",
     content:
-      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually.",
+      "A burguer typically considered a sandwich.",
   },
   {
     name: "Hoa quả sạch",
@@ -55,7 +55,7 @@ const categories = [
     ingredient: "Onion, Lettuce, Tomatoe, Patty, Cheese",
     price: "$14",
     content:
-      "A burguer typically considered a sandwich, consisting of one or more cooked patties-usually.",
+      "A burguer typically considered a sandwich, consisting.",
   },
 ];
 function Categories() {
