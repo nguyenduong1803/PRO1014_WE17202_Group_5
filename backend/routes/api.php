@@ -43,6 +43,7 @@ Route::group(['namespace' => 'Tables', 'prefix' => 'tables'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\Tables\TablesControllers::class, 'create']);
         Route::post('update', [\App\Http\Controllers\Api\Tables\TablesControllers::class, 'update']);
+        Route::delete('delete/{id}', [\App\Http\Controllers\Api\Tables\TablesControllers::class, 'deleteTable']);
     });
     Route::get('lists', [\App\Http\Controllers\Api\Tables\TablesControllers::class, 'getLists']);
 });

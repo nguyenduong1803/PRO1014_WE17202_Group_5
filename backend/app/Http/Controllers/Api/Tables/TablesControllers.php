@@ -48,7 +48,7 @@ class TablesControllers extends Controller
         ])->getSecurePath();
         $user = Auth::user();
         $modelTables = new Tables();
-        $detailProduct = $modelTables ->getDetailProduct($validate['id']);
+        $detailProduct = $modelTables ->getDetailTable($validate['id']);
         $updateAddress = isset($validate['address_shop']) ? $validate['address_shop'] : $detailProduct['address_shop'];
         $updateFloor = isset($validate['floor']) ? $validate['floor'] : $detailProduct['floor'];
         $updateDes = isset($validate['description']) ? $validate['description'] : $detailProduct['description'];
@@ -73,5 +73,21 @@ class TablesControllers extends Controller
         ];
         $modelTables -> updateTable($params);
         return response() ->json(["msg" => "Cập nhật thành công!", "status" => true],200);
+    }
+
+    public function deleteTable($id) {
+        $modelTables = new Tables();
+        $result = $modelTables -> checkTableDeleted($id);
+        $timeStamp = date("Y-m-d H:i:s",time());
+        $params = [
+            2,
+            $timeStamp,
+            $id
+        ];
+        if(isset($result)) {
+            $modelTables -> deleteTable($params);
+            return response() ->json(["msg" => "Xoá thành công!", "status" => true],200);
+        }
+        return response() ->json(["msg" => "Dữ liệu không tồn tại!", "status" => false],404);
     }
 }

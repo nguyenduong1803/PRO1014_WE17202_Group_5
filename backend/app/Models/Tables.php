@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class Tables extends Model
 {
+    protected $table = 'tables';
     use HasFactory;
     public function create($params) {
         DB::insert('INSERT INTO tables
@@ -15,7 +16,7 @@ class Tables extends Model
     values (?, ?, ?, ?, ?, ?, ?, ?, ?)', $params);
     }
     public function getLists() {
-        $result = DB::select("SELECT * FROM tables");
+        $result = DB::select("SELECT * FROM tables WHERE `is_delete` = 1");
         return $result;
     }
     public function updateTable($params) {
@@ -25,8 +26,19 @@ class Tables extends Model
                     WHERE `id` = ?", $params);
     }
 
-    public function getDetailProduct($id) {
+    public function getDetailTable($id) {
         $data = Tables::where('id', $id)->first();
         return $data;
+    }
+
+    public function checkTableDeleted($id) {
+        $data = Tables::query() -> where('id', $id)
+            -> where('is_delete', 1)
+            -> first();
+        return $data;
+    }
+
+    public function deleteTable($params) {
+        DB::update("UPDATE tables SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
     }
 }
