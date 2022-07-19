@@ -88,6 +88,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -103,22 +104,26 @@ section {
   display: block;
 }
 
-button{
+button {
   border: none
 }
+
 a,
 ol,
 ul,
 li {
   list-style: none;
 }
-input{
-  outline:none;
+
+input {
+  outline: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -126,6 +131,7 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -153,39 +159,53 @@ html {
   position: relative;
   min-height: 100vh;
 }
+
 /* ===== Scrollbar CSS ===== */
-  /* Firefox */
-   * {
-    scrollbar-width: auto;
-    scrollbar-color:  var(--primaryColor) rgba(234, 106, 18,0.5);
-  }
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--primaryColor) rgba(234, 106, 18, 0.5);
+}
 
-   /* Chrome, Edge, and Safari */ 
-   *::-webkit-scrollbar {
-    width: 14px;
-  }
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 14px;
+}
 
-  *::-webkit-scrollbar-track {
-    background-color: linear-gradient(to right, #fbf8f7, #fbf9f0, #fbf9f0);
-  }
+*::-webkit-scrollbar-track {
+  background-color: linear-gradient(to right, #fbf8f7, #fbf9f0, #fbf9f0);
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color:var(--primaryPink) ;
-    border-radius: 10px;
-    border: 3px solid #ffffff;
-  } 
-  .MuiSlider-colorSecondary{
-   color: var(--primaryPink) !important;
-  }
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primaryPink);
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}
+
+.MuiSlider-colorSecondary {
+  color: var(--primaryPink) !important;
+}
+
+.show .modal_dialog {
+  transform: translate(0, 0);
+}
+
+.modal_dialog {
+  position: relative;
+  max-width: 380px;
+  background-color: #fff;
+  transform: translate(100%, 0);
+  margin: 0 0 0 auto;
+  z-index: 5;
+}
+
 :root {
   --purple: #1a358f;
   --yeallow: #f4cc3d;
   --red: #df3d3d;
   --orange: #F27400;
-  --text-color: rgba(0,0,0,0.55);
-  --primaryColor:#ff7272;
-  --primaryPink:#ff7272;
+  --text-color: rgba(0, 0, 0, 0.55);
+  --primaryColor: #ff7272;
+  --primaryPink: #ff7272;
 
 }
-
-

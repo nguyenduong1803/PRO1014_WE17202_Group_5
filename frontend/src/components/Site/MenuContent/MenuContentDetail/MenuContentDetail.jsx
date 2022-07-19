@@ -3,7 +3,7 @@ import styles from './MenuContentDetail.module.css';
 import Button from '@mui/material/Button';
 function MenuContentDetail({img,title,content}) {
   return (
-    <div className='col-lg-4'>
+    <div className='col-lg-3'>
         <div className={styles.MenuContentDetail}>
         <div className={styles.MenuContent}>
             <img src={img} alt="" />

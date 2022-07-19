@@ -33,6 +33,7 @@ const routerSite = [
 
   { path: "/chi-tiet-hoa-don", component: OrderDetail , },
   { path: "/chi-tiet-don-hang", component: DetailProduct , },
+  { path: "*", component: PageNotFound , },
   
 
 ]
