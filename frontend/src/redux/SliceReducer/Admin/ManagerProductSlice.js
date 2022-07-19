@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
-import { getToken, removeUserSession, setTokenSession } from "../../utils/Common"
+import { getToken, removeUserSession, setTokenSession } from "../../../utils/Common"
 const api = "http://127.0.0.1:8000/api/"
 // initState: {
 //     username: "",
@@ -14,20 +14,18 @@ const api = "http://127.0.0.1:8000/api/"
 // },
 
 const AuthSlice = createSlice({
-    name: "auth",
+    name: "product",
     initialState: {
-        token: "",
         status: "idle",
-        user: {},
-        isSuccess: getToken() ? true : false
+        products: [],
     },
     reducers: {
     },
     extraReducers: buiders => {
         buiders
-            .addCase(LoginAuth.pending, (state) => {
+            .addCase(getProducts.pending, (state) => {
                 state.status = "loading"
-            }).addCase(LoginAuth.fulfilled, (state) => {
+            }).addCase(getProducts.fulfilled, (state) => {
                 state.status = "idle"
             }).addCase(getUserAuth.fulfilled, (state, action) => {
                 state.status = "idle"
@@ -50,14 +48,17 @@ const AuthSlice = createSlice({
             })
     }
 })
-export const LoginAuth = createAsyncThunk("auth/login", async (payload, action) => {
+export const getProducts = createAsyncThunk("product/getProducts", async (payload, action) => {
     let token
     let status
     console.log(payload, action)
     await axios
-        .post(api + "auth/login", {
-            email: payload.email,
-            mat_khau: payload.password
+        .get(api + "getLists?q=&sortCreateAt=desc&limit=10&page=1", {
+            params: {
+                q: payload.keySearch,
+                limit: payload.limit,
+                page: payload.pageIndex
+            }
         })
         .then(async (response) => {
             token = response.data.token
@@ -111,14 +112,4 @@ export const logOut = createAsyncThunk("auth/logout", async (payload, action) =>
     await removeUserSession()
 })
 
-// {
-//     "ten": "duong test 2",
-//     "dia_chi": "hcm",
-//     "ngay_sinh": "1998-12-22",
-//     "sdt": "0934565787",
-//     "gioi_tinh": 0,
-//     "vai_tro": 0,
-//     "email": "duongtest2@gmail.com",
-//     "mat_khau": "12345678"
-// }
 export default AuthSlice
