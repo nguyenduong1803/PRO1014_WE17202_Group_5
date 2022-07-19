@@ -1,21 +1,21 @@
-
 .modal-container {
   padding-top: 0px;
   position: relative;
   z-index: 100;
-  .modal-btn {
-   
-  }
-  .modal-content, 
+
+  .modal-btn {}
+
+  .modal-content,
   .modal-backdrop {
-    height: 0; 
-    width: 0; 
-    opacity: 0;    
+    height: 0;
+    width: 0;
+    opacity: 0;
     visibility: hidden;
-    overflow: hidden; 
+    overflow: hidden;
     cursor: pointer;
-    transition: opacity 0.2s ease-in; 
+    transition: opacity 0.2s ease-in;
   }
+
   .modal-close {
     color: #aaa;
     position: absolute;
@@ -29,15 +29,20 @@
     font-weight: bold;
     text-align: center;
     cursor: pointer;
-    &:hover { color: #333; }        
-  }      
-  .modal-content-btn {
+
+    &:hover {
+      color: #333;
+    }
   }
+
+  .modal-content-btn {}
+
   #modal-toggle {
-    display: none;  
-    &.active ~ .modal-backdrop,
-    &:checked ~ .modal-backdrop {
-      background: linear-gradient(to right, rgba(251, 248, 247,0.7), rgba(251, 249, 240,0.7), rgba(251, 249, 240,0.7));
+    display: none;
+
+    &.active~.modal-backdrop,
+    &:checked~.modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.2);
       width: 100vw;
       height: 100vh;
       position: fixed;
@@ -45,11 +50,12 @@
       top: 0;
       z-index: 9;
       visibility: visible;
-      opacity: 1;      
-      transition: opacity 0.2s ease-in; 
+      opacity: 1;
+      transition: opacity 0.2s ease-in;
     }
-    &.active ~ .modal-content,
-    &:checked ~ .modal-content {
+
+    &.active~.modal-content,
+    &:checked~.modal-content {
       opacity: 1;
       background-color: #fff;
       max-width: 400px;
@@ -63,9 +69,19 @@
       z-index: 999;
       pointer-events: auto;
       cursor: auto;
-      visibility: visible;      
-      box-shadow: 2px 3px 27px rgba(51, 51, 51, 0.3);  
-      @media (max-width: 400px) { left: 0; }                   
-    }  
+      visibility: visible;
+      max-width: 500px;
+      background-color: #fff;
+      padding: 20px;
+      animation: scale 0.5s ease;
+      border-radius: 10px;
+      box-shadow: 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.02),
+        22.3px 22.3px 17.9px rgba(0, 0, 0, 0.03),
+        100px 100px 80px rgba(0, 0, 0, 0.05);
+
+    @media (max-width: 400px) {
+      left: 0;
+    }
   }
+}
 }

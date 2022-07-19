@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
-import { getToken, removeUserSession, setTokenSession } from "../../utils/Common"
+import { getToken, removeUserSession, setTokenSession } from "../../../utils/Common"
 const api = "http://127.0.0.1:8000/api/"
 // initState: {
 //     username: "",
@@ -111,14 +111,4 @@ export const logOut = createAsyncThunk("auth/logout", async (payload, action) =>
     await removeUserSession()
 })
 
-// {
-//     "ten": "duong test 2",
-//     "dia_chi": "hcm",
-//     "ngay_sinh": "1998-12-22",
-//     "sdt": "0934565787",
-//     "gioi_tinh": 0,
-//     "vai_tro": 0,
-//     "email": "duongtest2@gmail.com",
-//     "mat_khau": "12345678"
-// }
 export default AuthSlice
