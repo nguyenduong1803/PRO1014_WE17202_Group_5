@@ -42,4 +42,11 @@ class Product extends Model
     public function deleteProduct($params) {
         DB::update("UPDATE products SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
     }
+
+    public function updateProduct($params) {
+        DB::update("UPDATE products SET `name` = ?, `short_description` = ?,`id_directory` = ?,
+                    `price` = ?, `id_code_sale` = ?, `is_status_product` = ?,`id_cart` = ?,
+                    `full_description` = ?,`time_complete` = ?,`id_user` = ?, `update_at` = ?
+                    WHERE `id` = ?", $params);
+    }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Tables;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ProductCreate extends FormRequest
+class UpdateTable extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,16 +26,14 @@ class ProductCreate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255|string',
-            'short_description' => 'required|max:255|string',
-            'id_directory' => 'nullable|integer',
-            'price' => 'required|max:50|float',
-            'id_code_sale' => 'nullable|integer',
-            'is_status_product' => 'nullable|integer',
-            'id_cart' => 'nullable|integer',
-            'full_description' => 'nullable|string',
-            'time_complete' => 'nullable|datetime',
-            'update_at' => 'nullable|timestamp',
+            'address_shop' => 'nullable|max:255|string',
+            'floor' => 'nullable|integer',
+            'description' => 'nullable|max:255|string',
+            'status'=> 'nullable|integer',
+            'index_table' => 'nullable|integer',
+            'total_user_sitting'=> 'nullable|integer',
+            'limit_time_book' => 'nullable|date_equals:date',
+            'id' => 'required|integer|exists:tables',
         ];
     }
     public function failedValidation(Validator $validator)
