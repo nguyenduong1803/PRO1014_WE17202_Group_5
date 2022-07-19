@@ -2,13 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./ManageProduct.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import AddIcon from "@mui/icons-material/Add";
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
 import Pagination from "../../../extensions/Pagination/Pagination";
-import { NavLink } from "react-router-dom";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
 import { DataContext } from "../../../contexts/DataContext";
-import axios from "axios";
+
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
 import { tableProduct } from "../../../config/tables"
@@ -16,64 +14,30 @@ import { listPagination } from "../../../config/listConfig"
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
 import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
+import { selectLoadingProduct, selectProducts } from "../../../redux/selector";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "../../../components/Site/Loading/Loading";
+import { deleteProductById } from "../../../redux/SliceReducer/Admin/ManagerProductSlice";
+import PaginationMui from "../../../components/Admin/PaginationMui/PaginationMui";
 const ManageProduct = (id) => {
+  const dispatch = useDispatch()
+  const listProduct = useSelector(selectProducts)
+  const loadingProduct = useSelector(selectLoadingProduct)
   const { data, setData } = useContext(DataContext);
   const [PageSize, setPageSize] = useState(10)
-
-  const [dataSliced, setdataSliced] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
-  const [sortPosition, setSortPosition] = useState("");
-  const [sortStatus, setSortStatus] = useState("");
-
-  useEffect(() => {
-    if (data) {
-      const firstPageIndex = (currentPage - 1) * PageSize;
-      const lastPageIndex = firstPageIndex + PageSize;
-      setdataSliced(data.slice(firstPageIndex, lastPageIndex));
-    }
-    if (searchValue !== "" || sortPosition !== "" || sortStatus !== "") {
-      const firstPageIndex = (currentPage - 1) * PageSize;
-      const lastPageIndex = firstPageIndex + PageSize;
-      setdataSliced(
-        data
-          .filter((e) => e.name.toLowerCase().indexOf(searchValue) !== -1)
-          // .filter((e) => e.address.indexOf(sortStatus) !== -1)
-          // .filter((e) => e.phoneNumber.indexOf(sortPosition) !== -1)
-          .slice(firstPageIndex, lastPageIndex)
-      );
-    }
-  }, [currentPage, searchValue, sortPosition, sortStatus, data, PageSize]);
+  // useEffect(() => {
+  //   if (data) {
+  //     const firstPageIndex = (currentPage - 1) * PageSize;
+  //     const lastPageIndex = firstPageIndex + PageSize;
+  //   }
+  // }, []);
 
   const [idProduct, setIdProduct] = useState();
   const handleDeleteProduct = (e) => {
-    axios
-      .delete("http://localhost:5000/api/products/" + e, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZTI1MzQwOWQ0YThiYjRlMWU1ZTYiLCJpYXQiOjE2NTU2OTU4NzZ9.fC3rv-pUyNxMEx0K12E-XWsUm8GSTK6RefKGhdFaV8o",
-        },
-      })
-      .then((res) => {
-
-        setData(data.filter((e) => e._id !== idProduct));
-      });
-
+    dispatch(deleteProductById(idProduct))
   };
-
-  const headers = [
-    // { label: / * Nhãn để hiển thị ở đầu CSV * / , khóa: / * Khóa dữ liệu * / }
-    { label: "Ảnh sản phẩm", key: "images" },
-    { label: "Mã sản phẩm", key: "id" },
-    { label: "Tên sản phẩm", key: "name" },
-    { label: "Mô tả", key: "describe" },
-    { label: "Mã giảm giá", key: "discount" },
-    { label: "Số lượng", key: "category" },
-    { label: "Gía sản phẩm", key: "price" },
-    { label: "Thanh toán", key: "payment" },
-    { label: "Trạng thái", key: "status" },
-  ];
   const breadcrumItem = [
     {
       href: "/",
@@ -93,7 +57,9 @@ const ManageProduct = (id) => {
   }, {
     name: "vegetables"
   }]
-
+const handleChangePage =(value)=>{
+  console.log(value)
+}
   return (
     <>
       <Sidebar />
@@ -116,25 +82,23 @@ const ManageProduct = (id) => {
                 name="Danh mục"
               />
             </div>
-
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
               <ButtonAdd name="Thêm sản phẩm" path="them-san-pham" />
-              <ExportReact csvData={data} fileName="Danh sách sản phẩm" />
+              <ExportReact csvData={listProduct||[]} fileName="Danh sách sản phẩm" />
             </div>
           </div>
         </div>
         <div className={styles.profile}>
-          <Tablecustom
-            data={dataSliced.filter((e) =>
-              e.name.toLowerCase().includes(searchValue)
-            )}
-            PageSize={PageSize}
-            tables={tableProduct}
-            setIdProduct={setIdProduct}
-          />
-
+          {loadingProduct === "loading" ? <Loading /> :
+            <Tablecustom
+              data={listProduct ||[]}
+              PageSize={PageSize}
+              tables={tableProduct}
+              setIdProduct={setIdProduct}
+            />
+          }
           <div className={`${styles.pagination} justify-content-between`}>
             <SelectMui
               list={listPagination}
@@ -145,16 +109,15 @@ const ManageProduct = (id) => {
               <span style={{ marginRight: `25px` }}>
                 có{" "}
                 <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
-                  {searchValue === ""
-                    ? data.length
-                    : data.filter(
-                      (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
-                    ).length}
+                  {listProduct && listProduct.length}
                 </span>{" "}
                 bản ghi
               </span>
-
-              {searchValue === "" ? (
+              <PaginationMui 
+               count={10}
+               onPageChange={value=>handleChangePage(value)}
+              />
+              {/* {searchValue === "" ? (
                 <Pagination
                   className="pagination-bar"
                   currentPage={currentPage}
@@ -175,7 +138,7 @@ const ManageProduct = (id) => {
                   pageSize={PageSize}
                   onPageChange={(page) => setCurrentPage(page)}
                 />
-              )}
+              )} */}
             </div>
           </div>
         </div>

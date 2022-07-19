@@ -1,8 +1,4 @@
-.footer_home {
-	background: #F3F6FA;
-	padding-top: 70px;
-	padding-bottom: 0;
-}
+
 
 .footer__about {
 	margin-bottom: 30px;
@@ -137,7 +133,7 @@
 	-webkit-backdrop-filter: blur(4px);
 	backdrop-filter: blur(4px);
 	padding-bottom: 0;
-	z-index: 2;
+	z-index: 1;
 }
 
 .footer__about {

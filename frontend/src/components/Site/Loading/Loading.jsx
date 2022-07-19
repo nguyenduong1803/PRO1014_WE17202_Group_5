@@ -1,18 +1,19 @@
-import React from "react";
-import './Loading.css'
+import React from 'react'
+import styles from './Loading.module.css'
 
-function Loading() {
+const Loadings = () => {
   return (
-    <section className="loading">
-      <div className="typewriter">
-        <div className="slide">
-          <i></i>
-        </div>
-        <div className="paper"></div>
-        <div className="keyboard"></div>
-      </div>
-    </section>
-  );
+    <div className={`${styles.wrap} d-flex justify-content-center align-items-center`}>
+      <div className="text-center"><div className={styles.loader1}>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div></div>
+    </div>
+
+  )
 }
 
-export default Loading;
+export default Loadings

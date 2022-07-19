@@ -4,75 +4,98 @@ import LayoutSite from '../LayoutSite/LayoutSite';
 import MenuContentDetail from './MenuContentDetail/MenuContentDetail';
 import product1 from '../../../assets/img/seafood-1.jpg';
 import ButtonCart from "../../../components/Site/ContentHome/ButtonCart/ButtonCart"
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../../redux/SliceReducer/Admin/ManagerProductSlice';
+import { selectLoadingProduct, selectProducts } from '../../../redux/selector';
+import Loading from '../Loading/Loading';
+import CategoryItem from './ProductMenu/ProductMenu';
+import Product from '../Product/Product';
 const product = [
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
+    price:6800000
 
   },
   {
     img: product1,
     title: 'overlay',
     content: 'Copyright 2022. Made with love by Iqonic Design',
-
+    price:6800000
   },
 ];
 function MenuContent() {
+  const dispatch = useDispatch()
+  const listProduct = useSelector(selectProducts)
+  const loadingProduct = useSelector(selectLoadingProduct)
+  // React.useEffect(() => {
+  //   dispatch(getProducts())
+
+  // }, [selectProducts])
   return (
     <LayoutSite>
       <ButtonCart />
@@ -82,20 +105,21 @@ function MenuContent() {
             <MenuContentOptions />
           </div>
           <div className='col-lg-9'>
-            <div className="row">
+            {loadingProduct==="loading" ? <Loading /> : <div className="row" style={{transition:"0.3s"}}>
               {
-                product.map((products, index) => {
+                product && product.map((products, index) => {
                   return (
-                    <MenuContentDetail
+                    <Product
                       key={index}
-                      img={products.img}
-                      title={products.title}
-                      content={products.content}
+                      img={product1}
+                      title={products.name}
+                      price={products.price}
                     />
                   )
                 })
               }
-            </div>
+            </div>}
+
           </div>
         </div>
       </div>
