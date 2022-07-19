@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Exo:400,700");
-p {
+/* p {
     margin-bottom: 10px;
-}
+} */
 .main {
     width: 100%;
 }
@@ -20,13 +20,14 @@ p {
     text-align: center;
 }
 .sideBar {
+    padding: 24px;
     min-height: 100vh;
-    min-width: 460px;
+    min-width:600px;
     transition: 0.4s;
 }
 
 .form {
-    margin: 30px 0;
+    width: 100%;
 }
 .form p + input {
     margin-bottom: 16px;
@@ -248,7 +249,7 @@ p {
 /* UPLOAD IMAGE */
 
 .variants {
-
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -263,6 +264,7 @@ p {
   }
   
   .file {
+    width: 100%;
     position: relative;
     display: flex;
     justify-content: center;

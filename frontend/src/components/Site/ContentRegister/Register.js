@@ -98,30 +98,30 @@ const FormRegister = () => {
 
         <form className={`${styles.form}`} >
             <div className="d-flex m-3" style={{ gap: "1rem" }}>
-                <div>
+                <div className="col-6">
                     <InputTextField setInput={setInput} name="Username" value={name} inputType={"name"} />
                 </div>
-                <div>
+                <div className="col-6">
                     <InputTextField setInput={setInput} name="Email" value={email} inputType={"email"} />
                 </div>
             </div>
             <div className="d-flex  m-3" style={{ gap: "1rem" }}>
-                <div>
+                <div className="col-6">
                     <InputPassword setPassword={setPassword} password={password} />
                 </div>
-                <div>
+                <div className="col-6">
                     <Calendar label="Ngày sinh" value={dob} setInput={setInput} inputType={"dob"} />
                 </div>
             </div>
             <div className="d-flex m-3" style={{ gap: "1rem" }}>
-                <div>
+                <div className="col-6">
                     <InputTextField setInput={setInput} name="Địa chỉ" value={address} inputType={"address"} />
                 </div>
-                <div>
+                <div className="col-6">
                     <InputTextField setInput={setInput} name="Số điện thoại" value={phone} inputType={"phone"} />
                 </div>
             </div>
-            <div className="d-flex m-3 align-items-center justify-content-between">
+            <div className="d-flex m-3 align-items-center justify-content-between" style={{ gap: "1rem" }}>
                 <div className="col-6">
                     <div className="d-inline-block  align-items-center" >
                         <input
@@ -146,7 +146,7 @@ const FormRegister = () => {
                         </label>
                     </div>
                 </div>
-                <div >
+                <div className="col-6">
                     <UploadImage value={image} inputType={"image"} setInput={setInput} />
                 </div>
 

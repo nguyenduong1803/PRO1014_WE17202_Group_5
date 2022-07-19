@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Product.module.css';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import { formatMoney } from "../../../../extensions/formatMoney"
+import { formatMoney } from "../../../extensions/formatMoney"
 import AddIcon from '@mui/icons-material/Add';
 
 function BasicRating() {

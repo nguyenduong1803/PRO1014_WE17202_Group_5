@@ -18,98 +18,83 @@ const AuthSlice = createSlice({
     initialState: {
         status: "idle",
         products: [],
+        isSuccess: false,
+        searchText: ""
     },
     reducers: {
+        searchProduct: (state, action) => {
+            state.searchText = action.payload
+            return state
+        },
     },
     extraReducers: buiders => {
         buiders
             .addCase(getProducts.pending, (state) => {
                 state.status = "loading"
-            }).addCase(getProducts.fulfilled, (state) => {
-                state.status = "idle"
-            }).addCase(getUserAuth.fulfilled, (state, action) => {
-                state.status = "idle"
-                state.user = action.payload
-            }).addCase(loginSuccess.fulfilled, (state, action) => {
-                state.status = "idle"
-                state.isSuccess = true
-                state.user = action.payload.user
-                state.token = action.payload.token
-            }).addCase(loginFailure.fulfilled, (state, action) => {
-                state.status = "idle"
-                state.isSuccess = action.payload
-            }).addCase(logOut.pending, (state) => {
-                state.status = "loading"
-            }).addCase(logOut.fulfilled, (state) => {
-                state.status = "idle"
-                state.token = ""
-                state.isSuccess = false
-                state.user = {}
+            }).addCase(getProducts.fulfilled, (state, action) => {
+                console.log(action.payload)
+                if (action.payload.status === "success") {
+                    state.products = action.payload.data
+                    state.isSuccess = true
+                    state.status = "idle"
+                } else {
+                    state.isSuccess = false
+                    state.status = "idle"
+                }
+            }).addCase(deleteProductById.fulfilled, (state, action) => {
+                if (action.payload.status === true) {
+                    state.products.forEach((item,index)=>{
+                        if(item.id===action.payload.id){
+                            state.products.splice(index, 1)
+                        }
+                    })
+                } else {
+                    console.log(action.payload)
+                }
             })
     }
 })
 export const getProducts = createAsyncThunk("product/getProducts", async (payload, action) => {
-    let token
-    let status
+    let payloads
     console.log(payload, action)
     await axios
-        .get(api + "getLists?q=&sortCreateAt=desc&limit=10&page=1", {
+        .get(api + "product/getLists", {
             params: {
-                q: payload.keySearch,
-                limit: payload.limit,
-                page: payload.pageIndex
+                q: "",
+                sortCreateAt: payload?.sort||"desc",
+                limit: payload?.limit ||10,
+                page: payload?.page||1,
             }
         })
-        .then(async (response) => {
-            token = response.data.token
-            await action.dispatch(loginSuccess(token))
-            await action.dispatch(getUserAuth())
+        .then(response => {
+            console.log(response.data.data)
+            payloads = { data: response.data.data, status: "success" }
         }).catch(function (err) {
             console.log(err)
-            status = err.response.status
-            action.dispatch(loginFailure(err.response.status))
+            payloads = { data: "", status: err.response.status }
         })
-    return { token, status }
+    return payloads
 })
-
-export const getUserAuth = createAsyncThunk("auth/getUser", async () => {
-    let user
-    if (getToken() !== undefined && getToken()) {
-        await axios.get(api + "auth/getInfoUser",
-            { headers: { "Authorization": `Bearer ${getToken()}` } })
-            .then(res => {
-                user = res.data.user
-            }).catch((error) => {
-                console.log(error)
-            });
-    }
-    return user
+export const deleteProductById = createAsyncThunk("product/deleteProductById", async (payload, action) => {
+    let payloads
+    console.log(payload, action)
+    await axios
+        .delete(api + `product/delete/${payload}`, {
+            headers: { "Authorization": `Bearer ${getToken()}` }
+        })
+        .then(response => {
+            console.log(response.data.status)
+            payloads = { data: payload, status: response.data.status }
+            action.dispatch(getProducts())
+        }).catch(function (err) {
+            console.log(err)
+            payloads = { data: "", status: err.response.status }
+        })
+    return payloads
 })
-const loginSuccess = createAsyncThunk("auth/loginSuccess", async (token) => {
-    let user;
-    await setTokenSession(token)
-    await axios.get(api + "auth/getInfoUser",
-        { headers: { "Authorization": `Bearer ${getToken()}` } })
-        .then(res => {
-            user = res.data.user
-        }).catch((error) => {
-            console.log(error)
-        });
-    return user;
-})
-const loginFailure = createAsyncThunk("auth/loginFailure", (err) => {
-    return err
-})
-export const logOut = createAsyncThunk("auth/logout", async (payload, action) => {
-    console.log(getToken())
-    await axios.get(api + "auth/logout",
-        { headers: { "Authorization": `Bearer ${getToken()}` } })
-        .then(res => {
-            console.log(res)
-        }).catch((error) => {
-            console.log(error)
-        });
-    await removeUserSession()
-})
+export const searchProduct = (payload, action) => {
+    console.log(payload, action)
+    return { type: "product/searchProduct", payload }
+}
 
 export default AuthSlice

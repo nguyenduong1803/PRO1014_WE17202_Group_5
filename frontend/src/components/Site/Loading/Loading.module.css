@@ -10,6 +10,7 @@
   -webkit-animation: bounce var(--duration) linear infinite;
   animation: bounce var(--duration) linear infinite;
 }
+
 .typewriter .slide {
   width: 92px;
   height: 20px;
@@ -20,6 +21,7 @@
   -webkit-animation: slide var(--duration) ease infinite;
   animation: slide var(--duration) ease infinite;
 }
+
 .typewriter .slide:before,
 .typewriter .slide:after,
 .typewriter .slide i:before {
@@ -27,12 +29,14 @@
   position: absolute;
   background: var(--tool);
 }
+
 .typewriter .slide:before {
   width: 2px;
   height: 8px;
   top: 6px;
   left: 100%;
 }
+
 .typewriter .slide:after {
   left: 94px;
   top: 3px;
@@ -40,6 +44,7 @@
   width: 6px;
   border-radius: 3px;
 }
+
 .typewriter .slide i {
   display: block;
   position: absolute;
@@ -49,6 +54,7 @@
   top: 4px;
   background: var(--tool);
 }
+
 .typewriter .slide i:before {
   right: 100%;
   top: -2px;
@@ -56,6 +62,7 @@
   border-radius: 2px;
   height: 14px;
 }
+
 .typewriter .paper {
   position: absolute;
   left: 24px;
@@ -68,6 +75,7 @@
   -webkit-animation: paper var(--duration) linear infinite;
   animation: paper var(--duration) linear infinite;
 }
+
 .typewriter .paper:before {
   content: "";
   position: absolute;
@@ -80,6 +88,7 @@
   background: var(--text);
   box-shadow: 0 12px 0 var(--text), 0 24px 0 var(--text), 0 36px 0 var(--text);
 }
+
 .typewriter .keyboard {
   width: 120px;
   height: 56px;
@@ -87,11 +96,13 @@
   z-index: 1;
   position: relative;
 }
+
 .typewriter .keyboard:before,
 .typewriter .keyboard:after {
   content: "";
   position: absolute;
 }
+
 .typewriter .keyboard:before {
   top: 0;
   left: 0;
@@ -102,6 +113,7 @@
   transform: perspective(10px) rotateX(2deg);
   transform-origin: 50% 100%;
 }
+
 .typewriter .keyboard:after {
   left: 2px;
   top: 25px;
@@ -117,131 +129,163 @@
 }
 
 @-webkit-keyframes bounce {
+
   85%,
   92%,
   100% {
     transform: translateY(0);
   }
+
   89% {
     transform: translateY(-4px);
   }
+
   95% {
     transform: translateY(2px);
   }
 }
 
 @keyframes bounce {
+
   85%,
   92%,
   100% {
     transform: translateY(0);
   }
+
   89% {
     transform: translateY(-4px);
   }
+
   95% {
     transform: translateY(2px);
   }
 }
+
 @-webkit-keyframes slide {
   5% {
     transform: translateX(14px);
   }
+
   15%,
   30% {
     transform: translateX(6px);
   }
+
   40%,
   55% {
     transform: translateX(0);
   }
+
   65%,
   70% {
     transform: translateX(-4px);
   }
+
   80%,
   89% {
     transform: translateX(-12px);
   }
+
   100% {
     transform: translateX(14px);
   }
 }
+
 @keyframes slide {
   5% {
     transform: translateX(14px);
   }
+
   15%,
   30% {
     transform: translateX(6px);
   }
+
   40%,
   55% {
     transform: translateX(0);
   }
+
   65%,
   70% {
     transform: translateX(-4px);
   }
+
   80%,
   89% {
     transform: translateX(-12px);
   }
+
   100% {
     transform: translateX(14px);
   }
 }
+
 @-webkit-keyframes paper {
   5% {
     transform: translateY(46px);
   }
+
   20%,
   30% {
     transform: translateY(34px);
   }
+
   40%,
   55% {
     transform: translateY(22px);
   }
+
   65%,
   70% {
     transform: translateY(10px);
   }
+
   80%,
   85% {
     transform: translateY(0);
   }
+
   92%,
   100% {
     transform: translateY(46px);
   }
 }
+
 @keyframes paper {
   5% {
     transform: translateY(46px);
   }
+
   20%,
   30% {
     transform: translateY(34px);
   }
+
   40%,
   55% {
     transform: translateY(22px);
   }
+
   65%,
   70% {
     transform: translateY(10px);
   }
+
   80%,
   85% {
     transform: translateY(0);
   }
+
   92%,
   100% {
     transform: translateY(46px);
   }
 }
+
 @-webkit-keyframes keyboard {
+
   5%,
   12%,
   21%,
@@ -257,125 +301,63 @@
       22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
       60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
   }
+
   9% {
     box-shadow: 15px 2px 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
       60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
       22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
       60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
   }
+
   18% {
     box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
       60px 2px 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
       22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
       60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
   }
+
   27% {
     box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
       60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
       22px 12px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
       60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
   }
+
   36% {
     box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
       60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
       22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 12px 0 var(--key),
       60px 12px 0 var(--key), 68px 12px 0 var(--key), 83px 10px 0 var(--key);
   }
+
   45% {
     box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
       60px 0 0 var(--key), 75px 0 0 var(--key), 90px 2px 0 var(--key),
       22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
       60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
   }
+
   54% {
     box-shadow: 15px 0 0 var(--key), 30px 2px 0 var(--key), 45px 0 0 var(--key),
       60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
       22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
       60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
   }
+
   63% {
     box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
       60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
       22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
       60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 12px 0 var(--key);
   }
+
   72% {
     box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 2px 0 var(--key),
       60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
       22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
       60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
   }
-  81% {
-    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
-      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
-      22px 10px 0 var(--key), 37px 12px 0 var(--key), 52px 10px 0 var(--key),
-      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
-  }
-}
-@keyframes keyboard {
-  5%,
-  12%,
-  21%,
-  30%,
-  39%,
-  48%,
-  57%,
-  66%,
-  75%,
-  84% {
-    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
-      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
-      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
-      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
-  }
-  9% {
-    box-shadow: 15px 2px 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
-      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
-      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
-      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
-  }
-  18% {
-    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
-      60px 2px 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
-      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
-      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
-  }
-  27% {
-    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
-      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
-      22px 12px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
-      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
-  }
-  36% {
-    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
-      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
-      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 12px 0 var(--key),
-      60px 12px 0 var(--key), 68px 12px 0 var(--key), 83px 10px 0 var(--key);
-  }
-  45% {
-    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
-      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 2px 0 var(--key),
-      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
-      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
-  }
-  54% {
-    box-shadow: 15px 0 0 var(--key), 30px 2px 0 var(--key), 45px 0 0 var(--key),
-      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
-      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
-      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
-  }
-  63% {
-    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
-      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
-      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
-      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 12px 0 var(--key);
-  }
-  72% {
-    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 2px 0 var(--key),
-      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
-      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
-      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
-  }
+
   81% {
     box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
       60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
@@ -384,7 +366,169 @@
   }
 }
 
+@keyframes keyboard {
+
+  5%,
+  12%,
+  21%,
+  30%,
+  39%,
+  48%,
+  57%,
+  66%,
+  75%,
+  84% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
+      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
+      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
+      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  9% {
+    box-shadow: 15px 2px 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
+      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
+      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
+      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  18% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
+      60px 2px 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
+      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
+      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  27% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
+      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
+      22px 12px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
+      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  36% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
+      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
+      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 12px 0 var(--key),
+      60px 12px 0 var(--key), 68px 12px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  45% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
+      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 2px 0 var(--key),
+      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
+      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  54% {
+    box-shadow: 15px 0 0 var(--key), 30px 2px 0 var(--key), 45px 0 0 var(--key),
+      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
+      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
+      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  63% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
+      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
+      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
+      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 12px 0 var(--key);
+  }
+
+  72% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 2px 0 var(--key),
+      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
+      22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key),
+      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  81% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key),
+      60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key),
+      22px 10px 0 var(--key), 37px 12px 0 var(--key), 52px 10px 0 var(--key),
+      60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+}
+
+
+
+.loader1 {
+  display: inline-block;
+  font-size: 0px;
+  padding: 0px;
+}
+
+.wrap {
+  width: 100%;
+  height: 100vh;
+  z-index: 20;
+  background: linear-gradient(to right, rgba(251, 248, 247, 0.7), rgba(251, 249, 240, 0.9), rgba(251, 249, 240, 0.9));
+
+}
+
+.loader1 span {
+  vertical-align: middle;
+  border-radius: 100%;
+
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  margin: 3px 2px;
+  -webkit-animation: loader1 0.6s linear infinite alternate;
+  animation: loader1 0.6s linear infinite alternate;
+}
+
+.loader1 span:nth-child(1) {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+  background: rgba(255, 114, 114,0.6);
+}
+
+.loader1 span:nth-child(2) {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+  background: rgba(255, 114, 114,0.8);
+}
+
+.loader1 span:nth-child(3) {
+  -webkit-animation-delay: -0.26666s;
+  animation-delay: -0.26666s;
+  background: rgba(255, 114, 114,1);
+}
+
+.loader1 span:nth-child(4) {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+  background: rgba(255, 114, 114,0.8);
+
+}
+
+.loader1 span:nth-child(5) {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+  background: rgba(255, 114, 114,0.4);
+}
+
+@keyframes loader1 {
+  from {
+    transform: scale(0, 0);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+@-webkit-keyframes loader1 {
+  from {
+    -webkit-transform: scale(0, 0);
+  }
+
+  to {
+    -webkit-transform: scale(1, 1);
+  }
+}
+
 .loading {
+  width: 100%;
   min-height: 100vh;
   display: flex;
   font-family: "Roboto", Arial;

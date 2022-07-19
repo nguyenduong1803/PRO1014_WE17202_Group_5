@@ -8,15 +8,15 @@ export const tableProduct = [
     },
     {
       name: "Ảnh",
-      width: 130,
+      width: 60,
       dataKey: "images",
       isFixed: true,
       type: "img"
     },
     {
       name: "Mã sản phẩm",
-      width: 250,
-      dataKey: "_id",
+      width: 150,
+      dataKey: "id",
       isFixed: false,
       type: "cell"
     },
@@ -36,15 +36,15 @@ export const tableProduct = [
     },
     {
       name: "Mô tả",
-      width: 150,
-      dataKey: "describe",
+      width: 350,
+      dataKey: "short_desscription",
       isFixed: false,
       type: "cell"
     },
     {
       name: "Mã giảm giá",
       width: 150,
-      dataKey: "discount",
+      dataKey: "id_code_sale",
       isFixed: false,
       type: "cell"
     },
@@ -58,7 +58,7 @@ export const tableProduct = [
     {
       name: "Thời gian tạo",
       width: 250,
-      dataKey: "timeCreate",
+      dataKey: "create_at",
       isFixed: false,
       type: "cell"
     },
@@ -72,7 +72,7 @@ export const tableProduct = [
     {
       name: "Quản lý",
       width: 150,
-      dataKey: "_id",
+      dataKey: "id",
       isFixed: "right",
       type: "edit"
     },

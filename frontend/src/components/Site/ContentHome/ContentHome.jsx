@@ -1,7 +1,7 @@
 import React from "react";
 import Banner from "./Banner/Banner";
 import Categories from "./Categories/Categories";
-import Product from "./Product/Product";
+import Product from "../Product/Product";
 import Trending from "./TrendingOrder/TrendingOrder";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ContentRight from "./ContentHomeRight/SaleFood/SaleFood";
@@ -50,7 +50,7 @@ const Products = [
     price: 1200000,
   },
   {
-    img: product2,
+    img: "https://img.freepik.com/free-photo/thai-food-shrimp-spicy-fish-sauce_1150-38077.jpg?t=st=1658235944~exp=1658236544~hmac=53051792149dc74df6cc7d9b3360e2a04cb3300569bba2e865b63c88fc01972c&w=996",
     title: "Lẩu Cua",
     price: 490000,
   },

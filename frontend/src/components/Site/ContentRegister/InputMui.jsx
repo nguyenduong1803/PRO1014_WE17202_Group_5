@@ -56,19 +56,20 @@ function InputPassword({ setPassword, password }) {
     )
 }
 
-function InputTextField({ name, inputType, setInput,value }) {
-    const handleChangeInput=(e)=>{
-       setInput(prev=>{ 
-        prev[inputType] = e.target.value
-        return {...prev }
-       })
+function InputTextField({ name, inputType, setInput, value }) {
+    const handleChangeInput = (e) => {
+        setInput(prev => {
+            prev[inputType] = e.target.value
+            return { ...prev }
+        })
     }
     return (
         <TextField
+            fullWidth
             id="outlined-basic"
             label={name}
             variant="outlined"
-            onChange={e=>handleChangeInput(e)}
+            onChange={e => handleChangeInput(e)}
             value={value}
         />
     );

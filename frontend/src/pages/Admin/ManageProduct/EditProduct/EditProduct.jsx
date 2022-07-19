@@ -8,60 +8,68 @@ import Header from "../../../../components/Admin/Header/Header";
 import { DataContext } from "../../../../contexts/DataContext";
 import ShowCategory from "../../../../components/Admin/ShowCategory/ShowCategory"
 import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
+import { useDispatch, useSelector } from "react-redux";
+import { searchProduct } from "../../../../redux/SliceReducer/Admin/ManagerProductSlice";
+import { selectProductById } from "../../../../redux/selector";
 function EditProduct() {
-  const { data } = useContext(DataContext);
+  
+
+  const product = useSelector(selectProductById)
+
+
+
   const [status, setStatus] = useState(true);
   const [warnDate, setWarnDate] = useState("");
   const [saleDateStart, setSaleDateStart] = useState();
   const [saleDateEnd, setSaleDateEnd] = useState();
   const [img, setImg] = useState("");
   const [imgUrls, setImgUrls] = useState("");
-  const [imgBase64, setImgBase64] = useState("");
 
-  const history = useHistory();
   const [imgs, setImgs] = useState([]);
-
-
   const idProduct = window.location.hash.split("#")[1];
-  const productDetailt = data && data.find((e) => e?._id === idProduct);
-  // console.log(productDetailt.timeCreate);
-  
   const [registerForm, setRegisterForm] = useState({
-    name: productDetailt?.name,
-    _id: productDetailt?._id,
-    describe: productDetailt?.describe,
-    price: productDetailt?.price,
+    name: product?.name,
+    id: product?.id,
+    short_desscription: product?.short_desscription,
+    price: product?.price,
     discount: 0,
-    timeCreate: productDetailt?.updatedAt,
-    quantity: productDetailt?.quantity,
+    timeCreate: product?.updatedAt,
+    quantity: product?.quantity,
     categories: "Hoa quả",
     comment: [],
-    status: productDetailt?.status,
+    status: product?.status,
     unit: "Kg",
-    // timeDiscount: [{ start: productDetailt?.timeCreate, end: productDetailt?.timeCreate }],
   });
-  function getBase64(file, cb) {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      return cb(reader.result);
-    };
-  }
 
-  useEffect(() => {
-    if (saleDateStart && saleDateEnd) {
-      const start = new Date(saleDateStart);
-      const end = new Date(saleDateEnd);
-      setWarnDate((end - start) / (1000 * 3600 * 24));
-    } else {
-      setWarnDate("");
-    }
-  }, [saleDateEnd, saleDateStart]);
-  useEffect(() => {
+  useEffect( () => {
+    // if (saleDateStart && saleDateEnd) {
+    //   const start = new Date(saleDateStart);
+    //   const end = new Date(saleDateEnd);
+    //   setWarnDate((end - start) / (1000 * 3600 * 24));
+    // } else {
+    //   setWarnDate("");
+    // }
+    console.log(idProduct)
+    console.log(product)
+     setRegisterForm({
+      name: product?.name,
+      id: product?.id,
+      short_desscription: product?.short_desscription,
+      price: product?.price,
+      discount: 0,
+      timeCreate: product?.updatedAt,
+      quantity: product?.quantity,
+      categories: "Hoa quả",
+      comment: [],
+      status: product?.status,
+      unit: "Kg",
+    },[])
+
     return () => {
       img && URL.revokeObjectURL(img);
     };
-  }, [img]);
+  }, [saleDateEnd, saleDateStart, img]);
+
   const breadcrumItem = [
     {
       href: "/",
@@ -80,32 +88,13 @@ function EditProduct() {
     },
   ];
 
-  const onChangeRegisterForm = (event) => {
-    setRegisterForm({
-      ...registerForm,
-      [event.target.name]: event.target.value,
-
-    });
-  };
-
-  function getImg(e) {
-    for (let i = 0; i < e.target.files.length; i++) {
-      setImgUrls((prev) => [...prev, URL.createObjectURL(e.target.files[i])]);
-
-      getBase64(e.target.files[i], (result) => {
-        setImgBase64((prev) => [...prev, result]);
-      });
-
-    }
-  }
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     var formData = new FormData();
     formData.append("name", registerForm.name);
-    formData.append("describe", registerForm.describe);
+    formData.append("short_desscription", registerForm.short_desscription);
     formData.append("price", registerForm.price);
     formData.append("discount", registerForm.discount);
     formData.append("quantity", registerForm.quantity);
@@ -113,19 +102,21 @@ function EditProduct() {
     formData.append("status", registerForm.status);
     formData.append("unit", registerForm.unit);
     formData.append("timeCreate", registerForm.timeCreate);
-    formData.append("images", imgs);
-    axios.put("http://localhost:5000/api/products/" + idProduct, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZTI1MzQwOWQ0YThiYjRlMWU1ZTYiLCJpYXQiOjE2NTU3OTkyMjJ9.gpm8o8864y8Y79qwoi5z4jBMIdrl8nvEcOPm44l8CEA",
-      },
+    imgs.forEach(img => {
+      formData.append("images", img);
     })
-      .then((res) => {
-        console.log(res.data);
-        // History.push("/admin/quan-ly-san-pham");
-      })
-      .catch((err) => console.log(err));
+    // axios.put("http://localhost:5000/api/products/" + idProduct, formData, {
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //     Authorization:
+    //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZTI1MzQwOWQ0YThiYjRlMWU1ZTYiLCJpYXQiOjE2NTU3OTkyMjJ9.gpm8o8864y8Y79qwoi5z4jBMIdrl8nvEcOPm44l8CEA",
+    //   },
+    // })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     // History.push("/admin/quan-ly-san-pham");
+    //   })
+    //   .catch((err) => console.log(err));
 
   };
 
@@ -141,39 +132,38 @@ function EditProduct() {
         <div style={!status ? { filter: `brightness(80%)` } : {}}>
           <form
             onSubmit={handleSubmit}
-            onChange={(e) => onChangeRegisterForm(e)}
             encType="multipart/form-data"
           >
             <div className={`${styles.formRow} `}>
               <div className={`${styles.uploadImg}`}>
-              <div className={`${styles.imgsWrapper}`}>
-                    {imgUrls ? (
-                      imgUrls.map((e, index) => (
-                        <img src={e} alt="" key={index} />
-                      ))
-                    ) : (
-                      <>
-                        <div>Chưa có ảnh</div>
-                        <div>Chưa có ảnh</div>
-                        <div>Chưa có ảnh</div>
-                      </>
-                    )}
-                  </div>
+                <div className={`${styles.imgsWrapper}`}>
+                  {imgUrls ? (
+                    imgUrls.map((e, index) => (
+                      <img src={e} alt="" key={index} />
+                    ))
+                  ) : (
+                    <>
+                      <div>Chưa có ảnh</div>
+                      <div>Chưa có ảnh</div>
+                      <div>Chưa có ảnh</div>
+                    </>
+                  )}
+                </div>
 
 
-                  <label htmlFor="upLoadImg">
-                    <p>Tải ảnh lên</p>
+                <label htmlFor="upLoadImg">
+                  <p>Tải ảnh lên</p>
 
-                  </label>
-                  <input
-                    id="upLoadImg"
-                    type="file"
-                    className={`${styles.importImg}`}
-                    onChange={getImg}
-                    accept="image/jpeg,image/jpg"
-                    multiple
-                  />
-             
+                </label>
+                <input
+                  id="upLoadImg"
+                  type="file"
+                  className={`${styles.importImg}`}
+                  onChange={() => { }}
+                  accept="image/jpeg,image/jpg"
+                  multiple
+                />
+
               </div>
               <div className={`${styles.showHideProducts} `}>
                 <label
@@ -231,8 +221,8 @@ function EditProduct() {
                     </label>
                     <input
                       type="text"
-                      name="describe"
-                      value={registerForm.describe}
+                      name="short_desscription"
+                      value={registerForm.short_desscription}
                     />
                   </div>
                 </div>
@@ -294,7 +284,7 @@ function EditProduct() {
                     <label htmlFor="">
                       Mã sản phẩm <span>*</span>
                     </label>
-                    <input type="text" value={registerForm._id} disabled />
+                    <input type="text" value={registerForm.id} disabled />
                   </div>
                 </div>
                 <div className={`${styles.formRight} `}>
