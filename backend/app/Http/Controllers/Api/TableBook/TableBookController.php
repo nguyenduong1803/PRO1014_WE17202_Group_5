@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api\TableBook;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TableBook\TableBookCreate;
+use App\Http\Requests\TableBook\TableBookUpdate;
 use App\Models\TableBook;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use function PHPUnit\Framework\isEmpty;
 
 class TableBookController extends Controller
 {
@@ -66,5 +66,37 @@ class TableBookController extends Controller
         if(!isset($result[0])) return response() ->json(["msg" => "Sản phẩm đã bị xoá hoặc không tôn tại!", "status" => false],404);
         $modelTableBook -> deleteTableBook($params2);
         return response() ->json(["msg" => 'Xoá đặt bàn thành công!', "status" => true],200);
+    }
+
+    public function updateTableBook(TableBookUpdate $request) {
+        $validate = $request -> validated();
+        $modelTableBook = new TableBook();
+        $paramsDetail = [
+            $validate['id']
+        ];
+        $resultDetail = $modelTableBook -> getDetail($paramsDetail);
+        $data =  $resultDetail[0];
+        if(!isset($data)) return response() ->json(["msg" => "Dữ liệu không tồn tại!", "status" => false],404);
+        $user = Auth::user();
+        $updateTimeUpdateAt = date("Y-m-d H:i:s",time());
+        $updateNameUser = isset($validate['name_user']) ? $validate['name_user'] : $data -> name_user;
+        $updateIdTable = isset($validate['id_table']) ? $validate['id_table'] : $data -> id_table;
+        $updatePhone = isset($validate['phone']) ? $validate['phone'] : $data -> phone;
+        $updateTotalUser = isset($validate['total_user']) ? $validate['total_user'] :$data -> total_user;
+        $updateStatusBook = isset($validate['status_book']) ? $validate['status_book'] : $data -> status_book;
+        $updateTimeBook = isset($validate['time_book']) ? $validate['time_book'] : $data -> time_book;
+        $params = [
+            $updateNameUser,
+            $updateIdTable,
+            $updatePhone,
+            $updateTotalUser,
+            $updateStatusBook ,
+            $updateTimeBook,
+            $user['id'],
+            $updateTimeUpdateAt,
+            $validate['id']
+        ];
+        $modelTableBook -> updateTableBook($params);
+        return response() ->json(["msg" => "Cập nhật đặt bàn thành công!", "status" => true],200);
     }
 }

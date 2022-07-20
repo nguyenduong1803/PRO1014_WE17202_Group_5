@@ -19,6 +19,11 @@ class TableBook extends Model
         return DB::select('SELECT * FROM table_book WHERE `id_user` = ? AND `is_delete` = ?', $params);
     }
 
+    public function getDetail($params): array
+    {
+        return DB::select('SELECT * FROM table_book WHERE `id` = ? AND `is_delete` = 1', $params);
+    }
+
     public function getListsTableBook() {
         return DB::select('SELECT * FROM table_book WHERE `is_delete` = 1');
     }
@@ -29,5 +34,11 @@ class TableBook extends Model
 
     public function deleteTableBook($params) {
         DB::update("UPDATE table_book SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
+    }
+    public function updateTableBook($params) {
+        DB::update("UPDATE table_book SET `name_user` = ?, `id_table` = ?,`phone` = ?,
+                    `total_user` = ?, `status_book` = ?, `time_book` = ?,`id_user` = ?,
+                     `update_at` = ?
+                    WHERE `id` = ? AND `is_delete` = 1", $params);
     }
 }

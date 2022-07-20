@@ -54,6 +54,7 @@ Route::group(['namespace' => 'TableBook', 'prefix' => 'tableBook'], function(){
         Route::post('create', [\App\Http\Controllers\Api\TableBook\TableBookController::class, 'createBook']);
         Route::get('getTablesBookByUser', [\App\Http\Controllers\Api\TableBook\TableBookController::class, 'getTablesBookByUser']);
         Route::delete('delete/{id}', [\App\Http\Controllers\Api\TableBook\TableBookController::class, 'deleteTableBook']);
+        Route::post('update', [\App\Http\Controllers\Api\TableBook\TableBookController::class, 'updateTableBook']);
     });
     Route::get('getLists', [\App\Http\Controllers\Api\TableBook\TableBookController::class, 'getListsTableBook']);
 });
