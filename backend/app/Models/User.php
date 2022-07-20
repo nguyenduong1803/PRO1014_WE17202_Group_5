@@ -28,7 +28,7 @@ class User extends Authenticatable
         return $result;
     }
 
-    public function getForgotPass($id) {
+    public function checkExistsUserById($id) {
         $result = User::where('id', $id)->first();
         return $result;
     }

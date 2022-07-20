@@ -19,4 +19,9 @@ class TableBook extends Model
         $result = DB::select('SELECT * FROM table_book WHERE `id_user` = ? AND `is_delete` = ?', $params);
         return $result;
     }
+
+    public function getListsTableBook() {
+        $result = DB::select('SELECT * FROM table_book WHERE `is_delete` = 1');
+        return $result;
+    }
 }
