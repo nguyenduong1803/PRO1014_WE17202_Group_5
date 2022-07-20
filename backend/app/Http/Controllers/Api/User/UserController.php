@@ -36,7 +36,7 @@ class UserController extends Controller
 
     public function getPassForgot($id, $token) {
         $modelUser = new User();
-        $user = $modelUser -> getForgotPass($id);
+        $user = $modelUser -> checkExistsUserById($id);
         if($user['token_verify'] === $token) {
             return response() ->json(["msg" => "Get link success!"],200);
         } else {
@@ -48,7 +48,7 @@ class UserController extends Controller
     public function resetPassword(UserResetPassword $request) {
         $validate = $request ->validated();
         $modelUser = new User();
-        $user = $modelUser -> getForgotPass($validate['id']);
+        $user = $modelUser -> checkExistsUserById($validate['id']);
         if($user['token_verify'] === $validate['token']) {
             $params = [
                 NULL,
