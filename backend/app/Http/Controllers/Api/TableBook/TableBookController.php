@@ -7,6 +7,7 @@ use App\Http\Requests\TableBook\TableBookCreate;
 use App\Models\TableBook;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isEmpty;
 
 class TableBookController extends Controller
 {
@@ -46,7 +47,24 @@ class TableBookController extends Controller
         $modelTableBook = new TableBook();
         $data = $modelTableBook -> getListsTableBook();
         if(!isset($data)) response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
-        return response() ->json(["data" => $data, "status" => false],200);
+        return response() ->json(["data" => $data, "status" => true],200);
+    }
 
+    public function deleteTableBook($id) {
+        $modelTableBook = new TableBook();
+        $timeStamp = date("Y-m-d H:i:s",time());
+        $params = [
+            (int)$id,
+            1
+        ];
+        $result = $modelTableBook -> checkExistsTableBook($params);
+        $params2 = [
+            2,
+            $timeStamp,
+            $id
+        ];
+        if(!isset($result[0])) return response() ->json(["msg" => "Sản phẩm đã bị xoá hoặc không tôn tại!", "status" => false],404);
+        $modelTableBook -> deleteTableBook($params2);
+        return response() ->json(["msg" => 'Xoá đặt bàn thành công!', "status" => true],200);
     }
 }

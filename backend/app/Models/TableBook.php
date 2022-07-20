@@ -16,12 +16,18 @@ class TableBook extends Model
     values (?, ?, ?, ?, ?, ?, ?)', $params);
     }
     public function getTablesBookByUser($params) {
-        $result = DB::select('SELECT * FROM table_book WHERE `id_user` = ? AND `is_delete` = ?', $params);
-        return $result;
+        return DB::select('SELECT * FROM table_book WHERE `id_user` = ? AND `is_delete` = ?', $params);
     }
 
     public function getListsTableBook() {
-        $result = DB::select('SELECT * FROM table_book WHERE `is_delete` = 1');
-        return $result;
+        return DB::select('SELECT * FROM table_book WHERE `is_delete` = 1');
+    }
+
+    public function checkExistsTableBook($params) {
+        return DB::select('SELECT * FROM table_book WHERE `id` = ? AND `is_delete` = ? LIMIT 1', $params);
+    }
+
+    public function deleteTableBook($params) {
+        DB::update("UPDATE table_book SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
     }
 }
