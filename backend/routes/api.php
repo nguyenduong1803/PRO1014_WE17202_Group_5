@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 Route::group(['namespace' => 'Auth', 'prefix' => 'auth'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::get('getInfoUser', [\App\Http\Controllers\Api\Auth\AuthController::class, 'getInfoUser']);
@@ -47,6 +48,13 @@ Route::group(['namespace' => 'Tables', 'prefix' => 'tables'], function(){
     });
     Route::get('lists', [\App\Http\Controllers\Api\Tables\TablesControllers::class, 'getLists']);
 });
+
+Route::group(['namespace' => 'TableBook', 'prefix' => 'tableBook'], function(){
+    Route::middleware('auth:api') -> group(function () {
+        Route::post('create', [\App\Http\Controllers\Api\TableBook\TableBookController::class, 'createBook']);
+    });
+});
+
 
 
 Route::group(['namespace' => 'User', 'prefix' => 'user'], function(){
