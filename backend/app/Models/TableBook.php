@@ -14,8 +14,9 @@ class TableBook extends Model
         DB::insert('INSERT INTO table_book
     (name_user, id_table, phone,total_user,status_book,time_book, id_user)
     values (?, ?, ?, ?, ?, ?, ?)', $params);
-
-
-
+    }
+    public function getTablesBookByUser($params) {
+        $result = DB::select('SELECT * FROM table_book WHERE `id_user` = ? AND `is_delete` = ?', $params);
+        return $result;
     }
 }

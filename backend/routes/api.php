@@ -52,6 +52,7 @@ Route::group(['namespace' => 'Tables', 'prefix' => 'tables'], function(){
 Route::group(['namespace' => 'TableBook', 'prefix' => 'tableBook'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\TableBook\TableBookController::class, 'createBook']);
+        Route::get('getTablesBookByUser', [\App\Http\Controllers\Api\TableBook\TableBookController::class, 'getTablesBookByUser']);
     });
 });
 

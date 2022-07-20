@@ -24,6 +24,18 @@ class TableBookController extends Controller
         ];
         $modelTableBook -> create($params);
         return response() ->json(["msg" => "Đặt bàn thành công!", "status" => true],200);
+    }
+
+    public function getTablesBookByUser() {
+        $user = Auth::user();
+        $modelTableBook = new TableBook();
+        $params = [
+            $user['id'],
+            1
+        ];
+        $data = $modelTableBook -> getTablesBookByUser($params);
+        if(isset($data)) return response() ->json(["data" => $data, "status" => true],200);
+        return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
 
     }
 }
