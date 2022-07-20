@@ -12,8 +12,8 @@ class TableBook extends Model
     use HasFactory;
     public function create($params) {
         DB::insert('INSERT INTO table_book
-    (name_user, id_table, phone,total_user,status_book,time_book)
-    values (?, ?, ?, ?, ?, ?)', $params);
+    (name_user, id_table, phone,total_user,status_book,time_book, id_user)
+    values (?, ?, ?, ?, ?, ?, ?)', $params);
 
 
 
