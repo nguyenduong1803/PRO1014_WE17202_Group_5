@@ -1,8 +1,4 @@
-import React from "react";
-import MenuContentOptions from "./MenuContentOptions/MenuContentOpTions";
-import LayoutSite from "../LayoutSite/LayoutSite";
-import MenuContentDetail from "./MenuContentDetail/MenuContentDetail";
-import product1 from "../../../assets/img/seafood-1.jpg";
+import React from 'react'
 import ButtonCart from "../../../components/Site/ContentHome/ButtonCart/ButtonCart";
 import SearchIcon from '@mui/icons-material/Search';
 import Box from "@mui/material/Box";
@@ -11,6 +7,19 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+import MenuContentOptions from './MenuContentOptions/MenuContentOpTions';
+import LayoutSite from '../LayoutSite/LayoutSite';
+import MenuContentDetail from './MenuContentDetail/MenuContentDetail';
+import product1 from '../../../assets/img/seafood-1.jpg';
+import ButtonCart from "../../../components/Site/ContentHome/ButtonCart/ButtonCart"
+import { useDispatch, useSelector } from 'react-redux';
+
+import { selectLoadingProduct, selectProducts } from '../../../redux/selector';
+import Loading from '../Loading/Loading';
+import CategoryItem from './ProductMenu/ProductMenu';
+import Product from '../Product/Product';
+
 const product = [
   {
     img: product1,
@@ -66,10 +75,16 @@ const product = [
     img: product1,
     title: "overlay",
     content: "Copyright 2022. Made with love by Iqonic Design",
+
+
   },
 ];
 
 function MenuContent() {
+  const dispatch = useDispatch()
+  const listProduct = useSelector(selectProducts)
+  const loadingProduct = useSelector(selectLoadingProduct)
+
   return (
     <LayoutSite>
       <ButtonCart />
@@ -108,19 +123,24 @@ function MenuContent() {
           <div className="col-lg-3">
             <MenuContentOptions />
           </div>
-          <div className="col-lg-9">
-            <div className="row">
-              {product.map((products, index) => {
-                return (
-                  <MenuContentDetail
-                    key={index}
-                    img={products.img}
-                    title={products.title}
-                    content={products.content}
-                  />
-                );
-              })}
-            </div>
+
+          <div className='col-lg-9'>
+            {loadingProduct==="loading" ? <Loading /> : <div className="row" style={{transition:"0.3s"}}>
+              {
+                product && product.map((products, index) => {
+                  return (
+                    <Product
+                      key={index}
+                      img={product1}
+                      title={products.name}
+                      price={products.price}
+                    />
+                  )
+                })
+              }
+            </div>}
+
+
           </div>
         </div>
       </div>

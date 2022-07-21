@@ -1,11 +1,32 @@
 
-.Banner img{
-    /* opacity: 0.5; */
-    background-color: rgba(255,255,255,0.5);
-    width: 100%;
+.Banner {
+    position: relative;
+  
+}
+.Banner .img{
+    position: relative;
     border-radius: 30px;
+    width: 100%;
+    height: 340px;
+    background: url(../../../../assets/img/01.png) no-repeat center right;
+    background-size: cover;
+    background-position: center;
+}
+.Banner .img::after{
+    display: block;
+    position: absolute;
+    background-image: -webkit-gradient(linear, left top, right top, from(#fff), color-stop(65%, #fff), to(rgba(83,100,141,0)));
+    background-image: linear-gradient(90deg, #fff 0%, #fff 65%, rgba(83,100,141,0) 100%);
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 60%;
+    opacity: 0.9;
+    border-radius: 1.6rem;
+    content: '';
 }
 .content{
+    z-index: 5;
     position: absolute;
     margin: -250px 50px;
 }

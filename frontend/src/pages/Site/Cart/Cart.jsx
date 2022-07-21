@@ -35,7 +35,6 @@ function ProductCart({ img, quantity, price, name, id, setCarts, carts }) {
       })
       closeRef.current.parentElement.parentElement.remove()
     }
-
   }
   const [quantityCart, setQuantityCart] = React.useState(quantity)
   return (

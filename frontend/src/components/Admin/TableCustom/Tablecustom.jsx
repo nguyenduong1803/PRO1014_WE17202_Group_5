@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Table from "rsuite/Table";
 import "rsuite-table/dist/css/rsuite-table.css";
 import Loadings from "../../../components/Site/Loadings/Loadings"
+import { searchProduct } from '../../../redux/SliceReducer/Admin/ManagerProductSlice';
+import { useDispatch } from 'react-redux';
 const ImageCell = ({ rowData, dataKey, ...props }) => (
     <Table.Cell {...props} style={{ padding: 0 }}>
         <div
@@ -101,34 +103,39 @@ const PostAction = ({ rowData, dataKey, setIsBlog, path, ...props }) => (
         </div>
     </Table.Cell>
 );
-const EditCell = ({ rowData, dataKey, setIdProduct, ...props }) => (
-    <Table.Cell {...props}>
-        <div className={styles.Celll}>
-            <Link
-                to={{
-                    pathname: `/admin/sua-san-pham`,
-                    search: `#${rowData[dataKey]}`,
-                }}
-                className={`${styles.btnEdit} `}
-                role="button"
-            >
-                Sửa
-            </Link>
-            <button
-                className={`${styles.btnDelete}`}
-                onClick={() => setIdProduct(rowData[dataKey])}
-                role="button"
-                data-toggle="modal"
-                data-target="#exampleModal"
-            >
-                Xóa
-            </button>
-        </div>
-    </Table.Cell>
-);
+const EditCell = ({ rowData, dataKey, setIdProduct, ...props }) => {
+    const dispatch = useDispatch()
+
+    return (
+        <Table.Cell {...props}>
+            <div className={styles.Celll}>
+                <Link
+                    onClick={()=>dispatch(searchProduct(rowData[dataKey]))}
+                    to={{
+                        pathname: `/admin/sua-san-pham`,
+                        search: `#${rowData[dataKey]}`,
+                    }}
+                    className={`${styles.btnEdit} `}
+                    role="button"
+                >
+                    Sửa
+                </Link>
+                <button
+                    className={`${styles.btnDelete}`}
+                    onClick={() => setIdProduct(rowData[dataKey])}
+                    role="button"
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                >
+                    Xóa
+                </button>
+            </div>
+        </Table.Cell>
+    )
+};
 function Tablecustom({ tables, data, setIdProduct, path }) {
     const [loading, setLoading] = React.useState(false)
-
+    console.log(data)
     return (
         <>
             {loading ? <Loadings /> :

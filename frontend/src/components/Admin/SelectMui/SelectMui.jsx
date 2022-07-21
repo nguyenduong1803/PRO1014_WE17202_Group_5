@@ -3,13 +3,15 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { getProducts } from '../../../redux/SliceReducer/Admin/ManagerProductSlice';
+import { useDispatch } from 'react-redux';
 
-function SelectMui({ list, name,setPageSize }) {
+function SelectMui({ list, name, setPageSize }) {
     const [value, setValue] = React.useState('');
-
+    const dispatch = useDispatch()
     const handleChange = (event) => {
         setValue(event.target.value);
-        setPageSize(event.target.value)
+        dispatch(getProducts({limit:event.target.value}))
     };
     const handleClick = () => {
         console.log("@")
@@ -25,7 +27,7 @@ function SelectMui({ list, name,setPageSize }) {
                 onChange={handleChange}
                 defaultValue=""
             >
-                
+
                 {list.map((item, index) => (
                     <MenuItem key={index} value={item.name}>{item.name}</MenuItem>
                 ))}

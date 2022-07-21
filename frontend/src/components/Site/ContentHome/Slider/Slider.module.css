@@ -75,7 +75,7 @@
     margin-top: 50px;
     position: relative;
     width: 270px;
-    height: 440px;
+    height: 340px;
     border-radius: 20px;
     display: flex;
     align-items: flex-start;
@@ -107,7 +107,7 @@
     z-index: 1;
     bottom: 7px;
     width: 255px;
-    height: 230px;
+    height: 130px;
     color: #fff;
     padding: 0 7px;
     font-family: "Poppins", sans-serif;
@@ -126,6 +126,7 @@
   }
   
   .btn {
+    margin-top: 12px;
     width: 248px;
     color: #fff;
     display: flex;
@@ -145,7 +146,7 @@
     color: #fff;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
-    background-color: #f9b02d;
+    background-color: var(--primaryColor);
     border-radius: 7px;
   }
   

@@ -3,11 +3,11 @@ import styles from './Table.module.css'
 import Chair from "./Chair/Chair"
 function Table({ colors, name, status, ...props }) {
     const { color, colorblur } = colors;
-    console.log(color)
     const rootColor = { "--colorPrimary": `${color}`, "--colorBlur": `${colorblur}` }
     // color: {
     //     "--clr": "#b145e9"
     // },
+  
     return (
         <div className={styles.wrap} {...props} style={rootColor} >
             <div className={styles.pulse}></div>

@@ -53,7 +53,6 @@ const AuthSlice = createSlice({
 export const LoginAuth = createAsyncThunk("auth/login", async (payload, action) => {
     let token
     let status
-    console.log(payload, action)
     await axios
         .post(api + "auth/login", {
             email: payload.email,
@@ -100,8 +99,8 @@ const loginFailure = createAsyncThunk("auth/loginFailure", (err) => {
     return err
 })
 export const logOut = createAsyncThunk("auth/logout", async (payload, action) => {
-    await axios.get(api + "api/auth/logout",
-        { headers: { "Authorization": `Bearer ${action.getState().token}` } })
+    await axios.get(api + "auth/logout",
+        { headers: { "Authorization": `Bearer ${getToken()}` } })
         .then(res => {
             console.log(res)
         }).catch((error) => {

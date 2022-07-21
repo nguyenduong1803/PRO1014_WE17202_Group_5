@@ -3,20 +3,17 @@ import styles from "./LayoutSite.module.css"
 import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
-import BarIcon from "../../../assets/svg/BarIcon"
 import Line from "../../../assets/svg/Line"
 import { selectLoading } from "../../../redux/selector"
 import Loadings from "../../../components/Site/Loadings/Loadings"
 import { useSelector } from 'react-redux'
-
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import Footer from '../../../components/Site/FooterContent/Footer';
-
 import BarArrow from '../../../assets/svg/BarArrow'
 
 
 function LayoutSite({ children }) {
     const load = useSelector(selectLoading)
+  
     return (
         <>
             {load === "loading" ? <Loadings /> : ""}
@@ -27,7 +24,7 @@ function LayoutSite({ children }) {
                     {/* <div className={styles.shapeCircle}></div> */}
                     <img className={styles.overlayImg} src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-02.webp" alt="" />
                     {/* <div className={styles.overlayQ}><img  src="https://iqonic.design/wp-content/themes/iqonic/assets/images/bg-01.webp" alt="" /></div> */}
-                   <div className={styles.bgrLine}> <Line /></div>
+                    <div className={styles.bgrLine}> <Line /></div>
                 </div>
                 <div className="position-relative" style={{ zIndex: 2 }}>{children}</div>
             </main>

@@ -23,10 +23,22 @@ export const selectLoading = (state) => state.AuthSlice.status
 // register
 export const selectLoadingRegister = (state) => state.AccountSlice.status
 export const selectIsuccess = (state) => state.AccountSlice.mess
+// product
+export const selectProducts = (state) => state.ManagerProduct.products
+export const selectLoadingProduct = (state) => state.ManagerProduct.status
+export const selectSearchText = (state) => state.ManagerProduct.searchText
+// tables
+export const selectListTable = (state)=>state.OrderTableSlice.tables
+
+
+export const selectProductById = createSelector(selectProducts, selectSearchText,
+    (product, searchText) => {
+        return product.find((item)=>item.id===Number(searchText))
+    })
 
 export const remainingSelector = createSelector(selectUser, isSuccess, selectLoading,
     (user, success, loading) => {
-        return success === true && loading==='idle' ? user : {}
+        return success === true && loading === 'idle' ? user : {}
     })
 
 

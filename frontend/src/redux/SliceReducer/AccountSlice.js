@@ -7,7 +7,7 @@ const AccountSlice = createSlice({
         account: {},
         status: "idle",
         isSuccess: false,
-        mess:{}
+        mess: {}
     },
     reducers: {
 
@@ -20,12 +20,12 @@ const AccountSlice = createSlice({
             .addCase(registerAccounts.fulfilled, (state) => {
                 state.status = "idle"
 
-            }).addCase(isRegisterSuccess.fulfilled, (state,action)=>{
+            }).addCase(isRegisterSuccess.fulfilled, (state, action) => {
                 state.mess = action.payload
             })
     }
 })
-export const isRegisterSuccess =createAsyncThunk("register/isRegisterSuccess",(payload,action)=>{
+export const isRegisterSuccess = createAsyncThunk("register/isRegisterSuccess", (payload, action) => {
     return payload
 })
 export const registerAccounts = createAsyncThunk("register/registerAccounts", async (payload, action) => {
@@ -34,13 +34,13 @@ export const registerAccounts = createAsyncThunk("register/registerAccounts", as
             "Content-Type": "multipart/form-data",
         },
     }).then((response) => {
-        console.log(response)
         action.dispatch(isRegisterSuccess(response.data.msg))
     }).catch((error) => {
         console.log(error)
         action.dispatch(isRegisterSuccess(error.response.data[0]))
 
     })
+
 })
 
 export const forgotPasswords = createAsyncThunk("register/forgotPasswords", async (payload, action) => {

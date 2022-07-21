@@ -27,7 +27,7 @@ class UserLogin extends FormRequest
     {
         return [
             'email' => 'required|string|email',
-            'mat_khau' => 'required|min:6|max:255'
+            'mat_khau' => 'required|min:6|max:255|string'
         ];
     }
     public function failedValidation(Validator $validator)

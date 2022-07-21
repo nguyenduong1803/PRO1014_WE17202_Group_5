@@ -8,7 +8,7 @@ function UploadImage({ setInput, inputType, value }) {
     const [file, setFile] = React.useState("")
     const handleChangeInput = (e) => {
         setInput(prev => {
-            prev[inputType] = e.target.value
+            prev[inputType] = e.target.files[0]
             return { ...prev }
         })
         const file = URL.createObjectURL(e.target.files[0]);
@@ -25,7 +25,7 @@ function UploadImage({ setInput, inputType, value }) {
                 /> :
                     <div className={`${styles.variants}`}>
                         <div className={`${styles.file} ${styles.file__upload}`}>
-                            <label htmlFor='input-file'>
+                            <label htmlFor='input-file' style={{width: "100%"}}>
                                 <BackupIcon /> <p style={{ paddingLeft: "12px" }}>Upload</p>
                             </label>
                             <input id='input-file' type='file' value={value} onChange={e => handleChangeInput(e)} />
