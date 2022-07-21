@@ -198,6 +198,9 @@ html {
   margin: 0 0 0 auto;
   z-index: 5;
 }
+#datetime-local{
+  color: #fff;
+}
 
 :root {
   --purple: #1a358f;

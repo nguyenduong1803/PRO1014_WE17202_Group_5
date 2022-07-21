@@ -1,34 +1,24 @@
 import React from 'react'
 import styles from "../ShopDetails/ProductDetails.module.css"
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 function QuantityCart({ setQuantity, quantity,setCarts,productId }) {
     const handleChange = (event) => {
         const value = event.target.value.replace(/[^0-9]/g, '');
-        if (value === "") setQuantity(0);
+        if (value === "") setQuantity(1);
         else setQuantity(Number(value));
     };
     const decreaseQuantity = () => {
-        if (quantity > 0) {
+        if (quantity > 1) {
             setQuantity(quantity - 1);
-            setCarts(prev => {
-                const index = prev.findIndex((element) => element.productId === productId)
-                prev[index].quantity -=1
-                localStorage.setItem('cart', JSON.stringify(prev));
-                return prev
-            })
         }
     };
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
-        setCarts(prev => {
-            const index = prev.findIndex((element) => element.productId === productId)
-            prev[index].quantity +=1
-            localStorage.setItem('cart', JSON.stringify(prev));
-            return prev
-        })
     };
     return (
         <div className={styles.quantity}>
-            <button onClick={() => decreaseQuantity()}>-</button>
+            <button onClick={() => decreaseQuantity()} className={styles.quantityBtn}><RemoveIcon/></button>
             <input
                 type="text"
                 className={styles.productQuantity}
@@ -36,7 +26,7 @@ function QuantityCart({ setQuantity, quantity,setCarts,productId }) {
                 onChange={(e) => handleChange(e)}
                 onKeyPress={(event) => { !(/^[0-9]/.test(event.key)) && event.preventDefault(); }}
             />
-            <button onClick={() => increaseQuantity()}>+</button>
+            <button onClick={() => increaseQuantity()} className={styles.quantityBtn}><AddIcon/></button>
         </div>
     )
 }
