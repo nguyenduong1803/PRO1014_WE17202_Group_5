@@ -44,8 +44,8 @@ function OrderHistory({id,img,title,content,price,imgUser,Date}) {
         <div className={styles.lines}></div>
         <div className={styles.orderIdFooter}>
             <div className={styles.orderIdFooterLeft}>
-                <h4>items X2</h4>
-                <p>{price}</p>
+                <h4 classs={styles.items}>items X2</h4> <br />
+                <p>Price : {price}</p>
             </div>
             <div className={styles.orderIdFooterRight}>
                 <Link to='/chi-tiet-hoa-don'>Xem Chi Tiết</Link>

@@ -15,10 +15,10 @@ import OrderDetail from '../../pages/Site/OrderDetail/OrderDetail';
 import Login from "../../pages/Site/Login/Login"
 import Register from "../../pages/Site/Register/Register";
 import DetailProduct from "../../pages/Site/DetailProducts/DetailProducts";
-
-
+import Profile from '../../pages/Site/ProfileUser/ProfileUser'
+import Checkpass from  '../../pages/Site/CheckPass/CheckPass';
 import PageNotFound from "../../pages/Site/PageNotFound/PageNotFound";
-
+import CheckEmail from "../../pages/Site/CheckEmail/CheckEmail";
 const routerSite = [
   { path: "/", component: Home, },
   { path: "/dang-nhap", component: Login, },
@@ -33,6 +33,10 @@ const routerSite = [
 
   { path: "/chi-tiet-hoa-don", component: OrderDetail , },
   { path: "/chi-tiet-don-hang", component: DetailProduct , },
+  { path: "/profile", component:Profile , },
+  { path: "/checkpass", component:Checkpass , },
+  { path: "/checkemail", component:CheckEmail , },
+
   
 
 ]

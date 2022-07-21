@@ -1,0 +1,65 @@
+.content {
+    background-image: url(../../../assets/img/01.png);
+    background-repeat: no-repeat;
+    /* background: url('https://templates.iqonic.design/aprycot/html/dashboard/dist/assets/images/User-profile/01.png') no-repeat center; */
+    margin: 70px 50px;
+    z-index: -10;
+    border-radius: 20px;
+    height: 380px;
+
+}
+
+.img {
+    height: 270px;
+}
+
+.row {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px); 
+    height: 100vh;
+    width: 100%;
+    border-radius: 20px;
+    height: 30%;
+    margin: 0 !important;
+}
+
+.rowcol6 {
+    float: left;
+    display: flex;
+}
+
+.imguser {
+    margin-top: -50px;
+    margin-left: 20px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}
+
+.rowcol4 {
+    margin-top: 30px;
+}
+
+.h4 {
+    padding: 5px 0;
+}
+
+.col6 {
+    float: right;
+}
+
+.col6 button {
+    background-color: #ff7272;
+    height: 50px;
+    margin: 30px 0px;
+}
+
+.col6 button:hover {
+    background-color: #ff6464;
+
+}
+
+.rowss {
+    margin-left: 80px;
+    display: inline-flex;
+}

@@ -139,7 +139,9 @@
 	padding-bottom: 0;
 	z-index: 2;
 }
-
+.containerss{
+	padding:0 50px;
+}
 .footer__about {
 	margin-bottom: 30px;
 }

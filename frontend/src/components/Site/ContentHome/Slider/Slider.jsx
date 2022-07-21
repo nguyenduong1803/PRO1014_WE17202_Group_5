@@ -134,7 +134,7 @@ function CategoryItem({ img, name, to ,content,price,ingredient}) {
     //   </div>
       
     // </div>
-    <div className={styles.containers}>
+    <div className={styles.containersss}>
     {/* <img src={img}/> */}
     <img src="https://firebasestorage.googleapis.com/v0/b/cajaregistradora-776cc.appspot.com/o/pngwing.com(2).png?alt=media&token=bde13cf8-4b17-4da9-90cf-c16db83b2e1f" alt="" />
     <div className={styles.contentBox}>
