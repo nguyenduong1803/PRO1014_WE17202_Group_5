@@ -1,5 +1,6 @@
 import React from 'react'
 import Table from '../Table/Table'
+import Cart from './Cart'
 import styles from "./ModalRigh.scss"
 function DrawerMui() {
     return (
@@ -14,8 +15,8 @@ function DrawerMui() {
             <div className="modal-content">
                 <label className="modal-close" for="modal-toggle">&#x2715;</label>
                
-                <p>Hello from inside the modal!</p>
-                <label className="modal-content-btn" for="modal-toggle">OK</label>
+                    <Cart/>
+                <label className="modal-content-btn" for="modal-toggle"></label>
             </div>
         </div>  </div>
     )

@@ -46,7 +46,6 @@
   font-size: 24px;
   color: #696969;
 
-
 }
 
 .itemButton {
@@ -64,13 +63,18 @@
 }
 
 .quantity .productQuantity {
-  width: 100px;
+  width: 50px;
   padding: 10px 20px;
   outline: none;
   border: none;
   text-align: center;
 }
-
+.quantityBtn{
+  width: 40px;
+  display: block;
+  background-color: rgb(211, 70, 70);
+  font-size: 30px;
+}
 .cartButtonGroup {
   display: flex;
   justify-content: space-between;
