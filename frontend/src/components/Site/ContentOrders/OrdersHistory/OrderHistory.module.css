@@ -45,15 +45,17 @@
     margin-right: -10px;
     float: right;
 }
-.orderIdHeaderLeft{
-    padding: 10px 0;
+.items button{
+    font-size: 1rem !important;
 }
 .priceNumber{
     padding: 5px 0;
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
-    font-weight: bold;
+}
+.quantity{
+    margin-left: 20px;
 }
 .lines{
     width: 100%;

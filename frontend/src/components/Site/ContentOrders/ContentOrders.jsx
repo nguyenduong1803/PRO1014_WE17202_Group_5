@@ -8,36 +8,40 @@ const ordersHistory = [
     Date: "23 Feb 2021, 08:28 PM",
     img: product1,
     imgUser: product1,
-    price: 10,
-    content: "Vegetable Fritters with Egg",
-    title: "Pizza",
+    phone: 789,
+   
+    name:"Hòa Trần",
+    ban:'A12'
   },
   {
     id: 1,
     Date: "23 Feb 2021, 08:28 PM",
     img: product1,
     imgUser: product1,
-    price: 10,
-    content: "Vegetable Fritters with Egg",
-    title: "Pizza",
+    phone: 789,
+   
+    name:"Hữu Dương",
+    ban:'A12'
   },
   {
     id: 1,
     Date: "23 Feb 2021, 08:28 PM",
     img: product1,
     imgUser: product1,
-    price: 10,
-    content: "Vegetable Fritters with Egg",
-    title: "Pizza",
+    phone: 123,
+   
+    name:"Pizza",
+    ban:'A12'
   },
   {
     id: 1,
     Date: "23 Feb 2021, 08:28 PM",
     img: product1,
     imgUser: product1,
-    price: 10,
-    content: "Vegetable Fritters with Egg",
-    title: "Pizza",
+    phone: 789,
+   
+    name:"Pizza",
+    ban:'A12'
   },
 ];
 function ContentOrders() {
@@ -49,13 +53,12 @@ function ContentOrders() {
           return (
             <OrdersHistory
               key={index}
-              title={order.title}
-              id={order.id}
+              name={order.name}              id={order.id}
               Date={order.Date}
               img={order.img}
-              price={order.price}
-              content={order.content}
+              phone={order.phone}
               imgUser={order.imgUser}
+              ban={order.ban}
             />
           );
         })}
