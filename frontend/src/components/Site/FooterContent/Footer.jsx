@@ -106,7 +106,7 @@ const company = [
 function Footer() {
   return (
     <footer className="footer_home spad" style={{ paddingLeft: "24px" }}>
-      <div className="container">
+      <div className="containerss">
         <div
           className="row"
           style={{

@@ -1,4 +1,5 @@
 .orderHistory{
+    font-size: .8rem;
     width: 100%;
     padding: 20px ;
     background-color: #ffffff;
@@ -44,15 +45,17 @@
     margin-right: -10px;
     float: right;
 }
-.orderIdHeaderLeft{
-    padding: 10px 0;
+.items button{
+    font-size: 1rem !important;
 }
 .priceNumber{
     padding: 5px 0;
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
-    font-weight: bold;
+}
+.quantity{
+    margin-left: 20px;
 }
 .lines{
     width: 100%;
@@ -64,8 +67,27 @@
     color: rgb(182, 182, 182);
 }
 .orderIdFooter{
+    font-size: .6rem;
     display: inline-flex;
     width:100%;
     justify-content: space-between;
     padding: 10px 0;
+}
+.orderIdFooterRight {
+    margin-top: 18px;
+}
+.orderIdFooterRight a{
+    padding: 10px;
+    color:#FF7272;
+    border: 1px solid #FF7272;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.orderIdFooterRight a:hover{
+    color:#000000;
+    border: 1px solid #000;
+}
+.items{
+    margin-bottom: 10px;
 }

@@ -13,7 +13,7 @@
   
   .categories__item h5 {
     position: absolute;
-    width: 100%;
+    width: 100% !important;
     padding: 0 20px;
     bottom: 20px;
     text-align: center;
@@ -71,7 +71,7 @@
     box-sizing: border-box;
   }
    */
-  .containers {
+  .containersss {
     margin-top: 50px;
     position: relative;
     width: 270px;
@@ -84,13 +84,13 @@
     overflow: hidden;
   }
   
-  .containers img {
+  .containersss img {
     z-index: 1;
     width: 270px;
     padding: 35px;
   }
   
-  .containers::before {
+  .containersss::before {
     content: "";
     position: absolute;
     top: -130px;

@@ -32,10 +32,12 @@ table{
     font-family: Arial, Helvetica, sans-serif;
 }
 .icons{
-    margin-top: -20px;
     margin-left: 65px !important;
 }
 .icons p{
     font-size: 4px;
 
+}
+.table{
+    max-width: 840px;
 }

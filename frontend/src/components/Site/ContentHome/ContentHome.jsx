@@ -15,6 +15,7 @@ import MyCart from "../../Site/ContentHome/ContentHomeRight/MyCart/MyCart";
 // import product6 from "../../../../src/assets/img/seafood-10.jpg";
 // import product7 from "../../../../src/assets/img/seafood-10.jpg";
 // import product8 from "../../../../src/assets/img/seafood-10.jpg";
+import ProfileUser from '../ProfileUser/ProfileUser';
 import Slider from './Slider/Slider';
 
 const mycart = [
@@ -185,7 +186,7 @@ function ContentHome() {
       </div>
       <div className="container">
         <Slider/>
-       
+       {/* <ProfileUser/> */}
       </div>
     </div>
   );

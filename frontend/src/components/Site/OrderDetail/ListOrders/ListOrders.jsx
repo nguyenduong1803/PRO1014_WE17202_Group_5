@@ -10,7 +10,8 @@ import styles from "./ListOrders.module.css";
 import product1 from "../../../../assets/img/seafood-1.jpg";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
-
+import ClearIcon from '@mui/icons-material/Clear';
+import EditIcon from '@mui/icons-material/Edit';
 const rows = [
   {
     img: product1,
@@ -58,7 +59,7 @@ function BasicRating() {
 }
 export default function DenseTable() {
   return (
-    <TableContainer component={Paper} style={{margin:'0 20px', borderRadius: "20px" ,backgroundColor: "white" }}>
+    <TableContainer className={styles.table} component={Paper} style={{margin:'0 20px', borderRadius: "20px" ,backgroundColor: "white" }}>
       <Table sx={{ minWidth: 650 }} aria-label="a dense table">
         <TableHead className={styles.header}>
           <TableRow>
@@ -67,6 +68,8 @@ export default function DenseTable() {
             <TableCell align="right" style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}}>Prices</TableCell>
             <TableCell align="right" style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}}>Total Prices</TableCell>
             <TableCell align="right" style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}}>Total Prices</TableCell>
+            <TableCell align="right" style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}}>Update</TableCell>
+
           </TableRow>
         </TableHead>
         <TableBody style={{}}>
@@ -103,6 +106,8 @@ export default function DenseTable() {
               <TableCell align="center">{row.price}</TableCell>
               <TableCell align="center">{row.totalPrice}</TableCell>
               <TableCell align="center">{row.totalPrice}</TableCell>
+              <TableCell align="center"><ClearIcon/> <EditIcon/> </TableCell>
+
             </TableRow>
           ))}
         </TableBody>
