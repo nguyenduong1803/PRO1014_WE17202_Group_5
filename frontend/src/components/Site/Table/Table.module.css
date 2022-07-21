@@ -14,17 +14,27 @@
 .wrapRectangle {
     position: relative;
     text-decoration: none;
-    height: 100%;
+    height: 190px;
     width: 100%;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 3;
-}
 
+}
+.wrapRectangle:hover{
+    cursor: pointer;
+    opacity: 0.93;
+}
+.wrapRectangle:nth-child(1),.wrapRectangle:nth-child(1){
+    margin-top: 0;
+
+}
 .wrap:hover {
     cursor: pointer;
+    opacity: 0.93;
+
 }
 
 

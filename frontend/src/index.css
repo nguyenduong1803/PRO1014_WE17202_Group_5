@@ -198,8 +198,9 @@ html {
   margin: 0 0 0 auto;
   z-index: 5;
 }
-#datetime-local{
-  color: #fff;
+
+#datetime-local {
+  color:var(--warning-color);
 }
 
 :root {
@@ -210,5 +211,7 @@ html {
   --text-color: rgba(0, 0, 0, 0.55);
   --primaryColor: #ff7272;
   --primaryPink: #ff7272;
-
+  --secondary-color-lightest: rgb(253, 253, 251);
+  --warning-color: rgb(252, 213, 97);
+  --info-color: rgb(80, 62, 157);
 }

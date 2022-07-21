@@ -26,4 +26,76 @@
 .background{
     background-color: rgb(228, 180, 180) !important;
 }
-
+.backgroundWrap{
+  background-color: rgba(255,255,255,0.5);
+}
+.topLeft{
+    border-top-left-radius: 20px;
+    border-top:2px solid #fff;
+    border-left:2px solid #fff;
+}
+.topRight{
+    border-top-right-radius: 20px;
+    border-top:2px solid #fff;
+    border-right:2px solid #fff;
+}
+.botLeft{
+    border-bottom-left-radius: 20px;
+    border-bottom:2px solid #fff;
+    border-left:2px solid #fff;
+}
+.botRight{
+    border-bottom-right-radius: 20px;
+    border-right:2px solid #fff;
+    border-bottom:2px solid #fff;
+}
+.alacart_title{
+    margin: 12px 0;
+    font-weight: 600;
+}
+.bot{
+    border-bottom:2px solid #fff;
+}
+.top{
+    border-top:2px solid #fff;
+}
+.square_green{
+    width: 20px;
+    height: 20px;
+    background-color: #228B22;
+    border-radius: 4px;
+    margin-right: 12px;
+}
+.wrapSquare{
+    display: flex;
+    margin: 12px 0;
+}
+.square_red{
+    width: 20px;
+    height: 20px;
+    background-color: #FF4500;
+    border-radius: 4px;
+    margin-right: 12px;
+}
+.square_yellow{
+    width: 20px;
+    height: 20px;
+    background-color: #FFBF00;
+    border-radius: 4px;
+    margin-right: 12px;
+}
+.wc{
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    background-color: #fff;
+    height: 100%;
+    border-radius:10px;
+}
+.wcIcon{
+    width: 20%;
+    margin-right: 12px;
+}
+.wc h2{
+    text-align:center;
+}

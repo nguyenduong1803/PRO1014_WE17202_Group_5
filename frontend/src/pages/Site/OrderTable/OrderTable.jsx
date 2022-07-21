@@ -1,151 +1,274 @@
 import React from 'react'
-import DrawerMui from '../../../components/Site/DrawerMui/DrawerMui'
+import TableOption from '../../../components/Site/TableOption/TableOption'
 import LayoutSite from '../../../components/Site/LayoutSite/LayoutSite'
-import RectangleTable from '../../../components/Site/Table/RectangleTable'
-import Table from "../../../components/Site/Table/Table"
+import CategoryTable from '../../../components/Site/Table/CategoryTable'
 import styles from "./OrderTable.module.css"
-function OrderTable() {
+import { useDispatch, useSelector } from "react-redux"
+import { getListTable } from '../../../redux/SliceReducer/OrderTableSlice'
+import { selectListTable } from '../../../redux/selector'
 
+const possitionTable = [
+    { index: 0, possition: 0 },
+    { index: 1, possition: 1 },
+    { index: -1, possition: 1 },
+    { index: -1, possition: 1 },
+
+    { index: 2, possition: 4 },
+    { index: 3, possition: 5 },
+    { index: 4, possition: 6 },
+    { index: 5, possition: 7 },
+    { index: -1, possition: 1 },
+    { index: -1, possition: 1 },
+
+    { index: 6, possition: 10 },
+    { index: 7, possition: 11 },
+    { index: 8, possition: 12 },
+    { index: -1, possition: 1 },
+    { index: -1, possition: 1 },
+    { index: -1, possition: 1 },
+    { index: -1, possition: 1 },
+    // { index: -1, possition: 1 },
+
+    { index: -1, possition: 1 },
+    { index: 9, possition: 18 },
+    { index: 10, possition: 19 },
+    { index: -1, possition: 1 },
+
+    { index: 11, possition: 20 },
+    { index: 12, possition: 21 },
+    { index: 13, possition: 22 },
+    { index: 14, possition: 23 },
+    { index: 15, possition: 24 },
+    { index: -1, possition: 1 },
+
+    { index: 16, possition: 25 },
+    { index: 17, possition: 26 },
+    { index: 18, possition: 27 },
+]
+function OrderTable() {
+    const dispatch = useDispatch()
+    const tables = useSelector(selectListTable)
+    React.useEffect(() => {
+        dispatch(getListTable())
+    }, [])
+    console.log(tables);
+    // for (let item in possitionTable) {
+    //     tables.map((table, index) => {
+    //         if (possitionTable[item].index === index) {
+    //             return (<div className={`${styles.backgroundWrap} ${styles.topLeft} col-2`}>
+    //                 <TableOption
+    //                     type="circle"
+    //                     id={table?.index_table}
+    //                     status={table?.status}
+    //                 />
+    //             </div>)
+    //         } else {
+    //             return (
+    //                 <div className="col-lg-2"></div>
+    //             )
+    //         }
+    //     })
+    // }
     return (
         <div>
             <LayoutSite>
-                <div className="row">
 
-                    <div className="col-2">
-                        <DrawerMui
-                        />
-                    </div>
-                    <div className="col-2" >
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-2"
-                        />
-                    </div>
-                    <div className="col-4" >
-                       <div className={`${styles.borderLeftRight} `}></div>
-                    </div>
-                    <div className="col-2">
-                        <RectangleTable
-                            colors={{ color: "#A0522D", colorblur: "#228B22" }}
-                            name="A-6"
-                        />
-                    </div>
-                    <div className="col-2">
-                        <RectangleTable
-                            colors={{ color: "#A0522D", colorblur: "#228B22" }}
-                            name="A-5"
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-2">
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-13"
-                        />
-                    </div>
-                    <div className="col-2">
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-13"
-                        />
-                    </div>
-                    <div className="col-4">
-                        <div className={`${styles.borderLeftRight} `}>
-                        </div>
-                    </div>
-                    <div className="col-2">
-                        <RectangleTable
-                            colors={{ color: "#A0522D", colorblur: "#228B22" }}
-                            name="A-4"
-                        />
-                    </div>
-                    <div className="col-2">
-                        <RectangleTable
-                            colors={{ color: "#A0522D", colorblur: "#228B22" }}
-                            name="A-3"
-                        />
-                    </div>
-                </div>
 
-                <div className="row" style={{ height: "170px" }}><div className={styles.borderTopBot}></div></div>
-                <div className="row">
+                <div className="container-fluid">
+                    <CategoryTable />
+                    <h2 className={styles.alacart_title}>Sảnh tầng 1 AlaCarte</h2>
+                    <div className={styles.wrapSquare}>
+                        <div className={styles.square_green}></div>
+                        <h4>Bàn chưa đặt</h4>
+                    </div>
+                    <div className={styles.wrapSquare}>
+                        <div className={styles.square_yellow}></div>
+                        <h4>Bàn đã đặt</h4>
+                    </div>
+                    <div className={styles.wrapSquare}>
+                        <div className={styles.square_red}></div>
+                        <h4>Bàn đang ăn</h4>
+                    </div>
 
-                    <div className="col-2">
-                        <RectangleTable
-                            colors={{ color: "#A0522D", colorblur: "#228B22" }}
-                            name="A-1"
-                        />
-                    </div>
-                    <div className="col-2" >
-                        <RectangleTable
-                            colors={{ color: "#A0522D", colorblur: "#228B22" }}
-                            name="A-2"
-                        />
-                    </div>
-                    <div className="col-2" >
-                        <div className={styles.borderLeftRight}>
-                        </div>
-                    </div>
-                    <div className="col-2">
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-5"
-                        />
-                    </div>
-                    <div className="col-2">
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-6"
-                        />
-                    </div>
-                    <div className="col-2">
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-13"
-                        />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-2">
-                        <RectangleTable
-                            colors={{ color: "#A0522D", colorblur: "#228B22" }}
-                            name="A-3"
-                        />
-                        <div className={styles.borderBottom}></div>
+                    <div className="container-fluid">
+                        <div className="row">
+                            {
 
-                    </div>
-                    <div className="col-2">
-                        <RectangleTable
-                            colors={{ color: "#A0522D", colorblur: "#228B22" }}
-                            name="A-4"
-                        />
-                        <div className={styles.borderBottom}>
+                                possitionTable.map((ele, index) => {
+                                    if (ele.index !== -1) {
+                                        return (
+                                            <div className={`${styles.backgroundWrap}  col-lg-2`}>
+                                                <TableOption
+                                                    type="circle"
+                                                    id={tables && tables[ele.index]?.index_table}
+                                                    status={tables && tables[ele.index]?.status}
+                                                />
+                                            </div>)
+                                    } else {
+                                        return (
+                                            <div className="col-lg-2"></div>
+                                        )
+                                    }
+
+
+                                })
+
+
+                            }
 
                         </div>
                     </div>
-                    <div className="col-2">
-                        <div className={styles.borderLeftRight}>
+                    {/* <div className="container-fluid">
+                        <div className="row">
+
+                            <div className={`${styles.backgroundWrap} ${styles.topLeft} col-2`}>
+                                <TableOption
+                                    type="circle"
+                                    id={tables[0]?.index_table}
+                                    status={tables[0]?.status}
+                                />
+                            </div>
+                            <div className={`${styles.backgroundWrap} ${styles.topRight} col-2`} >
+                            <TableOption
+                                    type="circle"
+                                    id={tables[1]?.index_table}
+                                    status={tables[1]?.status}
+                                />
+                            </div>
+                            <div className="col-4" >
+
+                            </div>
+                            <div className={`${styles.backgroundWrap} ${styles.topLeft} col-2`}>
+                            <TableOption
+                                    id={tables[2]?.index_table}
+                                    status={tables[2]?.status}
+                                />
+                            </div>
+                            <div className={`${styles.backgroundWrap} ${styles.topRight} col-2`}>
+                            <TableOption
+                                    id={tables[3]?.index_table}
+                                    status={tables[3]?.status}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-2">
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-13"
-                        />
-                    </div>
-                    <div className="col-2">
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-13"
-                        />
-                    </div>
-                    <div className="col-2">
-                        <Table
-                            colors={{ color: "#A0522D", colorblur: "#FE4F7B" }}
-                            name="A-13"
-                        />
-                    </div>
+
+
+                        <div className="row">
+                            <div className={`${styles.backgroundWrap} ${styles.botLeft} col-2`}>
+                                <TableOption
+                                    type="circle"
+                                    id="A-3"
+                                    status={3}
+                                />
+                            </div>
+                            <div className={`${styles.backgroundWrap} ${styles.botRight} col-2`}>
+                                <TableOption
+                                    type="circle"
+                                    id="A-4"
+                                    status="1"
+                                />
+                            </div>
+                            <div className="col-4">
+
+                            </div>
+                            <div className={`${styles.backgroundWrap} ${styles.botLeft} col-2`}>
+                                <TableOption
+                                    id="A-1"
+                                    status="2"
+                                />
+                            </div>
+                            <div className={`${styles.backgroundWrap} ${styles.botRight} col-2`}>
+                                <TableOption
+                                    id="A-1"
+                                    status="3"
+                                />
+                            </div>
+                        </div>
+                        <div className="row" style={{ height: "170px", margin: "12px 0" }}>
+                            <div className="col-lg-2">
+                             
+                            </div>
+                        </div>
+                        <div className="row">
+
+                            <div className={`${styles.backgroundWrap} ${styles.topLeft} col-2`}>
+                                <TableOption
+                                    id="A-1"
+                                    status="1"
+                                />
+                            </div>
+                            <div className={`${styles.backgroundWrap} ${styles.topRight}   col-2`} >
+                                <TableOption
+                                    id="A-1"
+                                    status="1"
+                                />
+                            </div>
+                            <div className={` col-2`} >
+                            </div>
+                            <div className={`${styles.backgroundWrap}  ${styles.topLeft}  col-2`}>
+                                <TableOption
+                                    type="circle"
+                                    id="A-1"
+                                    status="1"
+                                />
+                            </div>
+                            <div className={`${styles.backgroundWrap}  ${styles.top} col-2`}>
+                                <TableOption
+                                    type="circle"
+                                    id="A-1"
+                                    status="1"
+                                />
+                            </div>
+                            <div className={`${styles.backgroundWrap}  ${styles.topRight} col-2`}>
+                                <TableOption
+                                    type="circle"
+                                    id="A-1"
+                                    status="1"
+                                />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className={`${styles.backgroundWrap} ${styles.botLeft}  col-2`}>
+                                <TableOption
+                                    id="A-1"
+                                    status="1"
+                                />
+
+
+                            </div>
+                            <div className={`${styles.backgroundWrap} ${styles.botRight} col-2`}>
+                                <TableOption
+                                    id="A-1"
+                                    status="1"
+                                />
+
+                            </div>
+                            <div className={` col-2`}>
+
+                            </div>
+                            <div className={`${styles.backgroundWrap}  ${styles.botLeft} col-2`}>
+                                <TableOption
+                                    id="A-1"
+                                    status="1"
+                                    type="circle"
+                                />
+                            </div>
+                            <div className={`${styles.backgroundWrap}  col-2`}>
+                                <TableOption
+                                    id="A-1"
+                                    status="1"
+                                    type="circle"
+                                />
+                            </div>
+                            <div className={`${styles.backgroundWrap} ${styles.botRight} col-2`}>
+                                <TableOption
+                                    id="A-1"
+                                    status="1"
+                                    type="circle"
+                                />
+                            </div>
+                        </div>
+                    </div> */}
                 </div>
             </LayoutSite >
         </div >

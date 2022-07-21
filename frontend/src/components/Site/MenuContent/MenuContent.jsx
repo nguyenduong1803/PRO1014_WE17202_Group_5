@@ -5,7 +5,7 @@ import MenuContentDetail from './MenuContentDetail/MenuContentDetail';
 import product1 from '../../../assets/img/seafood-1.jpg';
 import ButtonCart from "../../../components/Site/ContentHome/ButtonCart/ButtonCart"
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../../../redux/SliceReducer/Admin/ManagerProductSlice';
+
 import { selectLoadingProduct, selectProducts } from '../../../redux/selector';
 import Loading from '../Loading/Loading';
 import CategoryItem from './ProductMenu/ProductMenu';
@@ -92,10 +92,7 @@ function MenuContent() {
   const dispatch = useDispatch()
   const listProduct = useSelector(selectProducts)
   const loadingProduct = useSelector(selectLoadingProduct)
-  // React.useEffect(() => {
-  //   dispatch(getProducts())
 
-  // }, [selectProducts])
   return (
     <LayoutSite>
       <ButtonCart />

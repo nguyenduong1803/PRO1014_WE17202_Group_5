@@ -1,18 +1,10 @@
 :root {
-  --danger-color: rgb(250, 83, 24);
-  --danger-color-lighter: rgb(255, 247, 237);
-  --warning-color: rgb(252, 213, 97);
-  --warning-color-transparent: rgba(252, 213, 97, 0.1);
-  --secondary-color: rgb(248, 248, 247);
-  --secondary-color-darker: rgb(160, 160, 160);
-  --secondary-color-lightest: rgb(253, 253, 251);
-  --info-color: rgb(80, 62, 157);
+
 }
 
 .modal-container {
   padding-top: 0px;
   position: relative;
-  z-index: 99;
 
   * {
     scrollbar-width: auto;
@@ -47,7 +39,7 @@
     overflow: hidden;
     cursor: pointer;
     transition: opacity 0.2s ease-in;
-
+    z-index: 10;
   }
 
   .modal-close {
@@ -84,19 +76,43 @@
       position: fixed;
       left: 0;
       top: 0;
-      z-index: 9;
+      z-index: 2;
       visibility: visible;
       opacity: 0.4;
       transition: opacity 0.2s ease-in;
     }
-
+    &:checked~.modal-content.modal_mini{
+      opacity: 1;
+      background-color: #fff;
+      max-width: 400px;
+      width: 530px;
+      min-height: 210px;
+      padding: 24px 30px 10px 30px;
+      position: fixed;
+      left: 50%;
+      top: 30%;
+      transform: translateX(-50%);
+      border-radius: 4px;
+      z-index: 22;
+      pointer-events: auto;
+      cursor: auto;
+      visibility: visible;
+      max-width: 500px;
+      background-color: rgba(253, 253, 251, 1);
+      padding: 20px;
+      animation: scale 0.5s ease;
+      border-radius: 10px;
+      box-shadow: 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.02),
+        22.3px 22.3px 17.9px rgba(0, 0, 0, 0.03),
+        100px 100px 80px rgba(0, 0, 0, 0.05);
+    }
     &.active~.modal-content,
     &:checked~.modal-content {
       opacity: 1;
       background-color: #fff;
       max-width: 400px;
       width: 530px;
-      min-height: 610px;
+      min-height: 510px;
       padding: 24px 30px 10px 30px;
       position: fixed;
       left: 50%;
@@ -119,8 +135,10 @@
       @media (max-width: 400px) {
         left: 0;
       }
+      
 
     }
+    
   }
 }
 
@@ -150,11 +168,14 @@
 #order {
 
   .section-title {
+    
     font-size: 18px;
     font-weight: bold;
   }
 }
-
+.address-name{
+  color:var(--warning-color);
+}
 .order-info {
   width: 240px;
   margin-top: 24px;
@@ -177,7 +198,7 @@
   }
 
   .form__edit-cart {
-    color:#fff;
+    color: var(--warning-color);
     width: 150px;
     background-color: transparent !important ;
   }
@@ -326,4 +347,11 @@
       fill: currentColor;
     }
   }
+}
+.label-toggle{
+  display: block;
+}
+// modal login 
+.modalLogin_title{
+  margin: 24px 0 ;
 }

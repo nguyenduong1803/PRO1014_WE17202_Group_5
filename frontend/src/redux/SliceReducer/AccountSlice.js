@@ -34,7 +34,6 @@ export const registerAccounts = createAsyncThunk("register/registerAccounts", as
             "Content-Type": "multipart/form-data",
         },
     }).then((response) => {
-        console.log(response)
         action.dispatch(isRegisterSuccess(response.data.msg))
     }).catch((error) => {
         console.log(error)
