@@ -25,7 +25,7 @@ class Product extends Model
             -> where('is_delete', '1')
             -> where('name', 'like', '%' . $search . '%')
             -> orderBy('create_at', $sortDateCreateAt)
-            -> simplePaginate($limitPage);
+            -> paginate($limitPage);
         $data->appends(['q' => $search]);
         return $data;
     }
