@@ -3,17 +3,12 @@ import styles from "./LayoutSite.module.css"
 import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
 import { Link } from "react-router-dom"
-import BarIcon from "../../../assets/svg/BarIcon"
 import Line from "../../../assets/svg/Line"
-import { selectLoading, selectLoadingProduct, selectProducts } from "../../../redux/selector"
+import { selectLoading } from "../../../redux/selector"
 import Loadings from "../../../components/Site/Loadings/Loadings"
-import { useDispatch, useSelector } from 'react-redux'
-
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { useSelector } from 'react-redux'
 import Footer from '../../../components/Site/FooterContent/Footer';
-
 import BarArrow from '../../../assets/svg/BarArrow'
-import { getProducts } from '../../../redux/SliceReducer/Admin/ManagerProductSlice'
 
 
 function LayoutSite({ children }) {

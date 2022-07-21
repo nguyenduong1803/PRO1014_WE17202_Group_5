@@ -56,7 +56,6 @@ const AuthSlice = createSlice({
 })
 export const getProducts = createAsyncThunk("product/getProducts", async (payload, action) => {
     let payloads
-    console.log(payload, action)
     await axios
         .get(api + "product/getLists", {
             params: {
@@ -67,7 +66,6 @@ export const getProducts = createAsyncThunk("product/getProducts", async (payloa
             }
         })
         .then(response => {
-            console.log(response.data.data)
             payloads = { data: response.data.data, status: "success" }
         }).catch(function (err) {
             console.log(err)
@@ -77,13 +75,11 @@ export const getProducts = createAsyncThunk("product/getProducts", async (payloa
 })
 export const deleteProductById = createAsyncThunk("product/deleteProductById", async (payload, action) => {
     let payloads
-    console.log(payload, action)
     await axios
         .delete(api + `product/delete/${payload}`, {
             headers: { "Authorization": `Bearer ${getToken()}` }
         })
         .then(response => {
-            console.log(response.data.status)
             payloads = { data: payload, status: response.data.status }
             action.dispatch(getProducts())
         }).catch(function (err) {
@@ -93,7 +89,6 @@ export const deleteProductById = createAsyncThunk("product/deleteProductById", a
     return payloads
 })
 export const searchProduct = (payload, action) => {
-    console.log(payload, action)
     return { type: "product/searchProduct", payload }
 }
 

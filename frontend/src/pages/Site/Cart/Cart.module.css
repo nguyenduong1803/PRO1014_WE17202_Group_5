@@ -75,6 +75,9 @@
   background-color: rgb(211, 70, 70);
   font-size: 30px;
 }
+.quantityBtn svg{
+  color:rgb(160,160,160);
+}
 .cartButtonGroup {
   display: flex;
   justify-content: space-between;
