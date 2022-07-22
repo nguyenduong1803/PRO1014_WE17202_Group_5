@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom'
 import logo from "../../../assets/img/logoSea.png"
 
 function Header() {
-
     const infoUser = useContext(AuthContext)
     return (
         <header className={styles.header}>

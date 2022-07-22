@@ -8,50 +8,47 @@ import { getListTable } from '../../../redux/SliceReducer/OrderTableSlice'
 import { selectListTable } from '../../../redux/selector'
 
 const possitionTable = [
-    { index: 0, possition: 0 },
-    { index: 1, possition: 1 },
-    { index: -1, possition: 1 },
-    { index: -1, possition: 1 },
+    { index: 0, possition: 0 ,id:"id1"},
+    { index: 1, possition: 1 ,id:"id2"},
+    { index: -1, possition: 1 ,id:"id3"},
+    { index: -1, possition: 1 ,id:"id4"},
 
-    { index: 2, possition: 4 },
-    { index: 3, possition: 5 },
-    { index: 4, possition: 6 },
-    { index: 5, possition: 7 },
-    { index: -1, possition: 1 },
-    { index: -1, possition: 1 },
+    { index: 2, possition: 4 ,id:"id5"},
+    { index: 3, possition: 5 ,id:"id6"},
+    { index: 4, possition: 6 ,id:"id7"},
+    { index: 5, possition: 7 ,id:"id8"},
+    { index: -1, possition: 1 ,id:"id9"},
+    { index: -1, possition: 1 ,id:"id10"},
 
-    { index: 6, possition: 10 },
-    { index: 7, possition: 11 },
-    { index: 8, possition: 12 },
-    { index: -1, possition: 1 },
-    { index: -1, possition: 1 },
-    { index: -1, possition: 1 },
-    { index: -1, possition: 1 },
-    // { index: -1, possition: 1 },
+    { index: 6, possition: 10 ,id:"id11"},
+    { index: 7, possition: 11 ,id:"id12"},
+    { index: 8, possition: 12 ,id:"id13"},
+    { index: -1, possition: 1 ,id:"id14"},
+    { index: -1, possition: 1 ,id:"id15"},
+    { index: -1, possition: 1 ,id:"id16"},
+    { index: -1, possition: 1 ,id:"id17"},
+    // { index: -1, possition: 1 ,id:"id"},
 
-    { index: -1, possition: 1 },
-    { index: 9, possition: 18 },
-    { index: 10, possition: 19 },
-    { index: -1, possition: 1 },
+    { index: -1, possition: 1 ,id:"id18"},
+    { index: 9, possition: 18 ,id:"id19"},
+    { index: 10, possition: 19 ,id:"id20"},
+    { index: -1, possition: 1 ,id:"id21"},
 
-    { index: 11, possition: 20 },
-    { index: 12, possition: 21 },
-    { index: 13, possition: 22 },
-    { index: 14, possition: 23 },
-    { index: 15, possition: 24 },
-    { index: -1, possition: 1 },
+    { index: 11, possition: 20 ,id:"id22"},
+    { index: 12, possition: 21 ,id:"id23"},
+    { index: 13, possition: 22 ,id:"id24"},
+    { index: 14, possition: 23 ,id:"id25"},
+    { index: 15, possition: 24 ,id:"id26"},
+    { index: -1, possition: 1 ,id:"id27"},
 
-    { index: 16, possition: 25 },
-    { index: 17, possition: 26 },
-    { index: 18, possition: 27 },
+    { index: 16, possition: 25 ,id:"id28"},
+    { index: 17, possition: 26 ,id:"id29"},
+    { index: 18, possition: 27 ,id:"id30"},
 ]
 function OrderTable() {
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const tables = useSelector(selectListTable)
-    React.useEffect(() => {
-        dispatch(getListTable())
-    }, [])
-    console.log(tables);
+  
     // for (let item in possitionTable) {
     //     tables.map((table, index) => {
     //         if (possitionTable[item].index === index) {
@@ -72,8 +69,6 @@ function OrderTable() {
     return (
         <div>
             <LayoutSite>
-
-
                 <div className="container-fluid">
                     <CategoryTable />
                     <h2 className={styles.alacart_title}>Sảnh tầng 1 AlaCarte</h2>
@@ -93,11 +88,10 @@ function OrderTable() {
                     <div className="container-fluid">
                         <div className="row">
                             {
-
                                 possitionTable.map((ele, index) => {
                                     if (ele.index !== -1) {
                                         return (
-                                            <div className={`${styles.backgroundWrap}  col-lg-2`}>
+                                            <div key={ele.id} className={`${styles.backgroundWrap}  col-lg-2`}>
                                                 <TableOption
                                                     type="circle"
                                                     id={tables && tables[ele.index]?.index_table}
@@ -106,14 +100,10 @@ function OrderTable() {
                                             </div>)
                                     } else {
                                         return (
-                                            <div className="col-lg-2"></div>
+                                            <div key={ele.id} className="col-lg-2"></div>
                                         )
                                     }
-
-
                                 })
-
-
                             }
 
                         </div>

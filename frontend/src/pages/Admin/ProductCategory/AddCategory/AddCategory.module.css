@@ -8,13 +8,13 @@
     flex: 1;
 }
 /* Remove Arrows Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.main input::-webkit-outer-spin-button,
+.main input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 /* Remove Arrows  Firefox */
-input[type="number"] {
+.main  input[type="number"] {
     -moz-appearance: textfield;
 }
 .main p {

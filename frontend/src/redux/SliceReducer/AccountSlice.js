@@ -22,6 +22,9 @@ const AccountSlice = createSlice({
 
             }).addCase(isRegisterSuccess.fulfilled, (state, action) => {
                 state.mess = action.payload
+            }).addCase(forgotPasswords.fulfilled, (state, action) => {
+                console.log(action.payload)
+                state.mess = action.payload
             })
     }
 })
@@ -44,15 +47,18 @@ export const registerAccounts = createAsyncThunk("register/registerAccounts", as
 })
 
 export const forgotPasswords = createAsyncThunk("register/forgotPasswords", async (payload, action) => {
-    await axios.post(api + "auth/register", payload, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-        },
-    }).then((response) => {
-        console.log(response)
-    }).catch((error) => {
-        console.log(error)
-    })
+    await axios
+        .post(api + "user/sendMailForgotPassword", {
+            email: payload, // This is the body part
+        })
+        .then((response) => {
+            console.log(response)
+
+        }).catch(function (err) {
+            console.log(err)
+
+        })
+
 })
 
 export default AccountSlice

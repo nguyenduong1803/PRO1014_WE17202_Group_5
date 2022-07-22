@@ -31,6 +31,7 @@ const theme = createTheme();
 export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(event.currentTarget)
     const data = new FormData(event.currentTarget);
     
   };

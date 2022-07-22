@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectLoadingProduct, selectProducts } from '../../../redux/selector';
 import Loading from '../Loading/Loading';
 import Product from '../Product/Product';
+import { getProducts } from '../../../redux/SliceReducer/Admin/ManagerProductSlice';
 
 const product = [
   {
@@ -77,6 +78,7 @@ function MenuContent() {
     { name: "category" },
     { name: "category" },
   ]
+
   return (
     <LayoutSite>
       {/* <ButtonCart /> */}
@@ -97,7 +99,7 @@ function MenuContent() {
             </div>
             {loadingProduct === "loading" ? <Loading /> : <div className="row" style={{ transition: "0.3s" }}>
               {
-                product && product.map((products, index) => {
+                listProduct && listProduct.map((products, index) => {
                   return (
                     <Product
                       key={index}

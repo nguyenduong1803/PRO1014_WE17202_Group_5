@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from "../AddCategory/AddCategory.module.css";
+import styles from "./AddCategory.module.css";
 import Header from "../../../../components/Admin/Header/Header";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import Loadings from "../../../../components/Site/Loadings/Loadings";
@@ -8,7 +8,7 @@ const AddCategory = () => {
     const [status, setStatus] = useState(true);
     const [loading, setLoading] = useState(false);
     const [imgUrls, setImgUrls] = useState("");
-    const [imgBase64, setImgBase64] = useState("");
+
     const breadcrumItem = [
         {
           href: "/",

@@ -1,5 +1,14 @@
-:root {
+:root {}
 
+.wrap_modal-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(221, 221, 221, 0.3);
+  z-index: 10;
+  transition: all 0.2s;
 }
 
 .modal-container {
@@ -28,120 +37,27 @@
     border: 3px solid #ffffff;
   }
 
-  .modal-btn {}
-
-  .modal-content,
-  .modal-backdrop {
-    height: 0;
-    width: 0;
-    opacity: 0;
-    visibility: hidden;
-    overflow: hidden;
-    cursor: pointer;
-    transition: opacity 0.2s ease-in;
-    z-index: 10;
-  }
-
-  .modal-close {
-    color: #aaa;
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    padding-top: 3px;
-    background: #fff;
-    font-size: 16px;
-    width: 25px;
-    height: 25px;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-
-    &:hover {
-      color: #333;
-    }
-  }
-
-  .modal-content-btn {}
-
-  #modal-toggle {
-    display: none;
-
-    &.active~.modal-backdrop,
-    &:checked~.modal-backdrop {
-      backdrop-filter: blur(1px);
-      background: rgba(79, 79, 79, 0.7);
-
-      width: 100vw;
-      height: 100vh;
-      position: fixed;
-      left: 0;
-      top: 0;
-      z-index: 2;
-      visibility: visible;
-      opacity: 0.4;
-      transition: opacity 0.2s ease-in;
-    }
-    &:checked~.modal-content.modal_mini{
-      opacity: 1;
-      background-color: #fff;
-      max-width: 400px;
-      width: 530px;
-      min-height: 210px;
-      padding: 24px 30px 10px 30px;
-      position: fixed;
-      left: 50%;
-      top: 30%;
-      transform: translateX(-50%);
-      border-radius: 4px;
-      z-index: 22;
-      pointer-events: auto;
-      cursor: auto;
-      visibility: visible;
-      max-width: 500px;
-      background-color: rgba(253, 253, 251, 1);
-      padding: 20px;
-      animation: scale 0.5s ease;
-      border-radius: 10px;
-      box-shadow: 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.02),
-        22.3px 22.3px 17.9px rgba(0, 0, 0, 0.03),
-        100px 100px 80px rgba(0, 0, 0, 0.05);
-    }
-    &.active~.modal-content,
-    &:checked~.modal-content {
-      opacity: 1;
-      background-color: #fff;
-      max-width: 400px;
-      width: 530px;
-      min-height: 510px;
-      padding: 24px 30px 10px 30px;
-      position: fixed;
-      left: 50%;
-      top: 11%;
-      transform: translateX(-50%);
-      border-radius: 4px;
-      z-index: 22;
-      pointer-events: auto;
-      cursor: auto;
-      visibility: visible;
-      max-width: 500px;
-      background-color: rgba(253, 253, 251, 1);
-      padding: 20px;
-      animation: scale 0.5s ease;
-      border-radius: 10px;
-      box-shadow: 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.02),
-        22.3px 22.3px 17.9px rgba(0, 0, 0, 0.03),
-        100px 100px 80px rgba(0, 0, 0, 0.05);
-
-      @media (max-width: 400px) {
-        left: 0;
-      }
-      
-
-    }
-    
-  }
 }
 
+.modal-content {
+  opacity: 1;
+  background-color: #fff;
+  max-width: 400px;
+  width: 530px;
+  min-height: 510px;
+  padding: 24px 30px 10px 30px;
+  position: fixed;
+  left: 50%;
+  top: 13%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  z-index: 22;
+  max-width: 500px;
+  border-radius: 10px;
+  border: 1px solid rgb(255, 255, 255);
+  transition:0.2s;
+
+}
 
 // order cart
 
@@ -168,14 +84,16 @@
 #order {
 
   .section-title {
-    
+
     font-size: 18px;
     font-weight: bold;
   }
 }
-.address-name{
-  color:var(--warning-color);
+
+.address-name {
+  color: var(--warning-color);
 }
+
 .order-info {
   width: 240px;
   margin-top: 24px;
@@ -200,10 +118,11 @@
   .form__edit-cart {
     color: var(--warning-color);
     width: 150px;
-    background-color: transparent !important ;
+    background-color: transparent !important;
   }
-  .form__edit-cart option{
-   color: #000;
+
+  .form__edit-cart option {
+    color: #000;
   }
 
   .delivery {
@@ -348,10 +267,31 @@
     }
   }
 }
-.label-toggle{
+
+.label-toggle {
   display: block;
 }
+
 // modal login 
-.modalLogin_title{
-  margin: 24px 0 ;
+.modalLogin_title {
+  margin: 24px 0;
+}
+.btn--login{
+  width: 140px;
+  height: 40px;
+  border:2px solid var(--primaryColor);
+  text-align: center;
+  text-decoration: none;
+  border-radius:4px;
+  background-color: var(--primaryColor);
+  color:#fff;
+  line-height:34px;
+  transition:0.3s;
+}
+.btn--login:hover{
+  color:rgb(227, 227, 227);
+}
+.modal_mini{
+  top:40%;
+  min-height: 200px;
 }
