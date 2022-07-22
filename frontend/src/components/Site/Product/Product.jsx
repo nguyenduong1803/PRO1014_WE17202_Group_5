@@ -37,7 +37,7 @@ function Product({ img, title, price }) {
         <h4 className={styles.title}>{title}</h4>
         <div ><BasicRating /></div>
         <div className={`${styles.wrapPrice} d-flex justify-content-between align-items-center `}>
-          <p className={styles.price}>{formatMoney(price)}</p>  <p className={styles.icon}><AddIcon /></p>
+          <p className={styles.price}>{price && formatMoney(price)}</p>  <p className={styles.icon}><AddIcon /></p>
         </div>
       </div>
     </div>
