@@ -13,7 +13,7 @@ function TrendingOrder({ top, img, title, price ,persons}) {
         <h4 className={styles.title}>{title}</h4>
         <p className={styles.line}></p>
         <p className={styles.persons}>{persons}</p>
-        <p className={styles.price}>{price} <div className={styles.icon}><AddIcon/></div></p>
+        <div className={styles.price}>{price} <div className={styles.icon}><AddIcon/></div></div>
         
 
        </div>

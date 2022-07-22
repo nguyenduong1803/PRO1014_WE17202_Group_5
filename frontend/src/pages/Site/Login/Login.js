@@ -94,9 +94,9 @@ const FormLogin = ({ self }) => {
                     <span>
                         <input type="checkbox" /> Nhớ tài khoản
                     </span>
-                    <a href='/login'
+                    <Link to='/checkemail'
                         style={{ fontStyle: `italic`, color: `#74788d` }}>Quên mật khẩu?
-                    </a>
+                    </Link>
                 </div>
                 <a
                     href="/"

@@ -32,11 +32,6 @@ const AuthSlice = createSlice({
             }).addCase(getUserAuth.fulfilled, (state, action) => {
                 state.status = "idle"
                 state.user = action.payload
-            }).addCase(loginSuccess.fulfilled, (state, action) => {
-                state.status = "idle"
-                state.isSuccess = true
-                state.user = action.payload.user
-                state.token = action.payload.token
             }).addCase(loginFailure.fulfilled, (state, action) => {
                 state.status = "idle"
                 state.isSuccess = action.payload
@@ -60,8 +55,7 @@ export const LoginAuth = createAsyncThunk("auth/login", async (payload, action) 
         })
         .then(async (response) => {
             token = response.data.token
-            await action.dispatch(loginSuccess(token))
-            await action.dispatch(getUserAuth())
+            await action.dispatch(getUserAuth(token))
         }).catch(function (err) {
             console.log(err)
             status = err.response.status
@@ -70,8 +64,9 @@ export const LoginAuth = createAsyncThunk("auth/login", async (payload, action) 
     return { token, status }
 })
 
-export const getUserAuth = createAsyncThunk("auth/getUser", async () => {
+export const getUserAuth = createAsyncThunk("auth/getUser", async (token) => {
     let user
+    await setTokenSession(token)
     if (getToken() !== undefined && getToken()) {
         await axios.get(api + "auth/getInfoUser",
             { headers: { "Authorization": `Bearer ${getToken()}` } })
@@ -83,18 +78,18 @@ export const getUserAuth = createAsyncThunk("auth/getUser", async () => {
     }
     return user
 })
-const loginSuccess = createAsyncThunk("auth/loginSuccess", async (token) => {
-    let user;
-    await setTokenSession(token)
-    await axios.get(api + "auth/getInfoUser",
-        { headers: { "Authorization": `Bearer ${getToken()}` } })
-        .then(res => {
-            user = res.data.user
-        }).catch((error) => {
-            console.log(error)
-        });
-    return user;
-})
+// const loginSuccess = createAsyncThunk("auth/loginSuccess", async (token) => {
+//     let user;
+//     await setTokenSession(token)
+//     await axios.get(api + "auth/getInfoUser",
+//         { headers: { "Authorization": `Bearer ${getToken()}` } })
+//         .then(res => {
+//             user = res.data.user
+//         }).catch((error) => {
+//             console.log(error)
+//         });
+//     return user;
+// })
 const loginFailure = createAsyncThunk("auth/loginFailure", (err) => {
     return err
 })

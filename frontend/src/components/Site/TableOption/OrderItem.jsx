@@ -1,29 +1,38 @@
 import React from 'react'
 import QuantityCart from '../../../pages/Site/Cart/QuantityCart'
-import styles from "./TableOption.scss"
+import styles from "./TableOption.css"
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import CelendarOption from '../Calendar/CelendarOption';
 // import DeleteOutlineIcon from '@mui/icons-material/HighlightOff';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { FormControl, TextField } from '@mui/material';
 import { Link } from "react-router-dom";
-function OrderItem({ user,idTable }) {
-    const [tableName, setTableName] = React.useState(idTable);
-    const [order,setOrder]= React.useState({
-        name:user.ten,
-        phone:user.sdt,
-        countGuest:1,
+import { orderTable } from '../../../redux/SliceReducer/OrderTableSlice';
+import { useDispatch } from 'react-redux';
+function OrderItem({ idTable, user, id }) {
+    const dispatch = useDispatch()
+    const [order, setOrder] = React.useState({
+        tableId: idTable,
+        name: user.ten,
+        phone: user.sdt,
+        countGuest: 1,
+        celendar: ""
     });
-    const handleOrder = ()=>{
-        console.log("order")
+    const handleOrder = () => {
+        console.log(order)
+
+        dispatch(orderTable(order))
     }
+    React.useEffect(() => {
+
+    }, [])
     return (
         <section className="section" id="order">
             <div className="section-title">My Order&nbsp;😎</div>
             <div className="order-info">
                 <div className="address">
-                    <div className="address-name">Bàn {tableName}</div>
-                    <select onChange={e => setTableName(e.target.value)} className="form-select form__edit-cart" aria-label="Default select example">
+                    <div className="address-name">Bàn {order.tableId}</div>
+                    <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId}>
                         <option selected>Đổi Bàn</option>
                         <option value="A-2">A-2</option>
                         <option value="A-3">A-3</option>
@@ -43,7 +52,7 @@ function OrderItem({ user,idTable }) {
                         <span className="delivery-choose-time">30s</span>
 
                     </div>
-                    <span className="time"><CelendarOption /></span>
+                    <span className="time"><CelendarOption setOrder={setOrder} /></span>
                 </div>
             </div>
             <FormControl sx={{ margin: "12px 0", width: '100%' }} >
@@ -113,14 +122,14 @@ const CartItem = ({ id }) => {
     )
 }
 function InputField({ name, setOrder, values }) {
-    const handleChangeOrder = (e)=>{
-        setOrder(prev=>{ 
-            if(name==="Chủ tiệc"){
-                return {...prev,name:e.target.value}
-            }else if(name==="Số điện thoại"){
-                return {...prev,phone:e.target.value}
-            }else{
-                return {...prev,countGuest:e.target.value}
+    const handleChangeOrder = (e) => {
+        setOrder(prev => {
+            if (name === "Chủ tiệc") {
+                return { ...prev, name: e.target.value }
+            } else if (name === "Số điện thoại") {
+                return { ...prev, phone: e.target.value }
+            } else {
+                return { ...prev, countGuest: e.target.value }
             }
         })
     }
@@ -129,7 +138,7 @@ function InputField({ name, setOrder, values }) {
             id="outlined-basic"
             label={name}
             variant="outlined"
-            onChange={(e) =>handleChangeOrder(e)}
+            onChange={(e) => handleChangeOrder(e)}
             value={values}
         />
     );
@@ -140,8 +149,7 @@ export function ModalLogin() {
             <h2 className="modalLogin_title">Bạn phải đăng nhập để thực hiện chức năng này</h2>
             <h2 className="modalLogin_title">Chuyển đến trang Đăng nhập</h2>
             <div className="d-flex justify-content-between align-items-center">
-                <Link to="/dang-nhap" type="button" className="btn btn-outline-success">Đăng nhập</Link>
-                <label type="button" for="modal-toggle" className="btn btn-outline-success">Tiếp tục xem</label>
+                <Link to="/dang-nhap" type="button" className=" btn--login">Đăng nhập</Link>
             </div>
         </div>
     )
