@@ -17,7 +17,7 @@ function SelectMui({ list, name, setPageSize }) {
         console.log("@")
     }
     return (
-        <FormControl sx={{ m: 0, minWidth: 130 }} size="small">
+        <FormControl sx={{ m: 0, minWidth: 145 }} size="small">
             <InputLabel>{name}</InputLabel>
             <Select
                 inputProps={{ MenuProps: { disableScrollLock: true } }}

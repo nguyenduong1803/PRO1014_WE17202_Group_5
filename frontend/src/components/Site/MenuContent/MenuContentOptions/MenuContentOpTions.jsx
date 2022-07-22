@@ -5,9 +5,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import SearchSharpIcon from '@mui/icons-material/SearchSharp';
+
 function MenuContentOpTions() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -19,7 +18,10 @@ function MenuContentOpTions() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   return (
     <div className={styles.Menu}>
-      
+      <div style={{ display: 'flex', width: '100%' }} className="position-relative">
+        <input type="search" placeholder="Tìm kiếm..." className={styles.searchInput} />
+        <div className={`icon position-absolute ${styles.searchIcon}`} ><SearchSharpIcon fontSize='small' /></div>
+      </div>
       <div
         style={{ borderRadius: "20px" }}
         className={styles.optionss}
