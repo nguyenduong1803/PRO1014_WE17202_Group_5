@@ -1,6 +1,6 @@
 import React from "react";
 
-function SvgIcon() {
+function SvgIcon({...props}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ function SvgIcon() {
       height="15"
       fill="none"
       viewBox="0 0 128 128"
+      {...props}
     >
       <path
         fill="#F19534"
