@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from "./ProductDetails.module.css"
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 function Quantity({ setQuantity, quantity }) {
     const handleChange = (event) => {
         const value = event.target.value.replace(/[^0-9]/g, '');
@@ -16,7 +18,7 @@ function Quantity({ setQuantity, quantity }) {
     };
     return (
         <div className={styles.quantity}>
-            <button onClick={() => decreaseQuantity()}>-</button>
+            <button onClick={() => decreaseQuantity()}><RemoveIcon className={styles.RemoveIcon}/></button>
             <input
                 type="text"
                 className={styles.productQuantity}
@@ -24,7 +26,7 @@ function Quantity({ setQuantity, quantity }) {
                 onChange={(e) => handleChange(e)}
                 onKeyPress={(event) => { !(/^[0-9]/.test(event.key)) && event.preventDefault(); }}
             />
-            <button onClick={() => increaseQuantity()}>+</button>
+            <button onClick={() => increaseQuantity()}><AddIcon className={styles.RemoveIcon}/></button>
         </div>
     )
 }

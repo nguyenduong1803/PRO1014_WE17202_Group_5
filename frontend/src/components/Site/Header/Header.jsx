@@ -10,7 +10,7 @@ import { AuthContext } from '../../../contexts/AuthenContext'
 import ProfileAvatar from '../ProfileAvatar/ProfileAvatar'
 import { Link } from 'react-router-dom'
 import logo from "../../../assets/img/logoSea.png"
-
+import Cart from './Cart/Cart';
 function Header() {
     const infoUser = useContext(AuthContext)
     return (
@@ -35,7 +35,7 @@ function Header() {
                     <div className="d-flex justify-content-end align-items-center" style={{ height: "100%" }}>
                         <div className="d-flex col-lg-6 col-md-12 justify-content-evenly  align-items-center" style={{ marginRight: "24px" }}>
                             <Notify />
-                            <Mess />
+                            <Cart />
                             {getToken() ?
                                 <div className={`${styles.wrapInfo} d-flex align-items-center`}>
                                     <ProfileAvatar />

@@ -4,18 +4,24 @@
     margin: 0
 }
 
-.container {
+.containerss {
+    margin-bottom: 40px;
+    padding: 20px;
     margin-top: 40px;
     border-radius: 20px;
-    display: flex;
+    /* display: flex; */
     justify-content: space-around;
     flex-wrap: wrap;
     background-color: rgba(255,255,255,0.5);
     align-items: center;
-    height:200px;
     border: 1px solid #fff;
 }
+.container{
+    margin: 40px 0;
+    justify-content: space-around;
 
+    display: flex;
+}
 .progress {
     width: 100px;
     height: 100px;

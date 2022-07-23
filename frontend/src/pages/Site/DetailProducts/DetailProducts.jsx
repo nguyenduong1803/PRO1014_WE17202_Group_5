@@ -3,8 +3,6 @@ import DetailProduct from '../../../components/Site/DetailProducts/DetailProduct
 function DetailProducts() {
   return (
       <DetailProduct/>
-      
-
   )
 }
 

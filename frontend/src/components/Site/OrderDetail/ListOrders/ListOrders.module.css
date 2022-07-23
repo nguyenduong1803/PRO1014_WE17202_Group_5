@@ -32,12 +32,30 @@ table{
     font-family: Arial, Helvetica, sans-serif;
 }
 .icons{
+    margin-top: -20px;
     margin-left: 65px !important;
 }
-.icons p{
-    font-size: 4px;
 
-}
 .table{
     max-width: 840px;
+}
+.clearIcon{
+    padding: -5px;
+    color:rgb(249, 13, 13);
+    border-radius: 3px;
+
+}
+.clearIcon:hover{
+    transition: all 0.3s ease-in;
+    background-color:#FF7272;
+}
+.editIcon{
+    padding: -5px;
+    color:rgb(3, 61, 187);
+    border-radius: 3px;
+
+}
+.editIcon:hover{
+    transition: all 0.3s ease-in;
+    background-color:#FF7272;
 }

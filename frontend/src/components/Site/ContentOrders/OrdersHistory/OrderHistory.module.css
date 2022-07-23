@@ -37,6 +37,7 @@
     padding-bottom: 10px;
     line-height: 1.6rem;
     color:rgb(182, 182, 182);
+    
 }
 .line{
     border-bottom: 2px solid rgb(214, 213, 213);
@@ -45,9 +46,19 @@
     margin-right: -10px;
     float: right;
 }
-.items button{
-    font-size: 1rem !important;
+.button{
+    font-size: .4rem !important;
+    width:90px;
+    color:#000 !important;
 }
+.buttons{
+    color:#000 !important;
+
+    font-size: .4rem !important;
+    width:90px;
+    background-color: yellow !important;
+}
+
 .priceNumber{
     padding: 5px 0;
     width: 100%;
@@ -73,21 +84,25 @@
     justify-content: space-between;
     padding: 10px 0;
 }
-.orderIdFooterRight {
-    margin-top: 18px;
-}
-.orderIdFooterRight a{
-    padding: 10px;
-    color:#FF7272;
-    border: 1px solid #FF7272;
+
+.orderIdFooterRight .buttonLink{
+    background-color: #FF7272 !important;
+    font-weight: 550;
+    color:#000;
+    font-size: .4rem !important;
     text-decoration: none;
-    border-radius: 10px;
+}
+.orderIdFooterRight .buttonLink a:hover{
+    color:#000;
+}
+    a{
+    text-decoration: none !important;
 }
 
-.orderIdFooterRight a:hover{
+/* .orderIdFooterRight a:hover{
     color:#000000;
-    border: 1px solid #000;
-}
+    border: 2px solid #000;
+} */
 .items{
     margin-bottom: 10px;
 }

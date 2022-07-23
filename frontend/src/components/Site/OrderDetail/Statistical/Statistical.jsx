@@ -2,7 +2,9 @@ import React from 'react'
 import styles from './Statistical.module.css';
 function Statistical() {
   return (
-    <div>
+    <div className={styles.containerss}>
+            <h2>Customer Favourite</h2>
+
         <div className={styles.container}>
         
         <div className={styles.progress}>
@@ -19,6 +21,10 @@ function Statistical() {
             <div className={styles.right}></div>
         </div>
     </div>
+    <div div style={{display: 'flex',gridGap:'20px',textAlign:'center',lineHeight:'1.6rem'}}>
+           <div>Food 45 menus</div>
+            <div>Drink 21 menus</div>
+           </div>
     </div>
   )
 }
