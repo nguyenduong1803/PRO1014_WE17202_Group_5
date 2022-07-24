@@ -88,7 +88,7 @@ export const deleteProductById = createAsyncThunk("product/deleteProductById", a
         })
     return payloads
 })
-export const searchProduct = (payload, action) => {
+export const searchProduct = (payload) => {
     return { type: "product/searchProduct", payload }
 }
 

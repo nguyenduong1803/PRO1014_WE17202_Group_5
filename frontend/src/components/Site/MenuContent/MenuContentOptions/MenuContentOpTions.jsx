@@ -7,7 +7,14 @@ import Slider from "@mui/material/Slider";
 import InputLabel from '@mui/material/InputLabel';
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
 
-function MenuContentOpTions() {
+
+function MenuContentOpTions({setModalShow,modalShow}) {
+  
+  const handleShowOrder = () => {
+      setModalShow(!modalShow)
+  }
+
+  // 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -38,7 +45,7 @@ function MenuContentOpTions() {
             >
               <div className={styles.accordTitle}>
                 <div>
-                  <h4>Categories</h4>
+                  <h4>Danh mục</h4>
                 </div>
 
               </div>
@@ -75,7 +82,7 @@ function MenuContentOpTions() {
           >
             <div className={styles.accordTitle}>
               <div className={styles.accordTitleH4}>
-                <h4>Price</h4>
+                <h4>Chọn mức giá</h4>
               </div>
 
             </div>
@@ -95,6 +102,34 @@ function MenuContentOpTions() {
                 getAriaValueText={valuetext}
               />
             </Box>
+          </div>
+          <div className="accordion-body" style={{ padding: "0" }}></div>
+        </div>
+      </div>
+      <div
+        style={{ borderRadius: "20px", marginTop: "30px" }}
+        className={styles.optionss}
+      >
+        <div className={styles.accordionItem}>
+          <h2
+            id="flush-headingOne"
+            className={styles.accordionButton}
+          >
+            <div className={styles.accordTitle}>
+              <div className={styles.accordTitleH4}>
+                <h4>Đặt bàn</h4>
+              </div>
+
+            </div>
+          </h2>
+          <div className={styles.line}></div> <br />
+          <div className={styles.sliderPrice} style={{ color: 'white !important' }}>
+            <h2>box</h2>
+            <div className="modal-container" onClick={handleShowOrder}>
+              {/* <input id="modal-toggle" type="checkbox" /> */}
+              <button>Đặt bàn</button>
+            </div>
+              
           </div>
           <div className="accordion-body" style={{ padding: "0" }}></div>
         </div>

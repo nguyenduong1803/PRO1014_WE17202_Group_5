@@ -33,7 +33,7 @@ const routerSite = [
   { path: "/chi-tiet-hoa-don", component: OrderDetail , },
   { path: "/chi-tiet-don-hang", component: DetailProduct , },
   { path: "/profile", component:Profile , },
-  { path: "/checkpass", component:Checkpass , },
+  { path: "/getPassForgot/:id/:token", component:Checkpass , },
   { path: "/checkemail", component:CheckEmail , },
   { path: "*", component: PageNotFound , },
 

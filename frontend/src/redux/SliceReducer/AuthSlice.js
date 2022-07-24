@@ -2,16 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { getToken, removeUserSession, setTokenSession } from "../../utils/Common"
 const api = "http://127.0.0.1:8000/api/"
-// initState: {
-//     username: "",
-//     password: "",
-//     address: "",
-//     phone: "",
-//     dob: "",
-//     gender: "",
-//     roles: "",
-//     email: "",
-// },
 
 const AuthSlice = createSlice({
     name: "auth",
@@ -78,22 +68,10 @@ export const getUserAuth = createAsyncThunk("auth/getUser", async (token) => {
     }
     return user
 })
-// const loginSuccess = createAsyncThunk("auth/loginSuccess", async (token) => {
-//     let user;
-//     await setTokenSession(token)
-//     await axios.get(api + "auth/getInfoUser",
-//         { headers: { "Authorization": `Bearer ${getToken()}` } })
-//         .then(res => {
-//             user = res.data.user
-//         }).catch((error) => {
-//             console.log(error)
-//         });
-//     return user;
-// })
 const loginFailure = createAsyncThunk("auth/loginFailure", (err) => {
     return err
 })
-export const logOut = createAsyncThunk("auth/logout", async (payload, action) => {
+export const logOut = createAsyncThunk("auth/logout", async () => {
     await axios.get(api + "auth/logout",
         { headers: { "Authorization": `Bearer ${getToken()}` } })
         .then(res => {
@@ -103,15 +81,4 @@ export const logOut = createAsyncThunk("auth/logout", async (payload, action) =>
         });
     await removeUserSession()
 })
-
-// {
-//     "ten": "duong test 2",
-//     "dia_chi": "hcm",
-//     "ngay_sinh": "1998-12-22",
-//     "sdt": "0934565787",
-//     "gioi_tinh": 0,
-//     "vai_tro": 0,
-//     "email": "duongtest2@gmail.com",
-//     "mat_khau": "12345678"
-// }
 export default AuthSlice

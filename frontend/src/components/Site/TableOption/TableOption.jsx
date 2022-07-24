@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import RectangleTable from '../Table/RectangleTable';
 import Table from '../Table/Table'
-import OrderItem, { ModalLogin } from './OrderItem'
+import  { ModalLogin } from './OrderItem'
 import styles from "./TableOption.scss"
 import { useSelector } from "react-redux"
 import { isSuccess } from '../../../redux/selector';
 import { AuthContext } from '../../../contexts/AuthenContext';
+import StepperMui from "./StepperMui"
 function TableOption({ id, status, type }) {
     const isLogin = useSelector(isSuccess);
     const [modalShow, setModalShow] = React.useState(false)
@@ -40,7 +41,7 @@ function TableOption({ id, status, type }) {
                 {modalShow ? <div className="wrap_modal-content" >
                     <div className={`modal-content ${!isLogin && 'modal_mini'}`} onClick={e => handleClick(e)}>
                         {
-                            isLogin ? <OrderItem idTable={id} user={infoUser} /> : <ModalLogin />
+                            isLogin ? <StepperMui idTable={id} user={infoUser} /> : <ModalLogin />
                         }
 
                     </div>

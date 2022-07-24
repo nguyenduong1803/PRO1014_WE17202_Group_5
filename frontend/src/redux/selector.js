@@ -29,6 +29,7 @@ export const selectLoadingProduct = (state) => state.ManagerProduct.status
 export const selectSearchText = (state) => state.ManagerProduct.searchText
 // tables
 export const selectListTable = (state)=>state.OrderTableSlice.tables
+export const selectOrderTable = (state)=>state.OrderTableSlice.orderTable
 
 
 export const selectProductById = createSelector(selectProducts, selectSearchText,

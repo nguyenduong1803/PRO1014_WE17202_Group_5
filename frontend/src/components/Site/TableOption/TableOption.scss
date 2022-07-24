@@ -6,7 +6,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(221, 221, 221, 0.3);
+  background-color: rgba(194, 194, 194, 0.6);
   z-index: 10;
   transition: all 0.2s;
 }
@@ -45,17 +45,17 @@
   max-width: 400px;
   width: 530px;
   min-height: 510px;
-  padding: 24px 30px 10px 30px;
+  padding: 24px 24px 10px 24px;
   position: fixed;
   left: 50%;
-  top: 13%;
+  top: 11%;
   transform: translateX(-50%);
   border-radius: 4px;
   z-index: 22;
   max-width: 500px;
   border-radius: 10px;
   border: 1px solid rgb(255, 255, 255);
-  transition:0.2s;
+  transition: 0.2s;
 
 }
 
@@ -96,8 +96,8 @@
 
 .order-info {
   width: 240px;
-  margin-top: 24px;
-  padding: 27px 24px 12px 24px;
+  margin: 6px 0;
+  padding: 12px 24px 12px 24px;
   color: white;
   background: var(--info-color);
   border-radius: 15px;
@@ -247,27 +247,35 @@
     margin-top: 16px;
   }
 
-  .checkout-btn {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    color: #fff;
-    border: 1px solid #fff;
-    background-color: var(--primaryColor);
-    text-shadow: 1px 1px 3px rgba(108, 108, 108, 0.7);
-    border-radius: 10px;
 
-    .arrow {
-      margin-left: 16px;
-      color: #fff;
-    }
-
-    svg {
-      fill: currentColor;
-    }
-  }
 }
 
+.checkout-btn {
+  text-decoration: none;
+  color: #fff;
+  display: inline-block;
+  align-items: center;
+  padding: 14px;
+  color: #fff;
+  margin: 24px 0;
+  border: 1px solid #fff;
+  background-color: var(--primaryColor) !important;
+  text-shadow: 1px 1px 3px rgba(108, 108, 108, 0.7);
+  border-radius: 10px;
+
+  .arrow {
+    margin-left: 16px;
+    color: #fff;
+  }
+
+  svg {
+    fill: currentColor;
+  }
+}
+.checkout-btn:hover{
+  color :#fff;
+  opacity: 0.8;
+}
 .label-toggle {
   display: block;
 }
@@ -276,22 +284,29 @@
 .modalLogin_title {
   margin: 24px 0;
 }
-.btn--login{
+
+.btn--login {
   width: 140px;
   height: 40px;
-  border:2px solid var(--primaryColor);
+  border: 2px solid var(--primaryColor);
   text-align: center;
   text-decoration: none;
-  border-radius:4px;
+  border-radius: 4px;
   background-color: var(--primaryColor);
-  color:#fff;
-  line-height:34px;
-  transition:0.3s;
+  color: #fff;
+  line-height: 34px;
+  transition: 0.3s;
 }
-.btn--login:hover{
-  color:rgb(227, 227, 227);
+
+.btn--login:hover {
+  color: rgb(227, 227, 227);
 }
-.modal_mini{
-  top:40%;
+
+.modal_mini {
+  top: 40%;
   min-height: 200px;
+}
+.infoOrder__title-head{
+  margin: 12px 0;
+  font-weight: 500;
 }
