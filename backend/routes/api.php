@@ -71,6 +71,7 @@ Route::group(['namespace' => 'User', 'prefix' => 'user'], function(){
 Route::group(['namespace' => 'Cart', 'prefix' => 'cart'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('save', [\App\Http\Controllers\Api\Cart\CartController::class, 'saveCart']);
+        Route::post('updateOrder', [\App\Http\Controllers\Api\Cart\CartController::class, 'updateOrder']);
         Route::get('getCart', [\App\Http\Controllers\Api\Cart\CartController::class, 'getCart']);
         Route::delete('deleteOrder/{id}', [\App\Http\Controllers\Api\Cart\CartController::class, 'deleteOrder']);
     });

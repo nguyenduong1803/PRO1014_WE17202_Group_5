@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class SaveCart extends FormRequest
+class UpdateOrder extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,10 @@ class SaveCart extends FormRequest
     public function rules()
     {
         return [
-            'id_product' => 'integer|required',
-            'amount' => 'integer|required',
+            'amount' => 'integer|nullable',
             'id_table_book' => 'nullable|integer',
+            'status_cart_order' => 'integer|required',
+            'id' => 'integer|required|exists:cart',
         ];
     }
     public function failedValidation(Validator $validator)

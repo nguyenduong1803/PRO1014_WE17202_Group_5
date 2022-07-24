@@ -34,7 +34,7 @@ class Cart extends Model
             $params);
     }
 
-    public function checkOrderDeleted($id) {
+    public function checkDetailOrderDeleted($id) {
         $data = Cart::query() -> where('id', $id)
             -> where('is_delete', 1)
             -> first();
@@ -43,5 +43,11 @@ class Cart extends Model
 
     public function deleteOrder($params) {
         DB::update("UPDATE cart SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
+    }
+
+    public function updateOrder($params) {
+            DB::update("UPDATE cart SET `id_user` = ? , `amount` = ?, `id_table_book` = ?, `purchase_status` = ?,`status_cart_order` = ?,`update_at` = ?
+                    WHERE `id` = ?", $params);
+
     }
 }
