@@ -33,6 +33,11 @@ class InvoicesController extends Controller
         ];
         $modelInvoices ->create($params2);
         return response() ->json(["msg" => "Tạo hoá đơn thành công!", "status" => true],200);
+    }
 
+    public function lists() {
+        $modelInvoices = new Invoices();
+        $data = $modelInvoices -> lists();
+        return response() ->json(["data" => $data, "status" => true],200);
     }
 }
