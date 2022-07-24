@@ -35,7 +35,7 @@ class InvoicesController extends Controller
         return response() ->json(["msg" => "Tạo hoá đơn thành công!", "status" => true],200);
     }
 
-    public function lists() {
+    public function getInvoice() {
         $modelInvoices = new Invoices();
         $data = $modelInvoices -> lists();
         $data = $data[count($data) - 1];
