@@ -38,7 +38,7 @@ class TableBookController extends Controller
         ];
         $userChecked = $modelUser ->checkExistsUserById($user['id']);
         $data = $modelTableBook -> getTablesBookByUser($params);
-        if(!isset($userChecked)) response() ->json(["msg" => "Không tồn tại người dùng!", "status" => false],404);
+        if(!isset($userChecked)) return response() ->json(["msg" => "Không tồn tại người dùng!", "status" => false],404);
         if(isset($data)) return response() ->json(["data" => $data, "status" => true],200);
         return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
     }
