@@ -201,64 +201,6 @@
   }
 }
 
-.food-list {
-  display: grid;
-  row-gap: 24px;
-  height: 250px;
-  padding: 0;
-  margin: 24px 0 0 0;
-  font-size: 13px;
-  font-weight: bold;
-  list-style-type: none;
-  overflow-y: auto;
-  border-top: 1px solid rgba(184, 184, 184, 0.2);
-  border-bottom: 1px solid rgba(184, 184, 184, 0.2);
-
-  &__item {
-    display: grid;
-    align-items: center;
-
-    &:not(:last-child) {
-      grid-template-columns: 65px 120px 120px 1fr 35px;
-    }
-
-    &:last-child {
-      grid-template-columns: 65px 120px 120px 1fr 35px;
-    }
-
-    .food-image {
-      width: 57px;
-      height: 32px;
-      border-radius: 5px;
-    }
-
-    .food-buy-amount {
-      min-width: 40px;
-    }
-
-    .food-price {
-      color: var(--secondary-color-darker);
-      justify-self: flex-end;
-    }
-
-    .delete__cart-icon {
-      margin-left: 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      height: 30px;
-      width: 30px;
-      border-radius: 50%;
-    }
-
-    .delete__cart-icon:hover {
-      color: red;
-      background-color: rgb(239, 239, 239);
-    }
-  }
-}
-
 .total-price {
   display: flex;
   justify-content: space-between;

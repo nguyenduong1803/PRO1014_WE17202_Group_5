@@ -7,6 +7,7 @@ import { AuthContext } from '../../../contexts/AuthenContext';
 import StepperMui from "./StepperMui"
 import { getToken } from '../../../utils/Common';
 import ProductCart from '../CheckOut/CheckOutProducts/ProductCart';
+import InfomationCart from './InfomationCart';
 function TableOption({ id, status, type }) {
 
     const [modalShow, setModalShow] = React.useState(false)
@@ -45,16 +46,7 @@ function TableOption({ id, status, type }) {
                                 getToken() ? <StepperMui setModalShow={setModalShow}  idTable={id} user={infoUser} /> : <ModalLogin />
                             }
                         </div>
-                        <div className="TableOption__wrapCart" >
-                            <h3 className="mb-3">Thông tin giỏ hàng</h3>
-                            <div className="content__cart-box">
-                            <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
-                            <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
-                            <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
-                            <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
-
-                            </div>
-                        </div>
+                       <InfomationCart/>
                     </div>
                 </div> }
             </div>

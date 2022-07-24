@@ -3,10 +3,8 @@ import styles from "./ManageProduct.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
-import Pagination from "../../../extensions/Pagination/Pagination";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
 import { DataContext } from "../../../contexts/DataContext";
-
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
 import { tableProduct } from "../../../config/tables"
@@ -17,8 +15,9 @@ import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
 import { selectLoadingProduct, selectProducts } from "../../../redux/selector";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Site/Loading/Loading";
-import { deleteProductById } from "../../../redux/SliceReducer/Admin/ManagerProductSlice";
+import { deleteProductById } from "../../../redux/SliceReducer/ManagerProductSlice";
 import PaginationMui from "../../../components/Admin/PaginationMui/PaginationMui";
+
 const ManageProduct = (id) => {
   const dispatch = useDispatch()
   const listProduct = useSelector(selectProducts)

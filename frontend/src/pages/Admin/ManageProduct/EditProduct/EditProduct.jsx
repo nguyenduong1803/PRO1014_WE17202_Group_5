@@ -1,15 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import styles from "../EditProduct/EditProduct.module.css";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import Switch from "@mui/material/Switch";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
 import Header from "../../../../components/Admin/Header/Header";
-import { DataContext } from "../../../../contexts/DataContext";
-import ShowCategory from "../../../../components/Admin/ShowCategory/ShowCategory"
 import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
-import { useDispatch, useSelector } from "react-redux";
-import { searchProduct } from "../../../../redux/SliceReducer/Admin/ManagerProductSlice";
+import {  useSelector } from "react-redux";
 import { selectProductById } from "../../../../redux/selector";
 function EditProduct() {
   

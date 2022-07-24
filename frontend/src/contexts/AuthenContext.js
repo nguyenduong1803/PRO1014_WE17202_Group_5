@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, remainingSelector, selectLoadingProduct, selectProducts, selectLoading } from "../redux/selector";
-import { getProducts } from "../redux/SliceReducer/Admin/ManagerProductSlice";
+import { getProducts } from "../redux/SliceReducer/ManagerProductSlice";
 import { getUserAuth } from "../redux/SliceReducer/AuthSlice";
-import { getListTable } from "../redux/SliceReducer/OrderTableSlice";
+import { getListCart, getListTable } from "../redux/SliceReducer/OrderTableSlice";
 import { getToken } from "../utils/Common";
 const AuthContext = createContext("");
 
@@ -18,6 +18,7 @@ function AuthenProvider({ children }) {
         }
         dispatch(getListTable())
         dispatch(getProducts())
+        dispatch(getListCart())
     }, [])
     return (
         <AuthContext.Provider value={remaining}>

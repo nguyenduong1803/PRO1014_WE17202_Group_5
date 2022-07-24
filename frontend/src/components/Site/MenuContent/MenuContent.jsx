@@ -4,14 +4,15 @@ import MenuContentOptions from './MenuContentOptions/MenuContentOpTions';
 import LayoutSite from '../LayoutSite/LayoutSite';
 import product1 from '../../../assets/img/seafood-1.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { isSuccess, selectLoadingProduct, selectProducts } from '../../../redux/selector';
+import { isSuccess, selectCart, selectLoadingProduct, selectProducts } from '../../../redux/selector';
 import Loading from '../Loading/Loading';
 import Product from '../Product/Product';
 import { AuthContext } from '../../../contexts/AuthenContext';
 import StepperMui from '../TableOption/StepperMui';
 import { ModalLogin } from '../TableOption/OrderItem';
-import ProductCart from '../CheckOut/CheckOutProducts/ProductCart';
 import { getToken } from '../../../utils/Common';
+import ProductCartTable from '../TableOption/ProductCartTable';
+import InfomationCart from '../TableOption/InfomationCart';
 const product = [
   {
     img: product1,
@@ -73,7 +74,6 @@ const product = [
 ];
 
 function MenuContent() {
-  const dispatch = useDispatch()
   const listProduct = useSelector(selectProducts)
   const loadingProduct = useSelector(selectLoadingProduct)
   const category = [
@@ -81,7 +81,6 @@ function MenuContent() {
     { name: "category" },
     { name: "category" },
   ]
-  const isLogin = useSelector(isSuccess);
   const [modalShow, setModalShow] = React.useState(false)
   const infoUser = useContext(AuthContext)
   const handleClick = (e) => {
@@ -98,16 +97,7 @@ function MenuContent() {
               getToken() ? <StepperMui setModalShow={setModalShow} idTable={""} user={infoUser} /> : <ModalLogin />
             }
           </div>
-          <div className="TableOption__wrapCart" >
-            <h3 className="mb-3">Thông tin giỏ hàng</h3>
-            <div className="content__cart-box">
-              <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
-              <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
-              <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
-              <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
-
-            </div>
-          </div>
+          <InfomationCart/>
         </div>
       </div>}
       <div className="container-fluid">
@@ -134,6 +124,7 @@ function MenuContent() {
                       img={product1}
                       title={products.name}
                       price={products.price}
+                      id={products.id}
                     />
                   )
                 })

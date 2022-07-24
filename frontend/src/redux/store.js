@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
 import AuthSlice from "./SliceReducer/AuthSlice"
 import AccountSlice from "./SliceReducer/AccountSlice"
-import ManagerProductSlice from "./SliceReducer/Admin/ManagerProductSlice"
+import ManagerProductSlice from "./SliceReducer/ManagerProductSlice"
 import OrderTableSlice from "./SliceReducer/OrderTableSlice"
 
 const store = configureStore({

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Table from "rsuite/Table";
 import "rsuite-table/dist/css/rsuite-table.css";
 import Loadings from "../../../components/Site/Loadings/Loadings"
-import { searchProduct } from '../../../redux/SliceReducer/Admin/ManagerProductSlice';
+import { searchProduct } from '../../../redux/SliceReducer/ManagerProductSlice';
 import { useDispatch } from 'react-redux';
 const ImageCell = ({ rowData, dataKey, ...props }) => (
     <Table.Cell {...props} style={{ padding: 0 }}>
