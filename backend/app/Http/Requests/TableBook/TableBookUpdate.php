@@ -33,6 +33,7 @@ class TableBookUpdate extends FormRequest
             'total_user'=> 'nullable|integer',
             'status_book'=> 'nullable|required|integer',
             'time_book' => 'nullable|date_format:Y-m-d H:i:s',
+            'description' => 'nullable|max:255|string',
         ];
     }
 

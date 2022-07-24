@@ -32,6 +32,7 @@ class TableBookCreate extends FormRequest
             'total_user'=> 'required|integer',
             'status_book'=> 'required|integer',
             'time_book' => 'required|date_format:Y-m-d H:i:s',
+            'description' => 'nullable|max:255|string',
         ];
     }
 
