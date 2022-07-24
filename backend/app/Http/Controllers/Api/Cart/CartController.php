@@ -25,4 +25,15 @@ class CartController extends Controller
         $modelCart ->saveCart($params);
         return response() ->json(["msg" => "Thêm đơn hàng vào giỏ hàng thành công!", "status" => true],200);
     }
+
+    public function getCart() {
+        $user = Auth::user();
+        $params = [
+            $user['id']
+        ];
+        $modelCart = new Cart();
+        $data = $modelCart ->getCart($params);
+        if(!isset($data)) return response() ->json(["msg" => "Đã xảy ra lỗi!", "status" => false],405);
+        return response() ->json(["data" => $data, "status" => true],200);
+    }
 }
