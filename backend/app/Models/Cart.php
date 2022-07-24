@@ -19,12 +19,14 @@ class Cart extends Model
     }
 
     public function getCart($params) {
-        return DB::select("SELECT c.amount, c.purchase_status, c.status_cart_order, p.price, p.id_code_sale,p.name, img.path
+        return DB::select("SELECT c.amount, c.purchase_status, c.status_cart_order, p.price, p.id_code_sale,p.name, img.path, tb.id_table
             FROM cart as c
             INNER JOIN products as p
             ON c.id_product = p.id
             INNER JOIN images_product as img
             ON img.id_product_img = p.id_img
+            LEFT JOIN table_book as tb
+            ON c.id_table_book = tb.id
             WHERE c.id_user = p.id_user
             AND c.id_user = ?
             AND c.is_delete = 1
