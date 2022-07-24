@@ -23,9 +23,22 @@ class Invoices extends Model
         DB::insert('INSERT INTO invoices
     (id_user , status_cart_order, total_price, status_envoice, id_staff)
     values (? , ? , ?, ?, ?)', $params);
+
+        DB::update("UPDATE invoices SET `id_user` = ?, `status_cart_order` = ?,`total_price` = ?,
+                    `status_envoice` = ?, `id_staff` = ?
+                    WHERE `id` = ?", $params);
     }
 
-    public function lists() {
-        return DB::select("SELECT * FROM invoices WHERE status_envoice = 1 AND is_delete = 1");
+    public function getInvoice($params) {
+        return DB::select("SELECT iv.status_cart_order,iv.total_price, iv.status_envoice, iv.id_staff, tb.total_user, tbs.index_table, tbs.floor
+                                FROM invoices as iv
+                                INNER JOIN table_book as tb
+                                ON tb.id_user = ?
+                                INNER JOIN Tables as tbs
+                                ON tbs.id = tb.id_table
+                                WHERE status_envoice = 1
+                                AND iv.is_delete = 1
+                                AND tb.is_delete = 1
+                                AND tbs.is_delete = 1", $params);
     }
 }
