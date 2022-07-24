@@ -12,6 +12,7 @@ import Loadings from "../../../components/Site/Loadings/Loadings"
 import { InputPassword } from '../../../components/Site/ContentRegister/InputMui'
 import { FormControl } from '@mui/material'
 import BannerAnimation from '../../../components/Site/ContentRegister/BannerAnimation'
+import { getToken } from '../../../utils/Common'
 function Login(self) {
     return (
         <div className={`${styles.main} d-flex`}>
@@ -37,13 +38,12 @@ function Login(self) {
                 </div>
 
             </div>
-            <BannerAnimation/>
+            <BannerAnimation />
         </div>
     )
 }
 const FormLogin = ({ self }) => {
     const dispatch = useDispatch();
-    const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState({
         amount: '',
@@ -56,30 +56,31 @@ const FormLogin = ({ self }) => {
     const history = useHistory();
     const success = useSelector(isSuccess)
     const load = useSelector(selectLoading)
-    const handleSubmit = (e) => {
-        setLoading(true)
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        dispatch(LoginAuth({ email: email, password: password.password }))
-        console.log(success)
-        setEmail("")
-        setPassword(prev => ({ ...prev, password: "" }))
-
-    }
-    useEffect(() => {
-        if (success === true) {
+       await dispatch(LoginAuth({ email: email, password: password.password }))
+        if (getToken()) {
             history.push("/")
-        } else if (success) {
-            setNotify("Thông tin tài khoản hoặc mật khẩu không đúng")
-            setLoading(false)
         } else {
-            setLoading(false)
+            e.preventDefault();
+            console.log(success)
+            setEmail("")
+            setPassword(prev => ({ ...prev, password: "" }))
+            setNotify("Thông tin tài khoản hoặc mật khẩu không đúng")
         }
-    }, [success])
+    }
+    // useEffect(() => {
+    //     if (success === true) {
+    //     } else if (success) {
+    //         setNotify("Thông tin tài khoản hoặc mật khẩu không đúng")
+    //     } else {
+    //     }
+    // }, [success])
     return (
         <>  {load === "loading" ? <Loadings /> : ""}
             <form className={`${styles.form}`}>
                 <div>
-                  
+
                     <FormControl sx={{ margin: "24px 0", width: '100%' }} variant="outlined">
                         <InputEmail name="Email" email={email} setEmail={setEmail} />
                     </FormControl>
@@ -106,7 +107,7 @@ const FormLogin = ({ self }) => {
                 // onClick={handleLogin}
                 >Đăng nhập
                 </a>
-            {notify && <p className={styles.error}>{notify}</p>}
+                {notify && <p className={styles.error}>{notify}</p>}
             </form>
         </>
 
@@ -118,7 +119,7 @@ function InputEmail({ name, email, setEmail }) {
             id="outlined-basic"
             label={name}
             variant="outlined"
-            onChange={(e) =>(setEmail(e.target.value))}
+            onChange={(e) => (setEmail(e.target.value))}
             value={email}
         />
     );

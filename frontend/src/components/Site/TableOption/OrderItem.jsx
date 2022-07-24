@@ -8,27 +8,18 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { FormControl, TextField } from '@mui/material';
 import { Link } from "react-router-dom";
 import { orderTable } from '../../../redux/SliceReducer/OrderTableSlice';
-import { useDispatch } from 'react-redux';
-function OrderItem({ idTable, user, id }) {
-    const dispatch = useDispatch()
-    const [order, setOrder] = React.useState({
-        tableId: idTable,
-        name: user.ten,
-        phone: user.sdt,
-        countGuest: 1,
-        celendar: ""
-    });
+import { useDispatch} from 'react-redux';
+
+function OrderItem({order,setOrder}) {
+    
     const handleOrder = () => {
         console.log(order)
 
-        dispatch(orderTable(order))
+        // dispatch(orderTable(order))
     }
-    React.useEffect(() => {
-
-    }, [])
     return (
         <section className="section" id="order">
-            <div className="section-title">My Order&nbsp;😎</div>
+            {/* <div className="section-title">My Order&nbsp;😎</div> */}
             <div className="order-info">
                 <div className="address">
                     <div className="address-name">Bàn {order.tableId}</div>
@@ -55,14 +46,14 @@ function OrderItem({ idTable, user, id }) {
                     <span className="time"><CelendarOption setOrder={setOrder} /></span>
                 </div>
             </div>
-            <FormControl sx={{ margin: "12px 0", width: '100%' }} >
-                <InputField name="Chủ tiệc" values={order.name} setOrder={setOrder} />
+            <FormControl sx={{ margin: "8px 0", width: '100%' }} >
+                <InputField name="Chủ tiệc"  size="small" values={order.name} setOrder={setOrder} />
             </FormControl>
-            <FormControl sx={{ margin: "12px 0", width: '100%' }} >
-                <InputField name="Số điện thoại" values={order.phone} setOrder={setOrder} />
+            <FormControl sx={{ margin: "8px 0", width: '100%' }} >
+                <InputField name="Số điện thoại" size="small" values={order.phone} setOrder={setOrder} />
             </FormControl>
-            <FormControl sx={{ margin: "12px 0", width: '100%' }} >
-                <InputField name="Số người" setOrder={setOrder} values={order.countGuest} />
+            <FormControl sx={{ margin: "8px 0", width: '100%' }} >
+                <InputField name="Số người" setOrder={setOrder} size="small" values={order.countGuest} />
             </FormControl>
 
             {/* <ul className="food-list">
@@ -93,11 +84,11 @@ function OrderItem({ idTable, user, id }) {
                         Thêm món ăn<LocalDiningIcon />
                     </Link> */}
                 </div>
-                <button onClick={handleOrder} className="btn btn-warning checkout-btn">
+                {/* <button onClick={handleOrder} className="btn btn-warning checkout-btn">
                     Tiến hành đặt<svg width="18" height="18" className="arrow" viewBox="0 0 24 24">
                         <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
                     </svg>
-                </button>
+                </button> */}
             </div>
         </section>
     )
@@ -121,7 +112,7 @@ const CartItem = ({ id }) => {
         </li>
     )
 }
-function InputField({ name, setOrder, values }) {
+function InputField({ name, setOrder, values,size }) {
     const handleChangeOrder = (e) => {
         setOrder(prev => {
             if (name === "Chủ tiệc") {
@@ -140,6 +131,7 @@ function InputField({ name, setOrder, values }) {
             variant="outlined"
             onChange={(e) => handleChangeOrder(e)}
             value={values}
+            size={size}
         />
     );
 }

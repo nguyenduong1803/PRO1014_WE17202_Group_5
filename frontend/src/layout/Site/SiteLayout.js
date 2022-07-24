@@ -37,7 +37,6 @@ const routerSite = [
   { path: "/dat-lai-mat-khau", component:Checkpass , },
   { path: "/gui-email", component:CheckEmail , },
   { path: "/dat-hang", component: CheckOut , },
-
   { path: "*", component: PageNotFound , },
 
 ]
