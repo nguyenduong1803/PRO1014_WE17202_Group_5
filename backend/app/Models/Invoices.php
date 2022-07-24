@@ -23,10 +23,6 @@ class Invoices extends Model
         DB::insert('INSERT INTO invoices
     (id_user , status_cart_order, total_price, status_envoice, id_staff)
     values (? , ? , ?, ?, ?)', $params);
-
-        DB::update("UPDATE invoices SET `id_user` = ?, `status_cart_order` = ?,`total_price` = ?,
-                    `status_envoice` = ?, `id_staff` = ?
-                    WHERE `id` = ?", $params);
     }
 
     public function getInvoice($params) {
