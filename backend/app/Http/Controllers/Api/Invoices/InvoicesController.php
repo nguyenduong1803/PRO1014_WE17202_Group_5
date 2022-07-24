@@ -38,6 +38,7 @@ class InvoicesController extends Controller
     public function lists() {
         $modelInvoices = new Invoices();
         $data = $modelInvoices -> lists();
+        $data = $data[count($data) - 1];
         return response() ->json(["data" => $data, "status" => true],200);
     }
 }
