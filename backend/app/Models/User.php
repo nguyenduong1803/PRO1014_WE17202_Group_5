@@ -48,4 +48,11 @@ class User extends Authenticatable
     public function updateInfo($params) {
         DB::update("UPDATE users SET `ten` = ?, `dia_chi` = ?, `ngay_sinh` = ?, `sdt` = ?, `gioi_tinh` = ?, `email` = ?, `img` = ? WHERE `id` = ?", $params);
     }
+
+    public function getUserByRole($id, $role) {
+        return User::query() -> where('id', $id)
+            -> where('vai_tro', $role)
+            -> where('is_delete', 1)
+            -> first();
+    }
 }
