@@ -1,4 +1,4 @@
-import React,{ useContext }  from 'react'
+import React, { useContext } from 'react'
 import SelectMui from "../../Admin/SelectMui/SelectMui"
 import MenuContentOptions from './MenuContentOptions/MenuContentOpTions';
 import LayoutSite from '../LayoutSite/LayoutSite';
@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isSuccess, selectLoadingProduct, selectProducts } from '../../../redux/selector';
 import Loading from '../Loading/Loading';
 import Product from '../Product/Product';
-import { getProducts } from '../../../redux/SliceReducer/Admin/ManagerProductSlice';
 import { AuthContext } from '../../../contexts/AuthenContext';
 import StepperMui from '../TableOption/StepperMui';
 import { ModalLogin } from '../TableOption/OrderItem';
-
+import ProductCart from '../CheckOut/CheckOutProducts/ProductCart';
+import { getToken } from '../../../utils/Common';
 const product = [
   {
     img: product1,
@@ -91,14 +91,25 @@ function MenuContent() {
   return (
     <LayoutSite>
       {/* <ButtonCart /> */}
-      {modalShow ? <div className="wrap_modal-content" >
-        <div className={`modal-content ${!isLogin && 'modal_mini'}`} onClick={e => handleClick(e)}>
-          {
-            isLogin ? <StepperMui setModalShow={setModalShow} idTable={2} user={infoUser} /> : <ModalLogin />
-          }
+      {modalShow && <div className="wrap_modal-content" >
+        <div className="modal_content--item" onClick={e => handleClick(e)} >
+          <div className={`modal-content ${!getToken() && 'modal_mini'}`} >
+            {
+              getToken() ? <StepperMui setModalShow={setModalShow} idTable={""} user={infoUser} /> : <ModalLogin />
+            }
+          </div>
+          <div className="TableOption__wrapCart" >
+            <h3 className="mb-3">Thông tin giỏ hàng</h3>
+            <div className="content__cart-box">
+              <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
+              <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
+              <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
+              <ProductCart name="name" content="content" img="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/steak-n-shake-7x7-steakburger.jpg?quality=82&strip=1" price="223" />
 
+            </div>
+          </div>
         </div>
-      </div> : ""}
+      </div>}
       <div className="container-fluid">
         <div className="row position-relative" style={{ zIndex: "4" }}>
           <div className="col-lg-3">
