@@ -34,12 +34,8 @@ function OrderDetail() {
             );
           })}
           <div>
-            <h2>Customer Favourite</h2>
             <Statistical />
-           <div div style={{display: 'flex',gridGap:'20px',textAlign:'center',lineHeight:'1.6rem'}}>
-           <div>Food 45 menus</div>
-            <div>Drink 21 menus</div>
-           </div>
+          
           </div>
         </div>
         <div className="col-lg-9">

@@ -14,7 +14,7 @@ function MenuContentDetail({img,title,content}) {
             </div>
             <div className={styles.list}>
                 <div>Quantity</div>
-                <div><Button  size="small">Primary</Button></div>
+                <div><Button  size="small" color='primary'>Primary</Button></div>
             </div>
             </div>
         </div>

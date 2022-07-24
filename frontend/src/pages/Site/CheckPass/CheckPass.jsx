@@ -1,9 +1,9 @@
 import React from 'react'
-import Checkpassss from '../../../components/Site/Checkpass/Checkpass';
+import Checkpassword from '../../../components/Site/Checkpass/Checkpass';
 function CheckPass() {
   return (
     <div>
-        <Checkpassss/>
+        <Checkpassword/>
     </div>
   )
 }

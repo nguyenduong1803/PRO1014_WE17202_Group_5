@@ -31,9 +31,18 @@
   height: 50px;
 
 }
+.RemoveIcon{
+  background: rgb(255, 255, 255);
+}
+.RemoveIcon:hover{
+  color:red;
+}
 .quantity .productQuantity {
   width: 40px;
-  height: 28px;
+  /* height: 23px; */
+  background: border-box;
+  border-radius: 5px;
+  background-color: rgb(255,255,255,0.5);
   padding: 4px ;
   outline: none;
   border: none;

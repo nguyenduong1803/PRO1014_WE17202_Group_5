@@ -63,12 +63,12 @@ export default function DenseTable() {
       <Table sx={{ minWidth: 650 }} aria-label="a dense table">
         <TableHead className={styles.header}>
           <TableRow>
-            <TableCell style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}}>Items</TableCell>
-            <TableCell align="right" style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}} >Quantity</TableCell>
-            <TableCell align="right" style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}}>Prices</TableCell>
-            <TableCell align="right" style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}}>Total Prices</TableCell>
-            <TableCell align="right" style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}}>Total Prices</TableCell>
-            <TableCell align="right" style={{ fontSize:'1rem',color:"#fff",fontWeight:"500"}}>Update</TableCell>
+            <TableCell style={{ fontSize:'.8rem',color:"#fff",fontWeight:"500"}}>Items</TableCell>
+            <TableCell align="right" style={{ fontSize:'.8rem',color:"#fff",fontWeight:"500"}} >Quantity</TableCell>
+            <TableCell align="right" style={{ fontSize:'.8rem',color:"#fff",fontWeight:"500"}}>Prices</TableCell>
+            <TableCell align="right" style={{ fontSize:'.8rem',color:"#fff",fontWeight:"500"}}>Total Prices</TableCell>
+            <TableCell align="right" style={{ fontSize:'.8rem',color:"#fff",fontWeight:"500"}}>Total Prices</TableCell>
+            <TableCell align="right" style={{ fontSize:'.8rem',color:"#fff",fontWeight:"500"}}>Update</TableCell>
 
           </TableRow>
         </TableHead>
@@ -106,7 +106,7 @@ export default function DenseTable() {
               <TableCell align="center">{row.price}</TableCell>
               <TableCell align="center">{row.totalPrice}</TableCell>
               <TableCell align="center">{row.totalPrice}</TableCell>
-              <TableCell align="center"><ClearIcon/> <EditIcon/> </TableCell>
+              <TableCell align="center"><EditIcon className={styles.editIcon}/> <ClearIcon className={styles.clearIcon}/> </TableCell>
 
             </TableRow>
           ))}

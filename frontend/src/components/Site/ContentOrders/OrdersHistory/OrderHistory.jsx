@@ -43,26 +43,29 @@ function OrderHistory({ id, img, name, phone, imgUser, Date, ban }) {
         <div className={styles.orderIdFooter}>
           <div className={styles.orderIdFooterLeft}>
             <p classs={styles.items}>
-            <Button variant="contained" color="success">
+            <Button variant="contained" color="success" className={styles.button}>
                 Đã Thanh Toán
               </Button>
             </p>
-            <br />
+            {/* <br />
             <p classs={styles.items}>
-            <Button color="secondary" variant="contained">Đã Đặt</Button>
+            <Button color="secondary" variant="contained" className={styles.buttons}>Đã Đặt</Button>
 
             </p>
             <br />
             <p classs={styles.items}>
               {" "}
-              <Button variant="contained" color="error">
+              <Button variant="contained" color="error" className={styles.button}>
                 Đang Ăn
               </Button>
             </p>{" "}
-            <br />
+            <br /> */}
           </div>
           <div className={styles.orderIdFooterRight}>
-            <Link to="/chi-tiet-hoa-don">Xem Chi Tiết</Link>
+          <Button variant="contained" className={styles.buttonLink}>
+                 <Link to="/chi-tiet-hoa-don">Xem Chi Tiết</Link>
+              </Button>
+           
           </div>
         </div>
       </div>

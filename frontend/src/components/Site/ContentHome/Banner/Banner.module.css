@@ -44,25 +44,31 @@
     content: '';
 } */
 .deal{
-    color:var(--primaryColor);
+    color:#C65A0F;
     padding: 20px 0;
     font-size: 1.2rem;
-    text-shadow: 2px 4px 6px ;
-    font-weight: 600;
 }
 .contents{
     font-weight: 600;
+    letter-spacing:.2rem;
     font-size: 2.4rem;
+    font-family: "Playfair Display",serif;
 }
 .note{
     padding: 20px 0;
-    font-size: 1rem;
-    color: var(--primaryColor);
-    text-shadow: 2px 4px 6px ;
+    font-size: .8rem;
+    color: #C65A0F;
 
 }
 .button{
     background-color: var(--primaryColor) !important;
     border-radius: 20px !important;
     text-transform: none !important;
+}
+.SvgIcon{
+    position: relative;
+    top: -5px;
+
+    width: 25px !important;
+    height: 28px !important;
 }

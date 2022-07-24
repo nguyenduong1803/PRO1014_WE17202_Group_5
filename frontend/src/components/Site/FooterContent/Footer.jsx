@@ -119,7 +119,7 @@ function Footer() {
           <div className="col-lg-3">
             <div
               className="footer__about footer__widget"
-              style={{ width: "100%", paddingLeft: "24px" }}
+              style={{ width: "100%", paddingLeft: "24px",borderRight: "1px solid #3331" }}
             >
               <h6>Products</h6>
               <ul style={{ width: "100%" }}>
@@ -136,7 +136,7 @@ function Footer() {
           <div className="col-lg-3 ">
             <div
               className="footer__widget"
-              style={{ width: "100%", paddingLeft: "24px" }}
+              style={{ width: "100%", paddingLeft: "24px",borderRight: "1px solid #3331" }}
             >
               <h6>Blog</h6>
               <ul style={{ width: "100%" }}>
@@ -153,7 +153,7 @@ function Footer() {
           <div className="col-lg-3">
             <div
               className="footer__widget"
-              style={{ width: "100%", paddingLeft: "24px" }}
+              style={{ width: "100%", paddingLeft: "24px" ,borderRight: "1px solid #3331"}}
             >
               <h6>Support</h6>
               <ul style={{ width: "100%" }}>
