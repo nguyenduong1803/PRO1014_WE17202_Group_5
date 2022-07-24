@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
-import { getToken, removeUserSession, setTokenSession } from "../../../utils/Common"
+import { getToken, removeUserSession, setTokenSession } from "../../utils/Common"
 const api = "http://127.0.0.1:8000/api/"
 // initState: {
 //     username: "",

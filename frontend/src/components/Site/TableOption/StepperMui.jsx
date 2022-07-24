@@ -9,9 +9,9 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import OrderItem from './OrderItem';
 import style from "./TableOption.scss"
-import { selectOrderTable } from '../../../redux/selector';
+import { selectCart, selectOrderTable } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
+import { orderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -35,6 +35,8 @@ export default function StepperMui({ idTable, user, setModalShow }) {
     const [activeStep, setActiveStep] = React.useState(0);
     const dispatch = useDispatch()
     const orders = useSelector(selectOrderTable)
+    const selectCarts = useSelector(selectCart)
+    console.log(selectCarts)
     const [order, setOrder] = React.useState({
         tableId: idTable,
         name: orders.name,
@@ -44,6 +46,8 @@ export default function StepperMui({ idTable, user, setModalShow }) {
     });
     const handleOrder = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        // dispatch(orderTable(order))
+
     };
     const handleBack = () => {
 
@@ -80,7 +84,7 @@ export default function StepperMui({ idTable, user, setModalShow }) {
                                 <Typography>{step.description}</Typography>
                                 {index === 0 ? (<OrderItem order={order} setOrder={setOrder} />) :
                                     index === 1 ? (<Link onClick={handleAddProduct} className="checkout-btn " to="/menu">Thêm món ăn</Link>) :
-                                        index === 2 ? <InfoOrder /> : ""}
+                                        index === 2 ? <InfoOrder order={order}/> : ""}
                                 <Box sx={{ mb: 2 }}>
                                     <div>
                                         {index === 0 ?
@@ -125,13 +129,14 @@ export default function StepperMui({ idTable, user, setModalShow }) {
         </>
     );
 }
-const InfoOrder = () => {
+const InfoOrder = ({order}) => {
     return (
         <>
-            <h3 className="infoOrder__title-head">Bàn : </h3>
-            <h3 className="infoOrder__title-head">Chủ tiệc : </h3>
-            <h3 className="infoOrder__title-head">Số điện thoại : </h3>
-            <h3 className="infoOrder__title-head">Thời gian : </h3>
+            <h3 className="infoOrder__title-head">Bàn : {order.tableId} </h3>
+            <h3 className="infoOrder__title-head">Chủ tiệc :{order.name}  </h3>
+            <h3 className="infoOrder__title-head">Số điện thoại :{order.phone}  </h3>
+            <h3 className="infoOrder__title-head">Thời gian :{order.time_book}  </h3>
+            <h3 className="infoOrder__title-head">Tổng số người :{order.total_user}  </h3>
         </>
     )
 }

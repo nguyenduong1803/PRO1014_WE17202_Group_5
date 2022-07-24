@@ -14,7 +14,6 @@ function OrderItem({order,setOrder}) {
     
     const handleOrder = () => {
         console.log(order)
-
         // dispatch(orderTable(order))
     }
     return (
@@ -94,24 +93,6 @@ function OrderItem({order,setOrder}) {
     )
 }
 
-const CartItem = ({ id }) => {
-    const [quantity, setQuantity] = React.useState(1)
-    return (
-        <li className="food-list__item">
-            <img className="food-image" src="https://i.loli.net/2020/04/06/7oZgORNCnGE5qhU.png" />
-
-            <div className="food-name">Beach BBQBurger</div>
-            <div className="food-buy-amount">
-                <QuantityCart
-                    productId={id}
-                    setQuantity={setQuantity}
-                    quantity={quantity}
-                /></div>
-            <div className="food-price">680.000 đ</div>
-            <div className="delete__cart-icon"><DeleteOutlineIcon fontSize='small' /></div>
-        </li>
-    )
-}
 function InputField({ name, setOrder, values,size }) {
     const handleChangeOrder = (e) => {
         setOrder(prev => {

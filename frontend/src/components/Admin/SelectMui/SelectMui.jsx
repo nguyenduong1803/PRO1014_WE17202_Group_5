@@ -3,7 +3,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { getProducts } from '../../../redux/SliceReducer/Admin/ManagerProductSlice';
+import { getProducts } from '../../../redux/SliceReducer/ManagerProductSlice';
 import { useDispatch } from 'react-redux';
 
 function SelectMui({ list, name, setPageSize }) {

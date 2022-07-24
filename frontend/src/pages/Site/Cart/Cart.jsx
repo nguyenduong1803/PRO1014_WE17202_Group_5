@@ -5,7 +5,7 @@ import LayoutSite from "../../../components/Site/LayoutSite/LayoutSite"
 
 import breadcrumb from "../../../assets/img/breadcrumb.jpg";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import BreadCrumbs from "../../../components/Site/BreadCrumbs/BreadCrumbs";
+// import BreadCrumbs from "../../../components/Site/BreadCrumbs/BreadCrumbs";
 import QuantityCart from "./QuantityCart"
 import { DataContext } from "../../../contexts/DataContext"
 import { formatMoney } from "../../../extensions/formatMoney"
@@ -80,7 +80,7 @@ function Cart() {
   });
   return (
     <LayoutSite>
-      <BreadCrumbs list={breadcrumbs} img={breadcrumb} />
+      {/* <BreadCrumbs list={breadcrumbs} img={breadcrumb} /> */}
       <div className="container mt-5">
         <div className={styles.listItem}>
           <div className={`row ${styles.cartTitle}`}>

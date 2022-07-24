@@ -1,12 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import AliceCarousel from "react-alice-carousel";
+
 import "react-alice-carousel/lib/alice-carousel.css";
-import cat1 from "../../../../assets/img/seafood-1.jpg";
-import cat2 from "../../../../assets/img/seafood-1.jpg";
-import cat3 from "../../../../assets/img/seafood-1.jpg";
-import cat4 from "../../../../assets/img/seafood-1.jpg";
-import cat5 from "../../../../assets/img/seafood-1.jpg";
+
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 

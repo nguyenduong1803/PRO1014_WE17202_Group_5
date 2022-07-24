@@ -36,7 +36,7 @@ function BasicRating() {
     </>
   );
 }
-function Product({ img, title, price }) {
+function Product({ img, title, price,id }) {
   const dispatch = useDispatch();
   const [state, setState] = React.useState({
     open: false,
@@ -45,8 +45,7 @@ function Product({ img, title, price }) {
   });
   const { vertical, horizontal, open } = state;
   const handleClick = (newState) => () => {
-    
-    dispatch(addCart({id:1,quantity:2}))
+    dispatch(addCart({id:id,amount:1}))
     setState({ open: true, ...newState });
   };
 
