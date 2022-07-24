@@ -13,6 +13,8 @@ import { selectOrderTable } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
 import { Link } from 'react-router-dom';
+import CloseIcon from '@mui/icons-material/Close';
+
 const steps = [
     {
         label: 'Thông tin đặt bàn',
@@ -40,84 +42,90 @@ export default function StepperMui({ idTable, user, setModalShow }) {
         countGuest: orders.countGuest,
         celendar: orders.celendar,
     });
-
-    const handleNext = () => {
+    const handleOrder = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-
     const handleBack = () => {
+
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-
     const handleReset = () => {
         setActiveStep(0);
+
     };
     const handleOrderTable = () => {
         dispatch(updateOrderTable(order))
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setActiveStep(1);
+    }
+    const handleAddProduct =()=>{
+        setModalShow(false)
     }
     return (
-        <Box sx={{ maxWidth: "100%" }}>
-            <h2 onClick={() => setModalShow(false)}>Đóng</h2>
-            <Stepper activeStep={activeStep} orientation="vertical">
-                {steps.map((step, index) => (
-                    <Step key={step.label}>
-                        <StepLabel
-                            optional={
-                                index === 2 ? (
-                                    <Typography variant="caption">Xác nhận</Typography>
-                                ) : null
-                            }
-                        >
-                            {step.label}
-                        </StepLabel>
-                        <StepContent >
-                            <Typography>{step.description}</Typography>
-                            {index === 0 ? (<OrderItem order={order} setOrder={setOrder} />) :
-                             index === 1 ? (<Link className="checkout-btn " to="/menu">Thêm món ăn</Link>) :
-                            index === 2 ? <InfoOrder/> : ""}
-                            <Box sx={{ mb: 2 }}>
-                                <div>
-                                    {index === 0 ? (<Button
-                                        variant="contained"
-                                        onClick={handleOrderTable}
-                                        sx={{ mt: 1, mr: 1 }}
-                                    >
-                                        {index === steps.length - 1 ? 'Kết thúc' : 'Tiếp tục'}
-                                    </Button>) :
+        <>
+            <Box sx={{ maxWidth: "100%" }}>
+                <div className="stepper_modal-close" onClick={() => setModalShow(false)}><CloseIcon/></div>
+                <Stepper activeStep={activeStep} orientation="vertical">
+                    {steps.map((step, index) => (
+                        <Step key={step.label}>
+                            <StepLabel
+                                optional={
+                                    index === 2 ? (
+                                        <Typography variant="caption">Xác nhận</Typography>
+                                    ) : null
+                                }
+                            >
+                                {step.label}
+                            </StepLabel>
+                            <StepContent >
+                                <Typography>{step.description}</Typography>
+                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} />) :
+                                    index === 1 ? (<Link onClick={handleAddProduct} className="checkout-btn " to="/menu">Thêm món ăn</Link>) :
+                                        index === 2 ? <InfoOrder /> : ""}
+                                <Box sx={{ mb: 2 }}>
+                                    <div>
+                                        {index === 0 ?
+                                            (<Button
+                                                variant="contained"
+                                                onClick={handleOrderTable}
+                                                sx={{ mt: 1, mr: 1 }}
+                                            >
+                                                {index === steps.length - 1 ? 'Kết thúc' : 'Tiếp tục'}
+                                            </Button>) :
+                                            <Button
+                                                variant="contained"
+                                                onClick={handleOrder}
+                                                sx={{ mt: 1, mr: 1 }}
+                                            >
+                                                {index === steps.length - 1 ? 'Đặt bàn' : 'Bỏ qua'}
+                                            </Button>
+                                        }
                                         <Button
-                                            variant="contained"
-                                            onClick={handleNext}
+                                            disabled={index === 0}
+                                            onClick={handleBack}
                                             sx={{ mt: 1, mr: 1 }}
                                         >
-                                            {index === steps.length - 1 ? 'Đặt bàn' : 'Bỏ qua'}
+                                            Quay lại
                                         </Button>
-                                    }
-                                    <Button
-                                        disabled={index === 0}
-                                        onClick={handleBack}
-                                        sx={{ mt: 1, mr: 1 }}
-                                    >
-                                        Quay lại
-                                    </Button>
-                                </div>
-                            </Box>
-                        </StepContent>
-                    </Step>
-                ))}
-            </Stepper>
-            {activeStep === steps.length && (
-                <Paper square elevation={0} sx={{ p: 3 }}>
-                    <Typography>Bạn đã đặt bàn thành công</Typography>
-                    <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-                        Sửa Thông tin
-                    </Button>
-                </Paper>
-            )}
-        </Box>
+                                    </div>
+                                </Box>
+                            </StepContent>
+                        </Step>
+                    ))}
+                </Stepper>
+                {activeStep === steps.length && (
+                    <Paper square elevation={0} sx={{ p: 3 }}>
+                        <Typography>Bạn đã đặt bàn thành công</Typography>
+                        <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                            Sửa Thông tin
+                        </Button>
+                    </Paper>
+                )}
+            </Box>
+
+        </>
     );
 }
-const InfoOrder =()=>{
+const InfoOrder = () => {
     return (
         <>
             <h3 className="infoOrder__title-head">Bàn : </h3>

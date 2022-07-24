@@ -4,10 +4,18 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import { formatMoney } from "../../../extensions/formatMoney"
 import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { useDispatch } from 'react-redux';
+import { addCart } from '../../../redux/SliceReducer/OrderTableSlice';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function BasicRating() {
   const [value, setValue] = React.useState(5);
-
   return (
     <>
       <Box
@@ -29,6 +37,22 @@ function BasicRating() {
   );
 }
 function Product({ img, title, price }) {
+  const dispatch = useDispatch();
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, open } = state;
+  const handleClick = (newState) => () => {
+    
+    dispatch(addCart({id:1,quantity:2}))
+    setState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
   return (
     <div className=' col-lg-3'>
       <div className={styles.product} style={{ transition: '.6s' }}>
@@ -37,9 +61,20 @@ function Product({ img, title, price }) {
         <h4 className={styles.title}>{title}</h4>
         <div ><BasicRating /></div>
         <div className={`${styles.wrapPrice} d-flex justify-content-between align-items-center `}>
-          <p className={styles.price}>{price && formatMoney(price)}</p>  <p className={styles.icon}><AddIcon /></p>
+          <p className={styles.price}>{price && formatMoney(price)}</p>
+          <p onClick={handleClick({ vertical: 'bottom', horizontal: 'right', })} className={styles.icon}>
+            <AddIcon /></p>
         </div>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="I love snacks"
+        key={vertical + horizontal}
+      >
+        <Alert severity="success">Đã thêm vào giỏ hàng</Alert>
+      </Snackbar>
     </div>
   )
 }

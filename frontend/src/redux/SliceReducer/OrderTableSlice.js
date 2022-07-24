@@ -5,7 +5,7 @@ const api = "http://127.0.0.1:8000/api/"
 const tableOrder = {
     tableId: "",
     name: "",
-    phone:"",
+    phone: "",
     countGuest: 1,
     celendar: ""
 }
@@ -16,15 +16,19 @@ const OrderTableSlice = createSlice({
         order: [],
         isSuccess: false,
         orderTable: tableOrder,
-        cart:[]
+        cart: []
     },
     reducers: {
-        updateOrderTable:(state, action)=>{
-                return {...state,orderTable:action.payload}
+        updateOrderTable: (state, action) => {
+            return { ...state, orderTable: action.payload }
         },
-        updateCart:(state, action)=>{
-                return {...state,cart:action.payload}
-        }
+        addCart: (state, action) => {
+            state.cart.find((item) => {
+                return item.id === action.payload.id
+            })
+            return { ...state, cart: [...state.cart, action.payload] }
+        },
+
     },
     extraReducers: buiders => {
         buiders
@@ -81,11 +85,11 @@ export const orderTable = createAsyncThunk("orderTable/orderTable", async (paylo
         })
     return payloads
 })
-export const updateOrderTable = (payload,action)=>{
+export const updateOrderTable = (payload, action) => {
     return { type: "orderTable/updateOrderTable", payload }
 }
-export const updateCart = (payload,action)=>{
-    return { type: "orderTable/updateCart", payload }
+export const addCart = (payload, action) => {
+    return { type: "orderTable/addCart", payload }
 }
 
 export default OrderTableSlice
