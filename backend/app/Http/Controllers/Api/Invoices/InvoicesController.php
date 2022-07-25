@@ -38,7 +38,6 @@ class InvoicesController extends Controller
     public function getInvoice() {
         $user = Auth::user();
         $params = [$user['id']];
-        return $params;
         $modelInvoices = new Invoices();
         $data = $modelInvoices -> getInvoice($params);
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
