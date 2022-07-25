@@ -3,8 +3,7 @@ import TableOption from '../../../components/Site/TableOption/TableOption'
 import LayoutSite from '../../../components/Site/LayoutSite/LayoutSite'
 import CategoryTable from '../../../components/Site/Table/CategoryTable'
 import styles from "./OrderTable.module.css"
-import { useDispatch, useSelector } from "react-redux"
-import { getListTable } from '../../../redux/SliceReducer/OrderTableSlice'
+import {  useSelector } from "react-redux"
 import { selectListTable } from '../../../redux/selector'
 
 const possitionTable = [
@@ -46,7 +45,6 @@ const possitionTable = [
     { index: 18, possition: 27 ,id:"id30"},
 ]
 function OrderTable() {
-    // const dispatch = useDispatch()
     const tables = useSelector(selectListTable)
 
     return (

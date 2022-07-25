@@ -16,7 +16,8 @@ const OrderTableSlice = createSlice({
         order: [],
         isSuccess: false,
         orderTable: tableOrder,
-        cart: []
+        cart: [],
+        tables:[],
     },
     reducers: {
         updateOrderTable: (state, action) => {
