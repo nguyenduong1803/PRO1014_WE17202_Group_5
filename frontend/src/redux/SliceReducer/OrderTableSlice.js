@@ -43,7 +43,7 @@ const OrderTableSlice = createSlice({
                     state.isSuccess = false
                     state.status = "idle"
                 }
-            }).addCase(orderTable.fulfilled, (state, action) => {
+            }).addCase(createOrderTable.fulfilled, (state, action) => {
                 state.order = action.payload
             }).addCase(addCart.fulfilled, (state, action) => {
                 state.cart.push(action.payload)
@@ -64,6 +64,8 @@ const OrderTableSlice = createSlice({
                 } else {
                     console.log(action.payload)
                 }
+            }).addCase(createOrder.fulfilled, (state, action) => {
+                
             })
 
     }
@@ -81,7 +83,7 @@ export const getListTable = createAsyncThunk("orderTable/getListTable", async (p
         })
     return payloads
 })
-export const orderTable = createAsyncThunk("orderTable/orderTable", async (payload, action) => {
+export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", async (payload, action) => {
     let payloads
     await axios
         .post(api + "tableBook/create",
@@ -99,6 +101,7 @@ export const orderTable = createAsyncThunk("orderTable/orderTable", async (paylo
         .then(response => {
             console.log(response)
             payloads = { data: response.data.data, status: "success" }
+            action.dispatch(createOrder())
         }).catch(function (err) {
             console.log(err)
             payloads = { data: "", status: err.response.status }
@@ -143,6 +146,7 @@ export const getListCart = createAsyncThunk("orderTable/getListCart", async (pay
         })
     return payloads
 })
+
 export const deleteCart = createAsyncThunk("product/deleteCart", async (payload, action) => {
     let payloads
     await axios
@@ -152,6 +156,38 @@ export const deleteCart = createAsyncThunk("product/deleteCart", async (payload,
         .then(response => {
             payloads = { data: payload, status: response.data.status }
             action.dispatch(getListCart())
+        }).catch(function (err) {
+            console.log(err)
+            payloads = { data: "", status: err.response.status }
+        })
+    return payloads
+})
+
+// ============ order ================
+export const createOrder = createAsyncThunk("orderTable/createOrder", async (payload, action) => {
+    let payloads
+    await axios
+        .get(api + "invoices/create", {
+            headers: { "Authorization": `Bearer ${getToken()}` },
+        })
+        .then(response => {
+            console.log(response)
+            payloads = { data: response.data.data, status: "success" }
+        }).catch(function (err) {
+            console.log(err)
+            payloads = { data: "", status: err.response.status }
+        })
+    return payloads
+})
+export const getOrder = createAsyncThunk("orderTable/createOrder", async (payload, action) => {
+    let payloads
+    await axios
+        .get(api + "invoices/getInvoice", {
+            headers: { "Authorization": `Bearer ${getToken()}` },
+        })
+        .then(response => {
+            console.log(response)
+            payloads = { data: response.data.data, status: "success" }
         }).catch(function (err) {
             console.log(err)
             payloads = { data: "", status: err.response.status }

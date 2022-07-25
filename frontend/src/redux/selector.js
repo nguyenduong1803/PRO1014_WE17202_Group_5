@@ -30,8 +30,15 @@ export const selectSearchText = (state) => state.ManagerProduct.searchText
 // tables
 export const selectListTable = (state)=>state.OrderTableSlice.tables
 export const selectOrderTable = (state)=>state.OrderTableSlice.orderTable
+export const selectTableActive = (state)=>{
+   return state.OrderTableSlice.tables.filter((table,index)=>table.status===1)
+}
+
 // cart
 export const selectCart = (state)=>state.OrderTableSlice.cart
+
+// order
+export const selectOrder = (state)=>state.OrderTableSlice.order
 
 export const selectProductById = createSelector(selectProducts, selectSearchText,
     (product, searchText) => {
