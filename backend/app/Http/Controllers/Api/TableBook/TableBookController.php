@@ -23,6 +23,7 @@ class TableBookController extends Controller
             $validate['status_book'],
             $validate['time_book'],
             $user['id'],
+            $validate['description'],
         ];
         $modelTableBook -> create($params);
         return response() ->json(["msg" => "Đặt bàn thành công!", "status" => true],200);
@@ -85,6 +86,7 @@ class TableBookController extends Controller
         $updateTotalUser = isset($validate['total_user']) ? $validate['total_user'] :$data -> total_user;
         $updateStatusBook = isset($validate['status_book']) ? $validate['status_book'] : $data -> status_book;
         $updateTimeBook = isset($validate['time_book']) ? $validate['time_book'] : $data -> time_book;
+        $updateDes = isset($validate['description']) ? $validate['description'] : $data -> description;
         $params = [
             $updateNameUser,
             $updateIdTable,
@@ -93,6 +95,7 @@ class TableBookController extends Controller
             $updateStatusBook ,
             $updateTimeBook,
             $user['id'],
+            $updateDes,
             $updateTimeUpdateAt,
             $validate['id']
         ];

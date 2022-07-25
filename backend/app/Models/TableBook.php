@@ -12,8 +12,8 @@ class TableBook extends Model
     use HasFactory;
     public function create($params) {
         DB::insert('INSERT INTO table_book
-    (name_user, id_table, phone,total_user,status_book,time_book, id_user)
-    values (?, ?, ?, ?, ?, ?, ?)', $params);
+    (name_user, id_table, phone,total_user,status_book,time_book, id_user, description)
+    values (?, ?, ?, ?, ?, ?, ?, ?)', $params);
     }
     public function getTablesBookByUser($params) {
         return DB::select('SELECT * FROM table_book WHERE `id_user` = ? AND `is_delete` = ?', $params);
@@ -37,7 +37,7 @@ class TableBook extends Model
     }
     public function updateTableBook($params) {
         DB::update("UPDATE table_book SET `name_user` = ?, `id_table` = ?,`phone` = ?,
-                    `total_user` = ?, `status_book` = ?, `time_book` = ?,`id_user` = ?,
+                    `total_user` = ?, `status_book` = ?, `time_book` = ?,`id_user` = ?, description = ?,
                      `update_at` = ?
                     WHERE `id` = ? AND `is_delete` = 1", $params);
     }
