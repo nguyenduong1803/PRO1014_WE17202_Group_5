@@ -53,7 +53,7 @@ const FormRegister = () => {
         gender: '',
         image: ''
     })
-
+    
     const { email, name, dob, address, phone, gender, image } = input
     const ngaySinh = `${dob.getFullYear()}-${dob.getMonth() + 1}-${dob.getDate()}`
     const formRegister = new FormData();

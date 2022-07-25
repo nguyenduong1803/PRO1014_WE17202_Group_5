@@ -48,24 +48,7 @@ const possitionTable = [
 function OrderTable() {
     // const dispatch = useDispatch()
     const tables = useSelector(selectListTable)
-  
-    // for (let item in possitionTable) {
-    //     tables.map((table, index) => {
-    //         if (possitionTable[item].index === index) {
-    //             return (<div className={`${styles.backgroundWrap} ${styles.topLeft} col-2`}>
-    //                 <TableOption
-    //                     type="circle"
-    //                     id={table?.index_table}
-    //                     status={table?.status}
-    //                 />
-    //             </div>)
-    //         } else {
-    //             return (
-    //                 <div className="col-lg-2"></div>
-    //             )
-    //         }
-    //     })
-    // }
+
     return (
         <div>
             <LayoutSite>

@@ -5,7 +5,6 @@ import ProductCartTable from './ProductCartTable'
 import styles from "./TableOption.module.css"
 function InfomationCart() {
   const carts = useSelector(selectCart)
-
     return (
         <div className="TableOption__wrapCart" >
             <h3 className="mb-3">Thông tin giỏ hàng</h3>

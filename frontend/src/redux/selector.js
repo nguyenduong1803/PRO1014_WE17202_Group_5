@@ -31,7 +31,7 @@ export const selectSearchText = (state) => state.ManagerProduct.searchText
 export const selectListTable = (state)=>state.OrderTableSlice.tables
 export const selectOrderTable = (state)=>state.OrderTableSlice.orderTable
 export const selectTableActive = (state)=>{
-   return state.OrderTableSlice.tables.filter((table,index)=>table.status===1)
+   return state.OrderTableSlice.tables.filter((table,index)=>Number(table.status)===1)
 }
 
 // cart
