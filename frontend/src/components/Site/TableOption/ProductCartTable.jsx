@@ -9,7 +9,6 @@ function ProductCartTable({ img, name, idCart, price,quantity }) {
     const dispatch = useDispatch()
     const [quantityCart,setQuantityCart]=React.useState(quantity)
     const handleDelete =()=>{
-        console.log("deleete")
         dispatch(deleteCart(12))
     }
     return (

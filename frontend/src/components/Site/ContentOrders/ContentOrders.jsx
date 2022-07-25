@@ -49,6 +49,7 @@ const ordersHistory = [
 function ContentOrders() {
   const dispatch = useDispatch()
   const orders = useSelector(selectOrder)
+  console.log(orders)
   return (
     <LayoutSite>
       <h2>Order History</h2>

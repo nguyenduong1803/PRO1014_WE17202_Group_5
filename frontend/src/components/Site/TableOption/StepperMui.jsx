@@ -36,9 +36,8 @@ export default function StepperMui({ idTable, user, setModalShow }) {
     const dispatch = useDispatch()
     const orders = useSelector(selectOrderTable)
     const selectCarts = useSelector(selectCart)
-    console.log(selectCarts)
     const [order, setOrder] = React.useState({
-        tableId: idTable,
+        tableId: orders.tableId,
         name: orders.name,
         phone: orders.phone,
         countGuest: orders.countGuest,
@@ -60,14 +59,17 @@ export default function StepperMui({ idTable, user, setModalShow }) {
         setActiveStep(0);
 
     };
+    
     const handleOrderTable = () => {
-        setOrder(prev=>({...prev,tableId: idTable}))
         dispatch(updateOrderTable(order))
         setActiveStep(1);
     }
     const handleAddProduct = () => {
         setModalShow(false)
     }
+    React.useEffect(()=>{
+      if(idTable)  setOrder(prev=>({...prev,tableId:idTable}))
+    },[])
     return (
         <>
             <Box sx={{ maxWidth: "100%" }}>
@@ -86,7 +88,7 @@ export default function StepperMui({ idTable, user, setModalShow }) {
                             </StepLabel>
                             <StepContent >
                                 <Typography>{step.description}</Typography>
-                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} />) :
+                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} idTable={idTable} />) :
                                     index === 1 ? (<Link onClick={handleAddProduct} className="checkout-btn " to="/menu">Thêm món ăn</Link>) :
                                         index === 2 ? <InfoOrder order={order} /> : ""}
                                 <Box sx={{ mb: 2 }}>
