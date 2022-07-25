@@ -61,6 +61,7 @@ export default function StepperMui({ idTable, user, setModalShow }) {
 
     };
     const handleOrderTable = () => {
+        setOrder(prev=>({...prev,tableId: idTable}))
         dispatch(updateOrderTable(order))
         setActiveStep(1);
     }
@@ -146,7 +147,7 @@ const InfoOrder = ({ order }) => {
             <h3 className="infoOrder__title-head">Bàn : {order.tableId} </h3>
             <h3 className="infoOrder__title-head">Chủ tiệc :{order.name}  </h3>
             <h3 className="infoOrder__title-head">Số điện thoại :{order.phone}  </h3>
-            <h3 className="infoOrder__title-head">Thời gian :{order.time_book}  </h3>
+            <h3 className="infoOrder__title-head">Thời gian :{order.celendar}  </h3>
             <h3 className="infoOrder__title-head">Số khách :{order.countGuest}  </h3>
         </>
     )

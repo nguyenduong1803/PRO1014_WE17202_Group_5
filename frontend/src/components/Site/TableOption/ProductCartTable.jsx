@@ -20,7 +20,7 @@ function ProductCartTable({ img, name, idCart, price,quantity }) {
                 </div>
                 <div className={styles.name}>
                     <h4 className={styles.nameProducts}>{name}</h4>
-                    <div className={styles.price}>{formatMoney(price)} đ</div>
+                    <div className={styles.price}>{price&&formatMoney(price)} đ</div>
 
                 </div>
             </div>

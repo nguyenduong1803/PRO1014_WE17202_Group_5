@@ -20,6 +20,7 @@ const OrderTableSlice = createSlice({
     },
     reducers: {
         updateOrderTable: (state, action) => {
+            
             return { ...state, orderTable: action.payload }
         },
         // addCart: (state, action) => {
@@ -89,11 +90,11 @@ export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", 
         .post(api + "tableBook/create",
             {
                 name_user: payload.name,
-                id_table: 4,
+                id_table: payload.tableId,
                 status_book: 2,
                 phone: payload.phone,
                 total_user: payload.countGuest,
-                time_book: "2022-07-21 23:41:30",
+                time_book: payload.celendar,
             },
             {
                 headers: { "Authorization": `Bearer ${getToken()}` },
@@ -122,6 +123,8 @@ export const addCart = createAsyncThunk("orderTable/addCart", async (payload, ac
                 headers: { "Authorization": `Bearer ${getToken()}` },
             })
         .then(response => {
+            action.dispatch(getListCart())
+
             console.log(response)
         }).catch(function (err) {
             console.log(err)

@@ -1,22 +1,14 @@
 import React from 'react'
-import QuantityCart from '../../../pages/Site/Cart/QuantityCart'
 import styles from "./TableOption.css"
-import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import CelendarOption from '../Calendar/CelendarOption';
 // import DeleteOutlineIcon from '@mui/icons-material/HighlightOff';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { FormControl, TextField } from '@mui/material';
 import { Link } from "react-router-dom";
-import { orderTable } from '../../../redux/SliceReducer/OrderTableSlice';
-import { useDispatch, useSelector} from 'react-redux';
+import {  useSelector} from 'react-redux';
 import { selectTableActive } from '../../../redux/selector';
 
 function OrderItem({order,setOrder}) {
         const tableActive = useSelector(selectTableActive)
-    const handleOrder = () => {
-        console.log(order)
-        // dispatch(orderTable(order))
-    }
     console.log(tableActive);
     return (
         <section className="section" id="order">
@@ -27,8 +19,6 @@ function OrderItem({order,setOrder}) {
                     <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId}>
                         <option selected>Đổi Bàn</option>
                         {tableActive.map((table)=> <option value="A-2">{table.name}</option>)}
-                      
-                     
                     </select>
                 </div>
                 <div className="delivery">
@@ -44,7 +34,7 @@ function OrderItem({order,setOrder}) {
                         <span className="delivery-choose-time">30s</span>
 
                     </div>
-                    <span className="time"><CelendarOption setOrder={setOrder} /></span>
+                    <span className="time"><CelendarOption values={order.celendar} setOrder={setOrder} /></span>
                 </div>
             </div>
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
@@ -56,40 +46,11 @@ function OrderItem({order,setOrder}) {
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
                 <InputField name="Số người" setOrder={setOrder} size="small" values={order.countGuest} />
             </FormControl>
-
-            {/* <ul className="food-list">
-                <CartItem
-                    id="1"
-                />
-              <CartItem
-                    id="1"
-                />
-                <CartItem
-                    id="1"
-                />
-               
-                <CartItem
-                    id="1"
-                />
-                <CartItem
-                    id="1"
-                />
-            </ul> */}
-            {/* <div className="total-price">
-                <div className="total">Tổng tiền:</div>
-                <div className="price">$25.97</div>
-            </div> */}
             <div className="buy-action">
                 <div className="person-number-input">
-                    {/* <Link to="/order" className="btn btn-warning checkout-btn">
-                        Thêm món ăn<LocalDiningIcon />
-                    </Link> */}
+                
                 </div>
-                {/* <button onClick={handleOrder} className="btn btn-warning checkout-btn">
-                    Tiến hành đặt<svg width="18" height="18" className="arrow" viewBox="0 0 24 24">
-                        <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
-                    </svg>
-                </button> */}
+             
             </div>
         </section>
     )
