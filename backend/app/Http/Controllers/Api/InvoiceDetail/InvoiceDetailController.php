@@ -8,4 +8,7 @@ use Illuminate\Http\Request;
 class InvoiceDetailController extends Controller
 {
     //
+    public function getDetailInvoice() {
+
+    }
 }
