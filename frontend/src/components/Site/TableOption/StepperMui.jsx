@@ -11,7 +11,7 @@ import OrderItem from './OrderItem';
 import style from "./TableOption.scss"
 import { selectCart, selectOrderTable } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
+import { createOrderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
 import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -45,12 +45,15 @@ export default function StepperMui({ idTable, user, setModalShow }) {
         celendar: orders.celendar,
     });
     const handleOrder = () => {
+        dispatch(createOrderTable(order))
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        // dispatch(orderTable(order))
+
+    };
+    const handlNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
     };
     const handleBack = () => {
-
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
     const handleReset = () => {
@@ -61,13 +64,13 @@ export default function StepperMui({ idTable, user, setModalShow }) {
         dispatch(updateOrderTable(order))
         setActiveStep(1);
     }
-    const handleAddProduct =()=>{
+    const handleAddProduct = () => {
         setModalShow(false)
     }
     return (
         <>
             <Box sx={{ maxWidth: "100%" }}>
-                <div className="stepper_modal-close" onClick={() => setModalShow(false)}><CloseIcon/></div>
+                <div className="stepper_modal-close" onClick={() => setModalShow(false)}><CloseIcon /></div>
                 <Stepper activeStep={activeStep} orientation="vertical">
                     {steps.map((step, index) => (
                         <Step key={step.label}>
@@ -84,7 +87,7 @@ export default function StepperMui({ idTable, user, setModalShow }) {
                                 <Typography>{step.description}</Typography>
                                 {index === 0 ? (<OrderItem order={order} setOrder={setOrder} />) :
                                     index === 1 ? (<Link onClick={handleAddProduct} className="checkout-btn " to="/menu">Thêm món ăn</Link>) :
-                                        index === 2 ? <InfoOrder order={order}/> : ""}
+                                        index === 2 ? <InfoOrder order={order} /> : ""}
                                 <Box sx={{ mb: 2 }}>
                                     <div>
                                         {index === 0 ?
@@ -93,15 +96,23 @@ export default function StepperMui({ idTable, user, setModalShow }) {
                                                 onClick={handleOrderTable}
                                                 sx={{ mt: 1, mr: 1 }}
                                             >
-                                                {index === steps.length - 1 ? 'Kết thúc' : 'Tiếp tục'}
+                                                Tiếp tục
                                             </Button>) :
-                                            <Button
-                                                variant="contained"
-                                                onClick={handleOrder}
-                                                sx={{ mt: 1, mr: 1 }}
-                                            >
-                                                {index === steps.length - 1 ? 'Đặt bàn' : 'Bỏ qua'}
-                                            </Button>
+                                            index === 1 ?
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{ mt: 1, mr: 1 }}
+                                                    onClick={handlNext}
+                                                >
+                                                    Bỏ qua
+                                                </Button> :
+                                                <Button
+                                                    variant="contained"
+                                                    onClick={handleOrder}
+                                                    sx={{ mt: 1, mr: 1 }}
+                                                >
+                                                    Đặt bàn
+                                                </Button>
                                         }
                                         <Button
                                             disabled={index === 0}
@@ -129,14 +140,14 @@ export default function StepperMui({ idTable, user, setModalShow }) {
         </>
     );
 }
-const InfoOrder = ({order}) => {
+const InfoOrder = ({ order }) => {
     return (
         <>
             <h3 className="infoOrder__title-head">Bàn : {order.tableId} </h3>
             <h3 className="infoOrder__title-head">Chủ tiệc :{order.name}  </h3>
             <h3 className="infoOrder__title-head">Số điện thoại :{order.phone}  </h3>
             <h3 className="infoOrder__title-head">Thời gian :{order.time_book}  </h3>
-            <h3 className="infoOrder__title-head">Tổng số người :{order.total_user}  </h3>
+            <h3 className="infoOrder__title-head">Số khách :{order.countGuest}  </h3>
         </>
     )
 }

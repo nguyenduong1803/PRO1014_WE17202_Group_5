@@ -8,14 +8,16 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { FormControl, TextField } from '@mui/material';
 import { Link } from "react-router-dom";
 import { orderTable } from '../../../redux/SliceReducer/OrderTableSlice';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
+import { selectTableActive } from '../../../redux/selector';
 
 function OrderItem({order,setOrder}) {
-    
+        const tableActive = useSelector(selectTableActive)
     const handleOrder = () => {
         console.log(order)
         // dispatch(orderTable(order))
     }
+    console.log(tableActive);
     return (
         <section className="section" id="order">
             {/* <div className="section-title">My Order&nbsp;😎</div> */}
@@ -24,9 +26,9 @@ function OrderItem({order,setOrder}) {
                     <div className="address-name">Bàn {order.tableId}</div>
                     <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId}>
                         <option selected>Đổi Bàn</option>
-                        <option value="A-2">A-2</option>
-                        <option value="A-3">A-3</option>
-                        <option value="A-4">A-4</option>
+                        {tableActive.map((table)=> <option value="A-2">{table.name}</option>)}
+                      
+                     
                     </select>
                 </div>
                 <div className="delivery">
