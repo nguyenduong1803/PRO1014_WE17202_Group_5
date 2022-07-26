@@ -13,4 +13,9 @@ class Directory extends Model
     public function getLists() {
         return DB::select('SELECT * FROM directory WHERE `is_delete` = 1');
     }
+    public function createDirectory($params) {
+        DB::insert('INSERT INTO directory
+        (name)
+        values (?)', $params);
+    }
 }
