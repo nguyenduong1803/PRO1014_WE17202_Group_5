@@ -18,4 +18,12 @@ class Directory extends Model
         (name)
         values (?)', $params);
     }
+    public function getDetail($id) {
+        return Directory::query() -> where('id', $id)
+            -> where('is_delete', 1)
+            -> first();
+    }
+    public function deleteDirectory($params) {
+        DB::update("UPDATE directory SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
+    }
 }
