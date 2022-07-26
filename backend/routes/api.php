@@ -90,5 +90,13 @@ Route::group(['namespace' => 'InvoiceDetail', 'prefix' => 'invoice-detail'], fun
     });
 });
 
+Route::group(['namespace' => 'Directory', 'prefix' => 'directory'], function(){
+    Route::middleware('auth:api') -> group(function () {
+
+    });
+    Route::get('getLists', [\App\Http\Controllers\Api\Directory\DirectoryController::class, 'getLists']);
+});
+
+
 
 
