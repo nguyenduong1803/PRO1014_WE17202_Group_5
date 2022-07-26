@@ -124,10 +124,9 @@ function MenuContentOpTions({setModalShow,modalShow}) {
           </h2>
           <div className={styles.line}></div> <br />
           <div className={styles.sliderPrice} style={{ color: 'white !important' }}>
-            <h2>box</h2>
             <div className="modal-container" onClick={handleShowOrder}>
               {/* <input id="modal-toggle" type="checkbox" /> */}
-              <button>Đặt bàn</button>
+              <p className={styles.orderTable_btn}>Đặt bàn</p>
             </div>
               
           </div>

@@ -56,16 +56,19 @@ function ContentOrders() {
       <div className="row" style={{ zIndex: "10", position: "relative" }}>
         {/* {orders && orders.map((order, index) => {
           return ( */}
-            <OrdersHistory
+
+          {orders?  <OrdersHistory
               // key={index}
-              name={orders.id_user}
-              id={orders.id_user}
-              Date={orders.create_at}
+              name={"Dương nguyễn"}
+              id={orders.id}
+              Date={"27/7/2022 9:10"}
               img={product1}
               phone={"1234432"}
+              totalUser={orders.total_user}
               imgUser={product1}
-              ban={"A-12"}
-            />
+              ban={orders.index_table}
+              money={orders.total_price}
+            />:<h2>Bạn chưa có order nào</h2>}
           {/* );
         })} */}
       </div>

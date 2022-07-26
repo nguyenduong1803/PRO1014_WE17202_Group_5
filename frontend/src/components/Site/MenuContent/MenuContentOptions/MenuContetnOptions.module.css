@@ -77,3 +77,15 @@
     border-radius: 50%;
     padding: 10px
 }
+.orderTable_btn{
+    background-color:var(--primaryColor) !important;
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    text-align: center;
+    color:#fff;
+    line-height: 40px;
+}
+.orderTable_btn:hover{
+    cursor: pointer;
+}
