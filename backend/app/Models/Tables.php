@@ -27,8 +27,9 @@ class Tables extends Model
     }
 
     public function getDetailTable($id) {
-        $data = Tables::where('id', $id)->first();
-        return $data;
+        return Tables::query() -> where('id', $id)
+            -> where('is_delete', 1)
+            -> first();
     }
 
     public function checkTableDeleted($id) {
@@ -40,5 +41,9 @@ class Tables extends Model
 
     public function deleteTable($params) {
         DB::update("UPDATE tables SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
+    }
+
+    public function updateDetailStatus($params) {
+        DB::update("UPDATE tables SET `status` = ? WHERE `id` = ?", $params);
     }
 }
