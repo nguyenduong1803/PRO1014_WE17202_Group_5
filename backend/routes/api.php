@@ -90,5 +90,15 @@ Route::group(['namespace' => 'InvoiceDetail', 'prefix' => 'invoice-detail'], fun
     });
 });
 
+Route::group(['namespace' => 'Directory', 'prefix' => 'directory'], function(){
+    Route::middleware('auth:api') -> group(function () {
+        Route::post('create', [\App\Http\Controllers\Api\Directory\DirectoryController::class, 'createDirectory']);
+        Route::delete('delete/{id}', [\App\Http\Controllers\Api\Directory\DirectoryController::class, 'deleteDirectory']);
+        Route::post('update', [\App\Http\Controllers\Api\Directory\DirectoryController::class, 'updateDirectory']);
+    });
+    Route::get('getLists', [\App\Http\Controllers\Api\Directory\DirectoryController::class, 'getLists']);
+});
+
+
 
 
