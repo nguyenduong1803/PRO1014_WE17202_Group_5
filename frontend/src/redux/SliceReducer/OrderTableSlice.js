@@ -13,15 +13,16 @@ const OrderTableSlice = createSlice({
     name: "orderTable",
     initialState: {
         status: "idle",
-        order: [],
+        order: {},
+        listOrder: {},
         isSuccess: false,
         orderTable: tableOrder,
         cart: [],
-        tables:[],
+        tables: [],
+        detailOrder:[]
     },
     reducers: {
         updateOrderTable: (state, action) => {
-            
             return { ...state, orderTable: action.payload }
         },
         // addCart: (state, action) => {
@@ -66,8 +67,19 @@ const OrderTableSlice = createSlice({
                 } else {
                     console.log(action.payload)
                 }
-            }).addCase(createOrder.fulfilled, (state, action) => {
-                
+            }).addCase(getOrder.fulfilled, (state, action) => {
+                state.status = "idle"
+                state.listOrder = action.payload.data
+                console.log(action.payload)
+            })
+            .addCase(getDetailOrder.fulfilled, (state, action) => {
+                state.status = "idle"
+                state.detailOrder = action.payload.data
+                console.log(action.payload)
+            })
+
+            .addCase(createOrder.fulfilled, (state, action) => {
+
             })
 
     }
@@ -87,6 +99,7 @@ export const getListTable = createAsyncThunk("orderTable/getListTable", async (p
 })
 export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", async (payload, action) => {
     let payloads
+    console.log(payload)
     await axios
         .post(api + "tableBook/create",
             {
@@ -96,6 +109,7 @@ export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", 
                 phone: payload.phone,
                 total_user: payload.countGuest,
                 time_book: payload.celendar,
+                description: "mô tả"
             },
             {
                 headers: { "Authorization": `Bearer ${getToken()}` },
@@ -125,8 +139,6 @@ export const addCart = createAsyncThunk("orderTable/addCart", async (payload, ac
             })
         .then(response => {
             action.dispatch(getListCart())
-
-            console.log(response)
         }).catch(function (err) {
             console.log(err)
         })
@@ -148,13 +160,14 @@ export const getListCart = createAsyncThunk("orderTable/getListCart", async (pay
             console.log(err)
             payloads = { data: "", status: err.response.status }
         })
+    console.log(payloads)
     return payloads
 })
 
 export const deleteCart = createAsyncThunk("product/deleteCart", async (payload, action) => {
     let payloads
     await axios
-        .delete(api + `cart/deleteOrder/12`, {
+        .delete(api + `cart/deleteOrder/${payload}`, {
             headers: { "Authorization": `Bearer ${getToken()}` }
         })
         .then(response => {
@@ -183,19 +196,34 @@ export const createOrder = createAsyncThunk("orderTable/createOrder", async (pay
         })
     return payloads
 })
-export const getOrder = createAsyncThunk("orderTable/createOrder", async (payload, action) => {
+export const getOrder = createAsyncThunk("orderTable/getOrder", async () => {
     let payloads
     await axios
         .get(api + "invoices/getInvoice", {
             headers: { "Authorization": `Bearer ${getToken()}` },
         })
         .then(response => {
-            console.log(response)
+            console.log(response.data.data)
             payloads = { data: response.data.data, status: "success" }
         }).catch(function (err) {
-            console.log(err)
             payloads = { data: "", status: err.response.status }
         })
+    console.log(payloads)
+    return payloads
+})
+export const getDetailOrder = createAsyncThunk("orderTable/getDetailOrder", async () => {
+    let payloads
+    await axios
+        .get(api + "invoice-detail/getInvoiceDetail", {
+            headers: { "Authorization": `Bearer ${getToken()}` },
+        })
+        .then(response => {
+            console.log(response.data.data)
+            payloads = { data: response.data.data, status: "success" }
+        }).catch(function (err) {
+            payloads = { data: "", status: err.response.status }
+        })
+    console.log(payloads)
     return payloads
 })
 // export const addCart = (payload, action) => {

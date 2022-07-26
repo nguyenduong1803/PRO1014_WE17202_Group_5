@@ -3,16 +3,15 @@ import SelectMui from "../../Admin/SelectMui/SelectMui"
 import MenuContentOptions from './MenuContentOptions/MenuContentOpTions';
 import LayoutSite from '../LayoutSite/LayoutSite';
 import product1 from '../../../assets/img/seafood-1.jpg';
-import { useDispatch, useSelector } from 'react-redux';
-import { isSuccess, selectCart, selectLoadingProduct, selectProducts } from '../../../redux/selector';
-import Loading from '../Loading/Loading';
+import { useSelector } from 'react-redux';
+import {  selectLoadingProduct, selectProducts } from '../../../redux/selector';
 import Product from '../Product/Product';
 import { AuthContext } from '../../../contexts/AuthenContext';
 import StepperMui from '../TableOption/StepperMui';
 import { ModalLogin } from '../TableOption/OrderItem';
 import { getToken } from '../../../utils/Common';
-import ProductCartTable from '../TableOption/ProductCartTable';
-import InfomationCart from '../TableOption/InfomationCart';
+import LoadingProduct from '../Loading/LoadingProduct';
+import ChooseProduct from '../TableOption/ChooseProduct';
 const product = [
   {
     img: product1,
@@ -97,7 +96,7 @@ function MenuContent() {
               getToken() ? <StepperMui setModalShow={setModalShow} idTable={""} user={infoUser} /> : <ModalLogin />
             }
           </div>
-          <InfomationCart/>
+          <ChooseProduct />
         </div>
       </div>}
       <div className="container-fluid">
@@ -109,13 +108,13 @@ function MenuContent() {
 
           <div className='col-lg-9'>
             <div className="d-flex justify-content-between align-items-center pb-2 mb-2" style={{ borderBottom: "2px solid #fff" }}>
-              <p>Có 4 sản phẩm</p>
+              <p>Có {listProduct && listProduct.length} sản phẩm</p>
               <SelectMui
                 name="Lọc sản phẩm"
                 list={category}
               />
             </div>
-            {loadingProduct === "loading" ? <Loading /> : <div className="row" style={{ transition: "0.3s" }}>
+            {loadingProduct === "loading" ? <LoadingProduct /> : <div className="row" style={{ transition: "0.3s" }}>
               {
                 listProduct && listProduct.map((products, index) => {
                   return (
@@ -130,8 +129,6 @@ function MenuContent() {
                 })
               }
             </div>}
-
-
           </div>
         </div>
       </div>

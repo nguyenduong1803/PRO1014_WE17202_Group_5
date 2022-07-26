@@ -62,9 +62,8 @@
 .priceNumber{
     padding: 5px 0;
     width: 100%;
-    display: inline-flex;
-    justify-content: space-between;
 }
+
 .quantity{
     margin-left: 20px;
 }
@@ -95,9 +94,7 @@
 .orderIdFooterRight .buttonLink a:hover{
     color:#000;
 }
-    a{
-    text-decoration: none !important;
-}
+ 
 
 /* .orderIdFooterRight a:hover{
     color:#000000;

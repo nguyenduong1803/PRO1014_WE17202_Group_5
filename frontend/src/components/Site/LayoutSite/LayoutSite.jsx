@@ -36,7 +36,6 @@ function LayoutSite({ children }) {
 }
 const Navbar = () => {
     const refBar = React.useRef();
-
     return (
         <nav
             className={styles.navbar}

@@ -5,11 +5,12 @@ import styles from "./TableOption.module.css";
 import { formatMoney } from '../../../extensions/formatMoney';
 import { useDispatch } from 'react-redux';
 import { deleteCart } from '../../../redux/SliceReducer/OrderTableSlice';
+
 function ProductCartTable({ img, name, idCart, price,quantity }) {
     const dispatch = useDispatch()
     const [quantityCart,setQuantityCart]=React.useState(quantity)
     const handleDelete =()=>{
-        dispatch(deleteCart(12))
+        dispatch(deleteCart(5))
     }
     return (
         <div className={styles.contentMain}>
@@ -27,7 +28,7 @@ function ProductCartTable({ img, name, idCart, price,quantity }) {
                 <div className={styles.quantity}>
                     <Quantity quantity={quantityCart} setQuantity={setQuantityCart} />
                 </div>
-                <div className={styles.icon} onClick={handleDelete}>
+                <div className={styles.deleteIcon} onClick={handleDelete}>
                     <DeleteIcon />
                 </div>
             </div>

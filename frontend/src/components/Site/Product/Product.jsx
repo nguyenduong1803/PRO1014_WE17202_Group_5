@@ -60,7 +60,7 @@ function Product({ img, title, price,id }) {
         <h4 className={styles.title}>{title}</h4>
         <div ><BasicRating /></div>
         <div className={`${styles.wrapPrice} d-flex justify-content-between align-items-center `}>
-          <p className={styles.price}>{price && formatMoney(price)}</p>
+          <p className={styles.price}>{price && formatMoney(price)} đ</p>
           <p onClick={handleClick({ vertical: 'bottom', horizontal: 'right', })} className={styles.icon}>
             <AddIcon /></p>
         </div>

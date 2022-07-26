@@ -75,7 +75,8 @@ function OrderTable() {
                                             <div key={ele.id} className={`${styles.backgroundWrap}  col-lg-2`}>
                                                 <TableOption
                                                     type="circle"
-                                                    id={tables && tables[ele.index]?.index_table}
+                                                    id={tables && tables[ele.index]?.id}
+                                                    name={tables && tables[ele.index]?.index_table}
                                                     status={tables && tables[ele.index]?.status}
                                                 />
                                             </div>)

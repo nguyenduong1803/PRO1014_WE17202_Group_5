@@ -7,18 +7,21 @@ import { Link } from "react-router-dom";
 import {  useSelector} from 'react-redux';
 import { selectTableActive } from '../../../redux/selector';
 
-function OrderItem({order,setOrder,idTable}) {
+function OrderItem({order,setOrder,name}) {
         const tableActive = useSelector(selectTableActive)
-    console.log(tableActive);
+    const handleTableSelect =(e)=>{
+        setOrder(prev=>({...prev,tableId:e.target.value}))
+        console.log(order)
+    }
     return (
         <section className="section" id="order">
             {/* <div className="section-title">My Order&nbsp;😎</div> */}
             <div className="order-info">
                 <div className="address">
-                    <div className="address-name">Bàn {idTable||order.tableId}</div>
-                    <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId}>
+                    <div className="address-name">Bàn {name||order.tableId}</div>
+                    <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId} onChange={e=>handleTableSelect(e)}>
                         <option selected>Đổi Bàn</option>
-                        {tableActive.map((table)=> <option value="A-2">{table.name}</option>)}
+                        {tableActive.map((table)=> <option key={table.id}  value={table.id}>{table.index_table}</option>)}
                     </select>
                 </div>
                 <div className="delivery">

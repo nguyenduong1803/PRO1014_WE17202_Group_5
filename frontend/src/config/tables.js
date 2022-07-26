@@ -9,7 +9,7 @@ export const tableProduct = [
     {
       name: "Ảnh",
       width: 60,
-      dataKey: "images",
+      dataKey: "path",
       isFixed: true,
       type: "img"
     },
@@ -35,9 +35,16 @@ export const tableProduct = [
       type: "cell"
     },
     {
-      name: "Mô tả",
+      name: "Mô tả ngắn",
       width: 350,
-      dataKey: "short_desscription",
+      dataKey: "short_description",
+      isFixed: false,
+      type: "cell"
+    },
+    {
+      name: "Mô tả sản phẩm",
+      width: 350,
+      dataKey: "full_description",
       isFixed: false,
       type: "cell"
     },

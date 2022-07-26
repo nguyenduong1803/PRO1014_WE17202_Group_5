@@ -31,14 +31,15 @@ export const selectSearchText = (state) => state.ManagerProduct.searchText
 export const selectListTable = (state)=>state.OrderTableSlice.tables
 export const selectOrderTable = (state)=>state.OrderTableSlice.orderTable
 export const selectTableActive = (state)=>{
-   return state.OrderTableSlice.tables.filter((table,index)=>Number(table.status)===1)
+   return state.OrderTableSlice.tables.filter((table,index)=>Number(table.status)===3)
 }
 
 // cart
 export const selectCart = (state)=>state.OrderTableSlice.cart
 
 // order
-export const selectOrder = (state)=>state.OrderTableSlice.order
+export const selectOrder = (state)=>state.OrderTableSlice.listOrder
+export const selectOrderDetail = (state)=>state.OrderTableSlice.detailOrder
 
 export const selectProductById = createSelector(selectProducts, selectSearchText,
     (product, searchText) => {
