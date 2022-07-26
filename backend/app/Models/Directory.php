@@ -26,4 +26,9 @@ class Directory extends Model
     public function deleteDirectory($params) {
         DB::update("UPDATE directory SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
     }
+
+    public function updateDirectory($params) {
+        DB::update("UPDATE directory SET `name` = ?,`update_at` = ?
+                    WHERE `id` = ?", $params);
+    }
 }
