@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 class InvoiceDetailController extends Controller
 {
     //
-    public function getDetailInvoice() {
+    public function getDetailInvoice($id_invoice) {
+        $params = [
+            $id_invoice
+        ];
         $modelDetailInvoice = new InvoiceDetail();
-        $data = $modelDetailInvoice ->getDetailInvoice();
+        $data = $modelDetailInvoice ->getDetailInvoice($params);
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Không có dữ liệu!", "status" => false],404);
         return response() ->json(["data" => $data, "status" => true],200);
     }
