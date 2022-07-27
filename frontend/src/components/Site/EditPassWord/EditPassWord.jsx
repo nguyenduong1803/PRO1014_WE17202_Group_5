@@ -19,11 +19,11 @@ function EditPassWord() {
       <div className={styles.title}>
         <h2>Change PassWord</h2>
         <p>PassWord must contain :</p>
-        <ul className={styles.list}>
-          <li><CheckIcon/> Mật khẩu phải trên 6 kí tự</li>
-          <li><CheckIcon/> Mật khẩu phải kết hợp cả chữ và số</li>
-          <li><CheckIcon/> Phải có cả kí tự in hoa</li>
-          <li><CheckIcon/> Phải có cả số tự nhiên</li>
+        <ul className={styles.lists}>
+          <li className={styles.li}><CheckIcon/> Mật khẩu phải trên 6 kí tự</li>
+          <li className={styles.li}><CheckIcon/> Mật khẩu phải kết hợp cả chữ và số</li>
+          <li className={styles.li}><CheckIcon/> Phải có cả kí tự in hoa</li>
+          <li className={styles.li}><CheckIcon/> Phải có cả số tự nhiên</li>
         </ul>
       </div>
       <div className={styles.input}>

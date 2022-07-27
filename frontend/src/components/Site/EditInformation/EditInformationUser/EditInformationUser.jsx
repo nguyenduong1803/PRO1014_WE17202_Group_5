@@ -22,8 +22,8 @@ function IconLabelButtons() {
 function EditInformationUser() {
   return (
     <div className={styles.Box}>
-      <h2>EDIT INFORMATION FOR ME</h2>
-      <div className={`${styles.row} row`}>
+      
+      <div className={`${styles.row} row`}><h2>EDIT INFORMATION FOR ME</h2>
         <div className={`${styles.col} col-lg-6`}>
           <div>
             <TextField id="filled-basic" label="Name"  variant="filled" />
