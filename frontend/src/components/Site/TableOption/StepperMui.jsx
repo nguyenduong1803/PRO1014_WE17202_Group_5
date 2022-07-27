@@ -92,11 +92,13 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
             setNotify(prev => ({ ...prev, celendar: "" }))
         }
         const isFormSuccess = Object.entries(notify).every(([key, value]) => value === "")
-        console.log(notify)
-        // if (isFormSuccess) {
-        //     dispatch(updateOrderTable(order))
-        //     setActiveStep(1);
-        // }
+        const isFormSuccessOrder = Object.entries(order).every(([key, value]) => value !== "")
+        console.log(isFormSuccess)
+        console.log(isFormSuccessOrder)
+        if (isFormSuccess && isFormSuccessOrder) {
+            dispatch(updateOrderTable(order))
+            setActiveStep(1);
+        }
     }
     // step3
     const handleOrder = () => {
@@ -210,8 +212,6 @@ const InfoFood = () => {
             }
         })
     })
-    console.log(listOrder)
-
     return (
         <div className="wraplistCart_order ">
             {listOrder && listOrder.map((product, index) => {
