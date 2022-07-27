@@ -19,8 +19,13 @@ class InvoiceDetailController extends Controller
         return response() ->json(["data" => $data, "status" => true],200);
     }
 
-    public function insertProduct($params) {
+    public function insertDetailInvoice($params) {
         $modelDetailInvoice = new InvoiceDetail();
         $modelDetailInvoice ->insertDetailInvoice($params);
+    }
+
+    public function updateDetailInvoice($params) {
+        $modelDetailInvoice = new InvoiceDetail();
+        $modelDetailInvoice ->updateDetailInvoice($params);
     }
 }
