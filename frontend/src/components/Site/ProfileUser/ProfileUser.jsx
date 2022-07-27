@@ -3,13 +3,15 @@ import styles from './ProfileUser.module.css';
 import imguser from '../../../assets/img/seafood-1.jpg';
 import PinDropIcon from '@mui/icons-material/PinDrop';
 import Button from '@mui/material/Button';
+import {Link} from 'react-router-dom';
 const User = [
     {
         img:imguser,
         name:'Devon Lane',
         address:'Lisbon, Portugal',
         addressEmail:'Hoa121102@gmail.com',
-    }
+    },
+    
 ];
 function ProfileUser() {
   return (
@@ -40,10 +42,10 @@ function ProfileUser() {
             <div className={`${styles.col6} col-lg-6`}>
                 <div className={`${styles.rowss} row`}>
                     <div className="col-lg-4">
-                    <Button variant="contained">Prieview</Button>
+                    <Link to='/edit-user'><Button variant="contained">Chỉnh sửa thông tin</Button></Link>
                     </div>
                     <div className="col-lg-4">
-                    <Button variant="contained">Photos</Button>
+                    <Link to='/edit-password'><Button variant="contained">Đổi Mật Khẩu</Button></Link>
                     </div>
                     <div className="col-lg-4">
                     <Button variant="contained">Followers</Button>

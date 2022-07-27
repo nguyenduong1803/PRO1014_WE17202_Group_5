@@ -1,6 +1,6 @@
 import React from 'react'
 import QuantityCart from '../../../pages/Site/Cart/QuantityCart'
-import styles from "./TableOption.css"
+import styles from "./TableOption.module.css";
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import CelendarOption from '../Calendar/CelendarOption';
 // import DeleteOutlineIcon from '@mui/icons-material/HighlightOff';

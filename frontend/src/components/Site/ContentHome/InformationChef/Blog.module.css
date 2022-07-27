@@ -1,0 +1,60 @@
+.blogSection {
+    margin-bottom: 50px;
+}
+
+.blogImg {
+    width: 100%;
+}
+
+.contentitle{
+    font-family: "Playfair Display",serif !important;
+    margin-bottom: 30px;
+}
+.post {
+    box-shadow: 0px 0px 13px -4px rgb(0 0 0 / 20%);
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    border-radius: 25px;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+    padding: 25px;
+    overflow: hidden;
+    font-family: "Playfair Display",serif !important;
+}
+
+.title {
+    text-decoration: none;
+    display: inline-block;
+    margin: 12px 0;
+    color:#000;
+}
+.sectionTitle{
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.subTitle{
+    color: #FF9222;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+.blogShape{
+    background-image: url(../../../../assets/img/seafood-1.jpg);
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.1;
+    z-index: -1;
+}

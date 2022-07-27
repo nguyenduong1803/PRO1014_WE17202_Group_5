@@ -1,0 +1,40 @@
+.col{
+    text-align: center;
+    padding-bottom: 30px;
+}
+.col div{
+    width: 100%;
+}
+.row{
+    background-color: rgb(253, 242, 228);
+    padding-bottom: 50px;
+    padding: 50px;
+    
+}
+.Box{
+    margin:0 auto;
+    text-align: center;
+    width: 100%;
+    padding: 50px;
+    height:100vh;
+
+}
+.Box TextField{
+    width: 600px !important;
+}
+.Box h2{
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 30px;
+}
+.input{
+    padding: 20px 0;
+}
+.icon{
+    float: right !important;
+}
+.link{
+    float: left !important;
+    padding: 20px 0;
+    color:black !important;
+}

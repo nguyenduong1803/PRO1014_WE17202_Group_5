@@ -6,6 +6,13 @@
     box-shadow:1px 2px 20px rgba(204, 204, 204,0.5);
     z-index: 10;
 }
+.wrapInfo{
+    font-size: .8rem;
+}
+.avt{
+    width: 30px;
+    height: 30px;
+}
 .logo{
     width: 84px;
     padding-left: 20px;
