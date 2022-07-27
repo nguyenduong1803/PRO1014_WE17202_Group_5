@@ -2,7 +2,12 @@ import React from "react";
 import styles from "./Cart.module.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CloseIcon from '@mui/icons-material/Close';
+import ProductCart from "./ProductCart";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../../../redux/selector";
 function Cart() {
+  const carts = useSelector(selectCart)
+
   return (
     <div>
       <nav className={styles.navbar}>
@@ -27,46 +32,21 @@ function Cart() {
                 </div>
 
                 <ul className={styles.shoppingCartItems}>
-                  <li className={styles.clearfix}>
-                    <img
-                      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                      alt="item1"
-                    />
-                    <span className={styles.itemName}>Sony DSC-RX100M III</span>
-                    <span className={styles.itemPrice}>$849.99</span>
-                    <span className={styles.itemQuantity}>Số lượng : 01</span>
-                    <span className={styles.CloseIcon}><CloseIcon/></span>
-                  </li>
-                  <li className={styles.clearfix}>
-                    <img
-                      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                      alt="item1"
-                    />
-                    <span className={styles.itemName}>Sony DSC-RX100M III</span>
-                    <span className={styles.itemPrice}>$849.99</span>
-                    <span className={styles.itemQuantity}>Số lượng : 01</span>
-                    <span className={styles.CloseIcon}><CloseIcon/></span>
-                  </li>
-                  <li className={styles.clearfix}>
-                    <img
-                      src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/cart-item1.jpg"
-                      alt="item1"
-                    />
-                    <span className={styles.itemName}>Sony DSC-RX100M III</span>
-                    <span className={styles.itemPrice}>$849.99</span>
-                    <span className={styles.itemQuantity}>Số lượng : 01</span>
-                    <span className={styles.CloseIcon}><CloseIcon/></span>
-                  </li>
+                  {carts && carts.map((cart, index) => {
+                    return (
+                      <ProductCart key={index} name={cart.name} idCart={cart.id} content="content" img={cart.path} price={cart.price} quantity={cart.amount} />
+                    )
+                  })}
                 </ul>
 
-               <div className={styles.footerButton}>
-                <div className=""> <a href="#" className={styles.button}>
-                  Checkout
-                </a></div>
-                <div className=""> <a href="#" className={styles.button}>
-                  Checkout
-                </a></div>
-               </div>
+                <div className={styles.footerButton}>
+                  <div className=""> <a href="#" className={styles.button}>
+                    Checkout
+                  </a></div>
+                  <div className=""> <a href="#" className={styles.button}>
+                    Checkout
+                  </a></div>
+                </div>
               </div>
             </div>
           </ul>

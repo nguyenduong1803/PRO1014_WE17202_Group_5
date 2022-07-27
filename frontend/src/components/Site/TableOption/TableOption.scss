@@ -343,11 +343,14 @@
 
 .wraplistCart_order {
   padding: 0 12px;
-  height: 280px;
+  max-height: 280px;
   overflow-y: auto;
 }
 
 .productchoose_item {
   width: 50%;
   height: 70px;
+}
+.css-8t49rw-MuiStepConnector-line{
+  min-height: 0 !important;
 }
