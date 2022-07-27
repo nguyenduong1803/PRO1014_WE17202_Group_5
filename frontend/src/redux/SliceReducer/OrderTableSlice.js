@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { getToken } from "../../utils/Common"
+import { v4 as uuidv4 } from 'uuid';
 const api = "http://127.0.0.1:8000/api/"
 const tableOrder = {
     tableId: "",
@@ -27,16 +28,17 @@ const OrderTableSlice = createSlice({
         },
         addOrder: (state, action) => {
             const product = state.order.find(item => item.id === action.payload.id);
+            console.log(uuidv4())
             if (product) {
-                product.quantity=product.quantity+1
+                product.quantity = product.quantity + 1
             } else {
                 return { ...state, order: [...state.order, action.payload] }
             }
             return state
         },
-        addQuantityOrder:(state,action)=>{
+        addQuantityOrder: (state, action) => {
             const product = state.order.find(item => item.id === action.payload.id)
-            product.quantity=action.payload.quantity
+            product.quantity = action.payload.quantity
             return state
         }
         // addCart: (state, action) => {
@@ -196,6 +198,7 @@ export const deleteCart = createAsyncThunk("product/deleteCart", async (payload,
 
 // ============ order ================
 export const addOrder = (payload) => {
+
     return { type: "orderTable/addOrder", payload }
 }
 export const addQuantityOrder = (payload) => {

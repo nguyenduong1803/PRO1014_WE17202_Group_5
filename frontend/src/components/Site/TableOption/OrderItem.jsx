@@ -15,6 +15,7 @@ function OrderItem({ order, setOrder, name, setNotify, notify }) {
         setOrder(prev => ({ ...prev, tableId: e.target.value }))
         console.log(order)
     }
+
     return (
         <section className="section" id="order">
             {/* <div className="section-title">My Order&nbsp;😎</div> */}
@@ -72,13 +73,13 @@ function InputField({ name, setOrder, values, size, setNotify }) {
                 return { ...prev, name: e.target.value }
             } else if (name === "Số điện thoại") {
                 return { ...prev, phone: e.target.value }
-            } else {
-                const value = e.target.value.replace(/[^0-9]/g, '');
-                if (value === "") return { ...prev, countGuest: 0 }
-                else return { ...prev, countGuest: e.target.value }
-            }
+            } else
+                return {
+                    ...prev, countGuest: e.target.value
+                }
         })
     }
+
     const handlBlur = (e) => {
         switch (name) {
             case "Chủ tiệc":
@@ -123,7 +124,6 @@ function InputField({ name, setOrder, values, size, setNotify }) {
             variant="outlined"
             onChange={(e) => handleChangeOrder(e)}
             onBlur={e => handlBlur(e)}
-            onKeyPress={name === "Số người" || name === "Số điện thoại" ? (event) => { !(/^[0-9]/.test(event.key)) && event.preventDefault() } : ""}
             value={values}
             size={size}
         />
