@@ -81,7 +81,7 @@ export default function DenseTable() {
           </TableRow>
         </TableHead>
         <TableBody style={{}}>
-          {productCartDetail &&productCartDetail.map((product, index) => (
+          {productCartDetail && productCartDetail.map((product, index) => (
             <TableRow
               key={index}
               sx={{ "&:last-child td, &:last-child th": { border: "20px" } }}
@@ -94,7 +94,6 @@ export default function DenseTable() {
                     </div>
                     <div className={styles.titleProducts}>
                       <div className={styles.title}>
-                        {" "}
                         <h4>{product.name}</h4>
                       </div>
                       <div className={styles.name}>
@@ -103,11 +102,7 @@ export default function DenseTable() {
                     </div>
 
                   </div>
-                  <div className={styles.icons}>
-                    <p>
-                      <BasicRating />
-                    </p>
-                  </div>
+                 
                 </div>
               </TableCell>
               <TableCell align="center">{product.amount}</TableCell>

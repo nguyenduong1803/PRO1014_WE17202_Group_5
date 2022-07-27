@@ -53,6 +53,7 @@
     height: 50px;
     margin: 30px 0px;
     font-size: .6rem;
+    text-decoration: none;
 }
 
 .col6 button:hover {
@@ -63,4 +64,7 @@
 .rowss {
     margin-left: 80px;
     display: inline-flex;
+}
+.link{
+    text-decoration: none;
 }

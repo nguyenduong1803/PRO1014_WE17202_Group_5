@@ -29,10 +29,7 @@ function Header() {
                                 <Search className={styles.searchIcon} />
                             </div>
                         </div>
-                    </div>
-
-                </div>
-                <div className="col-lg-6 col-md-6">
+                    </div><div className="col-lg-6 col-md-6">
                     <div className="d-flex justify-content-end align-items-center" style={{ height: "100%" }}>
                         <div className="d-flex col-lg-6 col-md-12 justify-content-evenly  align-items-center" style={{ marginRight: "24px" }}>
                             <Notify />
@@ -58,6 +55,9 @@ function Header() {
                         </div>
                     </div>
                 </div>
+
+                </div>
+                
             </header >
         </div>
     )

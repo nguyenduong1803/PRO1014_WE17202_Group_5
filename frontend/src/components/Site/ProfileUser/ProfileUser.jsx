@@ -42,10 +42,10 @@ function ProfileUser() {
             <div className={`${styles.col6} col-lg-6`}>
                 <div className={`${styles.rowss} row`}>
                     <div className="col-lg-4">
-                    <Link to='/edit-user'><Button variant="contained">Chỉnh sửa thông tin</Button></Link>
+                    <Link to='/edit-user' className={styles.link}><Button variant="contained">Chỉnh sửa thông tin</Button></Link>
                     </div>
                     <div className="col-lg-4">
-                    <Link to='/edit-password'><Button variant="contained">Đổi Mật Khẩu</Button></Link>
+                    <Link to='/edit-password'  className={styles.link}><Button variant="contained">Đổi Mật Khẩu</Button></Link>
                     </div>
                     <div className="col-lg-4">
                     <Button variant="contained">Followers</Button>

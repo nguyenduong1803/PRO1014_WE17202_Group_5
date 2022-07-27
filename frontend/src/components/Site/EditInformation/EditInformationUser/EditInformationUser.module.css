@@ -9,13 +9,14 @@
     background-color: rgb(253, 242, 228);
     padding-bottom: 50px;
     padding: 50px;
+    height:100vh;
     
 }
 .Box{
     margin:0 auto;
     text-align: center;
     width: 100%;
-    padding: 50px;
+    padding:0 400px;
     height:100vh;
 
 }
@@ -37,4 +38,5 @@
     float: left !important;
     padding: 20px 0;
     color:black !important;
+    text-decoration: none;
 }
