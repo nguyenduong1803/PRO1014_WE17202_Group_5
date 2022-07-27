@@ -86,7 +86,7 @@ Route::group(['namespace' => 'Invoices', 'prefix' => 'invoices'], function(){
 
 Route::group(['namespace' => 'InvoiceDetail', 'prefix' => 'invoice-detail'], function(){
     Route::middleware('auth:api') -> group(function () {
-        Route::get('getInvoiceDetail', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'getDetailInvoice']);
+        Route::get('getInvoiceDetail/{id_invoice}', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'getDetailInvoice']);
     });
 });
 
