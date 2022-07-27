@@ -2,32 +2,50 @@
 
 namespace App\Http\Controllers\Api\Invoices;
 
+use App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController;
 use App\Http\Controllers\Controller;
+use App\Models\InvoiceDetail;
 use App\Models\Invoices;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class InvoicesController extends Controller
 {
     //
-    public function create() {
+    public function create(Request $request) {
         $user = Auth::user();
-        $params = [
-            $user['id']
-        ];
+        $controllerDetailInvoice = new InvoiceDetailController();
         $modelInvoices = new Invoices();
+        $modelDetailInvoice = new InvoiceDetail();
         $modelUser = new User();
-        $userStaff = $modelUser ->getUserByRole(2, 3);
-        $listProduct =  $modelInvoices ->getListsPriceProductInCart($params);
-        $countPrice = 0;
-        foreach ($listProduct as &$item) {
-            $countPrice += $item -> total_price;
+        $listChooseProducts = $request -> chooseProducts;
+        $uniIdInvoice = strtoupper(Str::random(10));
+        $totalPrice = 0;
+        if(!isset($listChooseProducts) || count($listChooseProducts) < 1) response() ->json(["msg" => "Vui lòng chọn món!", "status" => false],410);
+        for($i = 0; $i < count($listChooseProducts); $i++) {
+            $params = [
+                $user['id'],
+                $uniIdInvoice,
+                $listChooseProducts[$i]['id_table_book'],
+                $listChooseProducts[$i]['id_product'],
+                $listChooseProducts[$i]['amount'],
+            ];
+            $controllerDetailInvoice ->insertProduct($params);
+            $params3 = [
+                $listChooseProducts[$i]['id_product']
+            ];
+            $priceProduct = $modelDetailInvoice ->getPriceProductInDetailInvoice($params3);
+            $totalPrice += $priceProduct[0] -> price * $listChooseProducts[$i]['amount'];
         }
+
+        $userStaff = $modelUser ->getUserByRole(2, 3);
         $params2 = [
             $user['id'],
+            $uniIdInvoice,
             1,
-            $countPrice,
+            $totalPrice,
             1,
             $userStaff['id']
         ];

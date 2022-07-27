@@ -15,4 +15,9 @@ class InvoiceDetailController extends Controller
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Không có dữ liệu!", "status" => false],404);
         return response() ->json(["data" => $data, "status" => true],200);
     }
+
+    public function insertProduct($params) {
+        $modelDetailInvoice = new InvoiceDetail();
+        $modelDetailInvoice ->insertDetailInvoice($params);
+    }
 }
