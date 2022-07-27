@@ -39,7 +39,7 @@ function Header() {
                             <Cart />
                             {getToken() ?
                                 <div className={`${styles.wrapInfo} d-flex align-items-center`}>
-                                    <ProfileAvatar className={styles.avt}/>
+                                    <ProfileAvatar className={styles.avt} />
                                     <div>
                                         <h4 className={styles.name}>{infoUser?.ten}</h4>
                                         <p className={styles.possition}>Nhân viên order</p>
@@ -47,14 +47,14 @@ function Header() {
                                 </div>
                                 :
                                 <div className={`${styles.wrapInfo} d-flex align-items-center`}>
-                                    <ProfileAvatar  className={styles.avt}/>
+                                    <ProfileAvatar className={styles.avt} />
                                     <div>
                                         <Link to="/dang-nhap" className={styles.name}>Đăng nhập</Link>
 
                                     </div>
-                                }
+                                </div>
+                            }
 
-                            </div>
                         </div>
                     </div>
                 </div>
