@@ -54,6 +54,19 @@ class ProductController extends Controller
     public function getListProduct(Request $request) {
         $modelProduct = new Product();
         $result = $modelProduct ->listsProduct($request);
+        $modelImg = new ImagesProduct();
+        $listsImg = $modelImg -> listsImg();
+        $listData = $result ->items();
+        for($i = 0; $i < count($listData); $i++) {
+            $arr = [];
+            $listData[$i] -> listsImg = array();
+            for($j = 0; $j < count($listsImg); $j++) {
+                if($listsImg[$j] -> id_product_img == $listData[$i] -> id_img) {
+                    array_push( $arr, $listsImg[$j] -> path);
+                }
+            }
+            $listData[$i] -> listsImg = $arr;
+        }
         return $result;
     }
 
