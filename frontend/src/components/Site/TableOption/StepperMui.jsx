@@ -9,13 +9,12 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import OrderItem from './OrderItem';
 import style from "./TableOption.scss"
-import { selectCart, selectOrderTable } from '../../../redux/selector';
+import {  selectOrderTable, selectProductOrder, selectProducts } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
-import { Link } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-import InfomationCart from './ChooseProduct';
 import ProductCartTable from './ProductCartTable';
+import { isFutureDate, isNumber, isPhoneNumber, isRequired } from '../../../utils/Validate';
 
 const steps = [
     {
@@ -33,10 +32,16 @@ const steps = [
     },
 ];
 
-export default function StepperMui({ id, user, setModalShow, activeStep, setActiveStep }) {
+export default function StepperMui({ id, setModalShow, activeStep, setActiveStep }) {
     const dispatch = useDispatch()
     const orders = useSelector(selectOrderTable)
-    const selectCarts = useSelector(selectCart)
+    const [notify, setNotify] = React.useState({
+        name: "",
+        phone: "",
+        celendar: "",
+        countGuest: "",
+        validateTime: ""
+    })
     const [order, setOrder] = React.useState({
         tableId: orders.tableId,
         name: orders.name,
@@ -44,30 +49,67 @@ export default function StepperMui({ id, user, setModalShow, activeStep, setActi
         countGuest: orders.countGuest,
         celendar: orders.celendar,
     });
-    const handleOrder = () => {
-        dispatch(createOrderTable(order))
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
-    };
     const handlNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
     };
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+    // step 2
+    const handleOrderTable = () => {
+        if (isRequired(order.name)) {
+            setNotify(prev => ({ ...prev, name: "Vui lòng nhập tên khách hàng" }))
+        } else {
+            setNotify(prev => ({ ...prev, name: "" }))
+        }
+
+        if (isRequired(order.phone)) {
+            setNotify(prev => ({ ...prev, phone: "Vui lòng nhập số điện thoại" }))
+        }
+        else if (isPhoneNumber(order.phone)) {
+            setNotify(prev => ({ ...prev, phone: "Vui lòng nhập đúng số điện thoại" }))
+        }
+        else {
+            setNotify(prev => ({ ...prev, phone: "" }))
+        }
+
+        if (isRequired(order.countGuest)) {
+            setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập số người" }))
+        }
+        else if (isNumber(order.countGuest)) {
+            setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập đúng số" }))
+        }
+        else {
+            setNotify(prev => ({ ...prev, countGuest: "" }))
+        }
+
+        if (isRequired(order.validateTime)) {
+            setNotify(prev => ({ ...prev, celendar: "Vui lòng chọn thời gian" }))
+        } else if (isFutureDate(order.validateTime)) {
+            setNotify(prev => ({ ...prev, celendar: "Vui lòng chọn thời gian lớn hơn" }))
+        } else {
+            setNotify(prev => ({ ...prev, celendar: "" }))
+        }
+        const isFormSuccess = Object.entries(notify).every(([key, value]) => value === "")
+        console.log(notify)
+        // if (isFormSuccess) {
+        //     dispatch(updateOrderTable(order))
+        //     setActiveStep(1);
+        // }
+    }
+    // step3
+    const handleOrder = () => {
+        dispatch(createOrderTable(order))
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+    // const handleAddProduct = () => {
+    //     setModalShow(false)
+    // }
     const handleReset = () => {
         setActiveStep(0);
 
     };
-
-    const handleOrderTable = () => {
-        dispatch(updateOrderTable(order))
-        setActiveStep(1);
-    }
-    const handleAddProduct = () => {
-        setModalShow(false)
-    }
     React.useEffect(() => {
         if (id) setOrder(prev => ({ ...prev, tableId: id }))
     }, [])
@@ -89,7 +131,7 @@ export default function StepperMui({ id, user, setModalShow, activeStep, setActi
                             </StepLabel>
                             <StepContent >
                                 <Typography>{step.description}</Typography>
-                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} />) :
+                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify} />) :
                                     index === 1 ? (<InfoFood />) :
                                         index === 2 ? <InfoOrder order={order} /> : ""}
                                 <Box sx={{ mb: 2 }}>
@@ -125,6 +167,7 @@ export default function StepperMui({ id, user, setModalShow, activeStep, setActi
                                         >
                                             Quay lại
                                         </Button>
+                                        {/* <h2 className="stepper__notify">Vui lòng chọn lại thời gian</h2> */}
                                     </div>
                                 </Box>
                             </StepContent>
@@ -140,7 +183,6 @@ export default function StepperMui({ id, user, setModalShow, activeStep, setActi
                     </Paper>
                 )}
             </Box>
-
         </>
     );
 }
@@ -156,12 +198,25 @@ const InfoOrder = ({ order }) => {
     )
 }
 const InfoFood = () => {
-  const carts = useSelector(selectCart)
+    const orders = useSelector(selectProductOrder)
+    const products = useSelector(selectProducts)
+    let listOrder=[];
+    products.forEach(product => {
+        orders.forEach(order => {
+            if (order.id === product.id) {
+                console.log(order.quantity)
+                const newObj = {...product,quantity:order.quantity}
+                listOrder.push(newObj)
+            }
+        })
+    })
+    console.log(listOrder)
+
     return (
         <div className="wraplistCart_order ">
-            {carts && carts.map((cart, index) => {
+            {listOrder && listOrder.map((product, index) => {
                 return (
-                    <ProductCartTable key={index} name={cart.name} content="content" img={cart.path} price={cart.price} quantity={cart.amount} />
+                    <ProductCartTable key={index} name={product.name}  img={product.path} price={product.price} quantity={product.quantity} id={product.id} />
                 )
             })}
         </div>

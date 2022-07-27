@@ -40,6 +40,7 @@ export const selectCart = (state)=>state.OrderTableSlice.cart
 // order
 export const selectOrder = (state)=>state.OrderTableSlice.listOrder
 export const selectOrderDetail = (state)=>state.OrderTableSlice.detailOrder
+export const selectProductOrder = (state)=>state.OrderTableSlice.order
 
 export const selectProductById = createSelector(selectProducts, selectSearchText,
     (product, searchText) => {

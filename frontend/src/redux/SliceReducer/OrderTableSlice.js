@@ -13,18 +13,32 @@ const OrderTableSlice = createSlice({
     name: "orderTable",
     initialState: {
         status: "idle",
-        order: {},
+        order: [],
         listOrder: {},
         isSuccess: false,
         orderTable: tableOrder,
         cart: [],
         tables: [],
-        detailOrder:[]
+        detailOrder: []
     },
     reducers: {
         updateOrderTable: (state, action) => {
             return { ...state, orderTable: action.payload }
         },
+        addOrder: (state, action) => {
+            const product = state.order.find(item => item.id === action.payload.id);
+            if (product) {
+                product.quantity=product.quantity+1
+            } else {
+                return { ...state, order: [...state.order, action.payload] }
+            }
+            return state
+        },
+        addQuantityOrder:(state,action)=>{
+            const product = state.order.find(item => item.id === action.payload.id)
+            product.quantity=action.payload.quantity
+            return state
+        }
         // addCart: (state, action) => {
         //     state.cart.find((item) => {
         //         return item.id === action.payload.id
@@ -47,7 +61,7 @@ const OrderTableSlice = createSlice({
                     state.status = "idle"
                 }
             }).addCase(createOrderTable.fulfilled, (state, action) => {
-                state.order = action.payload
+
             }).addCase(addCart.fulfilled, (state, action) => {
                 state.cart.push(action.payload)
             }).addCase(getListCart.fulfilled, (state, action) => {
@@ -181,6 +195,12 @@ export const deleteCart = createAsyncThunk("product/deleteCart", async (payload,
 })
 
 // ============ order ================
+export const addOrder = (payload) => {
+    return { type: "orderTable/addOrder", payload }
+}
+export const addQuantityOrder = (payload) => {
+    return { type: "orderTable/addQuantityOrder", payload }
+}
 export const createOrder = createAsyncThunk("orderTable/createOrder", async (payload, action) => {
     let payloads
     await axios

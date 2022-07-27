@@ -1,16 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectCart } from '../../../redux/selector'
+import {selectProducts } from '../../../redux/selector'
 import styles from "./TableOption.module.css"
 import AddIcon from "@mui/icons-material/Add";
-import Quantity from "../../../pages/Site/ShopDetails/Quantity";
 import { formatMoney } from '../../../extensions/formatMoney';
 import { useDispatch } from 'react-redux';
-import { deleteCart } from '../../../redux/SliceReducer/OrderTableSlice';
+import { addOrder, deleteCart } from '../../../redux/SliceReducer/OrderTableSlice';
 import Search from '../../../assets/svg/Search';
 import { Button } from '@mui/material';
 function ChooseProduct({ className }) {
-    const carts = useSelector(selectCart)
+    const products = useSelector(selectProducts)
     return (
         <div className={`TableOption__wrapCart ${className}`} >
             <div className={styles.search}>
@@ -24,17 +23,17 @@ function ChooseProduct({ className }) {
             </div>
             <div className={styles.wrapCategory}>
                 <div className={styles.wrapbutton}><Button variant="outlined" color="success" margin="2"> Đồ uống</Button></div>
-                <div className={styles.wrapbutton}>        <Button variant="outlined" color="success"> Sashimi</Button></div>
-                <div className={styles.wrapbutton}>   <Button variant="outlined" color="success"> Tôm</Button></div>
-                <div className={styles.wrapbutton}>   <Button variant="outlined" color="success"> Cá</Button></div>
+                <div className={styles.wrapbutton}> <Button variant="outlined" color="success"> Sashimi</Button></div>
+                <div className={styles.wrapbutton}> <Button variant="outlined" color="success"> Tôm</Button></div>
+                <div className={styles.wrapbutton}> <Button variant="outlined" color="success"> Cá</Button></div>
                 <div className={styles.wrapbutton}> <Button variant="outlined" color="success"> Đồ uống</Button></div>
             </div>
             <div className="content__cart-box row">
                 {
-                    carts && carts.map((cart, index) => {
+                    products && products.map((product, index) => {
                         return (
-                            <div className={" col-lg-6"}>
-                                <ProductChoose key={index} name={cart.name} content="content" img={cart.path} price={cart.price} quantity={cart.amount} />
+                            <div className={" col-lg-6"} key={index}>
+                                <ProductChoose  name={product.name}  price={product.price} id={product.id} />
                             </div>
                         )
                     })
@@ -44,11 +43,10 @@ function ChooseProduct({ className }) {
     )
 }
 
-function ProductChoose({ img, name, price, quantity }) {
+function ProductChoose({ img, name, price,id }) {
     const dispatch = useDispatch()
-    const [quantityCart, setQuantityCart] = React.useState(quantity)
-    const handleDelete = () => {
-        dispatch(deleteCart(5))
+    const handleAddOrder = () => {
+        dispatch(addOrder({id,quantity:1}))
     }
     return (
         <div className={styles.wrapchoose}>
@@ -62,7 +60,7 @@ function ProductChoose({ img, name, price, quantity }) {
                 </div>
             </div>
             <div className={styles.detail}>
-                <div className={styles.icon} onClick={handleDelete}>
+                <div className={styles.icon} onClick={handleAddOrder}>
                     <AddIcon />
                 </div>
             </div>

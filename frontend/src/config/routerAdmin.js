@@ -14,6 +14,7 @@ import ProductCategory from "../pages/Admin/ProductCategory/ProductCategory";
 import AddCategory from "../pages/Admin/ProductCategory/AddCategory/AddCategory";
 import EditCategory from "../pages/Admin/ProductCategory/EditCategory/EditCategory";
 import PageNotFound from "../pages/Site/PageNotFound/PageNotFound";
+import ManageTable from "../pages/Admin/ManageTable/ManageTable";
 
 export const routerAdmin =[
     {
@@ -77,6 +78,10 @@ export const routerAdmin =[
     {
         component :Article,
         path:"thong-tin-bai-viet",
+    },
+    {
+        component :ManageTable,
+        path:"quan-ly-ban",
     },
     {
         component :PageNotFound,
