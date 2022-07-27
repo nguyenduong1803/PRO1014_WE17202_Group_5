@@ -99,9 +99,8 @@ class InvoicesController extends Controller
                 $detail = $modelDetailInvoice ->getDetailInvoice2($params4);
                 if(!isset($detail) || count($detail) < 1) return response() ->json(["msg" => "Cập nhật dữ liệu thất bại!", "status" => false],404);
                 $controllerDetailInvoice ->updateDetailInvoice($paramsUpdate);
-            } else {
-                $controllerDetailInvoice ->insertDetailInvoice($paramsInsert);
             }
+            if(is_null($listChooseProducts[$i]['id'])) $controllerDetailInvoice ->insertDetailInvoice($paramsInsert);
 
             $params5 = [
                 $listChooseProducts[$i]['id_product']
