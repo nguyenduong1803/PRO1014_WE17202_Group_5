@@ -10,23 +10,14 @@ class Invoices extends Model
 {
     use HasFactory;
 
-    public function getListsPriceProductInCart($params) {
-        return DB::select("SELECT products.price*cart.amount as total_price
-        FROM cart INNER JOIN products
-        ON cart.id_product = products.id
-        WHERE cart.id_user = ?
-        AND cart.status_cart_order = 1
-        ", $params);
-    }
-
     public function create($params) {
         DB::insert('INSERT INTO invoices
-    (id_user , status_cart_order, total_price, status_envoice, id_staff)
-    values (? , ? , ?, ?, ?)', $params);
+    (id_user ,id_invoice, status_cart_order, total_price, status_envoice, id_staff)
+    values (?, ? , ? , ?, ?, ?)', $params);
     }
 
     public function getInvoice($params) {
-        return DB::select("SELECT iv.status_cart_order,iv.total_price, iv.status_envoice, iv.id_staff, tb.total_user, tbs.index_table, tbs.floor
+        return DB::select("SELECT iv.status_cart_order,iv.id_invoice,iv.total_price, iv.status_envoice, iv.id_staff, tb.total_user, tbs.index_table, tbs.floor
                                 FROM invoices as iv
                                 INNER JOIN table_book as tb
                                 ON tb.id_user = ?

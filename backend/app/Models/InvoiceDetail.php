@@ -22,4 +22,18 @@ class InvoiceDetail extends Model
             WHERE
                 cart.id_user = 5 AND cart.is_delete = 1 AND p.is_delete = 1");
     }
+
+    public function insertDetailInvoice($params) {
+        DB::insert('INSERT INTO detail_invoice
+    (id_user , id_invoice , id_table_book, id_product, amount)
+    values (? , ? , ?, ?, ?)', $params);
+    }
+
+    public function getPriceProductInDetailInvoice($params) {
+        return DB::select("SELECT p.price as price
+                                FROM products as p
+                                WHERE p.is_delete = 1
+                                AND p.id = ?
+            ", $params);
+    }
 }

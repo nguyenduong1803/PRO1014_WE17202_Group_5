@@ -79,7 +79,7 @@ Route::group(['namespace' => 'Cart', 'prefix' => 'cart'], function(){
 
 Route::group(['namespace' => 'Invoices', 'prefix' => 'invoices'], function(){
     Route::middleware('auth:api') -> group(function () {
-        Route::get('create', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'create']);
+        Route::post('create', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'create']);
         Route::get('getInvoice', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'getInvoice']);
     });
 });
