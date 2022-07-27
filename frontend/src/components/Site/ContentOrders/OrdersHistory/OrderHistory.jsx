@@ -3,7 +3,7 @@ import styles from "./OrderHistory.module.css";
 import { Link } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-function OrderHistory({ id, img, name, phone, imgUser, Date, ban }) {
+function OrderHistory({ id, img, name, phone, imgUser, Date, ban,money,totalUser }) {
   return (
     <div className="col-lg-3">
       <div className={styles.orderHistory}>
@@ -35,7 +35,8 @@ function OrderHistory({ id, img, name, phone, imgUser, Date, ban }) {
           <div className={styles.orderIdContentRight}>
             <h4>Bàn : {ban}</h4>
             <div className={styles.priceNumber}>
-              <div>Số KH :{phone}</div>
+              <h4>Số khách :{totalUser}</h4>
+              <h4>Tổng tiền :{money} đ</h4>
             </div>
           </div>
         </div>

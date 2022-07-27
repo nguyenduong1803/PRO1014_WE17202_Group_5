@@ -1,18 +1,17 @@
 import React from 'react'
 import DeleteIcon from "@mui/icons-material/Delete";
-import Quantity from "../../../pages/Site/ShopDetails/Quantity";
-import styles from "./TableOption.module.css";
-import { formatMoney } from '../../../extensions/formatMoney';
+import styles from "../../TableOption/TableOption.module.css";
 import { useDispatch } from 'react-redux';
-import { deleteCart } from '../../../redux/SliceReducer/OrderTableSlice';
+import Quantity from '../../../../pages/Site/ShopDetails/Quantity';
+import { formatMoney } from '../../../../extensions/formatMoney';
+import { deleteCart } from '../../../../redux/SliceReducer/OrderTableSlice';
 
-function ProductCartTable({ img, name, price,quantity,id }) {
+function ProductCart({ img, name, idCart, price,quantity }) {
     const dispatch = useDispatch()
+    const [quantityCart,setQuantityCart]=React.useState(quantity)
     const handleDelete =()=>{
-        // dispatch(deleteCart(idCart))
+        dispatch(deleteCart(idCart))
     }
-   React.useEffect(()=>{
-   })
     return (
         <div className={styles.contentMain}>
             <div className={styles.info}>
@@ -27,7 +26,7 @@ function ProductCartTable({ img, name, price,quantity,id }) {
             </div>
             <div className={styles.detail}>
                 <div className={styles.quantity}>
-                    <Quantity quantity={quantity}  id={id}/>
+                    <Quantity quantity={quantityCart} setQuantity={setQuantityCart} />
                 </div>
                 <div className={styles.deleteIcon} onClick={handleDelete}>
                     <DeleteIcon />
@@ -37,4 +36,4 @@ function ProductCartTable({ img, name, price,quantity,id }) {
     )
 }
 
-export default ProductCartTable
+export default ProductCart

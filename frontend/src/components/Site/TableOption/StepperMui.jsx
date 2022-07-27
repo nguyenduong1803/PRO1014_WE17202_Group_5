@@ -9,11 +9,12 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import OrderItem from './OrderItem';
 import style from "./TableOption.scss"
-import { selectCart, selectOrderTable } from '../../../redux/selector';
+import {  selectOrderTable, selectProductOrder, selectProducts } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
-import { Link } from 'react-router-dom';
+import { createOrderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
 import CloseIcon from '@mui/icons-material/Close';
+import ProductCartTable from './ProductCartTable';
+import { isFutureDate, isNumber, isPhoneNumber, isRequired } from '../../../utils/Validate';
 
 const steps = [
     {
@@ -23,7 +24,7 @@ const steps = [
     {
         label: 'Chọn món ăn',
         description:
-            'Chọn món ăn từ menu nhà hàng',
+            'Các món ăn đã chọn',
     },
     {
         label: 'Tiến hành đặt',
@@ -31,43 +32,91 @@ const steps = [
     },
 ];
 
-export default function StepperMui({ idTable, user, setModalShow }) {
-    const [activeStep, setActiveStep] = React.useState(0);
+export default function StepperMui({ id, setModalShow, activeStep, setActiveStep }) {
     const dispatch = useDispatch()
     const orders = useSelector(selectOrderTable)
-    const selectCarts = useSelector(selectCart)
-    console.log(selectCarts)
+    const [notify, setNotify] = React.useState({
+        name: "",
+        phone: "",
+        celendar: "",
+        countGuest: "",
+        validateTime: ""
+    })
     const [order, setOrder] = React.useState({
-        tableId: idTable,
+        tableId: orders.tableId,
         name: orders.name,
         phone: orders.phone,
         countGuest: orders.countGuest,
         celendar: orders.celendar,
     });
-    const handleOrder = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        // dispatch(orderTable(order))
 
+    const handlNext = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
     const handleBack = () => {
-
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+    // step 2
+    const handleOrderTable = () => {
+        if (isRequired(order.name)) {
+            setNotify(prev => ({ ...prev, name: "Vui lòng nhập tên khách hàng" }))
+        } else {
+            setNotify(prev => ({ ...prev, name: "" }))
+        }
+
+        if (isRequired(order.phone)) {
+            setNotify(prev => ({ ...prev, phone: "Vui lòng nhập số điện thoại" }))
+        }
+        else if (isPhoneNumber(order.phone)) {
+            setNotify(prev => ({ ...prev, phone: "Vui lòng nhập đúng số điện thoại" }))
+        }
+        else {
+            setNotify(prev => ({ ...prev, phone: "" }))
+        }
+
+        if (isRequired(order.countGuest)) {
+            setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập số người" }))
+        }
+        else if (isNumber(order.countGuest)) {
+            setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập đúng số" }))
+        }
+        else {
+            setNotify(prev => ({ ...prev, countGuest: "" }))
+        }
+
+        if (isRequired(order.validateTime)) {
+            setNotify(prev => ({ ...prev, celendar: "Vui lòng chọn thời gian" }))
+        } else if (isFutureDate(order.validateTime)) {
+            setNotify(prev => ({ ...prev, celendar: "Vui lòng chọn thời gian lớn hơn" }))
+        } else {
+            setNotify(prev => ({ ...prev, celendar: "" }))
+        }
+        const isFormSuccess = Object.entries(notify).every(([key, value]) => value === "")
+        console.log(notify)
+        // if (isFormSuccess) {
+        //     dispatch(updateOrderTable(order))
+        //     setActiveStep(1);
+        // }
+    }
+    // step3
+    const handleOrder = () => {
+        dispatch(createOrderTable(order))
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    };
+    // const handleAddProduct = () => {
+    //     setModalShow(false)
+    // }
     const handleReset = () => {
         setActiveStep(0);
 
     };
-    const handleOrderTable = () => {
-        dispatch(updateOrderTable(order))
-        setActiveStep(1);
-    }
-    const handleAddProduct =()=>{
-        setModalShow(false)
-    }
+    React.useEffect(() => {
+        if (id) setOrder(prev => ({ ...prev, tableId: id }))
+    }, [])
     return (
         <>
             <Box sx={{ maxWidth: "100%" }}>
-                <div className="stepper_modal-close" onClick={() => setModalShow(false)}><CloseIcon/></div>
+                <div className="stepper_modal-close" onClick={() => setModalShow(false)}><CloseIcon /></div>
                 <Stepper activeStep={activeStep} orientation="vertical">
                     {steps.map((step, index) => (
                         <Step key={step.label}>
@@ -82,9 +131,9 @@ export default function StepperMui({ idTable, user, setModalShow }) {
                             </StepLabel>
                             <StepContent >
                                 <Typography>{step.description}</Typography>
-                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} />) :
-                                    index === 1 ? (<Link onClick={handleAddProduct} className="checkout-btn " to="/menu">Thêm món ăn</Link>) :
-                                        index === 2 ? <InfoOrder order={order}/> : ""}
+                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify} />) :
+                                    index === 1 ? (<InfoFood />) :
+                                        index === 2 ? <InfoOrder order={order} /> : ""}
                                 <Box sx={{ mb: 2 }}>
                                     <div>
                                         {index === 0 ?
@@ -93,15 +142,23 @@ export default function StepperMui({ idTable, user, setModalShow }) {
                                                 onClick={handleOrderTable}
                                                 sx={{ mt: 1, mr: 1 }}
                                             >
-                                                {index === steps.length - 1 ? 'Kết thúc' : 'Tiếp tục'}
+                                                Tiếp tục
                                             </Button>) :
-                                            <Button
-                                                variant="contained"
-                                                onClick={handleOrder}
-                                                sx={{ mt: 1, mr: 1 }}
-                                            >
-                                                {index === steps.length - 1 ? 'Đặt bàn' : 'Bỏ qua'}
-                                            </Button>
+                                            index === 1 ?
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{ mt: 1, mr: 1 }}
+                                                    onClick={handlNext}
+                                                >
+                                                    Tiếp tục
+                                                </Button> :
+                                                <Button
+                                                    variant="contained"
+                                                    onClick={handleOrder}
+                                                    sx={{ mt: 1, mr: 1 }}
+                                                >
+                                                    Đặt bàn
+                                                </Button>
                                         }
                                         <Button
                                             disabled={index === 0}
@@ -110,6 +167,7 @@ export default function StepperMui({ idTable, user, setModalShow }) {
                                         >
                                             Quay lại
                                         </Button>
+                                        {/* <h2 className="stepper__notify">Vui lòng chọn lại thời gian</h2> */}
                                     </div>
                                 </Box>
                             </StepContent>
@@ -125,18 +183,42 @@ export default function StepperMui({ idTable, user, setModalShow }) {
                     </Paper>
                 )}
             </Box>
-
         </>
     );
 }
-const InfoOrder = ({order}) => {
+const InfoOrder = ({ order }) => {
     return (
         <>
             <h3 className="infoOrder__title-head">Bàn : {order.tableId} </h3>
             <h3 className="infoOrder__title-head">Chủ tiệc :{order.name}  </h3>
             <h3 className="infoOrder__title-head">Số điện thoại :{order.phone}  </h3>
-            <h3 className="infoOrder__title-head">Thời gian :{order.time_book}  </h3>
-            <h3 className="infoOrder__title-head">Tổng số người :{order.total_user}  </h3>
+            <h3 className="infoOrder__title-head">Thời gian :{order.celendar}  </h3>
+            <h3 className="infoOrder__title-head">Số khách :{order.countGuest}  </h3>
         </>
+    )
+}
+const InfoFood = () => {
+    const orders = useSelector(selectProductOrder)
+    const products = useSelector(selectProducts)
+    let listOrder=[];
+    products.forEach(product => {
+        orders.forEach(order => {
+            if (order.id === product.id) {
+                console.log(order.quantity)
+                const newObj = {...product,quantity:order.quantity}
+                listOrder.push(newObj)
+            }
+        })
+    })
+    console.log(listOrder)
+
+    return (
+        <div className="wraplistCart_order ">
+            {listOrder && listOrder.map((product, index) => {
+                return (
+                    <ProductCartTable key={index} name={product.name}  img={product.path} price={product.price} quantity={product.quantity} id={product.id} />
+                )
+            })}
+        </div>
     )
 }

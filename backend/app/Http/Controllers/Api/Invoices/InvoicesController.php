@@ -40,7 +40,8 @@ class InvoicesController extends Controller
         $params = [$user['id']];
         $modelInvoices = new Invoices();
         $data = $modelInvoices -> getInvoice($params);
-        $data = $data[count($data) - 1];
+        if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
+        $data = $data[count($data) - 1 ];
         return response() ->json(["data" => $data, "status" => true],200);
     }
 }

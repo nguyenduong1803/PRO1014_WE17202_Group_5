@@ -6,9 +6,21 @@ import styles from "./TableOption.scss"
 import { AuthContext } from '../../../contexts/AuthenContext';
 import StepperMui from "./StepperMui"
 import { getToken } from '../../../utils/Common';
-import ProductCart from '../CheckOut/CheckOutProducts/ProductCart';
-import InfomationCart from './InfomationCart';
-function TableOption({ id, status, type }) {
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import ChooseProduct from './ChooseProduct';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+function TableOption({ id, status, type, name }) {
+    const [state, setState] = React.useState({
+        open: false,
+        vertical: 'bottom', horizontal: 'right'
+    });
+    const { vertical, horizontal, open } = state;
+    const [activeStep, setActiveStep] = React.useState(0);
 
     const [modalShow, setModalShow] = React.useState(false)
     const infoUser = useContext(AuthContext)
@@ -26,6 +38,12 @@ function TableOption({ id, status, type }) {
     const handleClick = (e) => {
         e.stopPropagation()
     }
+    const handleClose = () => {
+        console.log("close")
+        setModalShow(0)
+
+    }
+
     return (
         <div>
             <div className="modal-container" onClick={handleShowOrder}>
@@ -33,22 +51,31 @@ function TableOption({ id, status, type }) {
                 {type === "circle" ?
                     <Table
                         colors={color}
-                        name={id} /> :
+                        name={name} /> :
                     <RectangleTable
                         colors={color}
-                        name={id}
+                        name={name}
 
                     />}
-                {modalShow && <div className="wrap_modal-content" >
+                {modalShow && status === 3 ? <div className="wrap_modal-content" >
                     <div className="modal_content--item" onClick={e => handleClick(e)} >
-                        <div className={`modal-content ${!getToken() && 'modal_mini'}`} >
+                        <div className={`modal-content ${!getToken() && 'modal_mini'} ${activeStep === 1 && "active"}`} >
                             {
-                                getToken() ? <StepperMui setModalShow={setModalShow}  idTable={id} user={infoUser} /> : <ModalLogin />
+                                getToken() ? <StepperMui setActiveStep={setActiveStep} activeStep={activeStep} setModalShow={setModalShow} id={id} user={infoUser} /> : <ModalLogin />
                             }
                         </div>
-                       <InfomationCart/>
+                        <ChooseProduct className={`${activeStep === 1 && "active"}`} />
                     </div>
-                </div> }
+                </div> : modalShow ? <Snackbar
+                    anchorOrigin={{ vertical, horizontal }}
+                    open={true}
+                    onClose={handleClose}
+                    message="I love snacks"
+                    key={vertical + horizontal}
+                >
+                    <Alert severity="info">Bàn đã có khách đặt </Alert>
+                </Snackbar> : ""}
+
             </div>
         </div>
     )

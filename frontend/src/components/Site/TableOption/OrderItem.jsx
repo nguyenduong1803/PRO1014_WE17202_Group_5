@@ -1,32 +1,34 @@
 import React from 'react'
+
 import QuantityCart from '../../../pages/Site/Cart/QuantityCart'
 import styles from "./TableOption.module.css";
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
+
+import styles from "./TableOption.css"
+
 import CelendarOption from '../Calendar/CelendarOption';
 // import DeleteOutlineIcon from '@mui/icons-material/HighlightOff';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { FormControl, TextField } from '@mui/material';
 import { Link } from "react-router-dom";
-import { orderTable } from '../../../redux/SliceReducer/OrderTableSlice';
-import { useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
+import { selectTableActive } from '../../../redux/selector';
+import { isNumber, isPhoneNumber, isRequired } from '../../../utils/Validate';
 
-function OrderItem({order,setOrder}) {
-    
-    const handleOrder = () => {
+function OrderItem({ order, setOrder, name, setNotify, notify }) {
+    const tableActive = useSelector(selectTableActive)
+    const handleTableSelect = (e) => {
+        setOrder(prev => ({ ...prev, tableId: e.target.value }))
         console.log(order)
-        // dispatch(orderTable(order))
     }
     return (
         <section className="section" id="order">
             {/* <div className="section-title">My Order&nbsp;😎</div> */}
             <div className="order-info">
                 <div className="address">
-                    <div className="address-name">Bàn {order.tableId}</div>
-                    <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId}>
+                    <div className="address-name">Bàn {name || order.tableId}</div>
+                    <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId} onChange={e => handleTableSelect(e)}>
                         <option selected>Đổi Bàn</option>
-                        <option value="A-2">A-2</option>
-                        <option value="A-3">A-3</option>
-                        <option value="A-4">A-4</option>
+                        {tableActive.map((table) => <option key={table.id} value={table.id}>{table.index_table}</option>)}
                     </select>
                 </div>
                 <div className="delivery">
@@ -42,58 +44,33 @@ function OrderItem({order,setOrder}) {
                         <span className="delivery-choose-time">30s</span>
 
                     </div>
-                    <span className="time"><CelendarOption setOrder={setOrder} /></span>
+                    <span className="time"><CelendarOption values={order.celendar} setOrder={setOrder} setNotify={setNotify} /></span>
                 </div>
             </div>
+            <p>{notify.celendar}</p>
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
-                <InputField name="Chủ tiệc"  size="small" values={order.name} setOrder={setOrder} />
+                <InputField name="Chủ tiệc" size="small" values={order.name} setOrder={setOrder} setNotify={setNotify} />
+                <p>{notify.name}</p>
             </FormControl>
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
-                <InputField name="Số điện thoại" size="small" values={order.phone} setOrder={setOrder} />
+                <InputField name="Số điện thoại" size="small" values={order.phone} setOrder={setOrder} setNotify={setNotify} />
+                <p>{notify.phone}</p>
             </FormControl>
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
-                <InputField name="Số người" setOrder={setOrder} size="small" values={order.countGuest} />
+                <InputField name="Số người" setOrder={setOrder} size="small" values={order.countGuest} setNotify={setNotify} />
+                <p>{notify.countGuest}</p>
             </FormControl>
-
-            {/* <ul className="food-list">
-                <CartItem
-                    id="1"
-                />
-              <CartItem
-                    id="1"
-                />
-                <CartItem
-                    id="1"
-                />
-               
-                <CartItem
-                    id="1"
-                />
-                <CartItem
-                    id="1"
-                />
-            </ul> */}
-            {/* <div className="total-price">
-                <div className="total">Tổng tiền:</div>
-                <div className="price">$25.97</div>
-            </div> */}
             <div className="buy-action">
                 <div className="person-number-input">
-                    {/* <Link to="/order" className="btn btn-warning checkout-btn">
-                        Thêm món ăn<LocalDiningIcon />
-                    </Link> */}
+
                 </div>
-                {/* <button onClick={handleOrder} className="btn btn-warning checkout-btn">
-                    Tiến hành đặt<svg width="18" height="18" className="arrow" viewBox="0 0 24 24">
-                        <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
-                    </svg>
-                </button> */}
+
             </div>
         </section>
     )
 }
 
-function InputField({ name, setOrder, values,size }) {
+function InputField({ name, setOrder, values, size, setNotify }) {
     const handleChangeOrder = (e) => {
         setOrder(prev => {
             if (name === "Chủ tiệc") {
@@ -101,9 +78,48 @@ function InputField({ name, setOrder, values,size }) {
             } else if (name === "Số điện thoại") {
                 return { ...prev, phone: e.target.value }
             } else {
-                return { ...prev, countGuest: e.target.value }
+                const value = e.target.value.replace(/[^0-9]/g, '');
+                if (value === "") return { ...prev, countGuest: 0 }
+                else return { ...prev, countGuest: e.target.value }
             }
         })
+    }
+    const handlBlur = (e) => {
+        switch (name) {
+            case "Chủ tiệc":
+                if (isRequired(e.target.value)) {
+                    setNotify(prev => ({ ...prev, name: "Vui lòng nhập tên khách hàng" }))
+                } else {
+                    setNotify(prev => ({ ...prev, name: "" }))
+                }
+                break;
+            case "Số điện thoại":
+                if (isRequired(e.target.value)) {
+                    setNotify(prev => ({ ...prev, phone: "Vui lòng nhập số điện thoại" }))
+                }
+                else if (isPhoneNumber(e.target.value)) {
+                    setNotify(prev => ({ ...prev, phone: "Vui lòng nhập đúng số điện thoại" }))
+                }
+                else {
+                    setNotify(prev => ({ ...prev, phone: "" }))
+                }
+                break;
+            case "Số người":
+                if (isRequired(e.target.value)) {
+                    setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập số người" }))
+                }
+                else if (isNumber(e.target.value)) {
+                    setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập đúng số" }))
+                }
+                else {
+                    setNotify(prev => ({ ...prev, countGuest: "" }))
+                }
+                break;
+
+            default:
+                break;
+        }
+
     }
     return (
         <TextField
@@ -111,6 +127,8 @@ function InputField({ name, setOrder, values,size }) {
             label={name}
             variant="outlined"
             onChange={(e) => handleChangeOrder(e)}
+            onBlur={e => handlBlur(e)}
+            onKeyPress={name === "Số người" || name === "Số điện thoại" ? (event) => { !(/^[0-9]/.test(event.key)) && event.preventDefault() } : ""}
             value={values}
             size={size}
         />

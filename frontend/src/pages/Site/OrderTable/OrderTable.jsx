@@ -3,8 +3,7 @@ import TableOption from '../../../components/Site/TableOption/TableOption'
 import LayoutSite from '../../../components/Site/LayoutSite/LayoutSite'
 import CategoryTable from '../../../components/Site/Table/CategoryTable'
 import styles from "./OrderTable.module.css"
-import { useDispatch, useSelector } from "react-redux"
-import { getListTable } from '../../../redux/SliceReducer/OrderTableSlice'
+import {  useSelector } from "react-redux"
 import { selectListTable } from '../../../redux/selector'
 
 const possitionTable = [
@@ -46,26 +45,8 @@ const possitionTable = [
     { index: 18, possition: 27 ,id:"id30"},
 ]
 function OrderTable() {
-    // const dispatch = useDispatch()
     const tables = useSelector(selectListTable)
-  
-    // for (let item in possitionTable) {
-    //     tables.map((table, index) => {
-    //         if (possitionTable[item].index === index) {
-    //             return (<div className={`${styles.backgroundWrap} ${styles.topLeft} col-2`}>
-    //                 <TableOption
-    //                     type="circle"
-    //                     id={table?.index_table}
-    //                     status={table?.status}
-    //                 />
-    //             </div>)
-    //         } else {
-    //             return (
-    //                 <div className="col-lg-2"></div>
-    //             )
-    //         }
-    //     })
-    // }
+
     return (
         <div>
             <LayoutSite>
@@ -94,7 +75,8 @@ function OrderTable() {
                                             <div key={ele.id} className={`${styles.backgroundWrap}  col-lg-2`}>
                                                 <TableOption
                                                     type="circle"
-                                                    id={tables && tables[ele.index]?.index_table}
+                                                    id={tables && tables[ele.index]?.id}
+                                                    name={tables && tables[ele.index]?.index_table}
                                                     status={tables && tables[ele.index]?.status}
                                                 />
                                             </div>)
