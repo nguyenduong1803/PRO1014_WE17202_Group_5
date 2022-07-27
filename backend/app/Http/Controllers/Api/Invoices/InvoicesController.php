@@ -73,7 +73,7 @@ class InvoicesController extends Controller
         $listChooseProducts = $request -> chooseProducts;
         $idDetailInvoices = $request -> id_invoice;
         $totalPriceUpdate = 0;
-        if(!isset($listChooseProducts) || count($listChooseProducts) < 1) response() ->json(["msg" => "Vui lòng chọn món!", "status" => false],410);
+        if(!isset($listChooseProducts) || count($listChooseProducts) < 1) return response() ->json(["msg" => "Vui lòng chọn món!", "status" => false],410);
         for($i = 0; $i < count($listChooseProducts); $i++) {
             $timeUpdateAt = date("Y-m-d H:i:s",time());
             $paramsInsert = [
