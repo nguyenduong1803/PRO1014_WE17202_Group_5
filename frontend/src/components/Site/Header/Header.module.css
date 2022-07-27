@@ -6,6 +6,13 @@
     z-index: 10;
     padding-left: 70px;
 }
+.wrapInfo{
+    font-size: .8rem;
+}
+.avt{
+    width: 30px;
+    height: 30px;
+}
 .logo{
     width: 84px;
     padding-left: 20px;

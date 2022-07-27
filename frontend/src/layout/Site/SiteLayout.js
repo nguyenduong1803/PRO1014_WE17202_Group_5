@@ -20,6 +20,8 @@ import Checkpass from  '../../pages/Site/CheckPass/CheckPass';
 import PageNotFound from "../../pages/Site/PageNotFound/PageNotFound";
 import CheckEmail from "../../pages/Site/CheckEmail/CheckEmail";
 import CheckOut from "../../pages/Site/CheckOuts/CheckOuts";
+import EditUser from '../../pages/Site/EditInformation/EditInformation';
+import EditPassWord from '../../pages/Site/EditPassWord/EditPassWord'
 const routerSite = [
   { path: "/", component: Home, },
   { path: "/dang-nhap", component: Login, },
@@ -37,8 +39,11 @@ const routerSite = [
   { path: "/dat-lai-mat-khau", component:Checkpass , },
   { path: "/gui-email", component:CheckEmail , },
   { path: "/dat-hang", component: CheckOut , },
-  { path: "*", component: PageNotFound , },
+  { path: "/edit-user", component: EditUser , },
+  { path: "/edit-password", component: EditPassWord , },
 
+  { path: "*", component: PageNotFound , },
+  
 ]
 
 function SiteLayout() {

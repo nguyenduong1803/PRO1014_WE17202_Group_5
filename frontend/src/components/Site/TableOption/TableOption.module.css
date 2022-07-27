@@ -98,10 +98,15 @@
     display:contents;
 
 }
-.price{
+
+.quantity,.icon{
+    margin-top: 18px;
 }
+.icon:hover{
+
 
 .deleteIcon:hover{
+
     color:red;
     transition: all 0.1s;
     cursor: pointer;

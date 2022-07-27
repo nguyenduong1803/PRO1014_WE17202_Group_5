@@ -12,6 +12,8 @@ import product4 from "../../../../src/assets/img/seafood-10.jpg";
 import product5 from "../../../../src/assets/img/seafood-14.webp";
 import styles from "../ContentHome/TrendingOrder/TrendingOrder.module.css";
 import MyCart from "../../Site/ContentHome/ContentHomeRight/MyCart/MyCart";
+import InformationChef from'./InformationChef/BlogSection';
+import BlogItem from './InformationChef/BlogItem';
 // import product6 from "../../../../src/assets/img/seafood-10.jpg";
 // import product7 from "../../../../src/assets/img/seafood-10.jpg";
 // import product8 from "../../../../src/assets/img/seafood-10.jpg";
@@ -187,6 +189,10 @@ function ContentHome() {
       <div className="container">
         <Slider/>
        {/* <ProfileUser/> */}
+               
+      </div>
+      <div>
+      <InformationChef/>
       </div>
     </div>
   );

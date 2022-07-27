@@ -52,13 +52,30 @@
   margin: auto;
   width: 80%;
 }
-
+.badges{
+  position: relative;
+  top:-30px;
+  left:35px;
+  background-color: #FF8888;
+  border-radius: 50%;
+  color: white;
+  display: inline-block;
+  font-size: 8px;
+  line-height: 1;
+  padding: 3px 7px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
 .badge {
-  background-color: #6394F8;
+  background-color: #a3a3a3;
   border-radius: 10px;
   color: white;
   display: inline-block;
-  font-size: 12px;
+  position: relative;
+  left:-5px;
+  top:-5px;
+  font-size: 8px;
   line-height: 1;
   padding: 3px 7px;
   text-align: center;
@@ -73,7 +90,7 @@
   background-color:rgb(251, 234, 234);
   width: 370px;
   position: absolute;
-  border-radius: 20px;
+  border-radius: 10px;
   right: -20px;
   top: 50px;
 }
@@ -91,8 +108,8 @@
   position: relative;
 }
 .shoppingCartHeader {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   padding: 20px;
   border-bottom: 1px solid #E8E8E8;
   padding-bottom: 15px;

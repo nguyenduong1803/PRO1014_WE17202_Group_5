@@ -16,7 +16,7 @@ function Cart() {
             <li>
               <a href="#" id="cart">
                 <ShoppingCartIcon />
-                {/* <span className={styles.badge}>3</span> */}
+                <span className={styles.badges}>3</span>
 
               </a>
             </li>
