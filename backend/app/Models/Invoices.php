@@ -10,6 +10,8 @@ class Invoices extends Model
 {
     use HasFactory;
 
+    protected $table = 'invoices';
+
     public function create($params) {
         DB::insert('INSERT INTO invoices
     (id_user ,id_invoice, status_cart_order, total_price, status_envoice, id_staff)
@@ -17,15 +19,20 @@ class Invoices extends Model
     }
 
     public function getInvoice($params) {
-        return DB::select("SELECT iv.status_cart_order,iv.id_invoice,iv.total_price, iv.status_envoice, iv.id_staff, tb.total_user, tbs.index_table, tbs.floor
-                                FROM invoices as iv
-                                INNER JOIN table_book as tb
-                                ON tb.id_user = ?
-                                INNER JOIN Tables as tbs
-                                ON tbs.id = tb.id_table
-                                WHERE status_envoice = 1
-                                AND iv.is_delete = 1
-                                AND tb.is_delete = 1
-                                AND tbs.is_delete = 1", $params);
+        return DB::select("SELECT * FROM invoices as iv WHERE iv.id_user = ? and iv.is_delete = 1", $params);
+    }
+
+    public function getDetailInvoice($id) {
+        return Invoices::query() -> where('id', $id)
+            -> where('is_delete', 1)
+            -> first();
+    }
+
+    public function updateInvoice($params) {
+        DB::update("UPDATE invoices SET `status_cart_order` = ?, `total_price` = ?, `status_envoice` = ?,`id_staff` = ?, `update_at` = ? WHERE `id` = ?", $params);
+    }
+
+    public function updatePriceInvoice($params) {
+        DB::update("UPDATE invoices SET `total_price` = ?, `update_at` = ? WHERE `id` = ?", $params);
     }
 }

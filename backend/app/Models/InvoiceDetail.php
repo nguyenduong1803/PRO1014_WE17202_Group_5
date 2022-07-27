@@ -10,7 +10,7 @@ class InvoiceDetail extends Model
 {
     use HasFactory;
     public function getDetailInvoice($params) {
-                    return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND dt.id_invoice = ?", $params);
+        return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND dt.id_invoice = ?", $params);
     }
 
     public function insertDetailInvoice($params) {
@@ -25,5 +25,13 @@ class InvoiceDetail extends Model
                                 WHERE p.is_delete = 1
                                 AND p.id = ?
             ", $params);
+    }
+
+    public function updateDetailInvoice($params) {
+        DB::update("UPDATE detail_invoice SET `id_table_book` = ?, `id_product` = ?, `amount` = ?, `update_at` = ? WHERE `id_invoice` = ? AND `id` = ? AND is_delete = 1", $params);
+    }
+
+    public function getDetailInvoice2($params) {
+        return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND dt.id_invoice = ? AND dt.id = ?", $params);
     }
 }
