@@ -29,10 +29,9 @@ class Invoices extends Model
     }
 
     public function updateInvoice($params) {
-        DB::update("UPDATE invoices SET `status_cart_order` = ?, `total_price` = ?, `status_envoice` = ?,`id_staff` = ?, `update_at` = ? WHERE `id` = ?", $params);
-    }
-
-    public function updatePriceInvoice($params) {
-        DB::update("UPDATE invoices SET `total_price` = ?, `update_at` = ? WHERE `id` = ?", $params);
+        DB::update("UPDATE invoices SET `status_envoice` = ?, `user_name_book` = ?,`time_book` = ?,
+                    `phone` = ?,`note` = ?,`id_user` = ?,`id_staff` = ?,
+                    `update_at` = ?
+                WHERE `id` = ?", $params);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Invoices;
 
 use App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Invoices\InvoiceUpdate;
 use App\Models\InvoiceDetail;
 use App\Models\Invoices;
 use App\Models\User;
@@ -72,72 +73,33 @@ class InvoicesController extends Controller
         return response() ->json(["data" => $data, "status" => true],200);
     }
 
-    public function updateInvoice(Request $request,$id) {
+    public function updateInvoice(InvoiceUpdate $request,$id) {
+        $validate = $request -> validated();
         $modelInvoices = new Invoices();
         $user = Auth::user();
-        $controllerDetailInvoice = new InvoiceDetailController();
-        $modelDetailInvoice = new InvoiceDetail();
         $modelUser = new User();
+        $userStaff = $modelUser ->getUserByRole($validate['id_staff'], 3);
         $detailInvoice = $modelInvoices ->getDetailInvoice($id);
-        if(!isset($detailInvoice)) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
-        $listChooseProducts = $request -> chooseProducts;
-        $idDetailInvoices = $request -> id_invoice;
-        $totalPriceUpdate = 0;
-        if(!isset($listChooseProducts) || count($listChooseProducts) < 1) return response() ->json(["msg" => "Vui lòng chọn món!", "status" => false],410);
-        for($i = 0; $i < count($listChooseProducts); $i++) {
-            $timeUpdateAt = date("Y-m-d H:i:s",time());
-            $paramsInsert = [
-                $user['id'],
-                $idDetailInvoices,
-                $listChooseProducts[$i]['id_table_book'],
-                $listChooseProducts[$i]['id_product'],
-                $listChooseProducts[$i]['amount'],
-            ];
-            if(isset($listChooseProducts[$i]['id'])) {
-                $paramsUpdate = [
-                    $listChooseProducts[$i]['id_table_book'],
-                    $listChooseProducts[$i]['id_product'],
-                    $listChooseProducts[$i]['amount'],
-                    $timeUpdateAt,
-                    $idDetailInvoices,
-                    $listChooseProducts[$i]['id']
-                ];
-                $params4 = [
-                    $idDetailInvoices,
-                    $listChooseProducts[$i]['id']
-                ];
-                $detail = $modelDetailInvoice ->getDetailInvoice2($params4);
-                if(!isset($detail) || count($detail) < 1) return response() ->json(["msg" => "Cập nhật dữ liệu thất bại!", "status" => false],404);
-                $controllerDetailInvoice ->updateDetailInvoice($paramsUpdate);
-            }
-            if(is_null($listChooseProducts[$i]['id'])) $controllerDetailInvoice ->insertDetailInvoice($paramsInsert);
-
-            $params5 = [
-                $listChooseProducts[$i]['id_product']
-            ];
-            $params6 = [
-                $idDetailInvoices
-            ];
-            $modelDetailInvoice = new InvoiceDetail();
-            $dataInvoices = $modelDetailInvoice ->getDetailInvoice($params6);
-            $priceProduct = $modelDetailInvoice ->getPriceProductInDetailInvoice($params5);
-
-            for($i = 0; $i < count($dataInvoices); $i++) {
-                $totalPriceUpdate += $priceProduct[0] -> price * $dataInvoices[$i] -> amount;
-            }
-        }
-
-        $userStaff = $modelUser ->getUserByRole(2, 3);
+        if(!isset($detailInvoice) || !isset($userStaff)) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
+        $statusEnvoice = isset($validate['status_envoice']) ? $validate['status_envoice'] : $detailInvoice['status_envoice'];
+        $userNameBook = isset($validate['user_name_book']) ? $validate['user_name_book'] : $detailInvoice['user_name_book'];
+        $timeBook = isset($validate['time_book']) ? $validate['time_book'] : $detailInvoice['time_book'];
+        $phone = isset($validate['phone']) ? $validate['phone'] : $detailInvoice['phone'];
+        $note = isset($validate['note']) ? $validate['note'] : $detailInvoice['note'];
+        $idStaff = isset($validate['id_staff']) ? $validate['id_staff'] : $detailInvoice['id_staff'];
         $timeUpdateAt = date("Y-m-d H:i:s",time());
-        $params2 = [
-            1,
-            $totalPriceUpdate,
-            1,
-            $userStaff['id'],
+        $params =[
+            $statusEnvoice,
+            $userNameBook,
+            $timeBook,
+            $phone,
+            $note,
+            $user['id'],
+            $idStaff,
             $timeUpdateAt,
-            $id,
+            $id
         ];
-        $modelInvoices ->updateInvoice($params2);
-        return response() ->json(["msg" => "Cập nhật hoá đơn thành công!", "status" => true],200);
+        $modelInvoices ->updateInvoice($params);
+        return response() ->json(["msg" => "Cập nhật thành công!", "status" => true],200);
     }
 }
