@@ -20,26 +20,32 @@ class InvoicesController extends Controller
         $modelInvoices = new Invoices();
         $modelDetailInvoice = new InvoiceDetail();
         $modelUser = new User();
-        $listChooseProducts = $request -> chooseProducts;
-        $uniIdInvoice = strtoupper(Str::random(10));
+        $listIdProduct = $request['list_id_product'];
+        $listAmount = $request['list_amount'];
+        $listTableBook = $request['list_table_book'];
         $totalPrice = 0;
-        if(!isset($listChooseProducts) || count($listChooseProducts) < 1) response() ->json(["msg" => "Vui lòng chọn món!", "status" => false],410);
-        for($i = 0; $i < count($listChooseProducts); $i++) {
-            $params = [
-                $user['id'],
-                $uniIdInvoice,
-                $listChooseProducts[$i]['id_table_book'],
-                $listChooseProducts[$i]['id_product'],
-                $listChooseProducts[$i]['amount'],
-            ];
-            $controllerDetailInvoice ->insertProduct($params);
-            $params3 = [
-                $listChooseProducts[$i]['id_product']
-            ];
-            $priceProduct = $modelDetailInvoice ->getPriceProductInDetailInvoice($params3);
-            $totalPrice += $priceProduct[0] -> price * $listChooseProducts[$i]['amount'];
+        $uniIdInvoice = strtoupper(Str::random(10));
+        $arrMerge = array();
+        foreach ( $listIdProduct as $idx => $val ) {
+            $arrMerge[] = ["id_product" => $val,"amount" => $listAmount[$idx],"id_table_book" => $listTableBook[$idx] ];
         }
+        for($i = 0; $i < count($arrMerge); $i++) {
+                    $params = [
+                        $user['id'],
+                        $uniIdInvoice,
+                        $arrMerge[$i]['id_table_book'],
+                        $arrMerge[$i]['id_product'],
+                        $arrMerge[$i]['amount'],
+                    ];
+                    $controllerDetailInvoice ->insertDetailInvoice($params);
+                    $params3 = [
+                        $listIdProduct[$i]
+                    ];
+                    $priceProduct = $modelDetailInvoice ->getPriceProductInDetailInvoice($params3);
+                    $totalPrice += $priceProduct[0] -> price * $arrMerge[$i]['amount'];
 
+
+        }
         $userStaff = $modelUser ->getUserByRole(2, 3);
         $params2 = [
             $user['id'],
@@ -47,7 +53,11 @@ class InvoicesController extends Controller
             1,
             $totalPrice,
             1,
-            $userStaff['id']
+            $userStaff['id'],
+            $request['user_name_book'],
+            $request['time_book'],
+            $request['phone'],
+            $request['note'],
         ];
         $modelInvoices ->create($params2);
         return response() ->json(["msg" => "Tạo hoá đơn thành công!", "status" => true],200);
@@ -125,7 +135,7 @@ class InvoicesController extends Controller
             1,
             $userStaff['id'],
             $timeUpdateAt,
-            $id
+            $id,
         ];
         $modelInvoices ->updateInvoice($params2);
         return response() ->json(["msg" => "Cập nhật hoá đơn thành công!", "status" => true],200);
