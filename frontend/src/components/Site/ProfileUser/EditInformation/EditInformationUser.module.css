@@ -1,0 +1,58 @@
+.col{
+    text-align: center;
+    margin-top: -80px;
+}
+.col div{
+    width: 100%;
+}
+.row{
+    background-color: rgb(255,255,255,0.5);
+    padding-bottom: 50px;
+    /* padding: 50px; */
+    height:85vh;
+    border-radius: 10px;
+    padding: 0 20px;
+    box-shadow: 1px 1px 3px ;
+    
+}
+.Box{
+    margin:0 auto;
+    text-align: center;
+    width: 100%;
+    padding:0 100px;
+    height:100vh;
+
+}
+.Box TextField{
+    width: 600px !important;
+}
+.Box h2{
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.icon{
+    margin-top: -100px;
+    float: right !important;
+}
+.link{
+    float: left !important;
+    padding: 20px 0;
+    color:black !important;
+    text-decoration: none;
+}
+.iconUpdate{
+    background-color: #ff7272 !important;
+}
+.iconDelete{
+    color:#ffffff !important;
+    border: 1px solid #ff7272 !important;
+    background-color: #ff7272 !important;
+}   
+.iconDelete:hover{
+    color:#d35c5c;
+    border: 1px solid #d35c5c;
+    box-shadow: 1px 1px 1px 1px #ff7272;
+
+}

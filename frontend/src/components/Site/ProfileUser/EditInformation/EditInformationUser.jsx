@@ -10,10 +10,10 @@ import {Link} from 'react-router-dom'
 function IconLabelButtons() {
   return (
     <Stack direction="row" spacing={2}>
-      <Button variant="outlined" startIcon={<DeleteIcon />}>
+      <Button variant="contained" startIcon={<DeleteIcon /> } className={styles.iconDelete}>
         Clear
       </Button>
-      <Button variant="contained" endIcon={<SendIcon />}>
+      <Button variant="contained" endIcon={<SendIcon />} className={styles.iconUpdate}>
         Update
       </Button>
     </Stack>
@@ -23,33 +23,32 @@ function EditInformationUser() {
   return (
     <div className={styles.Box}>
       
-      <div className={`${styles.row} row`}><h2>EDIT INFORMATION FOR ME</h2>
+      <div className={`${styles.row} row`}>
+        <h2>CHỈNH SỬA THÔNG TIN</h2>
         <div className={`${styles.col} col-lg-6`}>
           <div>
-            <TextField id="filled-basic" label="Name"  variant="filled" />
+            <TextField id="filled-basic" label="Họ và tên (username)"  variant="filled" />
           </div>
           <div className={styles.input}>
-            <TextField id="filled-basic" label="Phone" variant="filled" />
+            <TextField id="filled-basic" label="Số Điện Thoại (numberPhone)" variant="filled" />
           </div>
           <div className={styles.inputs}>
-            <TextField id="filled-basic" label="Email" variant="filled" />
+            <TextField id="filled-basic" label="Địa chỉ (Address)" variant="filled" />
           </div>
         </div>
         <div className={`${styles.col} col-lg-6`}>
           <div>
-            <TextField id="filled-basic" label="Address" variant="filled" />
+            <TextField id="filled-basic" label="Liên hệ (Email)" variant="filled" />
           </div>
           <div className={styles.input}>
-            <TextField id="filled-basic" label="Gender" variant="filled" />
+            <TextField id="filled-basic" label="Giới tính (Gender)" variant="filled" />
           </div>
           <div>
-            <TextField id="filled-basic" label="Date" variant="filled" />
+            <TextField id="filled-basic" label="Ngày sinh (Date)" variant="filled" />
           </div>
         </div>
         <div className={styles.icon}>
-          <IconLabelButtons /><div className={styles.link}>
-          <Link to='/profile'>Thoát</Link>
-        </div>
+          <IconLabelButtons />
         </div>
         
       </div>
