@@ -74,18 +74,19 @@ class InvoicesController extends Controller
     }
 
     public function updateInvoice(InvoiceUpdate $request,$id) {
+        $validate = $request -> validated();
         $modelInvoices = new Invoices();
         $user = Auth::user();
         $modelUser = new User();
-        $userStaff = $modelUser ->getUserByRole($request['id_staff'], 3);
+        $userStaff = $modelUser ->getUserByRole($validate['id_staff'], 3);
         $detailInvoice = $modelInvoices ->getDetailInvoice($id);
         if(!isset($detailInvoice) || !isset($userStaff)) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
-        $statusEnvoice = isset($request['status_envoice']) ? $request['status_envoice'] : $detailInvoice['status_envoice'];
-        $userNameBook = isset($request['user_name_book']) ? $request['user_name_book'] : $detailInvoice['user_name_book'];
-        $timeBook = isset($request['time_book']) ? $request['time_book'] : $detailInvoice['time_book'];
-        $phone = isset($request['phone']) ? $request['phone'] : $detailInvoice['phone'];
-        $note = isset($request['note']) ? $request['note'] : $detailInvoice['note'];
-        $idStaff = isset($request['id_staff']) ? $request['id_staff'] : $detailInvoice['id_staff'];
+        $statusEnvoice = isset($validate['status_envoice']) ? $validate['status_envoice'] : $detailInvoice['status_envoice'];
+        $userNameBook = isset($validate['user_name_book']) ? $validate['user_name_book'] : $detailInvoice['user_name_book'];
+        $timeBook = isset($validate['time_book']) ? $validate['time_book'] : $detailInvoice['time_book'];
+        $phone = isset($validate['phone']) ? $validate['phone'] : $detailInvoice['phone'];
+        $note = isset($validate['note']) ? $validate['note'] : $detailInvoice['note'];
+        $idStaff = isset($validate['id_staff']) ? $validate['id_staff'] : $detailInvoice['id_staff'];
         $timeUpdateAt = date("Y-m-d H:i:s",time());
         $params =[
             $statusEnvoice,

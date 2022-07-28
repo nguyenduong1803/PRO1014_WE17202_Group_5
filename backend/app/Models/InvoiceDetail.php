@@ -13,7 +13,7 @@ class InvoiceDetail extends Model
         return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND dt.id_invoice = ? AND id_user = ?", $params);
     }
     public function getDetailInvoice($params) {
-        return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND dt.id_invoice = ? AND id_user = ? AND id = ?", $params);
+        return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND id_user = ? AND id = ?", $params);
     }
 
     public function insertDetailInvoice($params) {
@@ -31,10 +31,6 @@ class InvoiceDetail extends Model
     }
 
     public function updateDetailInvoice($params) {
-        DB::update("UPDATE detail_invoice SET `id_table_book` = ?, `id_product` = ?, `amount` = ?, `update_at` = ? WHERE `id_invoice` = ? AND `id` = ? AND is_delete = 1", $params);
-    }
-
-    public function getDetailInvoice2($params) {
-        return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND dt.id_invoice = ? AND dt.id = ?", $params);
+        DB::update("UPDATE detail_invoice SET `id_user` = ?,`id_table_book` = ?, `id_product` = ?, `amount` = ?, `update_at` = ? WHERE `id` = ? AND is_delete = 1", $params);
     }
 }
