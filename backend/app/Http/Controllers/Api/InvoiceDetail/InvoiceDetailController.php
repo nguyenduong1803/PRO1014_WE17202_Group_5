@@ -32,7 +32,7 @@ class InvoiceDetailController extends Controller
         $modelDetailInvoice = new InvoiceDetail();
         $data = $modelDetailInvoice ->getDetailInvoice($params);
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Không có dữ liệu!", "status" => false],404);
-        return response() ->json(["data" => $data, "status" => true],200);
+        return response() ->json(["data" => $data[0], "status" => true],200);
     }
 
     public function insertDetailInvoice($params) {
@@ -64,5 +64,24 @@ class InvoiceDetailController extends Controller
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Không có dữ liệu!", "status" => false],404);
         $modelDetailInvoice -> updateDetailInvoice($params);
         return response() ->json(["msg" => "Cập nhật thành công!", "status" => true],200);
+    }
+
+    public function deleteDetailInvoice($id) {
+        $modelDetailInvoice = new InvoiceDetail();
+        $user = Auth::user();
+        $params = [
+            $user['id'],
+            $id
+        ];
+        $timeStamp = date("Y-m-d H:i:s",time());
+        $params2 = [
+            2,
+            $timeStamp,
+            $id
+        ];
+        $data = $modelDetailInvoice ->getDetailInvoice($params);
+        if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Không có dữ liệu!", "status" => false],404);
+        $modelDetailInvoice -> deleteDetailInvoice($params2);
+        return response() ->json(["msg" => "Xoá thành công!", "status" => true],200);
     }
 }
