@@ -68,7 +68,9 @@ const FormLogin = ({ self }) => {
             setPassword(prev => ({ ...prev, password: "" }))
             setNotify("Thông tin tài khoản hoặc mật khẩu không đúng")
         }
+        
     }
+
     // useEffect(() => {
     //     if (success === true) {
     //     } else if (success) {

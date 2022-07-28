@@ -1,15 +1,18 @@
-import React from "react";
-import styles from "../ProductCategory/ProductCategory.module.css"
+import React, { useEffect, useState } from "react";
+import styles from "../ProductCategory/ProductCategory.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
-import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
+import Sidebar from "../../../components/Admin/Sidebar/Sidebar";
+import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete";
 import { categoryTable } from "../../../config/tables";
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 import { listPagination } from "../../../config/listConfig";
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
 import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
 import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
+import { api } from "../../../redux/SliceReducer/AuthSlice";
+import axios from "axios";
+import { getToken } from "../../../utils/Common";
 const ProductCategory = () => {
   const breadcrumItem = [
     {
@@ -23,16 +26,34 @@ const ProductCategory = () => {
       isActive: true,
     },
   ];
+
   const handleDeleteProduct = () => {
-    console.log("delete")
-  }
+    console.log("delete");
+  };
+  const [listCateGory, setListCateGory] = useState([]);
+  useEffect(() => {
+    async function getList() {
+      await axios
+        .get(api + "directory/getLists", {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        })
+        .then((res) => {
+          setListCateGory(res.data.data)
+          console.log(res.data.data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    getList();
+
+    return () => {};
+  }, []);
+
   return (
     <>
       <Sidebar />
-      <ModalDelete
-        idProduct={1}
-        handleDeleteProduct={handleDeleteProduct}
-      />
+      <ModalDelete idProduct={1} handleDeleteProduct={handleDeleteProduct} />
       <div className={`${styles.Equipment}`}>
         <Breadcrumbs breadItem={breadcrumItem} />
         <div className={`${styles.EquipmentMain} row`}>
@@ -41,19 +62,18 @@ const ProductCategory = () => {
               <ArrowBackIcon />
               Danh sách phân loại danh mục
             </p>
-            <InputSearch setSearchValue={()=>{}}/>
-
+            <InputSearch setSearchValue={() => {}} />
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
-            <ButtonAdd name="Thêm danh mục" path="them-danh-muc"/>
+              <ButtonAdd name="Thêm danh mục" path="them-danh-muc" />
               {/* <ExportReact csvData={data} fileName="Danh sách danh mục" /> */}
             </div>
           </div>
         </div>
         <div className={styles.profile}>
           <Tablecustom
-            data={[]}
+            data={listCateGory}
             PageSize={10}
             tables={categoryTable}
             // setIdProduct={setIdProduct}
