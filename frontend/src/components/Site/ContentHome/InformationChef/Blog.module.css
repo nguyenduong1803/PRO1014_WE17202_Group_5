@@ -46,7 +46,7 @@
     text-transform: uppercase;
 }
 .blogShape{
-    background-image: url(../../../../assets/img/seafood-1.jpg);
+    /* background-image: url(../../../../assets/img/seafood-1.jpg); */
     background-repeat: no-repeat;
     background-position: center left;
     background-size: contain;
