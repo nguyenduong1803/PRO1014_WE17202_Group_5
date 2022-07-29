@@ -1,5 +1,6 @@
 .blogSection {
     margin-bottom: 50px;
+    position: relative;
 }
 
 .blogImg {
@@ -46,15 +47,15 @@
     text-transform: uppercase;
 }
 .blogShape{
-    /* background-image: url(../../../../assets/img/seafood-1.jpg); */
+    background-image: url(../../../../assets/img/img10.png);
     background-repeat: no-repeat;
     background-position: center left;
     background-size: contain;
     position: absolute;
     left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
+    top: -150px;
+    height: 900px;
+    width: 900px;
     opacity: 0.1;
     z-index: -1;
 }

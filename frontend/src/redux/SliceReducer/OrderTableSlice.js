@@ -4,10 +4,10 @@ import { getToken } from "../../utils/Common"
 import { v4 as uuidv4 } from 'uuid';
 const api = "http://127.0.0.1:8000/api/"
 const tableOrder = {
-    tableId: "",
+    tableId: [],
     name: "",
     phone: "",
-    countGuest: 1,
+    countGuest: 1, 
     celendar: ""
 }
 const OrderTableSlice = createSlice({

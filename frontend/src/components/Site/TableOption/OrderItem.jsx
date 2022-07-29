@@ -8,27 +8,38 @@ import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { selectTableActive } from '../../../redux/selector';
 import { isNumber, isPhoneNumber, isRequired } from '../../../utils/Validate';
+import SelectMuiltiMui from '../../Admin/SelectMui/SelectMuiltiMui';
 
-function OrderItem({ order, setOrder, name, setNotify, notify }) {
+function OrderItem({ order, setOrder, name, setNotify, notify, id }) {
     const tableActive = useSelector(selectTableActive)
-    const handleTableSelect = (e) => {
-        setOrder(prev => ({ ...prev, tableId: e.target.value }))
-        console.log(order)
-    }
 
+    const handleNote = (e) => {
+        setOrder(prev => ({ ...prev, note: e.target.value }))
+    }
+    const listTable = [];
+    tableActive.forEach(table => {
+        order.tableId.forEach(tb => {
+            if (table.index_table === Number(tb)) {
+                listTable.push(table)
+            }
+        })
+    })
+    const totalSitting = listTable.reduce((init, value) => {
+        return init + value.total_user_sitting
+    }, 0)
     return (
         <section className="section" id="order">
             {/* <div className="section-title">My Order&nbsp;😎</div> */}
             <div className="order-info">
                 <div className="address">
-                    <div className="address-name">Bàn {name || order.tableId}</div>
-                    <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId} onChange={e => handleTableSelect(e)}>
+                    {/* <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId} onChange={e => handleTableSelect(e)}>
                         <option selected>Đổi Bàn</option>
                         {tableActive.map((table) => <option key={table.id} value={table.id}>{table.index_table}</option>)}
-                    </select>
+                    </select> */}
+                    <SelectMuiltiMui label=" Chọn nhiều bàn" listName={tableActive} position={"A"} id={id} setOrder={setOrder} order={order} />
                 </div>
                 <div className="delivery">
-                    <div className="delivery-time">
+                    {/* <div className="delivery-time">
                         <div className="btn time-btn">
                             <svg t="1586139290823" className="clock" viewBox="0 0 1024 1024" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" p-id="2356" width="18" height="18">
@@ -38,30 +49,24 @@ function OrderItem({ order, setOrder, name, setNotify, notify }) {
                             </svg>
                         </div>
                         <span className="delivery-choose-time">30s</span>
-
-                    </div>
+                    </div> */}
                     <span className="time"><CelendarOption values={order.celendar} setOrder={setOrder} setNotify={setNotify} /></span>
                 </div>
             </div>
-            <p>{notify.celendar}</p>
+            <p className="orderitem_notify">{notify.celendar}</p>
+            <p className="orderitem_totalUser">Sức chứa :khoảng {totalSitting} khách</p>
+
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
                 <InputField name="Chủ tiệc" size="small" values={order.name} setOrder={setOrder} setNotify={setNotify} />
-                <p>{notify.name}</p>
+                <p className="orderitem_notify">{notify.name}</p>
             </FormControl>
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
                 <InputField name="Số điện thoại" size="small" values={order.phone} setOrder={setOrder} setNotify={setNotify} />
-                <p>{notify.phone}</p>
+                <p className="orderitem_notify">{notify.phone}</p>
             </FormControl>
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
-                <InputField name="Số người" setOrder={setOrder} size="small" values={order.countGuest} setNotify={setNotify} />
-                <p>{notify.countGuest}</p>
+                <textarea className="textarea__item" onChange={handleNote} id="w3review" value={order.note} name="w3review" rows="4" cols="40" placeholder="Ghi chú"></textarea>
             </FormControl>
-            <div className="buy-action">
-                <div className="person-number-input">
-
-                </div>
-
-            </div>
         </section>
     )
 }
@@ -75,7 +80,7 @@ function InputField({ name, setOrder, values, size, setNotify }) {
                 return { ...prev, phone: e.target.value }
             } else
                 return {
-                    ...prev, countGuest: e.target.value
+                    ...prev, note: e.target.value
                 }
         })
     }
@@ -98,17 +103,6 @@ function InputField({ name, setOrder, values, size, setNotify }) {
                 }
                 else {
                     setNotify(prev => ({ ...prev, phone: "" }))
-                }
-                break;
-            case "Số người":
-                if (isRequired(e.target.value)) {
-                    setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập số người" }))
-                }
-                else if (isNumber(e.target.value)) {
-                    setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập đúng số" }))
-                }
-                else {
-                    setNotify(prev => ({ ...prev, countGuest: "" }))
                 }
                 break;
 

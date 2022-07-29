@@ -62,6 +62,21 @@ const OrderDetail = ({ rowData, dataKey, ...props }) => (
         </div>
     </Table.Cell>
 );
+const Delete =  ({ rowData, dataKey, setIdProduct, path, ...props }) => (
+    <Table.Cell {...props}>
+        <div className={styles.Celll}>
+            <button
+                className={`${styles.btnDelete}`}
+                onClick={() => setIdProduct(rowData[dataKey])}
+                role="button"
+                data-toggle="modal"
+                data-target="#exampleModal"
+            >
+                Xóa
+            </button>
+        </div>
+    </Table.Cell>
+);
 const IsSuccesOrder = ({ rowData, dataKey, ...props }) => (
     <Table.Cell
         {...props}
@@ -163,7 +178,10 @@ function Tablecustom({ tables, data, setIdProduct, path }) {
                                         Component = <CommentCell dataKey={table.dataKey} />
                                     } else if (table.type === "postAction") {
                                         Component = <PostAction setIsBlog={setIdProduct} dataKey={table.dataKey} path={path} />
-                                    } else if (table.type === "orderAction") {
+                                    } else if(table.type === "deleteCate"){
+                                        Component = <Delete setIdProduct={setIdProduct} dataKey={table.dataKey} path={path} />
+                                    }
+                                    else if (table.type === "orderAction") {
                                         Component = <OrderDetail dataKey={table.dataKey} />
                                     } else if (table.type === "isSucces") {
                                         Component = <IsSuccesOrder dataKey={table.dataKey} />

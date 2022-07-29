@@ -10,10 +10,14 @@ import { listPagination } from "../../../config/listConfig";
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
 import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
 import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
-import { api } from "../../../redux/SliceReducer/AuthSlice";
-import axios from "axios";
-import { getToken } from "../../../utils/Common";
+import { selectCategory } from "../../../redux/selector";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCategoryById } from "../../../redux/SliceReducer/CategorySlice";
+
 const ProductCategory = () => {
+  const [idProduct, setIdProduct]= React.useState("");
+  const categories = useSelector(selectCategory)
+  const dispatch = useDispatch()
   const breadcrumItem = [
     {
       href: "/",
@@ -26,34 +30,18 @@ const ProductCategory = () => {
       isActive: true,
     },
   ];
-
-  const handleDeleteProduct = () => {
-    console.log("delete");
-  };
-  const [listCateGory, setListCateGory] = useState([]);
-  useEffect(() => {
-    async function getList() {
-      await axios
-        .get(api + "directory/getLists", {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        })
-        .then((res) => {
-          setListCateGory(res.data.data)
-          console.log(res.data.data)
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    getList();
-
-    return () => {};
-  }, []);
-
+  const handleDeleteProduct = (id) => {
+    const cate = categories.find(item=>item.id===id);
+    dispatch(deleteCategoryById({id,name:cate.name}))
+  }
   return (
     <>
       <Sidebar />
-      <ModalDelete idProduct={1} handleDeleteProduct={handleDeleteProduct} />
+      <ModalDelete
+        idProduct={idProduct}
+        handleDeleteProduct={handleDeleteProduct}
+      />
+
       <div className={`${styles.Equipment}`}>
         <Breadcrumbs breadItem={breadcrumItem} />
         <div className={`${styles.EquipmentMain} row`}>
@@ -62,7 +50,8 @@ const ProductCategory = () => {
               <ArrowBackIcon />
               Danh sách phân loại danh mục
             </p>
-            <InputSearch setSearchValue={() => {}} />
+            <InputSearch setSearchValue={() => { }} />
+
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
@@ -73,17 +62,17 @@ const ProductCategory = () => {
         </div>
         <div className={styles.profile}>
           <Tablecustom
-            data={listCateGory}
+            data={categories}
             PageSize={10}
             tables={categoryTable}
-            // setIdProduct={setIdProduct}
+            setIdProduct={setIdProduct}
           />
 
           <div className={`${styles.pagination} justify-content-between`}>
             <SelectMui
               list={listPagination}
               name="Số bản ghi"
-              // setPageSize={setPageSize}
+            // setPageSize={setPageSize}
             />
             {/* <div className="d-flex align-items-center">
               <span style={{ marginRight: `25px` }}>

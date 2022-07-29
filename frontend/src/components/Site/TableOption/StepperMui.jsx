@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import OrderItem from './OrderItem';
 import style from "./TableOption.scss"
-import {  selectOrderTable, selectProductOrder, selectProducts } from '../../../redux/selector';
+import { selectOrderTable, selectProductOrder, selectProducts } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
 import CloseIcon from '@mui/icons-material/Close';
@@ -35,21 +35,24 @@ const steps = [
 export default function StepperMui({ id, setModalShow, activeStep, setActiveStep }) {
     const dispatch = useDispatch()
     const orders = useSelector(selectOrderTable)
+    
     const [notify, setNotify] = React.useState({
         name: "",
         phone: "",
         celendar: "",
         countGuest: "",
-        validateTime: ""
+        validateTime: "",
+        note: ""
     })
     const [order, setOrder] = React.useState({
-        tableId: orders.tableId,
+        tableId: [orders.tableId || id],
         name: orders.name,
         phone: orders.phone,
         countGuest: orders.countGuest,
         celendar: orders.celendar,
+        note: orders.note,
     });
-
+   
     const handlNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -73,17 +76,15 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         else {
             setNotify(prev => ({ ...prev, phone: "" }))
         }
-
-        if (isRequired(order.countGuest)) {
-            setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập số người" }))
-        }
-        else if (isNumber(order.countGuest)) {
-            setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập đúng số" }))
-        }
-        else {
-            setNotify(prev => ({ ...prev, countGuest: "" }))
-        }
-
+        // if (isRequired(order.countGuest)) {
+        //     setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập số người" }))
+        // }
+        // else if (isNumber(order.countGuest)) {
+        //     setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập đúng số" }))
+        // }
+        // else {
+        //     setNotify(prev => ({ ...prev, countGuest: "" }))
+        // }
         if (isRequired(order.validateTime)) {
             setNotify(prev => ({ ...prev, celendar: "Vui lòng chọn thời gian" }))
         } else if (isFutureDate(order.validateTime)) {
@@ -93,15 +94,15 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         }
         const isFormSuccess = Object.entries(notify).every(([key, value]) => value === "")
         const isFormSuccessOrder = Object.entries(order).every(([key, value]) => value !== "")
-        console.log(isFormSuccess)
-        console.log(isFormSuccessOrder)
         if (isFormSuccess && isFormSuccessOrder) {
             dispatch(updateOrderTable(order))
             setActiveStep(1);
         }
+        setActiveStep(1);
     }
     // step3
     const handleOrder = () => {
+        console.log(order)
         dispatch(createOrderTable(order))
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -112,9 +113,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         setActiveStep(0);
 
     };
-    React.useEffect(() => {
-        if (id) setOrder(prev => ({ ...prev, tableId: id }))
-    }, [])
+
     return (
         <>
             <Box sx={{ maxWidth: "100%" }}>
@@ -133,7 +132,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
                             </StepLabel>
                             <StepContent >
                                 <Typography>{step.description}</Typography>
-                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify} />) :
+                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify}  />) :
                                     index === 1 ? (<InfoFood />) :
                                         index === 2 ? <InfoOrder order={order} /> : ""}
                                 <Box sx={{ mb: 2 }}>
@@ -202,12 +201,12 @@ const InfoOrder = ({ order }) => {
 const InfoFood = () => {
     const orders = useSelector(selectProductOrder)
     const products = useSelector(selectProducts)
-    let listOrder=[];
+    let listOrder = [];
     products.forEach(product => {
         orders.forEach(order => {
             if (order.id === product.id) {
                 console.log(order.quantity)
-                const newObj = {...product,quantity:order.quantity}
+                const newObj = { ...product, quantity: order.quantity }
                 listOrder.push(newObj)
             }
         })
@@ -216,7 +215,7 @@ const InfoFood = () => {
         <div className="wraplistCart_order ">
             {listOrder && listOrder.map((product, index) => {
                 return (
-                    <ProductCartTable key={index} name={product.name}  img={product.path} price={product.price} quantity={product.quantity} id={product.id} />
+                    <ProductCartTable key={index} name={product.name} img={product.path} price={product.price} quantity={product.quantity} id={product.id} />
                 )
             })}
         </div>
