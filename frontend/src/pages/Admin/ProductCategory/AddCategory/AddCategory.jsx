@@ -4,34 +4,45 @@ import Header from "../../../../components/Admin/Header/Header";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import Loadings from "../../../../components/Site/Loadings/Loadings";
 import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
+import { useDispatch } from 'react-redux';
+import { addCategorys } from '../../../../redux/SliceReducer/CategorySlice';
 const AddCategory = () => {
-    const [status, setStatus] = useState(true);
-    const [loading, setLoading] = useState(false);
-    const [imgUrls, setImgUrls] = useState("");
-
-    const breadcrumItem = [
-        {
-          href: "/",
-          title: "Quản lý",
-          isActive: false,
-        },
-        {
-          href: "/them-dang-muc",
-          title: "Thêm loại danh mục",
-          isActive: true,
-        },
-      ];
+  const [status, setStatus] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [imgUrls, setImgUrls] = useState("");
+  const [category, setCategory] = useState({
+    name:"",
+    img: ""
+  })
+  const dispatch = useDispatch()
+  const breadcrumItem = [
+    {
+      href: "/",
+      title: "Quản lý",
+      isActive: false,
+    },
+    {
+      href: "/them-dang-muc",
+      title: "Thêm loại danh mục",
+      isActive: true,
+    },
+  ];
+  const handleAddCategory= (e)=>{
+    e.preventDefault();
+    console.log(e)
+    dispatch(addCategorys(category.name))
+  }
   return (
     <>
-    <Sidebar/>
-     {window.innerWidth <= 425 && <Header />}
+      <Sidebar />
+      {window.innerWidth <= 425 && <Header />}
       <div className={`${styles.main}`}>
         <Breadcrumbs breadItem={breadcrumItem} />
         <h2 style={{ fontSize: `30px`, fontWeight: `bold`, color: `#1A358F` }}>
           Thêm loại danh mục mới
         </h2>
         {loading ? (
-          <Loadings style={{display: "flex"}}/>
+          <Loadings style={{ display: "flex" }} />
         ) : (
           <div style={!status ? { filter: `brightness(80%)` } : {}}>
             <form
@@ -70,24 +81,25 @@ const AddCategory = () => {
                   <div className={`${styles.formLeft} `}>
                     <div className={`${styles.wrapLeft}`}>
                       <label htmlFor="">
-                        Mã danh mục 
+                        Mã danh mục
                       </label>
                       <input
                         type="text"
                         name="name"
-                        //defaultValue={registerForm.name}
+                      //defaultValue={registerForm.name}
                       />
                     </div>
                   </div>
                   <div className={`${styles.formRight} `}>
                     <div className={`${styles.wrapRight}`}>
                       <label htmlFor="">
-                        Tên danh mục 
+                        Tên danh mục
                       </label>
                       <input
+                        onChange={e => setCategory(prev => ({ ...prev, name: e.target.value }))}
                         type="text"
                         name="describe"
-                        //defaultValue={registerForm.describe}
+                      //defaultValue={registerForm.describe}
                       />
                     </div>
                   </div>
@@ -98,7 +110,7 @@ const AddCategory = () => {
                 </div>
                 <div className={`${styles.formRight} `}>
                   <div className={`${styles.buttonSection}`}>
-                    <button type="submit" className={`${styles.btnAdd}`}>
+                    <button  className={`${styles.btnAdd}`} onClick={e=>handleAddCategory(e)}>
                       Thêm loại danh mục
                     </button>
                     <button className={`${styles.btnCancel}`}>Huỷ</button>

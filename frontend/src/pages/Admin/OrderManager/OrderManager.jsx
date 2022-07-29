@@ -11,35 +11,14 @@ import { tableOrder } from "../../../config/tables"
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 import { listPagination } from "../../../config/listConfig"
 import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
+import { useSelector } from "react-redux";
+import { selectOrder } from "../../../redux/selector";
 const OrderManager = () => {
-
-  const { orders } = useContext(OrderContext);
-  const [dataSliced, setdataSliced] = useState([]);
+const listorders = useSelector(selectOrder);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchValue, setSearchValue] = useState("");
-  const [sortPosition, setSortPosition] = useState("");
-  const [sortStatus, setSortStatus] = useState("");
   const [PageSize, setPageSize] = useState(10)
-
-
-  useEffect(() => {
-    if (orders) {
-      const firstPageIndex = (currentPage - 1) * PageSize;
-      const lastPageIndex = firstPageIndex + PageSize;
-      setdataSliced(orders.slice(firstPageIndex, lastPageIndex));
-    }
-    if (searchValue !== "" || sortPosition !== "" || sortStatus !== "") {
-      const firstPageIndex = (currentPage - 1) * PageSize;
-      const lastPageIndex = firstPageIndex + PageSize;
-      setdataSliced(
-        orders && orders
-          .filter((e) => e.name.toLowerCase().indexOf(searchValue) !== -1)
-          .filter((e) => e.address.indexOf(sortStatus) !== -1)
-          .filter((e) => e.phoneNumber.indexOf(sortPosition) !== -1)
-          .slice(firstPageIndex, lastPageIndex)
-      );
-    }
-  }, [currentPage , sortStatus,PageSize]);
+  console.log(listorders)
+  
   const breadcrumItem = [
     {
       href: "/",
@@ -61,20 +40,17 @@ const OrderManager = () => {
           <div className={`${styles.leftSide} col-8`}>
             <p className={`${styles.title}`}>Quản lý đơn hàng</p>
             <InputSearch setSearchValue={()=>{}}/>
-
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
-              <ExportReact csvData={orders} />
+              {/* <ExportReact csvData={listorders} /> */}
             </div>
           </div>
         </div>
         <div className={styles.AccountPro}>
           <div className={styles.ManageTable}>
             <Tablecustom
-              data={dataSliced.filter((e) =>
-                e.name.toLowerCase().includes(searchValue)
-              )}
+              data={listorders&&[listorders]}
               PageSize={PageSize}
               tables={tableOrder}
             />
@@ -90,36 +66,11 @@ const OrderManager = () => {
               <span style={{ marginRight: `25px` }}>
                 có{" "}
                 <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
-                  {searchValue === ""
-                    ? orders.length
-                    : orders.filter(
-                      (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
-                    ).length}
-                </span>{" "}
+                {listorders.length}
+                </span>
                 bản ghi
               </span>
-              {searchValue === "" ? (
-                <Pagination
-                  className="pagination-bar"
-                  currentPage={currentPage}
-                  totalCount={orders && orders.length}
-                  pageSize={PageSize}
-                  onPageChange={(page) => setCurrentPage(page)}
-                />
-              ) : (
-                <Pagination
-                  className="pagination-bar"
-                  currentPage={currentPage}
-                  totalCount={
-                    orders &&
-                    orders.filter(
-                      (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
-                    ).length
-                  }
-                  pageSize={PageSize}
-                  onPageChange={(page) => setCurrentPage(page)}
-                />
-              )}
+             
             </div>
           </div>
         </div>

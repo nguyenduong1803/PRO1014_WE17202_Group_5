@@ -156,9 +156,7 @@
 
   .address,
   .delivery {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  
   }
 
   .address-edit {
@@ -179,8 +177,7 @@
   .delivery {
     margin-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 12px;
-
+    padding-bottom: 4px;
     .delivery-time {
       display: flex;
       align-items: center;
@@ -353,4 +350,18 @@
 }
 .css-8t49rw-MuiStepConnector-line{
   min-height: 0 !important;
+}
+.textarea__item{
+  padding: 12px;
+  height: 45px;
+  min-height: 45px;
+}
+.orderitem_totalUser{
+  line-height:20px;
+}
+.orderitem_notify{
+  font-size: 14px;
+  color:var(--red);
+  font-weight: 500;
+  transition:0.3s;
 }

@@ -10,7 +10,13 @@ import { listPagination } from "../../../config/listConfig";
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
 import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
 import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
+import { selectCategory } from "../../../redux/selector";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteCategoryById } from "../../../redux/SliceReducer/CategorySlice";
 const ProductCategory = () => {
+  const [idProduct, setIdProduct]= React.useState("");
+  const categories = useSelector(selectCategory)
+  const dispatch = useDispatch()
   const breadcrumItem = [
     {
       href: "/",
@@ -23,14 +29,15 @@ const ProductCategory = () => {
       isActive: true,
     },
   ];
-  const handleDeleteProduct = () => {
-    console.log("delete")
+  const handleDeleteProduct = (id) => {
+    const cate = categories.find(item=>item.id===id);
+    dispatch(deleteCategoryById({id,name:cate.name}))
   }
   return (
     <>
       <Sidebar />
       <ModalDelete
-        idProduct={1}
+        idProduct={idProduct}
         handleDeleteProduct={handleDeleteProduct}
       />
       <div className={`${styles.Equipment}`}>
@@ -41,29 +48,28 @@ const ProductCategory = () => {
               <ArrowBackIcon />
               Danh sách phân loại danh mục
             </p>
-            <InputSearch setSearchValue={()=>{}}/>
-
+            <InputSearch setSearchValue={() => { }} />
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
-            <ButtonAdd name="Thêm danh mục" path="them-danh-muc"/>
+              <ButtonAdd name="Thêm danh mục" path="them-danh-muc" />
               {/* <ExportReact csvData={data} fileName="Danh sách danh mục" /> */}
             </div>
           </div>
         </div>
         <div className={styles.profile}>
           <Tablecustom
-            data={[]}
+            data={categories}
             PageSize={10}
             tables={categoryTable}
-            // setIdProduct={setIdProduct}
+            setIdProduct={setIdProduct}
           />
 
           <div className={`${styles.pagination} justify-content-between`}>
             <SelectMui
               list={listPagination}
               name="Số bản ghi"
-              // setPageSize={setPageSize}
+            // setPageSize={setPageSize}
             />
             {/* <div className="d-flex align-items-center">
               <span style={{ marginRight: `25px` }}>

@@ -33,7 +33,7 @@ function CelendarOption({ setOrder, values, setNotify }) {
                 label="Chọn thời gian"
                 type="datetime-local"
                 defaultValue={(new Date())}
-                sx={{ width: 230, height: 44 }}
+                sx={{ width: 300, height: 35,maxWidth: "100%" }}
                 InputLabelProps={{
                     shrink: true,
                 }}

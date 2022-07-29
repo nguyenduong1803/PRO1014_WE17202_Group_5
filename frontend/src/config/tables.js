@@ -146,30 +146,30 @@ export const tableProduct = [
   ]
   export const tableOrder = [
     {
-      name: "STT",
-      width: 60,
-      dataKey: "id",
+      name: "ID đơn hàng",
+      width: 160,
+      dataKey: "id_invoice",
       isFixed: true,
       type: "cell"
     },
     {
-      name: "Mã đơn hàng",
+      name: "ID nhân viên",
       width: 150,
-      dataKey: "id",
+      dataKey: "id_staff",
       isFixed: false,
       type: "cell"
     },
     {
-      name: "Tên",
+      name: "Vị trí bàn",
       width: 190,
-      dataKey: "name",
+      dataKey: "index_table",
       isFixed: false,
       type: "cell"
     },
     {
-      name: "Email",
+      name: "Tổng tiền",
       width: 450,
-      dataKey: "email",
+      dataKey: "total_price",
       isFixed: false,
       type: "cell"
     },
@@ -181,46 +181,28 @@ export const tableProduct = [
       type: "cell"
     },
     {
-      name: "Địa chỉ",
+      name: "Tổng khách hàng",
       width: 190,
-      dataKey: "address",
+      dataKey: "total_user",
       isFixed: false,
       type: "cell"
     },
-    {
-      name: "Tổng sản phẩm",
-      width: 150,
-      dataKey: "items",
-      isFixed: false,
-      type: "comment"
-    },
+  
     {
       name: "Trạng thái",
       width: 250,
-      dataKey: "status",
+      dataKey: "status_cart_order",
       isFixed: false,
       type: "isSucces"
     },
-    {
-      name: "Ngày đặt hàng",
-      width: 150,
-      dataKey: "dateTimeStart",
-      isFixed: false,
-      type: "cell"
-    },
-    {
-      name: "Ngày hết hạn",
-      width: 150,
-      dataKey: "dateTimeEnd",
-      isFixed: false,
-      type: "cell"
-    },
+  
+   
     {
       name: "Quản lý",
-      width: 100,
-      dataKey: "_id",
+      width: 250,
+      dataKey: "id",
       isFixed: "right",
-      type: "orderAction"
+      type: "postAction"
     },
 
   ]
@@ -300,45 +282,45 @@ export const tableProduct = [
   export const categoryTable = [
     {
       name: "STT",
-      width: 40,
+      width: 100,
       dataKey: "id",
       isFixed: true,
       type: "cell"
     },
     {
       name: "Ảnh",
-      width: 130,
+      width: 200,
       dataKey: "images",
       isFixed: true,
       type: "img"
     },
     {
       name: "Tên danh mục",
-      width: 200,
+      width: 250,
       dataKey: "name",
       isFixed: false,
       type: "cell"
     },
     {
       name: "Mã danh mục",
-      width: 200,
-      dataKey: "_id",
+      width: 250,
+      dataKey: "id",
       isFixed: false,
       type: "cell"
     },
     {
-      name: "Loại danh mục",
-      width: 190,
-      dataKey: "phone",
+      name: "Ngày tạo",
+      width: 250,
+      dataKey: "create_at",
       isFixed: false,
       type: "cell"
     },
     {
       name: "Quản lý",
-      width: 210,
-      dataKey: "_id",
+      width: 80,
+      dataKey: "id",
       isFixed: "right",
-      type: "postAction"
+      type: "deleteCate"
     },
 
   ]
