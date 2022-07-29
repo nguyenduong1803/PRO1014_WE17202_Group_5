@@ -2,10 +2,9 @@
     background-image: url(../../../assets/img/01.png);
     background-repeat: no-repeat;
     /* background: url('https://templates.iqonic.design/aprycot/html/dashboard/dist/assets/images/User-profile/01.png') no-repeat center; */
-    margin: 70px 50px;
+    margin: 20px 50px;
     z-index: -10;
     border-radius: 20px;
-    height: 380px;
 
 }
 
@@ -21,6 +20,8 @@
     border-radius: 20px;
     height: 30%;
     margin: 0 !important;
+    padding: 10px 0;
+    
 }
 
 .rowcol6 {
@@ -29,7 +30,7 @@
 }
 
 .imguser {
-    margin-top: -50px;
+    margin-top: -70px;
     margin-left: 20px;
     width: 130px;
     height: 130px;
@@ -37,13 +38,20 @@
 }
 
 .rowcol4 {
-    margin-top: 30px;
+    padding: 10px 0;
+    margin-top: 10px;
 }
 
 .h4 {
     padding: 5px 0;
 }
-
+.AppBar{
+    width: 450px !important;
+    border-radius: 10px;
+    background-color: #ff6464 !important;
+    margin-left: -100px;
+    
+}
 .col6 {
     float: right;
 }
@@ -67,4 +75,8 @@
 }
 .link{
     text-decoration: none;
+}
+.Box{
+    background-color:none !important;
+    margin:0 auto;
 }

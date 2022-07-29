@@ -1,9 +1,9 @@
-import React from "react";
-import styles from "../ProductCategory/ProductCategory.module.css"
+import React, { useEffect, useState } from "react";
+import styles from "../ProductCategory/ProductCategory.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
-import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
+import Sidebar from "../../../components/Admin/Sidebar/Sidebar";
+import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete";
 import { categoryTable } from "../../../config/tables";
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 import { listPagination } from "../../../config/listConfig";
@@ -13,6 +13,7 @@ import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
 import { selectCategory } from "../../../redux/selector";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategoryById } from "../../../redux/SliceReducer/CategorySlice";
+
 const ProductCategory = () => {
   const [idProduct, setIdProduct]= React.useState("");
   const categories = useSelector(selectCategory)
@@ -40,6 +41,7 @@ const ProductCategory = () => {
         idProduct={idProduct}
         handleDeleteProduct={handleDeleteProduct}
       />
+
       <div className={`${styles.Equipment}`}>
         <Breadcrumbs breadItem={breadcrumItem} />
         <div className={`${styles.EquipmentMain} row`}>
@@ -49,6 +51,7 @@ const ProductCategory = () => {
               Danh sách phân loại danh mục
             </p>
             <InputSearch setSearchValue={() => { }} />
+
           </div>
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>

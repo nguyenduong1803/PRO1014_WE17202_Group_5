@@ -81,12 +81,16 @@ Route::group(['namespace' => 'Invoices', 'prefix' => 'invoices'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'create']);
         Route::get('getInvoice', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'getInvoice']);
+        Route::post('update/{id}', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'updateInvoice']);
     });
 });
 
 Route::group(['namespace' => 'InvoiceDetail', 'prefix' => 'invoice-detail'], function(){
     Route::middleware('auth:api') -> group(function () {
-        Route::get('getInvoiceDetail/{id_invoice}', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'getDetailInvoice']);
+        Route::get('getListDetailInvoice/{id_invoice}', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'getListDetailInvoice']);
+        Route::get('getDetailInvoice/{id}', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'getDetailInvoice']);
+        Route::post('update/{id}', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'updateDetailInvoice']);
+        Route::delete('delete/{id}', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'deleteDetailInvoice']);
     });
 });
 

@@ -9,8 +9,11 @@ use Illuminate\Support\Facades\DB;
 class InvoiceDetail extends Model
 {
     use HasFactory;
+    public function getListDetailInvoice($params) {
+        return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND dt.id_invoice = ? AND id_user = ?", $params);
+    }
     public function getDetailInvoice($params) {
-                    return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND dt.id_invoice = ?", $params);
+        return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND id_user = ? AND id = ?", $params);
     }
 
     public function insertDetailInvoice($params) {
@@ -25,5 +28,13 @@ class InvoiceDetail extends Model
                                 WHERE p.is_delete = 1
                                 AND p.id = ?
             ", $params);
+    }
+
+    public function updateDetailInvoice($params) {
+        DB::update("UPDATE detail_invoice SET `id_user` = ?,`id_table_book` = ?, `id_product` = ?, `amount` = ?, `update_at` = ? WHERE `id` = ? AND is_delete = 1", $params);
+    }
+
+    public function deleteDetailInvoice($params) {
+        DB::update("UPDATE detail_invoice SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
     }
 }

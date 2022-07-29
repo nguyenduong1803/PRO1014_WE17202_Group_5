@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 function ColorButtons() {
   return (
     <Stack direction="row" spacing={2}>
-      <Button variant="contained" color="success">
+      <Button variant="contained" className={styles.buttonIcon}>
        Thay Đổi
       </Button>
     </Stack>
@@ -17,7 +17,7 @@ function EditPassWord() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <h2>Change PassWord</h2>
+        <h2>THAY ĐỔI MẬT KHẨU</h2>
         <p>PassWord must contain :</p>
         <ul className={styles.lists}>
           <li className={styles.li}><CheckIcon/> Mật khẩu phải trên 6 kí tự</li>
@@ -58,9 +58,7 @@ function EditPassWord() {
           <div>
             <ColorButtons/>
           </div>
-          <div classname={styles.button}>
-            <Link to='/profile'>Thoát</Link>
-          </div>
+          
         </form>
       </div>
     </div>

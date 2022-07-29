@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Invoices;
 
 use App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Invoices\InvoiceUpdate;
 use App\Models\InvoiceDetail;
 use App\Models\Invoices;
 use App\Models\User;
@@ -20,26 +21,32 @@ class InvoicesController extends Controller
         $modelInvoices = new Invoices();
         $modelDetailInvoice = new InvoiceDetail();
         $modelUser = new User();
-        $listChooseProducts = $request -> chooseProducts;
-        $uniIdInvoice = strtoupper(Str::random(10));
+        $listIdProduct = $request['list_id_product'];
+        $listAmount = $request['list_amount'];
+        $listTableBook = $request['list_table_book'];
         $totalPrice = 0;
-        if(!isset($listChooseProducts) || count($listChooseProducts) < 1) response() ->json(["msg" => "Vui lòng chọn món!", "status" => false],410);
-        for($i = 0; $i < count($listChooseProducts); $i++) {
-            $params = [
-                $user['id'],
-                $uniIdInvoice,
-                $listChooseProducts[$i]['id_table_book'],
-                $listChooseProducts[$i]['id_product'],
-                $listChooseProducts[$i]['amount'],
-            ];
-            $controllerDetailInvoice ->insertProduct($params);
-            $params3 = [
-                $listChooseProducts[$i]['id_product']
-            ];
-            $priceProduct = $modelDetailInvoice ->getPriceProductInDetailInvoice($params3);
-            $totalPrice += $priceProduct[0] -> price * $listChooseProducts[$i]['amount'];
+        $uniIdInvoice = strtoupper(Str::random(10));
+        $arrMerge = array();
+        foreach ( $listIdProduct as $idx => $val ) {
+            $arrMerge[] = ["id_product" => $val,"amount" => $listAmount[$idx],"id_table_book" => $listTableBook[$idx] ];
         }
+        for($i = 0; $i < count($arrMerge); $i++) {
+                    $params = [
+                        $user['id'],
+                        $uniIdInvoice,
+                        $arrMerge[$i]['id_table_book'],
+                        $arrMerge[$i]['id_product'],
+                        $arrMerge[$i]['amount'],
+                    ];
+                    $controllerDetailInvoice ->insertDetailInvoice($params);
+                    $params3 = [
+                        $listIdProduct[$i]
+                    ];
+                    $priceProduct = $modelDetailInvoice ->getPriceProductInDetailInvoice($params3);
+                    $totalPrice += $priceProduct[0] -> price * $arrMerge[$i]['amount'];
 
+
+        }
         $userStaff = $modelUser ->getUserByRole(2, 3);
         $params2 = [
             $user['id'],
@@ -47,7 +54,11 @@ class InvoicesController extends Controller
             1,
             $totalPrice,
             1,
-            $userStaff['id']
+            $userStaff['id'],
+            $request['user_name_book'],
+            $request['time_book'],
+            $request['phone'],
+            $request['note'],
         ];
         $modelInvoices ->create($params2);
         return response() ->json(["msg" => "Tạo hoá đơn thành công!", "status" => true],200);
@@ -59,7 +70,36 @@ class InvoicesController extends Controller
         $modelInvoices = new Invoices();
         $data = $modelInvoices -> getInvoice($params);
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
-        $data = $data[count($data) - 1 ];
         return response() ->json(["data" => $data, "status" => true],200);
+    }
+
+    public function updateInvoice(InvoiceUpdate $request,$id) {
+        $validate = $request -> validated();
+        $modelInvoices = new Invoices();
+        $user = Auth::user();
+        $modelUser = new User();
+        $userStaff = $modelUser ->getUserByRole($validate['id_staff'], 3);
+        $detailInvoice = $modelInvoices ->getDetailInvoice($id);
+        if(!isset($detailInvoice) || !isset($userStaff)) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
+        $statusEnvoice = isset($validate['status_envoice']) ? $validate['status_envoice'] : $detailInvoice['status_envoice'];
+        $userNameBook = isset($validate['user_name_book']) ? $validate['user_name_book'] : $detailInvoice['user_name_book'];
+        $timeBook = isset($validate['time_book']) ? $validate['time_book'] : $detailInvoice['time_book'];
+        $phone = isset($validate['phone']) ? $validate['phone'] : $detailInvoice['phone'];
+        $note = isset($validate['note']) ? $validate['note'] : $detailInvoice['note'];
+        $idStaff = isset($validate['id_staff']) ? $validate['id_staff'] : $detailInvoice['id_staff'];
+        $timeUpdateAt = date("Y-m-d H:i:s",time());
+        $params =[
+            $statusEnvoice,
+            $userNameBook,
+            $timeBook,
+            $phone,
+            $note,
+            $user['id'],
+            $idStaff,
+            $timeUpdateAt,
+            $id
+        ];
+        $modelInvoices ->updateInvoice($params);
+        return response() ->json(["msg" => "Cập nhật thành công!", "status" => true],200);
     }
 }
