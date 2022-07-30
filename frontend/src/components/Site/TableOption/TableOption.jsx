@@ -21,7 +21,6 @@ function TableOption({ id, status, type, name }) {
     });
     const { vertical, horizontal, open } = state;
     const [activeStep, setActiveStep] = React.useState(0);
-
     const [modalShow, setModalShow] = React.useState(false)
     const infoUser = useContext(AuthContext)
     let color;
@@ -39,7 +38,6 @@ function TableOption({ id, status, type, name }) {
         e.stopPropagation()
     }
     const handleClose = () => {
-        console.log("close")
         setModalShow(0)
 
     }

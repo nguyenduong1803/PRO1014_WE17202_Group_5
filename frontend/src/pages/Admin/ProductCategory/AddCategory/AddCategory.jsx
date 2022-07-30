@@ -48,15 +48,15 @@ const AddCategory = () => {
 
   return (
     <>
-    <Sidebar/>
-     {window.innerWidth <= 425 && <Header />}
+      <Sidebar />
+      {window.innerWidth <= 425 && <Header />}
       <div className={`${styles.main}`}>
         <Breadcrumbs breadItem={breadcrumItem} />
         <h2 style={{ fontSize: `30px`, fontWeight: `bold`, color: `#1A358F` }}>
           Thêm loại danh mục mới
         </h2>
         {loading ? (
-          <Loadings style={{display: "flex"}}/>
+          <Loadings style={{ display: "flex" }} />
         ) : (
           <div style={!status ? { filter: `brightness(80%)` } : {}}>
             <form
@@ -95,19 +95,19 @@ const AddCategory = () => {
                   {/* <div className={`${styles.formLeft} `}>
                     <div className={`${styles.wrapLeft}`}>
                       <label htmlFor="">
-                        Mã danh mục 
+                        Mã danh mục
                       </label>
                       <input
                         type="text"
                         name="name"
-                        //defaultValue={registerForm.name}
+                      //defaultValue={registerForm.name}
                       />
                     </div>
                   </div> */}
                   <div className={`${styles.formRight} `}>
                     <div className={`${styles.wrapRight}`}>
                       <label htmlFor="">
-                        Tên danh mục 
+                        Tên danh mục
                       </label>
                       <input
                         type="text"

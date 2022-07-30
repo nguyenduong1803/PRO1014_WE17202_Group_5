@@ -106,33 +106,7 @@ function MenuContentOpTions({setModalShow,modalShow}) {
           <div className="accordion-body" style={{ padding: "0" }}></div>
         </div>
       </div>
-      <div
-        style={{ borderRadius: "20px", marginTop: "30px" }}
-        className={styles.optionss}
-      >
-        <div className={styles.accordionItem}>
-          <h2
-            id="flush-headingOne"
-            className={styles.accordionButton}
-          >
-            <div className={styles.accordTitle}>
-              <div className={styles.accordTitleH4}>
-                <h4>Đặt bàn</h4>
-              </div>
-
-            </div>
-          </h2>
-          <div className={styles.line}></div> <br />
-          <div className={styles.sliderPrice} style={{ color: 'white !important' }}>
-            <div className="modal-container" onClick={handleShowOrder}>
-              {/* <input id="modal-toggle" type="checkbox" /> */}
-              <p className={styles.orderTable_btn}>Đặt bàn</p>
-            </div>
-              
-          </div>
-          <div className="accordion-body" style={{ padding: "0" }}></div>
-        </div>
-      </div>
+     
       {/* <div
         style={{ borderRadius: "20px", marginTop: "30px" }}
         className={styles.optionss}

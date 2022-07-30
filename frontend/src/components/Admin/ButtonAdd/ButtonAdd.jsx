@@ -2,9 +2,9 @@ import React from 'react'
 import AddIcon from "@mui/icons-material/Add";
 import { NavLink } from 'react-router-dom';
 
-function ButtonAdd({path,name}) {
+function ButtonAdd({ path, name }) {
     return (
-        <NavLink to={`${path}`}>
+        <NavLink to={`/admin/${path}`}>
             <button style={{
                 backgroundColor: "#1a358f",
                 color: "#fff",

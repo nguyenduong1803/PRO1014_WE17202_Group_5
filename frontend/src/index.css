@@ -201,10 +201,16 @@ html {
   z-index: 5;
 }
 
-#datetime-local {
+#datetime-local,#datetime-local-label {
   color:var(--warning-color);
 }
-
+#demo-multiple-checkbox,#datetime-local{
+  color:#fff;;
+  padding: 12px 10px 15px 10px;
+}
+#demo-multiple-checkbox-label{
+  color:var(  --warning-color);
+}
 :root {
   --purple: #1a358f;
   --yeallow: #f4cc3d;
