@@ -31,25 +31,19 @@ const ProductCategory = () => {
     console.log("delete");
   };
   const [listCateGory, setListCateGory] = useState([]);
+  
   useEffect(() => {
     async function getList() {
-      await axios
+   const res =  await axios
         .get(api + "directory/getLists", {
           headers: { Authorization: `Bearer ${getToken()}` },
         })
-        .then((res) => {
           setListCateGory(res.data.data)
           console.log(res.data.data)
-        })
-        .catch((error) => {
-          console.log(error);
-        });
     }
     getList();
-
-    return () => {};
+    
   }, []);
-
   return (
     <>
       <Sidebar />
