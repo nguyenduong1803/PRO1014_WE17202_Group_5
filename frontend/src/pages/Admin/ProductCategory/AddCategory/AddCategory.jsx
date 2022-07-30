@@ -4,34 +4,48 @@ import Header from "../../../../components/Admin/Header/Header";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import Loadings from "../../../../components/Site/Loadings/Loadings";
 import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
-import { useDispatch } from 'react-redux';
-import { addCategorys } from '../../../../redux/SliceReducer/CategorySlice';
+import { api } from '../../../../redux/SliceReducer/AuthSlice';
+import axios from 'axios';
+import { getToken } from '../../../../utils/Common';
+import { useHistory } from 'react-router-dom'
+
 const AddCategory = () => {
-  const [status, setStatus] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [imgUrls, setImgUrls] = useState("");
-  const [category, setCategory] = useState({
-    name:"",
-    img: ""
-  })
-  const dispatch = useDispatch()
-  const breadcrumItem = [
-    {
-      href: "/",
-      title: "Quản lý",
-      isActive: false,
-    },
-    {
-      href: "/them-dang-muc",
-      title: "Thêm loại danh mục",
-      isActive: true,
-    },
-  ];
-  const handleAddCategory= (e)=>{
-    e.preventDefault();
-    console.log(e)
-    dispatch(addCategorys(category.name))
-  }
+    const [status, setStatus] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [imgUrls, setImgUrls] = useState("");
+    const history = useHistory()
+
+    const breadcrumItem = [
+        {
+          href: "/",
+          title: "Quản lý",
+          isActive: false,
+        },
+        {
+          href: "/them-danh-muc",
+          title: "Thêm loại danh mục",
+          isActive: true,
+        },
+      ];
+    const [nameCategory,setNameCategory]= useState('')
+    const handleSubmit = async e => {
+      e.preventDefault();
+      const res = await axios
+       .post(api + "directory/create",
+           {
+               name: nameCategory,
+           },
+           {
+               headers: { "Authorization": `Bearer ${getToken()}` },
+           })
+           if(res.data.status){
+              alert("Them thanh cong");
+              history.push('/admin/quan-ly-danh-muc')
+           }
+           console.log(res)
+    }
+
+
   return (
     <>
       <Sidebar />
@@ -46,10 +60,10 @@ const AddCategory = () => {
         ) : (
           <div style={!status ? { filter: `brightness(80%)` } : {}}>
             <form
-            //   onSubmit={handleSubmit}
+              onSubmit={e => handleSubmit(e)}
             //   onChange={(e) => onChangeRegisterForm(e)}
             >
-              <div className={`${styles.formRow} `}>
+              {/* <div className={`${styles.formRow} `}>
                 <div className={`${styles.uploadImg}`}>
                   <div className={`${styles.imgsWrapper}`}>
                     {imgUrls ? (
@@ -75,10 +89,10 @@ const AddCategory = () => {
                     multiple
                   />
                 </div>
-              </div>
+              </div> */}
               <div className={`${styles.form}`}>
                 <div className={`${styles.formRow} `}>
-                  <div className={`${styles.formLeft} `}>
+                  {/* <div className={`${styles.formLeft} `}>
                     <div className={`${styles.wrapLeft}`}>
                       <label htmlFor="">
                         Mã danh mục
@@ -89,17 +103,18 @@ const AddCategory = () => {
                       //defaultValue={registerForm.name}
                       />
                     </div>
-                  </div>
+                  </div> */}
                   <div className={`${styles.formRight} `}>
                     <div className={`${styles.wrapRight}`}>
                       <label htmlFor="">
                         Tên danh mục
                       </label>
                       <input
-                        onChange={e => setCategory(prev => ({ ...prev, name: e.target.value }))}
                         type="text"
-                        name="describe"
-                      //defaultValue={registerForm.describe}
+                        name="name"
+                        onChange={(event, newValue) => {
+                          setNameCategory(event.target.value);
+                        }}
                       />
                     </div>
                   </div>
@@ -110,10 +125,10 @@ const AddCategory = () => {
                 </div>
                 <div className={`${styles.formRight} `}>
                   <div className={`${styles.buttonSection}`}>
-                    <button  className={`${styles.btnAdd}`} onClick={e=>handleAddCategory(e)}>
+                    <button   type="submit" className={`${styles.btnAdd}`}>
                       Thêm loại danh mục
                     </button>
-                    <button className={`${styles.btnCancel}`}>Huỷ</button>
+                    <button className={`${styles.btnCancel}`} path="quan-ly-danh-muc">Huỷ</button>
                   </div>
                 </div>
               </div>

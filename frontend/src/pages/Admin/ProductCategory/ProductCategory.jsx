@@ -30,10 +30,24 @@ const ProductCategory = () => {
       isActive: true,
     },
   ];
-  const handleDeleteProduct = (id) => {
-    const cate = categories.find(item=>item.id===id);
-    dispatch(deleteCategoryById({id,name:cate.name}))
-  }
+
+  const handleDeleteProduct = () => {
+    console.log("delete");
+  };
+  const [listCateGory, setListCateGory] = useState([]);
+  
+  useEffect(() => {
+    async function getList() {
+   const res =  await axios
+        .get(api + "directory/getLists", {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        })
+          setListCateGory(res.data.data)
+          console.log(res.data.data)
+    }
+    getList();
+    
+  }, []);
   return (
     <>
       <Sidebar />

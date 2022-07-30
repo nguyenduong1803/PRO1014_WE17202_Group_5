@@ -3,7 +3,7 @@ import styles from "./EditPassWord.module.css";
 import CheckIcon from '@mui/icons-material/Check';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import {Link} from 'react-router-dom';
+
 function ColorButtons() {
   return (
     <Stack direction="row" spacing={2}>
