@@ -76,15 +76,6 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         else {
             setNotify(prev => ({ ...prev, phone: "" }))
         }
-        // if (isRequired(order.countGuest)) {
-        //     setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập số người" }))
-        // }
-        // else if (isNumber(order.countGuest)) {
-        //     setNotify(prev => ({ ...prev, countGuest: "Vui lòng nhập đúng số" }))
-        // }
-        // else {
-        //     setNotify(prev => ({ ...prev, countGuest: "" }))
-        // }
         if (isRequired(order.validateTime)) {
             setNotify(prev => ({ ...prev, celendar: "Vui lòng chọn thời gian" }))
         } else if (isFutureDate(order.validateTime)) {
@@ -106,9 +97,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         dispatch(createOrderTable(order))
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-    // const handleAddProduct = () => {
-    //     setModalShow(false)
-    // }
+
     const handleReset = () => {
         setActiveStep(0);
 

@@ -21,13 +21,13 @@ const MenuProps = {
 
 export default function SelectMuiltiMui({ label, listName, position, id, setOrder, order }) {
     const indexTable = listName.find((name) => name.id === id)
-    const [personName, setPersonName] = React.useState([`${indexTable.index_table}`]);
+    const [personName, setPersonName] = React.useState([`${order.tableId.length===1? indexTable.index_table : order.tableId}`]);
     const handleChange = (event) => {
         const {
             target: { value },
         } = event;
         setOrder(prev => {
-            return { ...prev, tableId: [...value] }
+            return { ...prev, tableId:value }
         })
         setPersonName(
             typeof value === 'string' ? value.split(',') : value,

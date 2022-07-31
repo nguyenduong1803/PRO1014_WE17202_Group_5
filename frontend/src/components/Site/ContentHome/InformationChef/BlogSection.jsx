@@ -28,9 +28,9 @@ function BlogSection() {
                 <div className="section-heading text-center">
                     <div className="row">
                         <div className="col-lg-8 offset-lg-2">
-                            <div className={styles.subTitle}>RECENT BLOG</div>
-                            <h2 className={styles.sectionTitle}>Keep Updated From Blog</h2>
-                            <p className={styles.contentitle}>Et optio praesent et! Eligendi ab, irure impedit rhoncus, doloremque! Pretium nobis nobis modi ullamco excepturi recusandae et! Nec scelerisque, natus gravida.</p>
+                            <div className={styles.subTitle}>INFOMATION</div>
+                            <h2 className={styles.sectionTitle}>About us</h2>
+                            <p className={styles.contentitle}>Đầu bếp hàng đầu Việt Nam</p>
                         </div>
                     </div>
                 </div>

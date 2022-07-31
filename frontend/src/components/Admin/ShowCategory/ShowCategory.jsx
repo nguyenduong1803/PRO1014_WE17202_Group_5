@@ -8,7 +8,7 @@ export default function SelectSmall() {
     };
 
     return (
-        <select class="form-select" aria-label="Default select example" onChange={(e)=>handleChange(e)}>
+        <select className="form-select" aria-label="Default select example" onChange={(e)=>handleChange(e)}>
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>

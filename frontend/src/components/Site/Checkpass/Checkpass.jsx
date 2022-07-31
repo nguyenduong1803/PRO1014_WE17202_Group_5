@@ -37,7 +37,7 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={theme} class='main'>
+    <ThemeProvider theme={theme} className='main'>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
