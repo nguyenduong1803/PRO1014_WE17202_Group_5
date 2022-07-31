@@ -23,7 +23,7 @@ function Cart() {
             <div className={`${styles.container} ${styles.content}`}>
               <div className={styles.shoppingCart}>
                 <div className={styles.shoppingCartHeader}>
-                  <i class="fa fa-shopping-cart cart-icon"></i>
+                  <i className="fa fa-shopping-cart cart-icon"></i>
                   <span className={styles.badge}>3</span>
                   <div className={styles.shoppingCartTotal}>
                     <span className={styles.lighterText}>Tổng:</span>

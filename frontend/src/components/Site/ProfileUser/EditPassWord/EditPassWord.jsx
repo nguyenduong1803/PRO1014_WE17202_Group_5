@@ -27,30 +27,30 @@ function EditPassWord() {
         </ul>
       </div>
       <div className={styles.input}>
-        <form class="row g-3" style={{ display: "initial" }}>
-          <div class="col-auto col-lg-4" style={{ width: "400px" }}>
+        <form className="row g-3" style={{ display: "initial" }}>
+          <div className="col-auto col-lg-4" style={{ width: "400px" }}>
           
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="inputPassword2"
               placeholder="Mật khẩu cũ"
             />
           </div>
-          <div class="col-auto col-lg-4" style={{ width: "400px" }}>
+          <div className="col-auto col-lg-4" style={{ width: "400px" }}>
           
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="inputPassword2"
               placeholder="Mật khẩu mới"
             />
           </div>
-          <div class="col-auto col-lg-4" style={{ width: "400px" }}>
+          <div className="col-auto col-lg-4" style={{ width: "400px" }}>
             
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="inputPassword2"
               placeholder="Nhập lại mật khẩu mới"
             />

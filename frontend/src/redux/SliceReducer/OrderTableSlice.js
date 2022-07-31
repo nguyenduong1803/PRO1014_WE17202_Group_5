@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import { getToken } from "../../utils/Common"
-import { v4 as uuidv4 } from 'uuid';
+
 const api = "http://127.0.0.1:8000/api/"
 const tableOrder = {
     tableId: [],
@@ -28,7 +28,7 @@ const OrderTableSlice = createSlice({
         },
         addOrder: (state, action) => {
             const product = state.order.find(item => item.id === action.payload.id);
-            console.log(uuidv4())
+            
             if (product) {
                 product.quantity = product.quantity + 1
             } else {
@@ -63,7 +63,7 @@ const OrderTableSlice = createSlice({
                     state.status = "idle"
                 }
             }).addCase(createOrderTable.fulfilled, (state, action) => {
-
+                state.orderTable=action.payload
             }).addCase(addCart.fulfilled, (state, action) => {
                 state.cart.push(action.payload)
             }).addCase(getListCart.fulfilled, (state, action) => {
@@ -115,12 +115,12 @@ export const getListTable = createAsyncThunk("orderTable/getListTable", async (p
 })
 export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", async (payload, action) => {
     let payloads
-    console.log(payload)
+    console.log(payload.tableId[0][0].join(""))
     await axios
         .post(api + "tableBook/create",
             {
                 name_user: payload.name,
-                id_table: payload.tableId,
+                id_table: payload.tableId[0].join(""),
                 status_book: 2,
                 phone: payload.phone,
                 total_user: payload.countGuest,
@@ -207,7 +207,29 @@ export const addQuantityOrder = (payload) => {
 export const createOrder = createAsyncThunk("orderTable/createOrder", async (payload, action) => {
     let payloads
     await axios
-        .get(api + "invoices/create", {
+        .post(api + "invoices/create",
+        {
+            list_id_product: [
+                4,
+                5,
+                4
+            ],
+            list_amount: [
+                2,
+                3,
+                4
+            ],
+            list_table_book: [
+                4,
+                4,
+                null
+            ],
+            user_name_book: "duong",
+            time_book:"" ,
+            phone:"0982996764",
+            note: "test"
+        },
+        {
             headers: { "Authorization": `Bearer ${getToken()}` },
         })
         .then(response => {
