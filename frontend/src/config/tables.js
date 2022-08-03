@@ -317,7 +317,7 @@ export const tableProduct = [
     },
     {
       name: "Quản lý",
-      width: 80,
+      width: 180,
       dataKey: "id",
       isFixed: "right",
       type: "deleteCate"

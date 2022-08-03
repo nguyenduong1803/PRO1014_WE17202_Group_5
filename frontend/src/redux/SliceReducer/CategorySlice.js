@@ -35,7 +35,11 @@ const CategorySlice = createSlice({
                     state.isSuccess = false
                     state.status = "idle"
                 }
-            }).addCase(deleteCategoryById.fulfilled, (state, action) => {
+            }).addCase(deleteCategoryById.pending, (state) => {
+                state.status = "loading"
+            })
+            .addCase(deleteCategoryById.fulfilled, (state, action) => {
+                state.status = "idle"
                 if (action.payload.status === true) {
                     state.category.forEach((item, index) => {
                         if (item.id === action.payload.id) {
@@ -45,6 +49,8 @@ const CategorySlice = createSlice({
                 } else {
                     console.log(action.payload)
                 }
+            }).addCase(updateCategory.fulfilled, (state, action) => {
+
             })
     }
 })
@@ -63,7 +69,7 @@ export const deleteCategoryById = createAsyncThunk("category/deleteCategoryById"
     let payloads
     console.log(payload)
     await axios
-        .delete(api + `directory/delete/${payload.id}`,
+        .delete(api + `directory/delete/${payload}`,
             {
                 headers: { "Authorization": `Bearer ${getToken()}` }
             })
@@ -77,7 +83,6 @@ export const deleteCategoryById = createAsyncThunk("category/deleteCategoryById"
     return payloads
 })
 export const addCategorys = createAsyncThunk("category/addCategorys", async (payload, action) => {
-
     await axios
         .post(api + "directory/create",
             {

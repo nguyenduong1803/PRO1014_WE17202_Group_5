@@ -31,23 +31,12 @@ const ProductCategory = () => {
     },
   ];
 
-  const handleDeleteProduct = () => {
+  const handleDeleteProduct = (idCate) => {
     console.log("delete");
+    console.log(idCate)
+    dispatch(deleteCategoryById(idCate))
   };
-  const [listCateGory, setListCateGory] = useState([]);
-  
-  useEffect(() => {
-    async function getList() {
-   const res =  await axios
-        .get(api + "directory/getLists", {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        })
-          setListCateGory(res.data.data)
-          console.log(res.data.data)
-    }
-    getList();
-    
-  }, []);
+ 
   return (
     <>
       <Sidebar />
@@ -80,6 +69,7 @@ const ProductCategory = () => {
             PageSize={10}
             tables={categoryTable}
             setIdProduct={setIdProduct}
+            path="sua-danh-muc/"
           />
 
           <div className={`${styles.pagination} justify-content-between`}>

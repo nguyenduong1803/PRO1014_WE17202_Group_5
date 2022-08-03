@@ -52,7 +52,7 @@ export const routerAdmin =[
     },
     {
         component :EditCategory,
-        path:"sua-danh-muc",
+        path:"sua-danh-muc/:name",
     },
     {
         component :Profile,
