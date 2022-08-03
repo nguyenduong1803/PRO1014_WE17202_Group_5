@@ -3,7 +3,7 @@ import styles from "./ModalDelete.module.css"
 function ModalDelete({ idProduct, handleDeleteProduct }) {
     return (
         <div
-            className="modal fade"
+            className={ `modal `}
             id="exampleModal"
             tabIndex="-1"
             role="dialog"
@@ -11,7 +11,7 @@ function ModalDelete({ idProduct, handleDeleteProduct }) {
             aria-hidden="true"
         >
             <div className="modal-dialog modal-dialog-centered" role="document">
-                <div className="modal-content">
+                <div className={`modal-content ${styles.modalCustom}`}>
                     <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">
                             Xóa sản phẩm

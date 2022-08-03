@@ -70,3 +70,7 @@
     border-radius: 0.25rem;
     background-color: #fff;
 }
+.modalCustom{
+    width: auto !important;
+    min-height: 200px !important;
+}

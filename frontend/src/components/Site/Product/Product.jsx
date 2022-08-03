@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import { formatMoney } from "../../../extensions/formatMoney"
 import AddIcon from '@mui/icons-material/Add';
-import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';

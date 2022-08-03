@@ -2,6 +2,7 @@ import React from 'react'
 import styles from "./Tablecustom.module.css"
 import { Link } from "react-router-dom";
 import Table from "rsuite/Table";
+import {toSlug} from "../../../extensions/toSlug"
 import "rsuite-table/dist/css/rsuite-table.css";
 import Loadings from "../../../components/Site/Loadings/Loadings"
 import { searchProduct } from '../../../redux/SliceReducer/ManagerProductSlice';
@@ -62,9 +63,18 @@ const OrderDetail = ({ rowData, dataKey, ...props }) => (
         </div>
     </Table.Cell>
 );
-const Delete =  ({ rowData, dataKey, setIdProduct, path, ...props }) => (
+const CategoryAction = ({ rowData, dataKey, setIdProduct,nameCate, path, ...props }) => (
     <Table.Cell {...props}>
         <div className={styles.Celll}>
+            <Link
+                to={{
+                    pathname: `/admin/${path}${rowData[dataKey]}`,
+                }}
+                className={`${styles.btnEdit} `}
+                role="button"
+            >
+                Sửa
+            </Link>
             <button
                 className={`${styles.btnDelete}`}
                 onClick={() => setIdProduct(rowData[dataKey])}
@@ -125,7 +135,7 @@ const EditCell = ({ rowData, dataKey, setIdProduct, ...props }) => {
         <Table.Cell {...props}>
             <div className={styles.Celll}>
                 <Link
-                    onClick={()=>dispatch(searchProduct(rowData[dataKey]))}
+                    onClick={() => dispatch(searchProduct(rowData[dataKey]))}
                     to={{
                         pathname: `/admin/sua-san-pham`,
                         search: `#${rowData[dataKey]}`,
@@ -178,8 +188,8 @@ function Tablecustom({ tables, data, setIdProduct, path }) {
                                         Component = <CommentCell dataKey={table.dataKey} />
                                     } else if (table.type === "postAction") {
                                         Component = <PostAction setIsBlog={setIdProduct} dataKey={table.dataKey} path={path} />
-                                    } else if(table.type === "deleteCate"){
-                                        Component = <Delete setIdProduct={setIdProduct} dataKey={table.dataKey} path={path} />
+                                    } else if (table.type === "deleteCate") {
+                                        Component = <CategoryAction setIdProduct={setIdProduct} dataKey={table.dataKey} path={path}nameCate={table.name} />
                                     }
                                     else if (table.type === "orderAction") {
                                         Component = <OrderDetail dataKey={table.dataKey} />
