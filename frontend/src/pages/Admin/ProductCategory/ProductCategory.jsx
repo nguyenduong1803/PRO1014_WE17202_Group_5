@@ -13,7 +13,10 @@ import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
 import { selectCategory } from "../../../redux/selector";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategoryById } from "../../../redux/SliceReducer/CategorySlice";
-
+import { api } from '../../../redux/SliceReducer/AuthSlice';
+import axios from 'axios';
+import { getToken } from '../../../utils/Common';
+import { useHistory } from 'react-router-dom'
 const ProductCategory = () => {
   const [idProduct, setIdProduct]= React.useState("");
   const categories = useSelector(selectCategory)

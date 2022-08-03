@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ProfileUser.module.css";
 import imguser from "../../../assets/img/Chef1.jpg";
 import PinDropIcon from "@mui/icons-material/PinDrop";
@@ -15,19 +15,16 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import EditUser from "./EditInformation/EditInformationUser";
 import EditPass from "./EditPassWord/EditPassWord";
-const User = [
-  {
-    img: imguser,
-    name: "Devon Lane",
-    address: "Lisbon, Portugal",
-    addressEmail: "Hoa121102@gmail.com",
-    phone: '0987654321',
-  },
-];
+import { api } from '../../../redux/SliceReducer/AuthSlice';
+import axios from 'axios';
+import { getToken } from '../../../utils/Common';
+
+
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
+ 
   return (
     <div
       role="tabpanel"
@@ -105,32 +102,44 @@ function FullWidthTabs() {
 }
 
 function ProfileUser() {
+  const [userInfo, setUserInfo] = useState({});
+  useEffect(() => {
+    async function user() {
+   const res =  await axios
+        .get(api + "auth/getInfoUser", {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        })
+        setUserInfo(res.data.user)
+    }
+    user();
+    
+  }, []);
   return (
     <div>
       <div className={styles.content}>
         <div className={styles.img}></div>
         <div className={`${styles.row} row`}>
-          {User.map((users, index) => (
+        
             <div className={`${styles.rowcol6} row`}>
               <div className="col-lg-4">
-                <img className={styles.imguser} src={users.img} alt="" />
+                <img className={styles.imguser} src={userInfo.img} alt="" />
               </div>
               <div className={`${styles.rowcol4} col-lg-4`}>
                 
-                <h4 className={styles.h4}>Họ Tên : {users.name} </h4>
+                <h4 className={styles.h4}>Họ Tên : {userInfo.ten} </h4>
                 <p>
                   <PinDropIcon />
-                  Địa Chỉ : {users.address}
+                  Địa Chỉ : {userInfo.dia_chi}
                   
                 </p>
               </div>
               <div className={`${styles.rowcol4} col-lg-4`}>
-                <p>SDT : {users.phone}</p>
+                <p>SDT : {userInfo.sdt}</p>
 
-                <p className={styles.h4}>Email : {users.addressEmail}</p>
+                <p className={styles.h4}>Email : {userInfo.email}</p>
               </div>
             </div>
-          ))}
+         
 
           {/* <div className={`${styles.rowss} row`}>
                     <div className="col-lg-4">

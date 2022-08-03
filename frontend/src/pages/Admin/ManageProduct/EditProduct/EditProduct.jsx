@@ -8,7 +8,7 @@ import {  useSelector } from "react-redux";
 import { selectProductById } from "../../../../redux/selector";
 function EditProduct() {
   
-
+  
   const product = useSelector(selectProductById)
 
 
