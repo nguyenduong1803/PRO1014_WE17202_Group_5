@@ -200,7 +200,10 @@ html {
   margin: 0 0 0 auto;
   z-index: 5;
 }
-
+.form-check-input:checked {
+  background-color: var(--primaryColor);
+  border-color: var(--primaryColor);
+}
 #datetime-local,#datetime-local-label {
   color:var(--warning-color);
 }

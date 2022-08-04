@@ -1,20 +1,22 @@
 import React from "react";
 import styles from "./MenuContetnOptions.module.css";
-import Checkbox from "@mui/material/Checkbox";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import InputLabel from '@mui/material/InputLabel';
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
+import { selectCategory } from "../../../../redux/selector";
+import { useSelector } from "react-redux";
 
-
-function MenuContentOpTions({setModalShow,modalShow}) {
-  
+function MenuContentOpTions({ setModalShow, modalShow }) {
+  const listCategory = useSelector(selectCategory)
+  const [activeCate,setActiveCate]= React.useState("")
+const handleActiveCate = (index)=>{
+  setActiveCate(index)
+}
   const handleShowOrder = () => {
-      setModalShow(!modalShow)
+    setModalShow(!modalShow)
   }
 
-  // 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -22,7 +24,7 @@ function MenuContentOpTions({setModalShow,modalShow}) {
     return `${value} VNĐ`;
   }
   const [value, setValue] = React.useState([0, 500000]);
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
+  
   return (
     <div className={styles.Menu}>
       <div style={{ display: 'flex', width: '100%' }} className="position-relative">
@@ -64,7 +66,16 @@ function MenuContentOpTions({setModalShow,modalShow}) {
           >
             <div className="accordion-body" style={{ padding: "0" }}>
               <div className={styles.option}>
-                <Checkbox {...label} /> Admin Templates
+                {
+                  listCategory.map((category,index) => (
+                    <div className={activeCate===index ?`form-check ${styles.input_space} ${styles.input_space_active}`: `form-check ${styles.input_space}`} key={category.id} >
+                      <input onClick={()=>handleActiveCate(index)} className="form-check-input" type="radio" name="flexRadioDefault" id={`${category.name}__category`} />
+                      <label onClick={()=>handleActiveCate(index)} className={`form-check-label ${styles.input_label}`} for={`${category.name}__category`}>
+                        {category.name}
+                      </label>
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>
@@ -106,7 +117,7 @@ function MenuContentOpTions({setModalShow,modalShow}) {
           <div className="accordion-body" style={{ padding: "0" }}></div>
         </div>
       </div>
-     
+
       {/* <div
         style={{ borderRadius: "20px", marginTop: "30px" }}
         className={styles.optionss}

@@ -6,7 +6,6 @@ import Trending from "./TrendingOrder/TrendingOrder";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ContentRight from "./ContentHomeRight/SaleFood/SaleFood";
 import product1 from "../../../../src/assets/img/seafood-1.jpg";
-import product2 from "../../../../src/assets/img/seafood-2.png";
 import product3 from "../../../../src/assets/img/seafood-3.jpg";
 import product4 from "../../../../src/assets/img/seafood-10.jpg";
 import product5 from "../../../../src/assets/img/seafood-14.webp";
@@ -14,9 +13,7 @@ import styles from "../ContentHome/TrendingOrder/TrendingOrder.module.css";
 import MyCart from "../../Site/ContentHome/ContentHomeRight/MyCart/MyCart";
 import InformationChef from'./InformationChef/BlogSection';
 import BlogItem from './InformationChef/BlogItem';
-// import product6 from "../../../../src/assets/img/seafood-10.jpg";
-// import product7 from "../../../../src/assets/img/seafood-10.jpg";
-// import product8 from "../../../../src/assets/img/seafood-10.jpg";
+
 import ProfileUser from '../ProfileUser/ProfileUser';
 import Slider from './Slider/Slider';
 

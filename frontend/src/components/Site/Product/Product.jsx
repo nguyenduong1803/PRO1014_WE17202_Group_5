@@ -8,6 +8,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
 import { addCart } from '../../../redux/SliceReducer/OrderTableSlice';
+import { getToken } from '../../../utils/Common';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -35,8 +36,9 @@ function BasicRating() {
     </>
   );
 }
-function Product({ img, title, price,id }) {
+function Product({ img, title, price, id }) {
   const dispatch = useDispatch();
+  const [notifyAlert,setNotifyAlert]=React.useState("")
   const [state, setState] = React.useState({
     open: false,
     vertical: 'top',
@@ -44,8 +46,15 @@ function Product({ img, title, price,id }) {
   });
   const { vertical, horizontal, open } = state;
   const handleClick = (newState) => () => {
-    dispatch(addCart({id:id,amount:1}))
-    setState({ open: true, ...newState });
+    if (getToken()) {
+      dispatch(addCart({ id: id, amount: 1 }))
+      setState({ open: true, ...newState });
+      setNotifyAlert("Đã thêm vào giỏ hàng")
+    } else {
+      setState({ open: true, ...newState });
+      setNotifyAlert("Bạn chưa đăng nhập")
+    }
+
   };
 
   const handleClose = () => {
@@ -71,7 +80,7 @@ function Product({ img, title, price,id }) {
         message="I love snacks"
         key={vertical + horizontal}
       >
-        <Alert severity="success">Đã thêm vào giỏ hàng</Alert>
+        <Alert severity="success">{notifyAlert}</Alert>
       </Snackbar>
     </div>
   )

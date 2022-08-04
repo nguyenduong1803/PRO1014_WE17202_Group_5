@@ -14,9 +14,9 @@ function Banner() {
         <p className={styles.deal}><SvgIcon className={styles.SvgIcon}/> Deal of the weekend</p>
         <h3 className={styles.contents}>Welcome to seafood !!! </h3>
         <p className={styles.note}>Wonderfully fresh</p>
-       <Link to='/menu'>
-       <Button variant="contained" className={styles.button}>
-          Check Menu
+       <Link to='/dat-ban'>
+       <Button variant="contained" size="large" className={styles.button}>
+          Đặt bàn ngay
         </Button>
        </Link>
       </div>

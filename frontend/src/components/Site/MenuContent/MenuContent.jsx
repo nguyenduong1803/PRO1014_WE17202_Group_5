@@ -4,7 +4,7 @@ import MenuContentOptions from './MenuContentOptions/MenuContentOpTions';
 import LayoutSite from '../LayoutSite/LayoutSite';
 import product1 from '../../../assets/img/seafood-1.jpg';
 import { useSelector } from 'react-redux';
-import {  selectLoadingProduct, selectProducts } from '../../../redux/selector';
+import {   selectLoadingProduct, selectProducts } from '../../../redux/selector';
 import Product from '../Product/Product';
 import { AuthContext } from '../../../contexts/AuthenContext';
 import StepperMui from '../TableOption/StepperMui';
@@ -75,6 +75,7 @@ const product = [
 function MenuContent() {
   const listProduct = useSelector(selectProducts)
   const loadingProduct = useSelector(selectLoadingProduct)
+
   const category = [
     { name: "category" },
     { name: "category" },
