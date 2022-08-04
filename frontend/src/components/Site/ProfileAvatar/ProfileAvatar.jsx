@@ -43,12 +43,12 @@ export default function ProfileAvatar() {
             style={{ fontSize: ".8rem" }}
             to="/profile"
           >
-            {" "}
+            
             <Avatar
               fontSize="small"
-              style={{ width: "25px", height: "25px" }}
-            />{" "}
-            Profile{" "}
+              style={{ width: "25px", height: "25px",marginRight:'10px'}}
+            />
+            Profile
           </Link>
         </li>
         {/* <li>
@@ -60,7 +60,7 @@ export default function ProfileAvatar() {
             <Avatar
               fontSize="small"
               style={{ width: "25px", height: "25px" }}
-            />{" "}
+            />
             My account
           </a>
         </li> */}
@@ -70,9 +70,9 @@ export default function ProfileAvatar() {
             style={{ fontSize: ".8rem" }}
             to='/dang-ky'
           >
-            <ListItemIcon style={{ minWidth: "0" }}>
+            <ListItemIcon style={{ minWidth: "0" ,paddingRight: "10px"}}>
               <PersonAdd fontSize="medium" />
-            </ListItemIcon>{" "}
+            </ListItemIcon>
             Add another account
           </Link>
         </li>
@@ -95,8 +95,8 @@ export default function ProfileAvatar() {
             to="/"
             onClick={handleLogout}
           >
-            {" "}
-            <ListItemIcon style={{ minWidth: "0" }}>
+            
+            <ListItemIcon style={{ minWidth: "0" ,paddingRight: "10px"}}>
               <Logout fontSize="medium" />
             </ListItemIcon>
             Logout

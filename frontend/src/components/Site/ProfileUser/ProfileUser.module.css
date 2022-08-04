@@ -7,7 +7,10 @@
     border-radius: 20px;
 
 }
-
+.forms{
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
 .img {
     height: 270px;
 }
@@ -45,13 +48,7 @@
 .h4 {
     padding: 5px 0;
 }
-.AppBar{
-    width: 450px !important;
-    border-radius: 10px;
-    background-color: #ff6464 !important;
-    margin-left: -100px;
-    
-}
+
 .col6 {
     float: right;
 }
@@ -76,7 +73,26 @@
 .link{
     text-decoration: none;
 }
+.AppBar{
+    width: 350px !important;
+    border-radius: 10px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    float: right;
+    background-color: #565CBA !important;
+    
+}
+.bgr{
+    background-color: rgba(255, 255, 255,0.5);
+    border: 2px solid #fff;
+    border-radius: 20px;
+    margin: 0 50px;
+
+}
 .Box{
     background-color:none !important;
     margin:0 auto;
+    width: 100%;
+    padding: 20px 40px;
 }
