@@ -11,6 +11,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -92,5 +93,11 @@ class UserController extends Controller
         $modelUser -> updateInfo($params);
         return response() ->json(["msg" => "Cập nhật thông tin tài khoản thành công!"],200);
 
+    }
+
+    public function getAllUsers(Request $request) {
+        $modelUser = new User();
+        $data = $modelUser -> getAllUsers($request);
+        return $data;
     }
 }

@@ -65,7 +65,10 @@ Route::group(['namespace' => 'User', 'prefix' => 'user'], function(){
     Route::post('sendMailForgotPassword', [\App\Http\Controllers\Api\User\UserController::class, 'sendMailForgotPassword']);
     Route::get('getPassForgot/{id}/{token}', [\App\Http\Controllers\Api\User\UserController::class, 'getPassForgot']) -> name('user.getPassForgot');
     Route::post('resetPassword', [\App\Http\Controllers\Api\User\UserController::class, 'resetPassword']);
-    Route::post('updateInfo', [\App\Http\Controllers\Api\User\UserController::class, 'updateInfo']) -> middleware('auth:api');
+    Route::middleware('auth:api') -> group(function () {
+        Route::post('updateInfo', [\App\Http\Controllers\Api\User\UserController::class, 'updateInfo']);
+        Route::get('getAllUsers', [\App\Http\Controllers\Api\User\UserController::class, 'getAllUsers']);
+    });
 });
 
 Route::group(['namespace' => 'Cart', 'prefix' => 'cart'], function(){
