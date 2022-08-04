@@ -71,7 +71,7 @@
   position: fixed;
   right: 50%;
   transform: translateX(50%);
-  top: 14%;
+  top: 11%;
   // transform: translateX(-50%);
   border-radius: 4px;
   z-index: 22;
@@ -89,12 +89,13 @@
 .TableOption__wrapCart {
   opacity: 0;
   background-color: #fff;
-  max-width: 675px;
+  width: 675px;
   position: fixed;
+  max-width: 675px;
   min-height: 593px;
   padding: 12px 0;
   left: 40%;
-  top: 14%;
+  top: 11%;
   // transform: translateX(-50%);
   border-radius: 4px;
   z-index: 1;
@@ -313,6 +314,7 @@
 }
 
 .content__cart-box {
+  padding-top: 12px;
   flex-wrap: wrap;
   overflow-y: auto;
   width: 100%;

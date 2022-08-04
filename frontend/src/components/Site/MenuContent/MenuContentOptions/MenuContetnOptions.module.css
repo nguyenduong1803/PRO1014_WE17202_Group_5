@@ -91,12 +91,15 @@
 }
 .input_space{
     margin: 12px 0;
-    border-bottom: 1px solid rgb(231, 231, 231);
+    border-bottom: 2px solid rgb(255, 255, 255);
     line-height:25px;
     padding-bottom: 6px;
 }
 .input_space.input_space_active{
     color: var(--primaryColor);
+}
+.input_label{
+    font-weight: 500;
 }
 .input_label:hover{
     cursor: pointer;

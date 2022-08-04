@@ -16,7 +16,7 @@
   z-index: 20;
 }
 
-.navbar.active {
+.navbar.activeHead {
   width: 300px;
 }
 
@@ -30,14 +30,16 @@
   opacity: 0.5;
   animation: rotation 10s infinite linear;
 }
-.bgrLine{
+
+.bgrLine {
   top: 200px;
   position: relative;
   z-index: 1;
   width: 120%;
   left: -20px;
 }
-.overlayQ{
+
+.overlayQ {
   display: flex;
 
   width: 100vw;
@@ -48,6 +50,7 @@
 
   z-index: 2;
 }
+
 .shapeCircle {
   background-image: linear-gradient(.314turn, rgba(40, 112, 222, .3) -32.12%, rgba(220, 232, 250, .35) 110.13%);
   -webkit-backdrop-filter: blur(4px);
@@ -61,7 +64,7 @@
   top: 150px;
   height: 100px;
   width: 100px;
-  box-shadow: 0 16px 24px rgba(40,112,222,.16);
+  box-shadow: 0 16px 24px rgba(40, 112, 222, .16);
 
 }
 
@@ -87,6 +90,12 @@
   top: 0;
   left: 0;
   width: 100%;
+  scrollbar-color: var(--primaryColor) var(--purple);
+}
+.navbar ul::-webkit-scrollbar-thumb {
+  background-color: var(--purple);
+  border-radius: 10px;
+  border: 3px solid #ffffff;
 }
 
 .navbar ul li {
@@ -108,7 +117,20 @@
   border-radius: 20px;
 }
 
-
+.active.navLink::before {
+  background-color: rgba(234, 106, 18, 0.03);
+  transform: translate(-50%, -50%) scale(1);
+  width: 93%;
+  height: 70%;
+  border-radius: 20px;
+  border:1px solid rgb(239, 239, 239);
+}
+.active .icon svg{
+  transition: 0.2s;
+}
+.active .icon svg{
+  fill: var(--primaryColor);
+}
 
 .navLink {
   position: relative;
@@ -121,7 +143,6 @@
   color: var(--cl-text);
   transition: .2s;
   overflow: hidden;
-
 
 }
 
@@ -165,7 +186,7 @@
   cursor: pointer;
 }
 
-.active .title {
+.activeHead .title {
   transform: translateX(0);
   transition: 0.5s cubic-bezier(0.85, 0.05, 0.595, 0.35);
   opacity: 1;
@@ -190,7 +211,7 @@
     left: -70px;
   }
 
-  .navbar.active {
+  .navbar.activeHead {
     left: 0;
     width: 100%;
   }

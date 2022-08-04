@@ -12,65 +12,7 @@ import { ModalLogin } from '../TableOption/OrderItem';
 import { getToken } from '../../../utils/Common';
 import LoadingProduct from '../Loading/LoadingProduct';
 import ChooseProduct from '../TableOption/ChooseProduct';
-const product = [
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
-  },
-  {
-    img: product1,
-    title: "overlay",
-    content: "Copyright 2022. Made with love by Iqonic Design",
 
-
-  },
-];
 
 function MenuContent() {
   const listProduct = useSelector(selectProducts)

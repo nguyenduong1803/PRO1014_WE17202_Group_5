@@ -11,7 +11,7 @@ import OrderItem from './OrderItem';
 import style from "./TableOption.scss"
 import { selectOrderTable, selectProductOrder, selectProducts } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
+import { createOrder, createOrderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
 import CloseIcon from '@mui/icons-material/Close';
 import ProductCartTable from './ProductCartTable';
 import { isFutureDate, isNumber, isPhoneNumber, isRequired } from '../../../utils/Validate';
@@ -94,8 +94,10 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
     // step3
     const handleOrder = () => {
         console.log(order)
-        dispatch(createOrderTable(order))
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        // dispatch(createOrderTable(order))
+        dispatch(createOrder(order))
+        console.log("order")
+        // setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
     const handleReset = () => {

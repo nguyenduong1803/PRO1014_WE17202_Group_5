@@ -116,16 +116,22 @@ export const getListTable = createAsyncThunk("orderTable/getListTable", async (p
 export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", async (payload, action) => {
     let payloads
     console.log(payload.tableId[0][0].join(""))
+
+    const test = [1,2,3]
+    const test1 = ['a', 'b', 'c']
+
     await axios
         .post(api + "tableBook/create",
             {
-                name_user: payload.name,
-                id_table: payload.tableId[0].join(""),
-                status_book: 2,
-                phone: payload.phone,
-                total_user: payload.countGuest,
-                time_book: payload.celendar,
-                description: "mô tả"
+                // name_user: payload.name,
+                // id_table: payload.tableId[0].join(""),
+                // status_book: 2,
+                // phone: payload.phone,
+                // total_user: payload.countGuest,
+                // time_book: payload.celendar,
+                // description: "mô tả"
+                table : test,
+                user : test1
             },
             {
                 headers: { "Authorization": `Bearer ${getToken()}` },
@@ -225,8 +231,8 @@ export const createOrder = createAsyncThunk("orderTable/createOrder", async (pay
                 null
             ],
             user_name_book: "duong",
-            time_book:"" ,
-            phone:"0982996764",
+            time_book: "",
+            phone: "0982996764",
             note: "test"
         },
         {

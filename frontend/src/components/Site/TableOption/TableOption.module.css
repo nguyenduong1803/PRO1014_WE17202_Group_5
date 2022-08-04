@@ -148,6 +148,7 @@
     border-radius: 20px;
     border: 1px solid rgb(228, 228, 228);
     width: 280px;
+    padding-right: 12px;
 }
 
 .searchInput::placeholder {
@@ -155,7 +156,10 @@
     color: rgb(136, 136, 136);
 
 }
-
+.emptyTitle{
+    margin-top: 24px;
+    font-weight: 500;
+}
 .searchIcon {
     position: absolute;
     left: 15px;
