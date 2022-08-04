@@ -72,6 +72,12 @@ class InvoicesController extends Controller
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
         return response() ->json(["data" => $data, "status" => true],200);
     }
+    public function getInvoicesByAdmin() {
+        $modelInvoices = new Invoices();
+        $data = $modelInvoices -> getInvoicesByAdmin();
+        if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
+        return response() ->json(["data" => $data, "status" => true],200);
+    }
 
     public function updateInvoice(InvoiceUpdate $request,$id) {
         $validate = $request -> validated();

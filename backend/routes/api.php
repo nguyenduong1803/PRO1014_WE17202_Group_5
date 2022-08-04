@@ -81,6 +81,7 @@ Route::group(['namespace' => 'Invoices', 'prefix' => 'invoices'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'create']);
         Route::get('getInvoicesByUser', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'getInvoicesByUser']);
+        Route::get('getInvoicesByAdmin', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'getInvoicesByAdmin']);
         Route::post('update/{id}', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'updateInvoice']);
     });
 });
