@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./LayoutSite.module.css"
 import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import Line from "../../../assets/svg/Line"
 import { selectLoading } from "../../../redux/selector"
 import Loadings from "../../../components/Site/Loadings/Loadings"
@@ -13,7 +13,6 @@ import BarArrow from '../../../assets/svg/BarArrow'
 
 function LayoutSite({ children }) {
     const load = useSelector(selectLoading)
-
     return (
         <>
             {load === "loading" ? <Loadings /> : ""}
@@ -36,6 +35,13 @@ function LayoutSite({ children }) {
 }
 const Navbar = () => {
     const refBar = React.useRef();
+    const [isActive, setIsActive] = React.useState(3);
+    let activeStyle = {
+        backgroundColor: "#000"
+    };
+
+    let activeClassName = "underline";
+
     return (
         <nav
             className={styles.navbar}
@@ -47,7 +53,7 @@ const Navbar = () => {
             >
                 <li>
                     <p className={`${styles.toggle} ${styles.navLink}`}
-                        onClick={() => { refBar.current.classList.toggle(`${styles.active}`) }}
+                        onClick={() => { refBar.current.classList.toggle(`${styles.activeHead}`) }}
                     >
                         <span className={styles.icon}
                         ><BarArrow width="25px" className={styles.barIcon} /></span>
@@ -55,11 +61,14 @@ const Navbar = () => {
                     </p>
                 </li>
                 {listMenu.map((menu, index) => (
-                    <li key={index}   >
-                        <Link className={styles.navLink} to={menu.to}>
+                    <li key={index}  >
+                        <NavLink
+                            className={(isActive) => `${styles.navLink} ${isActive && styles.active}`} to={menu.to}
+                            exact 
+                        >
                             <span className={styles.icon}>{menu.icon}</span>
                             <span className={styles.title}>{menu.name}</span>
-                        </Link>
+                        </NavLink>
                     </li>
                 ))}
             </ul>

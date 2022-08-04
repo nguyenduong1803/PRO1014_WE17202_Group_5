@@ -12,6 +12,7 @@ import logo from "../../../assets/img/logoSea.png"
 import Cart from './Cart/Cart';
 function Header() {
     const infoUser = useContext(AuthContext)
+    
     return (
         <div className="container-fluid">
             <header className={`${styles.header} `} >
@@ -21,7 +22,6 @@ function Header() {
                     </div>
                     <div className="col-lg-5 col-md-6">
                         <div className={styles.search}>
-
                             <div className={styles.warpInput}>
                                 <input
                                     className={styles.searchInput}
@@ -48,13 +48,10 @@ function Header() {
                                         <Link to="/dang-nhap" className={styles.name}><span className={styles.iconLogin}><LoginIcon /></span> Đăng nhập</Link>
                                     </div>
                                 }
-
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </header >
         </div>
     )

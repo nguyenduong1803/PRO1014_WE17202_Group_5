@@ -1,16 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
-
-@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-
-
-
+ 
 .navbarLeft {
   float: left;
 }
@@ -117,7 +105,7 @@
   padding: 20px;
   border-bottom: 1px solid #E8E8E8;
   padding-bottom: 15px;
-  background-color: #FF8888;
+  background-color:  var(--purple);
 
 }
 
@@ -137,7 +125,7 @@
 .shoppingCartItems {
   overflow-y: auto;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 1);
   max-height:350px;
   overflow-y: auto;
   min-height: 100px;
@@ -163,19 +151,28 @@
 }
 
 .itemPrice {
-  color: #6394F8;
+  color:  var(--purple);
   margin-right: 8px;
 }
 
 .itemQuantity {
   color: #777777;
 }
-
+.lighterText{
+  padding-right: 6px;
+}
+.mainColorText,.lighterText{
+  color:#fff;
+  font-size: 1rem;
+}
 .footerButton {
   display: inline-flex;
   width: 100%;
   justify-content: space-between;
   padding: 10px;
+  background-color:  var(--purple);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .CloseIcon {
@@ -194,7 +191,7 @@
 
 .shoppingCart:before {
   width: 100%;
-  content: " ";
+  content: "";
   position: absolute;
   display: block;
   background-color: rgba(255, 255, 255, 0.5);
@@ -225,7 +222,7 @@
 }
 
 .button {
-  background-color: #FF8888;
+  background-color: var(--purple);
   color: white;
   text-align: center;
   padding: 12px;

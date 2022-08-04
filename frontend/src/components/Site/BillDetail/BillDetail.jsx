@@ -2,7 +2,6 @@ import React from 'react'
 import styles from "./BillDetail.module.css"
 import { Link } from "react-router-dom"
 import { formatMoney } from "../../../extensions/formatMoney"
-import axios from "axios"
 
 
 function Bill({ bill, carts, data }) {

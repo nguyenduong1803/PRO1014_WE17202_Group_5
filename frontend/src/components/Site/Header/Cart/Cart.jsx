@@ -48,9 +48,9 @@ function Cart() {
                       })}
                     </ul>
                     <div className={styles.footerButton}>
-                      <div className=""> <a href="#" className={styles.button}>
+                      <div className=""> <Link to="/dat-hang" className={styles.button}>
                         Đặt hàng
-                      </a></div>
+                      </Link></div>
                     </div>
                   </>
                   :

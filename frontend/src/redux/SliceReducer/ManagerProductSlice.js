@@ -61,7 +61,7 @@ export const getProducts = createAsyncThunk("product/getProducts", async (payloa
     await axios
         .get(api + "product/getLists", {
             params: {
-                q: "",
+                q: payload?.keySearch||"",
                 sortCreateAt: payload?.sort || "desc",
                 limit: payload?.limit || 10,
                 page: payload?.page || 1,
