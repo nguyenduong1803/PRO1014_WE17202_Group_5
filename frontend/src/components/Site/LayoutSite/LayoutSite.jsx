@@ -13,7 +13,7 @@ import BarArrow from '../../../assets/svg/BarArrow'
 
 function LayoutSite({ children }) {
     const load = useSelector(selectLoading)
-  
+
     return (
         <>
             {load === "loading" ? <Loadings /> : ""}
@@ -41,15 +41,18 @@ const Navbar = () => {
             className={styles.navbar}
             ref={refBar}
         >
-            <ul>
+            <ul
+            // onMouseOut={() => { refBar.current.classList.remove(`${styles.active}`) }}
+            //     onMouseOver={() => { refBar.current.classList.add(`${styles.active}`) }}
+            >
                 <li>
-                    <a className={`${styles.toggle} ${styles.navLink}`}
+                    <p className={`${styles.toggle} ${styles.navLink}`}
                         onClick={() => { refBar.current.classList.toggle(`${styles.active}`) }}
                     >
                         <span className={styles.icon}
                         ><BarArrow width="25px" className={styles.barIcon} /></span>
                         <span className={styles.title}>Menu</span>
-                    </a>
+                    </p>
                 </li>
                 {listMenu.map((menu, index) => (
                     <li key={index}   >

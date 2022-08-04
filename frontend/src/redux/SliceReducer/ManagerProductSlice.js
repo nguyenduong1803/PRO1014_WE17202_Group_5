@@ -43,14 +43,16 @@ const AuthSlice = createSlice({
                 }
             }).addCase(deleteProductById.fulfilled, (state, action) => {
                 if (action.payload.status === true) {
-                    state.products.forEach((item,index)=>{
-                        if(item.id===action.payload.id){
+                    state.products.forEach((item, index) => {
+                        if (item.id === action.payload.id) {
                             state.products.splice(index, 1)
                         }
                     })
                 } else {
                     console.log(action.payload)
                 }
+            }).addCase(addProduct.fulfilled,(state, action)=>{
+                state.products.push(action.payload)
             })
     }
 })
@@ -60,9 +62,9 @@ export const getProducts = createAsyncThunk("product/getProducts", async (payloa
         .get(api + "product/getLists", {
             params: {
                 q: "",
-                sortCreateAt: payload?.sort||"desc",
-                limit: payload?.limit ||10,
-                page: payload?.page||1,
+                sortCreateAt: payload?.sort || "desc",
+                limit: payload?.limit || 10,
+                page: payload?.page || 1,
             }
         })
         .then(response => {
@@ -81,6 +83,23 @@ export const deleteProductById = createAsyncThunk("product/deleteProductById", a
         })
         .then(response => {
             payloads = { data: payload, status: response.data.status }
+            // action.dispatch(getProducts())
+        }).catch(function (err) {
+            console.log(err)
+            payloads = { data: "", status: err.response.status }
+        })
+    return payloads
+})
+export const addProduct = createAsyncThunk("product/addProduct", async (payload, action) => {
+    let payloads
+    await axios
+        .post(api + `product/create`, payload, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        .then(response => {
+            payloads = { data: payload, status: response.data.status }
             action.dispatch(getProducts())
         }).catch(function (err) {
             console.log(err)
@@ -91,5 +110,4 @@ export const deleteProductById = createAsyncThunk("product/deleteProductById", a
 export const searchProduct = (payload) => {
     return { type: "product/searchProduct", payload }
 }
-
 export default AuthSlice

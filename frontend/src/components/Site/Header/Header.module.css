@@ -47,6 +47,16 @@
 .name{
     font-weight: 500;
     line-height: 1.4rem;
+    color:#000;
+    font-size: 1rem;
+}
+.name:hover{
+    cursor: pointer;
+    color:var(---primaryColor) !important;
+}
+.iconLogin{
+    display: inline-block;
+    padding-right: 6px;
 }
 .possition{
     font-size: 0.9rem;
