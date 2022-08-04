@@ -100,4 +100,20 @@ class UserController extends Controller
         $data = $modelUser -> getAllUsers($request);
         return $data;
     }
+
+    public function deleteUser($id) {
+        $modelUser = new User();
+        $timeStamp = date("Y-m-d H:i:s",time());
+        $params = [
+            2,
+            $timeStamp,
+            $id
+        ];
+        $userChecked = $modelUser ->checkExistsUserById($id);
+        if(!isset($userChecked)) return response() ->json(["msg" => "Không tồn tại người dùng!", "status" => false],404);
+        else {
+            $modelUser -> deleteUser($params);
+            return response() ->json(["msg" => "Xoá người dùng thành công!", "status" => true],200);
+        }
+    }
 }

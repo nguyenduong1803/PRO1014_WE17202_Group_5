@@ -68,6 +68,7 @@ Route::group(['namespace' => 'User', 'prefix' => 'user'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('updateInfo', [\App\Http\Controllers\Api\User\UserController::class, 'updateInfo']);
         Route::get('getAllUsers', [\App\Http\Controllers\Api\User\UserController::class, 'getAllUsers']);
+        Route::delete('deleteUser/{id}', [\App\Http\Controllers\Api\User\UserController::class, 'deleteUser']);
     });
 });
 

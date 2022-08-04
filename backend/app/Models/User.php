@@ -69,4 +69,8 @@ class User extends Authenticatable
         $data->appends(['q' => $search]);
         return $data;
     }
+
+    public function deleteUser($params) {
+        DB::update("UPDATE users SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
+    }
 }
