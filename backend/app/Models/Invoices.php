@@ -18,8 +18,11 @@ class Invoices extends Model
     values (?, ? , ? , ?, ?, ?, ?, ?, ?, ?)', $params);
     }
 
-    public function getInvoice($params) {
+    public function getInvoicesByUser($params) {
         return DB::select("SELECT * FROM invoices as iv WHERE iv.id_user = ? and iv.is_delete = 1", $params);
+    }
+    public function getInvoicesByAdmin() {
+        return DB::select("SELECT * FROM invoices as iv WHERE iv.is_delete = 1");
     }
 
     public function getDetailInvoice($id) {

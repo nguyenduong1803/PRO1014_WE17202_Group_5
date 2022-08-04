@@ -64,11 +64,17 @@ class InvoicesController extends Controller
         return response() ->json(["msg" => "Tạo hoá đơn thành công!", "status" => true],200);
     }
 
-    public function getInvoice() {
+    public function getInvoicesByUser() {
         $user = Auth::user();
         $params = [$user['id']];
         $modelInvoices = new Invoices();
-        $data = $modelInvoices -> getInvoice($params);
+        $data = $modelInvoices -> getInvoicesByUser($params);
+        if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
+        return response() ->json(["data" => $data, "status" => true],200);
+    }
+    public function getInvoicesByAdmin() {
+        $modelInvoices = new Invoices();
+        $data = $modelInvoices -> getInvoicesByAdmin();
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
         return response() ->json(["data" => $data, "status" => true],200);
     }

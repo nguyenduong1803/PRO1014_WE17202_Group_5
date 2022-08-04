@@ -11,6 +11,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -92,5 +93,27 @@ class UserController extends Controller
         $modelUser -> updateInfo($params);
         return response() ->json(["msg" => "Cập nhật thông tin tài khoản thành công!"],200);
 
+    }
+
+    public function getAllUsers(Request $request) {
+        $modelUser = new User();
+        $data = $modelUser -> getAllUsers($request);
+        return $data;
+    }
+
+    public function deleteUser($id) {
+        $modelUser = new User();
+        $timeStamp = date("Y-m-d H:i:s",time());
+        $params = [
+            2,
+            $timeStamp,
+            $id
+        ];
+        $userChecked = $modelUser ->checkExistsUserById($id);
+        if(!isset($userChecked)) return response() ->json(["msg" => "Không tồn tại người dùng!", "status" => false],404);
+        else {
+            $modelUser -> deleteUser($params);
+            return response() ->json(["msg" => "Xoá người dùng thành công!", "status" => true],200);
+        }
     }
 }

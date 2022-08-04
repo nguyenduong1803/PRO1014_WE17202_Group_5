@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     public function insertUser($params) {
         DB::insert('INSERT INTO users (ten, dia_chi, ngay_sinh, sdt, gioi_tinh, vai_tro, email, mat_khau, img) values (?, ?, ? , ?,
                                                                                                    ?, ?,?,?, ?)', $params);
@@ -54,5 +56,21 @@ class User extends Authenticatable
             -> where('vai_tro', $role)
             -> where('is_delete', 1)
             -> first();
+    }
+
+    public function getAllUsers($request) {
+        $search = $request -> get('q');
+    
+        $limitPage = $request -> get('limit') ? $request -> get('limit'): 10;
+        $data = User::query()
+            -> where('is_delete', '1')
+            -> where('ten', 'like', '%' . $search . '%')
+            -> paginate($limitPage);
+        $data->appends(['q' => $search]);
+        return $data;
+    }
+
+    public function deleteUser($params) {
+        DB::update("UPDATE users SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
     }
 }

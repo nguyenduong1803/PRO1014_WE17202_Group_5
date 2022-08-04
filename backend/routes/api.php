@@ -65,7 +65,11 @@ Route::group(['namespace' => 'User', 'prefix' => 'user'], function(){
     Route::post('sendMailForgotPassword', [\App\Http\Controllers\Api\User\UserController::class, 'sendMailForgotPassword']);
     Route::get('getPassForgot/{id}/{token}', [\App\Http\Controllers\Api\User\UserController::class, 'getPassForgot']) -> name('user.getPassForgot');
     Route::post('resetPassword', [\App\Http\Controllers\Api\User\UserController::class, 'resetPassword']);
-    Route::post('updateInfo', [\App\Http\Controllers\Api\User\UserController::class, 'updateInfo']) -> middleware('auth:api');
+    Route::middleware('auth:api') -> group(function () {
+        Route::post('updateInfo', [\App\Http\Controllers\Api\User\UserController::class, 'updateInfo']);
+        Route::get('getAllUsers', [\App\Http\Controllers\Api\User\UserController::class, 'getAllUsers']);
+        Route::delete('deleteUser/{id}', [\App\Http\Controllers\Api\User\UserController::class, 'deleteUser']);
+    });
 });
 
 Route::group(['namespace' => 'Cart', 'prefix' => 'cart'], function(){
@@ -80,7 +84,8 @@ Route::group(['namespace' => 'Cart', 'prefix' => 'cart'], function(){
 Route::group(['namespace' => 'Invoices', 'prefix' => 'invoices'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'create']);
-        Route::get('getInvoice', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'getInvoice']);
+        Route::get('getInvoicesByUser', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'getInvoicesByUser']);
+        Route::get('getInvoicesByAdmin', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'getInvoicesByAdmin']);
         Route::post('update/{id}', [\App\Http\Controllers\Api\Invoices\InvoicesController::class, 'updateInvoice']);
     });
 });
