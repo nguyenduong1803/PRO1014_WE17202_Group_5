@@ -5,22 +5,18 @@
 .col div{
     width: 100%;
 }
-.row{
-    background-color: rgb(255,255,255,0.5);
-    padding-bottom: 50px;
-    /* padding: 50px; */
-    height:85vh;
-    border-radius: 10px;
-    padding: 0 20px;
-    box-shadow: 1px 1px 3px ;
-    
+.form{
+    margin-top: 100px;
 }
 .Box{
+    background-color: rgba(255, 255, 255,0.5);
+    border-radius: 20px;
     margin:0 auto;
     text-align: center;
     width: 100%;
     padding:0 100px;
-    height:100vh;
+    height:70vh;
+    box-shadow: 2px 1px 4px 1px rgba(177, 177, 177, 0.9);
 
 }
 .Box TextField{
@@ -33,7 +29,7 @@
 }
 
 .icon{
-    margin-top: -100px;
+    margin-top: 50px;
     float: right !important;
 }
 .link{

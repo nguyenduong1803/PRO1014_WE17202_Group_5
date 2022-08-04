@@ -15,16 +15,14 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import EditUser from "./EditInformation/EditInformationUser";
 import EditPass from "./EditPassWord/EditPassWord";
-import { api } from '../../../redux/SliceReducer/AuthSlice';
-import axios from 'axios';
-import { getToken } from '../../../utils/Common';
-
-
-
+import { api } from "../../../redux/SliceReducer/AuthSlice";
+import axios from "axios";
+import { getToken } from "../../../utils/Common";
+import { style } from "@mui/system";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
- 
+
   return (
     <div
       role="tabpanel"
@@ -55,10 +53,36 @@ function a11yProps(index) {
   };
 }
 
-function FullWidthTabs() {
+function FullWidthTabs({value}) {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
 
+
+
+  return (
+    <div className={styles.bgr}>
+      {" "}
+      
+      <Box sx={{ width: "70%" }} className={styles.Box}>
+        {/* <SwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={value}
+        onChangeIndex={handleChangeIndex}
+      > */}
+        <TabPanel value={value} index={0} dir={theme.direction}>
+          <EditUser />
+        </TabPanel>
+        <TabPanel value={value} index={1} dir={theme.direction}>
+          <EditPass />
+        </TabPanel>
+
+        {/* </SwipeableViews> */}
+      </Box>
+    </div>
+  );
+}
+
+function ProfileUser() {
+  const [userInfo, setUserInfo] = useState({});
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -66,10 +90,22 @@ function FullWidthTabs() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+  const [value, setValue] = React.useState(0);
 
+  useEffect(() => {
+    async function user() {
+      const res = await axios.get(api + "auth/getInfoUser", {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+      setUserInfo(res.data.user);
+    }
+    user();
+  }, []);
   return (
-    <Box sx={{ width: "70%" }} className={styles.Box}>
-      <AppBar position="static" className={styles.AppBar}>
+    <div>
+      <div className={styles.content}>
+        <div className={styles.img}>
+        <AppBar position="static" className={styles.AppBar}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -77,69 +113,30 @@ function FullWidthTabs() {
           textColor="inherit"
           aria-label="full width tabs example"
         >
-          <Tab label={<AccountCircleIcon />} {...a11yProps(0)} />
-
           <Tab label="Chỉnh sửa thông tin" {...a11yProps(1)} />
           <Tab label="Đổi mật khẩu" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      {/* <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      > */}
-      <TabPanel value={value} index={0} dir={theme.direction}></TabPanel>
-      <TabPanel value={value} index={1} dir={theme.direction}>
-        <EditUser />
-      </TabPanel>
-      <TabPanel value={value} index={2} dir={theme.direction}>
-        <EditPass />
-      </TabPanel>
+        </div>
 
-      {/* </SwipeableViews> */}
-    </Box>
-  );
-}
-
-function ProfileUser() {
-  const [userInfo, setUserInfo] = useState({});
-  useEffect(() => {
-    async function user() {
-   const res =  await axios
-        .get(api + "auth/getInfoUser", {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        })
-        setUserInfo(res.data.user)
-    }
-    user();
-    
-  }, []);
-  return (
-    <div>
-      <div className={styles.content}>
-        <div className={styles.img}></div>
         <div className={`${styles.row} row`}>
-        
-            <div className={`${styles.rowcol6} row`}>
-              <div className="col-lg-4">
-                <img className={styles.imguser} src={userInfo.img} alt="" />
-              </div>
-              <div className={`${styles.rowcol4} col-lg-4`}>
-                
-                <h4 className={styles.h4}>Họ Tên : {userInfo.ten} </h4>
-                <p>
-                  <PinDropIcon />
-                  Địa Chỉ : {userInfo.dia_chi}
-                  
-                </p>
-              </div>
-              <div className={`${styles.rowcol4} col-lg-4`}>
-                <p>SDT : {userInfo.sdt}</p>
-
-                <p className={styles.h4}>Email : {userInfo.email}</p>
-              </div>
+          <div className={`${styles.rowcol6} row`}>
+            <div className="col-lg-4">
+              <img className={styles.imguser} src={userInfo.img} alt="" />
             </div>
-         
+            <div className={`${styles.rowcol4} col-lg-4`}>
+              <h4 className={styles.h4}>Họ Tên : {userInfo.ten} </h4>
+              <p>
+                <PinDropIcon />
+                Địa Chỉ : {userInfo.dia_chi}
+              </p>
+            </div>
+            <div className={`${styles.rowcol4} col-lg-4`}>
+              <p>SDT : {userInfo.sdt}</p>
+
+              <p className={styles.h4}>Email : {userInfo.email}</p>
+            </div>
+          </div>
 
           {/* <div className={`${styles.rowss} row`}>
                     <div className="col-lg-4">
@@ -154,7 +151,9 @@ function ProfileUser() {
                 </div> */}
         </div>
       </div>
-      <FullWidthTabs />
+      <FullWidthTabs 
+      value={value}
+      />
     </div>
   );
 }
