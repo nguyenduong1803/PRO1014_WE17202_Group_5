@@ -23,7 +23,6 @@ const AccountSlice = createSlice({
             }).addCase(isRegisterSuccess.fulfilled, (state, action) => {
                 state.mess = action.payload
             }).addCase(forgotPasswords.fulfilled, (state, action) => {
-                console.log(action.payload)
                 state.mess = action.payload
             })
     }
@@ -52,7 +51,6 @@ export const forgotPasswords = createAsyncThunk("register/forgotPasswords", asyn
             email: payload, // This is the body part
         })
         .then((response) => {
-            console.log(response)
 
         }).catch(function (err) {
             console.log(err)

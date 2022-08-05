@@ -13,12 +13,7 @@ import LoadingSearch from '../Loading/LoadingSearch';
 import AliceCarousel from "react-alice-carousel";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-const responsive = {
-    0: { items: 1 },
-    568: { items: 2 },
-    1024: { items: 4 },
-    1600: { items: 4 },
-};
+
 function ChooseProduct({ className }) {
     const [keySearch, setKeySearch] = React.useState("");
     const debounce = useDebounce(keySearch, 500)

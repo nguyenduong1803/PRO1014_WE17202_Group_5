@@ -5,30 +5,38 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import SearchSharpIcon from '@mui/icons-material/SearchSharp';
 import { selectCategory } from "../../../../redux/selector";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../../../redux/SliceReducer/ManagerProductSlice";
+import useDebounce from "../../../../hooks/useDebounce";
 
 function MenuContentOpTions({ setModalShow, modalShow }) {
   const listCategory = useSelector(selectCategory)
-  const [activeCate,setActiveCate]= React.useState("")
-const handleActiveCate = (index)=>{
-  setActiveCate(index)
-}
-  const handleShowOrder = () => {
-    setModalShow(!modalShow)
+  const [activeCate, setActiveCate] = React.useState("")
+  const [value, setValue] = React.useState([0, 500000]);
+  const [keySearch, setKeySearch] = React.useState("");
+  const debounce = useDebounce(keySearch, 500)
+  const dispatch = useDispatch()
+  const handleActiveCate = (index) => {
+    setActiveCate(index)
   }
-
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   function valuetext(value) {
     return `${value} VNĐ`;
   }
-  const [value, setValue] = React.useState([0, 500000]);
-  
+
+  const handleSearch = (e) => {
+    setKeySearch(e.target.value);
+  }
+  React.useEffect(() => {
+    dispatch(getProducts({ keySearch: debounce, limit: 30 }))
+  }, [debounce])
   return (
     <div className={styles.Menu}>
       <div style={{ display: 'flex', width: '100%' }} className="position-relative">
-        <input type="search" placeholder="Tìm kiếm..." className={styles.searchInput} />
+        <input type="search" placeholder="Tìm kiếm..." className={styles.searchInput} onChange={e=>handleSearch(e)}/>
         <div className={`icon position-absolute ${styles.searchIcon}`} ><SearchSharpIcon fontSize='small' /></div>
       </div>
       <div
@@ -67,10 +75,10 @@ const handleActiveCate = (index)=>{
             <div className="accordion-body" style={{ padding: "0" }}>
               <div className={styles.option}>
                 {
-                  listCategory.map((category,index) => (
-                    <div className={activeCate===index ?`form-check ${styles.input_space} ${styles.input_space_active}`: `form-check ${styles.input_space}`} key={category.id} >
-                      <input onClick={()=>handleActiveCate(index)} className="form-check-input" type="radio" name="flexRadioDefault" id={`${category.name}__category`} />
-                      <label onClick={()=>handleActiveCate(index)} className={`form-check-label ${styles.input_label}`} for={`${category.name}__category`}>
+                  listCategory.map((category, index) => (
+                    <div className={activeCate === index ? `form-check ${styles.input_space} ${styles.input_space_active}` : `form-check ${styles.input_space}`} key={category.id} >
+                      <input onClick={() => handleActiveCate(index)} className="form-check-input" type="radio" name="flexRadioDefault" id={`${category.name}__category`} />
+                      <label onClick={() => handleActiveCate(index)} className={`form-check-label ${styles.input_label}`} htmlFor={`${category.name}__category`}>
                         {category.name}
                       </label>
                     </div>

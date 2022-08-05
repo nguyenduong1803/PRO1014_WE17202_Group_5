@@ -32,7 +32,6 @@ const AuthSlice = createSlice({
             .addCase(getProducts.pending, (state) => {
                 state.status = "loading"
             }).addCase(getProducts.fulfilled, (state, action) => {
-                console.log(action.payload)
                 if (action.payload.status === "success") {
                     state.products = action.payload.data
                     state.isSuccess = true

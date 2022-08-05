@@ -8,113 +8,77 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./ListOrders.module.css";
 import product1 from "../../../../assets/img/seafood-1.jpg";
-import Box from "@mui/material/Box";
-import Rating from "@mui/material/Rating";
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from "react-redux";
-import { selectOrderDetail } from "../../../../redux/selector";
+import { selectOrderDetail, selectProducts } from "../../../../redux/selector";
 import { getDetailOrder } from "../../../../redux/SliceReducer/OrderTableSlice";
-const rows = [
-  {
-    img: product1,
-    title: "Main Course",
-    name: "Panner curry special with cucumber",
-    quantity: "1X",
-    price: "3.00$",
-    totalPrice: "3.00$",
-  },
-  {
-    img: product1,
-    title: "Main Course",
-    name: "Panner curry special with cucumber",
-    quantity: "1X",
-    price: "3.00$",
-    totalPrice: "3.00$",
-  },
-  {
-    img: product1,
-    title: "Main Course",
-    name: "Panner curry special with cucumber",
-    quantity: "1X",
-    price: "3.00$",
-    totalPrice: "3.00$",
-  },
-];
-function BasicRating() {
-  const [value, setValue] = React.useState(5);
 
-  return (
-    <Box
-      sx={{
-        "& > legend": { mt: 2 },
-      }}
-    >
-      <Rating
-        name="simple-controlled"
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      />
-    </Box>
-  );
-}
-export default function DenseTable() {
+
+export default function ListOrders() {
   const dispatch = useDispatch()
   const productCartDetail = useSelector(selectOrderDetail)
-  React.useEffect(() => {
-    dispatch(getDetailOrder())
-  },[])
-  return (
-    <TableContainer className={styles.table} component={Paper} style={{ margin: '0 20px', borderRadius: "20px", backgroundColor: "white" }}>
-      <Table sx={{ minWidth: 650 }} aria-label="a dense table">
-        <TableHead className={styles.header}>
-          <TableRow>
-            <TableCell style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }}>Items</TableCell>
-            <TableCell align="right" style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }} >Quantity</TableCell>
-            <TableCell align="right" style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }}>Prices</TableCell>
-            <TableCell align="right" style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }}>Total Prices</TableCell>
-            <TableCell align="right" style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }}>Total Prices</TableCell>
-            <TableCell align="right" style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }}>Update</TableCell>
+  const products = useSelector(selectProducts)
+  const listProduct=[];
+  products.forEach(prod => {
+   if(productCartDetail){
+    productCartDetail.forEach(ele => {
+      if (prod.id === ele.id_product) {
+        let newProduct = { ...prod, quantity: ele.quantity }
+        listProduct.push(newProduct);
+      }
+    })
+   }
+  });
+const idInvoice = window.location.pathname.split('/')[2]
+React.useEffect(() => {
+  dispatch(getDetailOrder(idInvoice))
+
+  console.log(listProduct)
+}, [])
+return (
+  <TableContainer className={styles.table} component={Paper} style={{ borderRadius: "20px", backgroundColor: "white" }}>
+    <Table sx={{ minWidth: 650 }} aria-label="a dense table">
+      <TableHead className={styles.header}>
+        <TableRow>
+          <TableCell style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }}>Tên sản phẩm</TableCell>
+          <TableCell align="right" style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }} >Số lượng</TableCell>
+          <TableCell align="right" style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }}>Đơn giá</TableCell>
+          <TableCell align="right" style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }}>Tổng tiền</TableCell>
+          <TableCell align="right" style={{ fontSize: '.8rem', color: "#fff", fontWeight: "500" }}>Update</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody style={{}}>
+        {listProduct && listProduct?.map((product, index) => (
+          <TableRow
+            key={index}
+            sx={{ "&:last-child td, &:last-child th": { border: "20px" } }}
+          >
+            <TableCell align="left">
+              <div>
+                <div className={styles.tableDetailProducts}>
+                  <div>
+                    <img className={styles.img} src={product.listsImg[0]} />
+                  </div>
+                  <div className={styles.titleProducts}>
+                    <div className={styles.title}>
+                      <h4>{product.name}</h4>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </TableCell>
+            <TableCell align="center">{product.quantity}</TableCell>
+            <TableCell align="center">{product.price}</TableCell>
+            <TableCell align="center">{product.price*product.quantity}</TableCell>
+            <TableCell align="center"><EditIcon className={styles.editIcon} /> <ClearIcon className={styles.clearIcon} /> </TableCell>
 
           </TableRow>
-        </TableHead>
-        <TableBody style={{}}>
-          {productCartDetail && productCartDetail.map((product, index) => (
-            <TableRow
-              key={index}
-              sx={{ "&:last-child td, &:last-child th": { border: "20px" } }}
-            >
-              <TableCell align="left">
-                <div>
-                  <div className={styles.tableDetailProducts}>
-                    <div>
-                      <img className={styles.img} src={product1} />
-                    </div>
-                    <div className={styles.titleProducts}>
-                      <div className={styles.title}>
-                        <h4>{product.name}</h4>
-                      </div>
-                      <div className={styles.name}>
-                        <p>{product.id}</p>
-                      </div>
-                    </div>
-
-                  </div>
-                 
-                </div>
-              </TableCell>
-              <TableCell align="center">{product.amount}</TableCell>
-              <TableCell align="center">{product.price}</TableCell>
-              <TableCell align="center">{product.price}</TableCell>
-              <TableCell align="center">{product.price}</TableCell>
-              <TableCell align="center"><EditIcon className={styles.editIcon} /> <ClearIcon className={styles.clearIcon} /> </TableCell>
-
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
+);
 }

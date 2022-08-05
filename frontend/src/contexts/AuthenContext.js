@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser, remainingSelector, selectLoadingProduct, selectProducts, selectLoading } from "../redux/selector";
 import { getProducts } from "../redux/SliceReducer/ManagerProductSlice";
 import { getUserAuth } from "../redux/SliceReducer/AuthSlice";
-import { getListCart, getListTable, getOrder } from "../redux/SliceReducer/OrderTableSlice";
+import { getAllOrder, getListCart, getListTable, getOrder } from "../redux/SliceReducer/OrderTableSlice";
 import { getToken } from "../utils/Common";
 import { getCategory } from "../redux/SliceReducer/CategorySlice";
 const AuthContext = createContext("");
@@ -20,8 +20,9 @@ function AuthenProvider({ children }) {
         dispatch(getListTable())
         dispatch(getProducts())
         dispatch(getListCart())
-        dispatch(getOrder())
         dispatch(getCategory())
+        dispatch(getOrder())
+
     }, [])
     return (
         <AuthContext.Provider value={remaining}>

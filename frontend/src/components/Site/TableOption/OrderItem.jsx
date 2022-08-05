@@ -1,16 +1,14 @@
 import React from 'react'
 import styles from "./TableOption.module.css";
-// import styles2 from "./TableOption.css"
 import CelendarOption from '../Calendar/CelendarOption';
-// import DeleteOutlineIcon from '@mui/icons-material/HighlightOff';
 import { FormControl, TextField } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { selectTableActive } from '../../../redux/selector';
-import { isNumber, isPhoneNumber, isRequired } from '../../../utils/Validate';
+import {  isPhoneNumber, isRequired } from '../../../utils/Validate';
 import SelectMuiltiMui from '../../Admin/SelectMui/SelectMuiltiMui';
 
-function OrderItem({ order, setOrder, name, setNotify, notify, id }) {
+function OrderItem({ order, setOrder, setNotify, notify, id }) {
     const tableActive = useSelector(selectTableActive)
 
     const handleNote = (e) => {
@@ -19,7 +17,7 @@ function OrderItem({ order, setOrder, name, setNotify, notify, id }) {
     const listTable = [];
     tableActive.forEach(table => {
         order.tableId.forEach(tb => {
-            if (table.index_table === Number(tb)) {
+            if (table.id === Number(tb)) {
                 listTable.push(table)
             }
         })
@@ -29,13 +27,8 @@ function OrderItem({ order, setOrder, name, setNotify, notify, id }) {
     }, 0)
     return (
         <section className="section" id="order">
-            {/* <div className="section-title">My Order&nbsp;😎</div> */}
             <div className="order-info">
                 <div className="address">
-                    {/* <select className="form-select form__edit-cart" aria-label="Default select example" defaultValue={order.orderId} onChange={e => handleTableSelect(e)}>
-                        <option selected>Đổi Bàn</option>
-                        {tableActive.map((table) => <option key={table.id} value={table.id}>{table.index_table}</option>)}
-                    </select> */}
                     <SelectMuiltiMui label=" Chọn nhiều bàn" listName={tableActive} position={"A"} id={id} setOrder={setOrder} order={order} />
                 </div>
                 <div className="delivery">

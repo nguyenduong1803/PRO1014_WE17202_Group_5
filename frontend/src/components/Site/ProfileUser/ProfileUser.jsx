@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProfileUser.module.css";
-import imguser from "../../../assets/img/Chef1.jpg";
 import PinDropIcon from "@mui/icons-material/PinDrop";
-import Button from "@mui/material/Button";
-// import {Link} from 'react-router-dom';
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PropTypes from "prop-types";
-// import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
@@ -18,7 +13,6 @@ import EditPass from "./EditPassWord/EditPassWord";
 import { api } from "../../../redux/SliceReducer/AuthSlice";
 import axios from "axios";
 import { getToken } from "../../../utils/Common";
-import { style } from "@mui/system";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -109,7 +103,6 @@ function ProfileUser() {
         <Tabs
           value={value}
           onChange={handleChange}
-          indicatorColor="white"
           textColor="inherit"
           aria-label="full width tabs example"
         >

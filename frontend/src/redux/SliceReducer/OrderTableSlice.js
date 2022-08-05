@@ -7,20 +7,22 @@ const tableOrder = {
     tableId: [],
     name: "",
     phone: "",
-    countGuest: 1, 
-    celendar: ""
+    countGuest: 1,
+    celendar: "",
+    note: ""
 }
 const OrderTableSlice = createSlice({
     name: "orderTable",
     initialState: {
         status: "idle",
         order: [],
-        listOrder: {},
+        listOrder: [],
         isSuccess: false,
         orderTable: tableOrder,
         cart: [],
         tables: [],
-        detailOrder: []
+        detailOrder: [],
+        statusOrder:false,
     },
     reducers: {
         updateOrderTable: (state, action) => {
@@ -28,7 +30,7 @@ const OrderTableSlice = createSlice({
         },
         addOrder: (state, action) => {
             const product = state.order.find(item => item.id === action.payload.id);
-            
+
             if (product) {
                 product.quantity = product.quantity + 1
             } else {
@@ -62,9 +64,11 @@ const OrderTableSlice = createSlice({
                     state.isSuccess = false
                     state.status = "idle"
                 }
-            }).addCase(createOrderTable.fulfilled, (state, action) => {
-                state.orderTable=action.payload
-            }).addCase(addCart.fulfilled, (state, action) => {
+            })
+            .addCase(createOrderTable.fulfilled, (state, action) => {
+                state.orderTable = action.payload
+            })
+            .addCase(addCart.fulfilled, (state, action) => {
                 state.cart.push(action.payload)
             }).addCase(getListCart.fulfilled, (state, action) => {
                 if (action.payload.status === "success") {
@@ -86,16 +90,22 @@ const OrderTableSlice = createSlice({
             }).addCase(getOrder.fulfilled, (state, action) => {
                 state.status = "idle"
                 state.listOrder = action.payload.data
-                console.log(action.payload)
+
+            })
+            .addCase(getAllOrder.fulfilled, (state, action) => {
+                state.status = "idle"
+                state.listOrder = action.payload.data
             })
             .addCase(getDetailOrder.fulfilled, (state, action) => {
                 state.status = "idle"
                 state.detailOrder = action.payload.data
-                console.log(action.payload)
+
             })
-
             .addCase(createOrder.fulfilled, (state, action) => {
-
+                if (action.payload.status === true) {
+                   state.statusOrder=true
+                } else {
+                }
             })
 
     }
@@ -117,9 +127,6 @@ export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", 
     let payloads
     console.log(payload.tableId[0][0].join(""))
 
-    const test = [1,2,3]
-    const test1 = ['a', 'b', 'c']
-
     await axios
         .post(api + "tableBook/create",
             {
@@ -130,8 +137,7 @@ export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", 
                 // total_user: payload.countGuest,
                 // time_book: payload.celendar,
                 // description: "mô tả"
-                table : test,
-                user : test1
+
             },
             {
                 headers: { "Authorization": `Bearer ${getToken()}` },
@@ -159,30 +165,28 @@ export const addCart = createAsyncThunk("orderTable/addCart", async (payload, ac
             {
                 headers: { "Authorization": `Bearer ${getToken()}` },
             })
-        .then(response => {
+        .then(() => {
             action.dispatch(getListCart())
         }).catch(function (err) {
             console.log(err)
         })
     return payload
 })
-export const updateOrderTable = (payload, action) => {
+export const updateOrderTable = (payload) => {
     return { type: "orderTable/updateOrderTable", payload }
 }
-export const getListCart = createAsyncThunk("orderTable/getListCart", async (payload, action) => {
+export const getListCart = createAsyncThunk("orderTable/getListCart", async () => {
     let payloads
     await axios
         .get(api + "cart/getCart", {
             headers: { "Authorization": `Bearer ${getToken()}` },
         })
         .then(response => {
-            console.log(response)
             payloads = { data: response.data.data, status: "success" }
         }).catch(function (err) {
             console.log(err)
             payloads = { data: "", status: err.response.status }
         })
-    console.log(payloads)
     return payloads
 })
 
@@ -210,36 +214,24 @@ export const addOrder = (payload) => {
 export const addQuantityOrder = (payload) => {
     return { type: "orderTable/addQuantityOrder", payload }
 }
-export const createOrder = createAsyncThunk("orderTable/createOrder", async (payload, action) => {
+export const createOrder = createAsyncThunk("orderTable/createOrder", async (payload) => {
     let payloads
+    console.log(payload)
     await axios
         .post(api + "invoices/create",
-        {
-            list_id_product: [
-                4,
-                5,
-                4
-            ],
-            list_amount: [
-                2,
-                3,
-                4
-            ],
-            list_table_book: [
-                4,
-                4,
-                null
-            ],
-            user_name_book: "duong",
-            time_book: "",
-            phone: "0982996764",
-            note: "test"
-        },
-        {
-            headers: { "Authorization": `Bearer ${getToken()}` },
-        })
+            {
+                list_id_product: payload.productId,
+                list_amount: payload.quantitys,
+                list_table_book:payload.order.tableId,
+                user_name_book: payload.order.name,
+                time_book: payload.order.celendar,
+                phone: payload.order.phone,
+                note: payload.order.note
+            },
+            {
+                headers: { "Authorization": `Bearer ${getToken()}` },
+            })
         .then(response => {
-            console.log(response)
             payloads = { data: response.data.data, status: "success" }
         }).catch(function (err) {
             console.log(err)
@@ -250,31 +242,41 @@ export const createOrder = createAsyncThunk("orderTable/createOrder", async (pay
 export const getOrder = createAsyncThunk("orderTable/getOrder", async () => {
     let payloads
     await axios
-        .get(api + "invoices/getInvoice", {
+        .get(api + "invoices/getInvoicesByUser", {
             headers: { "Authorization": `Bearer ${getToken()}` },
         })
         .then(response => {
-            console.log(response.data.data)
             payloads = { data: response.data.data, status: "success" }
         }).catch(function (err) {
             payloads = { data: "", status: err.response.status }
         })
-    console.log(payloads)
     return payloads
 })
-export const getDetailOrder = createAsyncThunk("orderTable/getDetailOrder", async () => {
+export const getDetailOrder = createAsyncThunk("orderTable/getDetailOrder", async (payload) => {
     let payloads
     await axios
-        .get(api + "invoice-detail/getInvoiceDetail", {
+        .get(api + `invoice-detail/getListDetailInvoice/${payload}`,
+             {
             headers: { "Authorization": `Bearer ${getToken()}` },
         })
         .then(response => {
-            console.log(response.data.data)
             payloads = { data: response.data.data, status: "success" }
         }).catch(function (err) {
             payloads = { data: "", status: err.response.status }
         })
-    console.log(payloads)
+    return payloads
+})
+export const getAllOrder = createAsyncThunk("orderTable/getAllOrder", async () => {
+    let payloads
+    await axios
+        .get(api + "invoices/getInvoicesByAdmin", {
+            headers: { "Authorization": `Bearer ${getToken()}` },
+        })
+        .then(response => {
+            payloads = { data: response.data.data, status: "success" }
+        }).catch(function (err) {
+            payloads = { data: "", status: err.response.status }
+        })
     return payloads
 })
 // export const addCart = (payload, action) => {

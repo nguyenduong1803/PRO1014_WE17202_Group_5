@@ -4,9 +4,7 @@
     font-size: 1.7rem !important;
     color: white !important;
 }
-table{
-    padding: 50px !important;
-}
+
 .img{
     margin-top: 20px;
     width:60px;
@@ -37,7 +35,7 @@ table{
 }
 
 .table{
-    max-width: 840px;
+   width: 100%;
 }
 .clearIcon{
     padding: -5px;
