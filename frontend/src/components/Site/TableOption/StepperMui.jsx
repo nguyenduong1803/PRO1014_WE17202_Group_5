@@ -9,12 +9,12 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import OrderItem from './OrderItem';
 import style from "./TableOption.scss"
-import { selectOrderTable, selectProductOrder, selectProducts } from '../../../redux/selector';
+import { selectProductOrder, selectOrderTable, selectProducts } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { createOrder, createOrderTable, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
+import { createOrder, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
 import CloseIcon from '@mui/icons-material/Close';
 import ProductCartTable from './ProductCartTable';
-import { isFutureDate, isNumber, isPhoneNumber, isRequired } from '../../../utils/Validate';
+import { isFutureDate, isPhoneNumber, isRequired } from '../../../utils/Validate';
 
 const steps = [
     {
@@ -35,6 +35,7 @@ const steps = [
 export default function StepperMui({ id, setModalShow, activeStep, setActiveStep }) {
     const dispatch = useDispatch()
     const orders = useSelector(selectOrderTable)
+    const orderItems = useSelector(selectProductOrder)
     
     const [notify, setNotify] = React.useState({
         name: "",
@@ -91,18 +92,20 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         }
         setActiveStep(1);
     }
+  
     // step3
     const handleOrder = () => {
-        console.log(order)
-        // dispatch(createOrderTable(order))
-        dispatch(createOrder(order))
-        console.log("order")
-        // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        const productId=[];
+        const quantitys=[]
+        orderItems.forEach( value =>{
+            productId.push(value.id)
+            quantitys.push(value.quantity)
+        })
+        dispatch(createOrder({order,productId,quantitys}))
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-
     const handleReset = () => {
         setActiveStep(0);
-
     };
 
     return (

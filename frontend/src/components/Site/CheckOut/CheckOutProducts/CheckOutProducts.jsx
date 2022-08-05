@@ -46,14 +46,14 @@ function CheckOutProducts() {
             <p className={styles.titleP}>You have 4 items in your my cart</p>
           </div>
           <div className={styles.sort}>
-            <p>
+            <div>
               <FormControl variant="standard" sx={{ m: 1, minWidth: 100 }}>
                 <InputLabel id="demo-simple-select-standard-label">Sort by</InputLabel>
                 <Select
                   labelId="demo-simple-select-standard-label"
                   id="demo-simple-select-standard"
                   value={0}
-                  onChange={0}
+                  onChange={() => { }}
                   label="Age"
                   defaultValue=""
                 >
@@ -65,11 +65,12 @@ function CheckOutProducts() {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
               </FormControl>
-            </p>
+            </div>
           </div>
         </div>
         {productsCart.map((list, index) => {
           return (<ProductCart
+            key={index}
             img={list.img}
             name={list.name}
             content={list.content}

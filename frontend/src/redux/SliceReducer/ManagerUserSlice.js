@@ -104,7 +104,6 @@ export const logOut = createAsyncThunk("auth/logout", async (payload, action) =>
     await axios.get(api + "auth/logout",
         { headers: { "Authorization": `Bearer ${getToken()}` } })
         .then(res => {
-            console.log(res)
         }).catch((error) => {
             console.log(error)
         });

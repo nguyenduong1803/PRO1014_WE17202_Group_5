@@ -5,6 +5,7 @@
     background-color: #ffffff;
     border-radius: 20px;
     margin-top: 20px;
+    min-height: 400px;
 }
 .orderIdHeaderRight img{
     width: 50px;
@@ -29,12 +30,11 @@
 .orderIdContentRight{
     margin-left: 30px;
 }
-.orderIdContentRight h4{
-    font-weight:bold;
-    padding-bottom: 10px;
+.orderIdContentRight h2{
+    font-size: 1.1rem;
+    line-height: 1.6rem;
 }
 .orderIdContentRight p{
-    padding-bottom: 10px;
     line-height: 1.6rem;
     color:rgb(182, 182, 182);
     
@@ -47,21 +47,34 @@
     float: right;
 }
 .button{
-    font-size: .4rem !important;
-    width:90px;
-    color:#000 !important;
+    background-color: green !important;
+    padding: 12px ;
+    min-width: 140px;
+    font-size: 0.9rem !important;
+    color:#fff !important;
+    font-weight: 600;
 }
 .buttons{
-    color:#000 !important;
+    color:#fff !important;
+    color: #fff !important;
+    font-size: .9rem !important;
+    background-color: #FFBF00 !important;
+    min-width: 140px;
+    border-radius: 4px;
+    height: 37px;
+    width: 90%;
+    font-weight: 600;
 
-    font-size: .4rem !important;
-    width:90px;
-    background-color: yellow !important;
 }
 
 .priceNumber{
     padding: 5px 0;
     width: 100%;
+}
+.priceNumber span,.priceNumber h3{
+    font-size: 1rem;
+    display: inline-block;
+    line-height:1.4rem;
 }
 
 .quantity{
@@ -74,10 +87,13 @@
 }
 .date{
     padding:5px 0;
+    font-size: 1.2rem;
+    line-height:1.4rem;
     color: rgb(182, 182, 182);
+    margin: 12px 0;
 }
 .orderIdFooter{
-    font-size: .6rem;
+    font-size: .8rem;
     display: inline-flex;
     width:100%;
     justify-content: space-between;
@@ -85,10 +101,12 @@
 }
 
 .orderIdFooterRight .buttonLink{
-    background-color: #FF7272 !important;
+    background-color: #fff !important;
+}
+.buttonLink a{
     font-weight: 550;
-    color:#000;
-    font-size: .4rem !important;
+    color:#000 !important;
+    font-size: .9rem !important;
     text-decoration: none;
 }
 .orderIdFooterRight .buttonLink a:hover{
@@ -100,6 +118,3 @@
     color:#000000;
     border: 2px solid #000;
 } */
-.items{
-    margin-bottom: 10px;
-}

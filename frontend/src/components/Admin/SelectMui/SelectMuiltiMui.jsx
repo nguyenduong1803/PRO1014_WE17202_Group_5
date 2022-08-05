@@ -21,7 +21,7 @@ const MenuProps = {
 
 export default function SelectMuiltiMui({ label, listName, position, id, setOrder, order }) {
     const indexTable = listName.find((name) => name.id === id)
-    const [personName, setPersonName] = React.useState([`${order.tableId.length===1? indexTable.index_table : order.tableId}`]);
+    const [personName, setPersonName] = React.useState([`${order.tableId.length===1? indexTable.id : order.tableId}`]);
     const handleChange = (event) => {
         const {
             target: { value },
@@ -35,7 +35,7 @@ export default function SelectMuiltiMui({ label, listName, position, id, setOrde
     };
     React.useEffect(() => {
         setOrder(prev => {
-            return { ...prev, tableId: [personName] }
+            return { ...prev, tableId: [...personName] }
         })
     },[])
     return (
@@ -59,14 +59,12 @@ export default function SelectMuiltiMui({ label, listName, position, id, setOrde
                     </MenuItem>
                     {listName && listName.map((name) => 
                     (
-                        <MenuItem key={name.index_table} value={`${name.index_table}`}>
-                            <Checkbox checked={personName.indexOf(`${name.index_table}`) > -1} />
+                        <MenuItem key={name.id} value={`${name.id}`}>
+                            <Checkbox checked={personName.indexOf(`${name.id}`) > -1} />
                             <span>Bàn:{`${position}-`}</span>
-                            <ListItemText primary={`${name.index_table}`} />
+                            <ListItemText primary={`${name.id}`} />
                         </MenuItem>
                     ))}
-
-
                 </Select>
             </FormControl>
         </div>
