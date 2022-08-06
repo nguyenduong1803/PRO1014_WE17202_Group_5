@@ -13,8 +13,8 @@ class Product extends Model
 
     public function create($params) {
         DB::insert('INSERT INTO products
-    (name, short_desscription, id_directory, price, id_code_sale, is_status_product, id_user, id_cart, full_description, time_complete, is_delete, update_at,delete_at, id_img )
-    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?)', $params);
+    (name, short_description, id_directory, price, id_code_sale, is_status_product, id_user, id_cart, full_description, time_complete, id_img )
+    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $params);
     }
 
     public function listsProduct($request) {
