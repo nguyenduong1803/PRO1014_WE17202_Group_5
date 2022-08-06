@@ -3,37 +3,16 @@ import { getName } from '../../../utils/Common'
 import styles from "./Dashboard.module.css"
 import AddIcon from '@mui/icons-material/Add';
 import { Table } from 'react-bootstrap'
-import { DataContext } from "../../../contexts/DataContext"
-import { OrderContext } from "../../../contexts/OrderContext"
-import { UserContext } from "../../../contexts/UserContext"
 import { Doughnut } from 'react-chartjs-2';
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 
 function Dashboard() {
-    const { data } = useContext(DataContext)
-    const { user } = useContext(UserContext)
-    const { orders } = useContext(OrderContext)
-    const [colorBar, setColorBar] = useState("")
     const name = getName()
 
-    console.log(orders);
 
-    const state = {
-        labels: data.map(e => e.name),
-        datasets: [
-            {
-                label: 'Ẩn',
-                backgroundColor: "hsl(" + 360 * Math.random() + ',' +
-                    (25 + 70 * Math.random()) + '%,' +
-                    (85 + 10 * Math.random()) + '%)',
-                borderColor: '#ccc',
-                borderWidth: 1,
-                data: data.map(e => e.quantity)
-            }
-        ]
-    }
+  
     const stateDoughnut = {
         labels: ['January', 'February', 'March',
             'April', 'May'],
@@ -92,7 +71,7 @@ function Dashboard() {
                     <div className={`${styles.chartSection}`} >
 
                         <Bar
-                            data={state}
+                            // data={state}
                         />
                     </div>
                 </div>

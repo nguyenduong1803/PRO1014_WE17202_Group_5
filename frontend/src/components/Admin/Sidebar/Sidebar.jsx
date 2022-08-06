@@ -14,6 +14,7 @@ import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import CategoryIcon from '@mui/icons-material/Category';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 const listManagement = [
 
   {
@@ -27,9 +28,14 @@ const listManagement = [
     icon: LocalShippingIcon
   },
   {
-    name: "Nhân viên",
+    name: "Khách hàng",
     path: "quan-ly-nguoi-dung",
     icon: GroupIcon
+  },
+  {
+    name: "Nhân viên",
+    path: "quan-ly-nhan-vien",
+    icon: SupervisedUserCircleIcon
   },
   {
     name: "Vật liệu",

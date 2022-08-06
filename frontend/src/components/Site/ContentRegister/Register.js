@@ -62,7 +62,7 @@ const FormRegister = () => {
     formRegister.append("ngay_sinh", ngaySinh)
     formRegister.append("dia_chi", address)
     formRegister.append("sdt", phone)
-    formRegister.append("vai_tro", 1)
+    formRegister.append("vai_tro", 2)
     formRegister.append("gioi_tinh", 1)
     formRegister.append("mat_khau", password.password)
     formRegister.append("file", image)

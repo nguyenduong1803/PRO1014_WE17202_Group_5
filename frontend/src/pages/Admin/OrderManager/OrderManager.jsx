@@ -1,21 +1,20 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState } from "react";
 import styles from "../OrderManager/OrderManager.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
 import "rsuite-table/dist/css/rsuite-table.css";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
-import Pagination from "../../../extensions/Pagination/Pagination";
-import { OrderContext } from "../../../contexts/OrderContext";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom"
 import { tableOrder } from "../../../config/tables"
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 import { listPagination } from "../../../config/listConfig"
 import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectOrder } from "../../../redux/selector";
+import { getAllOrder } from "../../../redux/SliceReducer/OrderTableSlice";
 const OrderManager = () => {
 const listorders = useSelector(selectOrder);
-  const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
   const [PageSize, setPageSize] = useState(10)
   console.log(listorders)
   
@@ -31,7 +30,9 @@ const listorders = useSelector(selectOrder);
       isActive: true,
     },
   ];
- 
+ React.useEffect(()=>{
+  dispatch(getAllOrder())
+ },[])
   return (
     <>
       <Sidebar />
@@ -51,9 +52,10 @@ const listorders = useSelector(selectOrder);
         <div className={styles.AccountPro}>
           <div className={styles.ManageTable}>
             <Tablecustom
-              data={listorders&&[listorders]}
+              data={listorders}
               PageSize={PageSize}
               tables={tableOrder}
+              path="chi-tiet-don-hang"
             />
 
           </div>

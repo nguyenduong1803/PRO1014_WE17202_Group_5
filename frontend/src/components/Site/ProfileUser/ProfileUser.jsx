@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import EditUser from "./EditInformation/EditInformationUser";
 import EditPass from "./EditPassWord/EditPassWord";
-import { api } from "../../../redux/SliceReducer/AuthSlice";
+import { api } from "../../../utils/api";
 import axios from "axios";
 import { getToken } from "../../../utils/Common";
 
