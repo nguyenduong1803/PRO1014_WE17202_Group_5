@@ -1,5 +1,5 @@
 import React, { useEffect} from 'react'
-import styles from './UserManager.module.css'
+import styles from './ManageStaff.module.css'
 import Breadcrumbs from '../../../components/Admin/BreadCrumb/Breadcrumb';
 import AddIcon from '@mui/icons-material/Add';
 import "rsuite-table/dist/css/rsuite-table.css";
@@ -9,7 +9,7 @@ import Tablecustom from '../../../components/Admin/TableCustom/Tablecustom';
 import { customerTable } from '../../../config/tables';
 import InputSearch from '../../../components/Admin/InputSearch/InputSearch';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAllUser, selectUser } from '../../../redux/selector';
+import { selectStaff } from '../../../redux/selector';
 import { getAllUser } from '../../../redux/SliceReducer/AuthSlice';
 import { getToken } from '../../../utils/Common';
 const breadcrumItem = [
@@ -19,15 +19,15 @@ const breadcrumItem = [
         isActive: false,
     },
     {
-        href: "/quan-ly-nguoi-dung",
-        title: "Quản lý người dùng",
+        href: "/quan-ly-nhan vien",
+        title: "Quản lý nhân viên",
         isActive: true,
     },
 ];
 
-function UserManager() {
+function ManageStaff() {
     const dispatch = useDispatch()
-    const listUser = useSelector(selectAllUser)
+    const listUser = useSelector(selectStaff)
     useEffect(() => {
         if(getToken()&&getToken() !== undefined){
             dispatch(getAllUser())
@@ -72,4 +72,4 @@ function UserManager() {
     )
 }
 
-export default UserManager
+export default ManageStaff

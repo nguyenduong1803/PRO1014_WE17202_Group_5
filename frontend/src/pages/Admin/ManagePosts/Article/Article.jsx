@@ -2,26 +2,23 @@ import React, { useContext, useState } from "react";
 import styles from "../Article/Article.module.css";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { BlogContext } from "../../../../contexts/BlogContext";
 import axios from "axios";
 import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
 const Article = () => {
   const [img, setImg] = useState("");
   const [status, setStatus] = useState(true);
-  const { blogs } = useContext(BlogContext);
   const idBlogs = window.location.hash.split("#")[1];
-  const BlogDetail = blogs.find((e) => e?._id === idBlogs);
-  console.log(BlogDetail);
+ 
 
   const [registerForm, setRegisterForm] = useState({
-    author: BlogDetail?.author,
-    category: BlogDetail?.category,
+    author: "",
+    category: "",
     comments: [],
-    content: BlogDetail?.content,
-    desc: BlogDetail?.desc,
-    status:  BlogDetail?.status,
-    subTitle: BlogDetail?.subTitle,
-    title: BlogDetail?.title,
+    content: "",
+    desc: "",
+    status:  "",
+    subTitle:"",
+    title:"",
     _id: "62b27f70a4d739979c0c0405",
   });
   const onChangeRegisterForm = (event) => {
@@ -48,30 +45,6 @@ const Article = () => {
       isActive: true,
     },
   ];
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    var formData = new FormData();
-    formData.append("subTitle", registerForm.subTitle);
-    formData.append("author", registerForm.author);
-    formData.append("category", registerForm.category);
-    formData.append("content", registerForm.content);
-    formData.append("title", registerForm.title);
-
-    axios.put("http://localhost:5000/api/blogs/" + idBlogs,formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZTI1MzQwOWQ0YThiYjRlMWU1ZTYiLCJpYXQiOjE2NTU3OTkyMjJ9.gpm8o8864y8Y79qwoi5z4jBMIdrl8nvEcOPm44l8CEA",
-      },
-    })
-    .then((res) => {
-      console.log(res.data);
-     // History.push("/admin/quan-ly-san-pham");
-    })
-    .catch((err) => console.log(err));
-  };
 
 
   function getImg(e) {
@@ -100,7 +73,7 @@ const Article = () => {
               <div className={`${styles.formRow}`}></div>
             </div>
             <form  
-            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
             onChange={(e) => onChangeRegisterForm(e)}
             encType="multipart/form-data"
             >

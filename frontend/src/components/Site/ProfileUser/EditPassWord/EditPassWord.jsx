@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import axios from "axios";
-import { api } from "../../../../redux/SliceReducer/AuthSlice";
+import { api } from "../../../../utils/api";
 import { getToken } from "../../../../utils/Common";
 
 function EditPassWord() {

@@ -23,7 +23,7 @@ class ProductController extends Controller
         $uniIdImg = strtoupper(Str::random(10));
         $paramsProduct = [
             $validate['name'],
-            $validate['short_desscription'],
+            $validate['short_description'],
             $validate['id_directory'],
             $validate['price'],
             $validate['id_code_sale'],
@@ -32,7 +32,6 @@ class ProductController extends Controller
             $validate['id_cart'],
             $validate['full_description'],
             $validate['time_complete'],
-            $validate['update_at'],
             $uniIdImg
         ];
         foreach ($request->file('img') as $imagefile) {

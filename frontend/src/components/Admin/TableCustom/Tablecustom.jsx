@@ -4,9 +4,69 @@ import { Link } from "react-router-dom";
 import Table from "rsuite/Table";
 import {toSlug} from "../../../extensions/toSlug"
 import "rsuite-table/dist/css/rsuite-table.css";
-import Loadings from "../../../components/Site/Loadings/Loadings"
+import Loadings from "../../Site/Loading/Loadings/Loadings"
 import { searchProduct } from '../../../redux/SliceReducer/ManagerProductSlice';
 import { useDispatch } from 'react-redux';
+
+function Tablecustom({ tables, data, setIdProduct, path }) {
+    const [loading, setLoading] = React.useState(false)
+    console.log(data)
+    return (
+        <>
+            {loading ? <Loadings /> :
+                <div className={`${styles.Profiletable} mt-4`}>
+                    {
+                        (<Table
+                            data={data}
+                            rowHeight={55}
+                            height={data.length > 9 ? (550 * data.length) / 10 : 600}
+
+                        // affixHorizontalScrollbar
+                        >
+                            {
+                                tables.map((table, index) => {
+                                    let Component;
+                                    if (table.type === "img") {
+                                        Component = <ImageCell dataKey={table.dataKey} />
+                                    } else if (table.type === "cell") {
+                                        Component = <Table.Cell dataKey={table.dataKey} />
+                                    } else if (table.type === "status") {
+                                        Component = <PositionCell dataKey={table.dataKey} />
+                                    } else if (table.type === "edit") {
+                                        Component = <EditCell setIdProduct={setIdProduct} dataKey={table.dataKey} />
+                                    } else if (table.type === "comment") {
+                                        Component = <CommentCell dataKey={table.dataKey} />
+                                    } else if (table.type === "postAction") {
+                                        Component = <PostAction setIsBlog={setIdProduct} dataKey={table.dataKey} path={path} />
+                                    } else if (table.type === "deleteCate") {
+                                        Component = <CategoryAction setIdProduct={setIdProduct} dataKey={table.dataKey} path={path}nameCate={table.name} />
+                                    }
+                                    else if (table.type === "orderAction") {
+                                        Component = <OrderDetail dataKey={table.dataKey} />
+                                    } else if (table.type === "isSucces") {
+                                        Component = <IsSuccesOrder dataKey={table.dataKey} />
+                                    }
+                                    
+                                    else {
+                                        Component = <Table.Cell dataKey={table.dataKey} />
+                                    }
+                                    return (
+                                        <Table.Column key={index} width={table.width} align="center" fixed={table.isFixed}>
+                                            <Table.HeaderCell className={styles.HeaderCell}>
+                                                {table.name}
+                                            </Table.HeaderCell>
+                                            {Component}
+                                        </Table.Column>
+                                    )
+                                })
+                            }
+                        </Table>)}
+                </div>
+            }
+        </>
+    )
+}
+// show img avatar
 const ImageCell = ({ rowData, dataKey, ...props }) => (
     <Table.Cell {...props} style={{ padding: 0 }}>
         <div
@@ -24,7 +84,7 @@ const ImageCell = ({ rowData, dataKey, ...props }) => (
         </div>
     </Table.Cell>
 );
-
+// state order
 const PositionCell = ({ rowData, dataKey, ...props }) => (
     <Table.Cell
         {...props}
@@ -41,11 +101,15 @@ const PositionCell = ({ rowData, dataKey, ...props }) => (
         )}
     </Table.Cell>
 );
+// comment
 const CommentCell = ({ rowData, dataKey, ...props }) => (
     <Table.Cell {...props} style={{ padding: 0 }}>
         <div>{rowData[dataKey].length}</div>
     </Table.Cell>
 );
+
+
+// order deatail
 const OrderDetail = ({ rowData, dataKey, ...props }) => (
     <Table.Cell {...props}>
         <div className={styles.Celll}>
@@ -108,8 +172,7 @@ const PostAction = ({ rowData, dataKey, setIsBlog, path, ...props }) => (
         <div className={styles.Celll}>
             <Link
                 to={{
-                    pathname: `/admin/${path}`,
-                    search: `#${rowData[dataKey]}`,
+                    pathname: `/admin/${path}/${rowData[dataKey]}`,
                 }}
                 className={`${styles.btnEdit} `}
                 role="button"
@@ -158,61 +221,4 @@ const EditCell = ({ rowData, dataKey, setIdProduct, ...props }) => {
         </Table.Cell>
     )
 };
-function Tablecustom({ tables, data, setIdProduct, path }) {
-    const [loading, setLoading] = React.useState(false)
-    console.log(data)
-    return (
-        <>
-            {loading ? <Loadings /> :
-                <div className={`${styles.Profiletable} mt-4`}>
-                    {
-                        (<Table
-                            data={data}
-                            rowHeight={55}
-                            height={data.length > 9 ? (550 * data.length) / 10 : 600}
-
-                        // affixHorizontalScrollbar
-                        >
-                            {
-                                tables.map((table, index) => {
-                                    let Component;
-                                    if (table.type === "img") {
-                                        Component = <ImageCell dataKey={table.dataKey} />
-                                    } else if (table.type === "cell") {
-                                        Component = <Table.Cell dataKey={table.dataKey} />
-                                    } else if (table.type === "status") {
-                                        Component = <PositionCell dataKey={table.dataKey} />
-                                    } else if (table.type === "edit") {
-                                        Component = <EditCell setIdProduct={setIdProduct} dataKey={table.dataKey} />
-                                    } else if (table.type === "comment") {
-                                        Component = <CommentCell dataKey={table.dataKey} />
-                                    } else if (table.type === "postAction") {
-                                        Component = <PostAction setIsBlog={setIdProduct} dataKey={table.dataKey} path={path} />
-                                    } else if (table.type === "deleteCate") {
-                                        Component = <CategoryAction setIdProduct={setIdProduct} dataKey={table.dataKey} path={path}nameCate={table.name} />
-                                    }
-                                    else if (table.type === "orderAction") {
-                                        Component = <OrderDetail dataKey={table.dataKey} />
-                                    } else if (table.type === "isSucces") {
-                                        Component = <IsSuccesOrder dataKey={table.dataKey} />
-                                    } else {
-                                        Component = <Table.Cell dataKey={table.dataKey} />
-                                    }
-                                    return (
-                                        <Table.Column key={index} width={table.width} align="center" fixed={table.isFixed}>
-                                            <Table.HeaderCell className={styles.HeaderCell}>
-                                                {table.name}
-                                            </Table.HeaderCell>
-                                            {Component}
-                                        </Table.Column>
-                                    )
-                                })
-                            }
-                        </Table>)}
-                </div>
-            }
-        </>
-    )
-}
-
 export default Tablecustom

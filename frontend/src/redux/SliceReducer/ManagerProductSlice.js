@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
-import { getToken, removeUserSession, setTokenSession } from "../../utils/Common"
-const api = "http://127.0.0.1:8000/api/"
+import { api } from "../../utils/api"
+import { getToken } from "../../utils/Common"
 // initState: {
 //     username: "",
 //     password: "",
@@ -82,7 +82,7 @@ export const deleteProductById = createAsyncThunk("product/deleteProductById", a
         })
         .then(response => {
             payloads = { data: payload, status: response.data.status }
-            // action.dispatch(getProducts())
+            action.dispatch(getProducts())
         }).catch(function (err) {
             console.log(err)
             payloads = { data: "", status: err.response.status }
@@ -94,11 +94,12 @@ export const addProduct = createAsyncThunk("product/addProduct", async (payload,
     await axios
         .post(api + `product/create`, payload, {
             headers: {
-                "Content-Type": "multipart/form-data",
+                "Authorization": `Bearer ${getToken()}`
             },
         })
         .then(response => {
             payloads = { data: payload, status: response.data.status }
+            console.log(response)
             action.dispatch(getProducts())
         }).catch(function (err) {
             console.log(err)

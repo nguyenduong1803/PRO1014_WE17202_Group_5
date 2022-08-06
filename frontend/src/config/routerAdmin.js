@@ -15,6 +15,7 @@ import AddCategory from "../pages/Admin/ProductCategory/AddCategory/AddCategory"
 import EditCategory from "../pages/Admin/ProductCategory/EditCategory/EditCategory";
 import PageNotFound from "../pages/Site/PageNotFound/PageNotFound";
 import ManageTable from "../pages/Admin/ManageTable/ManageTable";
+import ManageStaff from "../pages/Admin/ManageStaff/ManageStaff";
 
 export const routerAdmin =[
     {
@@ -56,7 +57,7 @@ export const routerAdmin =[
     },
     {
         component :Profile,
-        path:"chi-tiet-nguoi-dung",
+        path:"chi-tiet-nguoi-dung/:name",
     },
    
     {
@@ -74,6 +75,10 @@ export const routerAdmin =[
     {
         component :UserManager,
         path:"quan-ly-nguoi-dung",
+    },
+    {
+        component :ManageStaff,
+        path:"quan-ly-nhan-vien",
     },
     {
         component :Article,

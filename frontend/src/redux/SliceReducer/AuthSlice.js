@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
+import { api } from "../../utils/api"
 import { getToken, removeUserSession, setTokenSession } from "../../utils/Common"
-export const api = "http://127.0.0.1:8000/api/"
 
 const AuthSlice = createSlice({
     name: "auth",
@@ -9,7 +9,8 @@ const AuthSlice = createSlice({
         token: "",
         status: "idle",
         user: {},
-        isSuccess: getToken() ? true : false
+        isSuccess: getToken() ? true : false,
+        listUser: [],
     },
     reducers: {
     },
@@ -22,6 +23,9 @@ const AuthSlice = createSlice({
             }).addCase(getUserAuth.fulfilled, (state, action) => {
                 state.status = "idle"
                 state.user = action.payload
+            }).addCase(getAllUser.fulfilled, (state, action) => {
+                state.status = "idle"
+                state.listUser = action.payload
             }).addCase(loginFailure.fulfilled, (state, action) => {
                 state.status = "idle"
                 state.isSuccess = action.payload
@@ -62,6 +66,27 @@ export const getUserAuth = createAsyncThunk("auth/getUser", async (token) => {
             { headers: { "Authorization": `Bearer ${getToken()}` } })
             .then(res => {
                 user = res.data.user
+            }).catch((error) => {
+                console.log(error)
+            });
+    }
+    return user
+})
+export const getAllUser = createAsyncThunk("user/getAllUser", async (payload) => {
+    let user
+    if (getToken() !== undefined && getToken()) {
+        await axios.get(api + "user/getAllUsers",
+             {
+                headers: { "Authorization": `Bearer ${getToken()}` },
+                params: {
+                    limit: payload?.limit || 10,
+                    page: payload?.page || 1,
+                    q: payload?.keySearch || "",
+                }
+            })
+            .then(res => {
+                console.log(res)
+                user = res.data.data
             }).catch((error) => {
                 console.log(error)
             });
