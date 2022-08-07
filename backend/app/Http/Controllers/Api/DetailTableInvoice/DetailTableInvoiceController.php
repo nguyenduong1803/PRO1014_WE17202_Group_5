@@ -13,4 +13,12 @@ class DetailTableInvoiceController extends Controller
         $modelDetailTableInvoice = new DetailTableInvoice();
         $modelDetailTableInvoice -> insert($params);
     }
+    public function getLists($id_invoice) {
+        $modelDetailTableInvoice = new DetailTableInvoice();
+        $params = [
+            $id_invoice
+        ];
+        $data = $modelDetailTableInvoice -> getLists($params);
+        return response() ->json(["data" => $data, "status" => true],200);
+    }
 }
