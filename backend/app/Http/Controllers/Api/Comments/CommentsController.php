@@ -47,4 +47,21 @@ class CommentsController extends Controller
         $modelComments -> updateComment($params);
         return response() ->json(["msg" => "Cập nhật bình luận thành công!", "status" => true],200);
     }
+
+    public function deleteComment($id) {
+        $modelComments = new Comments();
+        $timeStamp = date("Y-m-d H:i:s",time());
+        $user = Auth::user();
+        $result = $modelComments -> checkExistsComment($id, $user['id'] );
+        $params2 = [
+            2,
+            $timeStamp,
+            $id,
+            $user['id']
+        ];
+        if(!isset($result)) return response() ->json(["msg" => "Bình luận không tôn tại!", "status" => false],404);
+        $modelComments -> deleteComment($params2);
+        return response() ->json(["msg" => 'Xoá bình luận thành công!', "status" => true],200);
+    }
+
 }

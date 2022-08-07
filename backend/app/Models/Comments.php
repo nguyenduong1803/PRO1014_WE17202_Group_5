@@ -34,4 +34,14 @@ class Comments extends Model
     public function updateComment($params) {
         DB::update("UPDATE comments SET `description` = ?, `update_at` = ? WHERE `id_user` = ? AND `id` = ? AND is_delete = 1", $params);
     }
+
+    public function checkExistsComment($id, $id_user) {
+        return Comments::query() -> where('id', $id)
+            -> where('is_delete', 1)
+            -> where('id_user', $id_user)
+            -> first();
+    }
+    public function deleteComment($params) {
+        DB::update("UPDATE comments SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ? AND `id_user` = ?", $params);
+    }
 }
