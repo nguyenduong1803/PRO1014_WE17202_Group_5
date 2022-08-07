@@ -31,7 +31,7 @@ class InvoiceDetail extends Model
     }
 
     public function updateDetailInvoice($params) {
-        DB::update("UPDATE detail_invoice SET `id_user` = ?,`id_table_book` = ?, `id_product` = ?, `amount` = ?, `update_at` = ? WHERE `id` = ? AND is_delete = 1", $params);
+        DB::update("UPDATE detail_invoice SET `id_user` = ?, `id_product` = ?, `amount` = ?, `update_at` = ? WHERE `id` = ? AND is_delete = 1", $params);
     }
 
     public function deleteDetailInvoice($params) {
