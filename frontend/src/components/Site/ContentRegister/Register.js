@@ -10,8 +10,8 @@ import { InputPassword, InputTextField } from './InputMui'
 import UploadImage from './UploadImage'
 import BannerAnimation from './BannerAnimation'
 import { registerAccounts } from '../../../redux/SliceReducer/AccountSlice'
-import Loadings from '../Loadings/Loadings'
 import { selectIsuccess, selectLoadingRegister } from '../../../redux/selector'
+import Loadings from '../Loading/Loadings/Loadings'
 
 
 function ContentRegister() {

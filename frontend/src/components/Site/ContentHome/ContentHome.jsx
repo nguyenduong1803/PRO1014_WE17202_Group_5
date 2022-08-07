@@ -12,10 +12,7 @@ import product5 from "../../../../src/assets/img/seafood-14.webp";
 import styles from "../ContentHome/TrendingOrder/TrendingOrder.module.css";
 import MyCart from "../../Site/ContentHome/ContentHomeRight/MyCart/MyCart";
 import InformationChef from'./InformationChef/BlogSection';
-import BlogItem from './InformationChef/BlogItem';
-
-import ProfileUser from '../ProfileUser/ProfileUser';
-import Slider from './Slider/Slider';
+// import Slider from './Slider/Slider';
 
 const mycart = [
   {
@@ -184,7 +181,7 @@ function ContentHome() {
         </div>
       </div>
       <div className="container">
-        <Slider/>
+        {/* <Slider/> */}
        {/* <ProfileUser/> */}
                
       </div>
