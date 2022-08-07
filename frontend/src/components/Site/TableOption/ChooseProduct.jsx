@@ -10,7 +10,6 @@ import { Button } from '@mui/material';
 import useDebounce from '../../../hooks/useDebounce';
 import { getProducts } from '../../../redux/SliceReducer/ManagerProductSlice';
 import LoadingSearch from '../Loading/LoadingSearch';
-import AliceCarousel from "react-alice-carousel";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
