@@ -24,4 +24,10 @@ class CommentsController extends Controller
         $modelComments -> insert($params);
         return response() ->json(["msg" => "Bình luận thành công!", "status" => true],200);
     }
+
+    public function getListByProduct(Request $request){
+        $modelComments = new Comments();
+        $result = $modelComments -> getListByProduct($request);
+        return $result;
+    }
 }

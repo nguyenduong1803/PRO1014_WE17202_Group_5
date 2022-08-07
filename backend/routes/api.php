@@ -118,7 +118,7 @@ Route::group(['namespace' => 'Comments', 'prefix' => 'comments'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\Comments\CommentsController::class, 'postComment']);
     });
-    Route::get('getLists', [\App\Http\Controllers\Api\Directory\DirectoryController::class, 'getLists']);
+    Route::get('getListByProduct', [\App\Http\Controllers\Api\Comments\CommentsController::class, 'getListByProduct']);
 });
 
 
