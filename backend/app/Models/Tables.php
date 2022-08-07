@@ -40,10 +40,10 @@ class Tables extends Model
     }
 
     public function deleteTable($params) {
-        DB::update("UPDATE tables SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
+        DB::update("UPDATE tables SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ? AND is_delete = 1", $params);
     }
 
     public function updateDetailStatus($params) {
-        DB::update("UPDATE tables SET `status` = ? WHERE `id` = ?", $params);
+        DB::update("UPDATE tables SET `status` = ? WHERE `id` = ? AND is_delete = 1", $params);
     }
 }

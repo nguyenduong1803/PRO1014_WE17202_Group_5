@@ -44,13 +44,11 @@ class InvoiceDetailController extends Controller
         $validate = $request -> validated();
         $modelDetailInvoice = new InvoiceDetail();
         $timeUpdateAt = date("Y-m-d H:i:s",time());
-        $idTableBook = $validate['id_table_book'];
         $idProduct = $validate['id_product'];
         $amount = $validate['amount'];
         $user = Auth::user();
         $params = [
             $user['id'],
-            $idTableBook,
             $idProduct,
             $amount,
             $timeUpdateAt,

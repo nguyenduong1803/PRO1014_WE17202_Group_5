@@ -24,7 +24,6 @@ class InvoiceDetailUpdate extends FormRequest
     public function rules()
     {
         return [
-            "id_table_book" => "integer|required",
             "id_product" => "integer|required",
             "amount" => "integer|required",
         ];

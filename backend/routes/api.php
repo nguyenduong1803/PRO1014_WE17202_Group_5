@@ -99,6 +99,12 @@ Route::group(['namespace' => 'InvoiceDetail', 'prefix' => 'invoice-detail'], fun
     });
 });
 
+Route::group(['namespace' => 'InvoiceDetailTableInvoice', 'prefix' => 'detail-table-invoice'], function(){
+    Route::middleware('auth:api') -> group(function () {
+        Route::get('getLists/{id_invoice}', [\App\Http\Controllers\Api\DetailTableInvoice\DetailTableInvoiceController::class, 'getLists']);
+    });
+});
+
 Route::group(['namespace' => 'Directory', 'prefix' => 'directory'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\Directory\DirectoryController::class, 'createDirectory']);
