@@ -3,44 +3,37 @@ import left from "../../../assets/img/chevron-left.svg"
 import right from "../../../assets/img/chevron-right.svg"
 import styles from "./Carousel.module.css"
 import Panolens from "../Panolens/Panolens"
-import vr_1 from "../../../assets/images/vr1.png"
-import vr_2 from "../../../assets/images/vr2.jpg"
-import vr_3 from "../../../assets/images/vr3.jpg"
-import vr_4 from "../../../assets/images/vr4.jpg"
-import vr_5 from "../../../assets/images/vr5.jpg"
-import vr_6 from "../../../assets/images/vr6.jpg"
-import vr_7 from "../../../assets/images/vr7.jpg"
-import vr_8 from "../../../assets/images/vr8.jpg"
-import vr_9 from "../../../assets/images/vr9.jpg"
 
 
 const arrImage = [
     {
-        src: vr_1,
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822447/product/l1v9gpzpc90gszn7uvgp.jpg",
     },
     {
-        src: vr_2,
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822723/product/q6tvz6csfo73aksy1b0w.jpg",
+
     },
     {
-        src: vr_3,
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822613/product/ozexm6vwgbflul4tb70b.jpg",
+
     },
     {
-        src: vr_4,
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822781/product/sfiyk0x4iwiwhzd0fmew.jpg",
     },
     {
-        src: vr_5,
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822879/product/fjw2f4efbvnic7wnxw7t.jpg",
     },
     {
-        src: vr_6,
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822903/product/smka68hvau8djtffz2qr.jpg",
     },
     {
-        src: vr_7,
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822933/product/xs05ltchuq8xfspvy01e.jpg",
     },
     {
-        src: vr_8,
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822933/product/xs05ltchuq8xfspvy01e.jpg",
     },
     {
-        src: vr_9,
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822955/product/qxmltixitp2wdnw1rkdk.jpg",
     }
 
 

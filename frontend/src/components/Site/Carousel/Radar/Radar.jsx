@@ -34,7 +34,7 @@ function Rada({ point, scale }) {
         <div className={styles.circle} style={{ ...point, ...scale }} >
           <div className={styles.line} style={{}}></div>
         </div>
-        <input
+        {/* <input
           // onChange={() => handleRange()}
           // ref={refRange}
           className={`${styles.range} `}
@@ -43,7 +43,7 @@ function Rada({ point, scale }) {
           min="-180"
           max="360"
           type="range"
-        />
+        /> */}
 
       </div>
     </>
