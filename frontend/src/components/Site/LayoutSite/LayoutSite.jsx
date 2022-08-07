@@ -2,12 +2,12 @@ import React from 'react'
 import styles from "./LayoutSite.module.css"
 import { listMenu } from "../../../config/listConfig"
 import Header from "../../../components/Site/Header/Header"
-import { Link, NavLink } from "react-router-dom"
+import {  NavLink } from "react-router-dom"
 import Line from "../../../assets/svg/Line"
 import { selectLoading } from "../../../redux/selector"
-import Loadings from "../../../components/Site/Loadings/Loadings"
+import Loadings from "../Loading/Loadings/Loadings"
 import { useSelector } from 'react-redux'
-import Footer from '../../../components/Site/FooterContent/Footer';
+import Footer from '../../../components/Site/Footer/Footer';
 import BarArrow from '../../../assets/svg/BarArrow'
 
 

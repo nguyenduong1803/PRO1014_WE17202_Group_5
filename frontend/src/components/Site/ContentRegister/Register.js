@@ -10,8 +10,8 @@ import { InputPassword, InputTextField } from './InputMui'
 import UploadImage from './UploadImage'
 import BannerAnimation from './BannerAnimation'
 import { registerAccounts } from '../../../redux/SliceReducer/AccountSlice'
-import Loadings from '../Loadings/Loadings'
 import { selectIsuccess, selectLoadingRegister } from '../../../redux/selector'
+import Loadings from '../Loading/Loadings/Loadings'
 
 
 function ContentRegister() {
@@ -62,7 +62,7 @@ const FormRegister = () => {
     formRegister.append("ngay_sinh", ngaySinh)
     formRegister.append("dia_chi", address)
     formRegister.append("sdt", phone)
-    formRegister.append("vai_tro", 1)
+    formRegister.append("vai_tro", 2)
     formRegister.append("gioi_tinh", 1)
     formRegister.append("mat_khau", password.password)
     formRegister.append("file", image)

@@ -29,13 +29,12 @@ class ProductCreate extends FormRequest
             'name' => 'required|max:255|string',
             'short_description' => 'required|max:255|string',
             'id_directory' => 'nullable|integer',
-            'price' => 'required|max:50|float',
+            'price' => 'required|max:50',
             'id_code_sale' => 'nullable|integer',
             'is_status_product' => 'nullable|integer',
             'id_cart' => 'nullable|integer',
             'full_description' => 'nullable|string',
             'time_complete' => 'nullable|datetime',
-            'update_at' => 'nullable|timestamp',
         ];
     }
     public function failedValidation(Validator $validator)

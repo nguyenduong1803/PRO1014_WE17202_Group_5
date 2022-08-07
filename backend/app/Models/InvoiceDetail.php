@@ -18,8 +18,8 @@ class InvoiceDetail extends Model
 
     public function insertDetailInvoice($params) {
         DB::insert('INSERT INTO detail_invoice
-    (id_user , id_invoice , id_table_book, id_product, amount)
-    values (? , ? , ?, ?, ?)', $params);
+    (id_user , id_invoice, id_product, amount)
+    values (? , ? , ?, ?)', $params);
     }
 
     public function getPriceProductInDetailInvoice($params) {
@@ -31,7 +31,7 @@ class InvoiceDetail extends Model
     }
 
     public function updateDetailInvoice($params) {
-        DB::update("UPDATE detail_invoice SET `id_user` = ?,`id_table_book` = ?, `id_product` = ?, `amount` = ?, `update_at` = ? WHERE `id` = ? AND is_delete = 1", $params);
+        DB::update("UPDATE detail_invoice SET `id_user` = ?, `id_product` = ?, `amount` = ?, `update_at` = ? WHERE `id` = ? AND is_delete = 1", $params);
     }
 
     public function deleteDetailInvoice($params) {

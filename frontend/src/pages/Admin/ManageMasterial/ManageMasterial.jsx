@@ -1,78 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./ManageMasterial.module.css";
 import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
-import SearchIcon from "@mui/icons-material/Search";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
-import Pagination from "../../../extensions/Pagination/Pagination";
-import { NavLink } from "react-router-dom";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
-import { DataContext } from "../../../contexts/DataContext";
-import axios from "axios";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
-import { tableProduct } from "../../../config/tables"
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
 import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
 const ManageProduct = (id) => {
-  const { data, setData } = useContext(DataContext);
   const [PageSize, setPageSize] = useState(10)
-
-  const [dataSliced, setdataSliced] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchValue, setSearchValue] = useState("");
-  const [sortPosition, setSortPosition] = useState("");
-  const [sortStatus, setSortStatus] = useState("");
-
-  useEffect(() => {
-    if (data) {
-      const firstPageIndex = (currentPage - 1) * PageSize;
-      const lastPageIndex = firstPageIndex + PageSize;
-      setdataSliced(data.slice(firstPageIndex, lastPageIndex));
-    }
-    if (searchValue !== "" || sortPosition !== "" || sortStatus !== "") {
-      const firstPageIndex = (currentPage - 1) * PageSize;
-      const lastPageIndex = firstPageIndex + PageSize;
-      setdataSliced(
-        data
-          .filter((e) => e.name.toLowerCase().indexOf(searchValue) !== -1)
-          // .filter((e) => e.address.indexOf(sortStatus) !== -1)
-          // .filter((e) => e.phoneNumber.indexOf(sortPosition) !== -1)
-          .slice(firstPageIndex, lastPageIndex)
-      );
-    }
-  }, [currentPage, searchValue, sortPosition, sortStatus, data, PageSize]);
-
   const [idProduct, setIdProduct] = useState();
-  const handleDeleteProduct = (e) => {
-    axios
-      .delete("http://localhost:5000/api/products/" + e, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZTI1MzQwOWQ0YThiYjRlMWU1ZTYiLCJpYXQiOjE2NTU2OTU4NzZ9.fC3rv-pUyNxMEx0K12E-XWsUm8GSTK6RefKGhdFaV8o",
-        },
-      })
-      .then((res) => {
-
-        setData(data.filter((e) => e._id !== idProduct));
-      });
-
-  };
-
-  const headers = [
-    // { label: / * Nhãn để hiển thị ở đầu CSV * / , khóa: / * Khóa dữ liệu * / }
-    { label: "Ảnh sản phẩm", key: "images" },
-    { label: "Mã sản phẩm", key: "id" },
-    { label: "Tên sản phẩm", key: "name" },
-    { label: "Mô tả", key: "describe" },
-    { label: "Mã giảm giá", key: "discount" },
-    { label: "Số lượng", key: "category" },
-    { label: "Gía sản phẩm", key: "price" },
-    { label: "Thanh toán", key: "payment" },
-    { label: "Trạng thái", key: "status" },
-  ];
+ 
   const breadcrumItem = [
     {
       href: "/",
@@ -114,7 +53,7 @@ const ManageProduct = (id) => {
       <Sidebar />
       <ModalDelete
         idProduct={idProduct}
-        handleDeleteProduct={handleDeleteProduct}
+        // handleDeleteProduct={handleDeleteProduct}
       />
       <div className={`${styles.Equipment}`}>
         <Breadcrumbs breadItem={breadcrumItem} />
@@ -136,19 +75,19 @@ const ManageProduct = (id) => {
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
               <ButtonAdd name="Thêm sản phẩm" path="them-san-pham"/>
-              <ExportReact csvData={data} fileName="Danh sách sản phẩm" />
+              <ExportReact csvData={{}} fileName="Danh sách sản phẩm" />
             </div>
           </div>
         </div>
         <div className={styles.profile}>
-          <Tablecustom
+          {/* <Tablecustom
           PageSize={PageSize}
             data={dataSliced.filter((e) =>
               e.name.toLowerCase().includes(searchValue)
             )}
             tables={tableProduct}
             setIdProduct={setIdProduct}
-          />
+          /> */}
 
           <div className={`${styles.pagination} justify-content-between`}>
             <SelectMui
@@ -160,37 +99,12 @@ const ManageProduct = (id) => {
               <span style={{ marginRight: `25px` }}>
                 có{" "}
                 <span style={{ fontWeight: `bold`, color: `#1A358F` }}>
-                  {searchValue === ""
-                    ? data.length
-                    : data.filter(
-                      (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
-                    ).length}
+                  
                 </span>{" "}
                 bản ghi
               </span>
 
-              {searchValue === "" ? (
-                <Pagination
-                  className="pagination-bar"
-                  currentPage={currentPage}
-                  totalCount={data && data.length}
-                  pageSize={PageSize}
-                  onPageChange={(page) => setCurrentPage(page)}
-                />
-              ) : (
-                <Pagination
-                  className="pagination-bar"
-                  currentPage={currentPage}
-                  totalCount={
-                    data &&
-                    data.filter(
-                      (e) => e.name.toLowerCase().indexOf(searchValue) !== -1
-                    ).length
-                  }
-                  pageSize={PageSize}
-                  onPageChange={(page) => setCurrentPage(page)}
-                />
-              )}
+             
             </div>
           </div>
         </div>

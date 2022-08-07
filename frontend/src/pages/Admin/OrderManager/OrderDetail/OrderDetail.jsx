@@ -1,26 +1,12 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import styles from "../../OrderManager/OrderDetail/OrderDetail.module.css";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-// import {Order} from "../../../../contexts/OrderContext"
-import { OrderContext } from "../../../../contexts/OrderContext";
-import { DataContext } from "../../../../contexts/DataContext";
 
 const OrderDetail = () => {
-  const { orders } = useContext(OrderContext);
-  const {data}  = useContext(DataContext)
-  console.log(data.status);
-   console.log(orders);
   const idOrder = window.location.hash.split("#")[1];
-  const orderDetail = orders.find((e) => e._id === idOrder);
- console.log(orderDetail);
   
-   const idProduct = orderDetail?.items.map(e => e.id)
-    const dataProduct = data && data.filter(e => idProduct?.includes(e._id));
-
-console.log(dataProduct.map(e => e?.name));
-  //  const ADM = ab.find((e) => console.log(e))
-  
+const orderDetail = {}
   const breadcrumItem = [
     {
       href: "/",
@@ -117,7 +103,7 @@ console.log(dataProduct.map(e => e?.name));
           <div className="col-md-6">
             <div className={styles.Describe}>
               <h2>Mô tả chi tiết đơn hàng</h2>
-              {dataProduct && dataProduct.map((e,index) => (
+              {/* {dataProduct && dataProduct.map((e,index) => (
                 <div key={index} className={styles.DescribText}>
                 <div className="row d-flex border-bottom">
                   <div className={`${styles.DescribeOder} col-md-6 `}>
@@ -163,7 +149,7 @@ console.log(dataProduct.map(e => e?.name));
                   </div>
                 </div>
               </div>   
-              ))}           
+              ))}            */}
             </div>
           </div>
 

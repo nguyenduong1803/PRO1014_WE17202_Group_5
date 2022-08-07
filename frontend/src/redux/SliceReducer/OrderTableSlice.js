@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
+import { api } from "../../utils/api"
 import { getToken } from "../../utils/Common"
 
-const api = "http://127.0.0.1:8000/api/"
 const tableOrder = {
     tableId: [],
     name: "",

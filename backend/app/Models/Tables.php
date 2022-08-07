@@ -16,8 +16,7 @@ class Tables extends Model
     values (?, ?, ?, ?, ?, ?, ?, ?, ?)', $params);
     }
     public function getLists() {
-        $result = DB::select("SELECT * FROM tables WHERE `is_delete` = 1");
-        return $result;
+        return $result = DB::select("SELECT * FROM tables WHERE `is_delete` = 1");
     }
     public function updateTable($params) {
         DB::update("UPDATE tables SET `address_shop` = ?, `floor` = ?,`description` = ?,
@@ -33,17 +32,23 @@ class Tables extends Model
     }
 
     public function checkTableDeleted($id) {
-        $data = Tables::query() -> where('id', $id)
+        return $data = Tables::query() -> where('id', $id)
             -> where('is_delete', 1)
             -> first();
-        return $data;
     }
 
     public function deleteTable($params) {
-        DB::update("UPDATE tables SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
+        DB::update("UPDATE tables SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ? AND is_delete = 1", $params);
     }
 
     public function updateDetailStatus($params) {
-        DB::update("UPDATE tables SET `status` = ? WHERE `id` = ?", $params);
+        DB::update("UPDATE tables SET `status` = ? WHERE `id` = ? AND is_delete = 1", $params);
+    }
+
+    public function checkStatusTable($id, $status) {
+        return $data = Tables::query() -> where('id', $id)
+            -> where('is_delete', 1)
+            -> where('status', $status)
+            -> first();
     }
 }

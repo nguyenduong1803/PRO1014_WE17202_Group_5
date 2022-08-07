@@ -35,7 +35,6 @@ class ProductUpdate extends FormRequest
             'id_cart' => 'nullable|integer',
             'full_description' => 'nullable|string',
             'time_complete' => 'nullable|datetime',
-            'update_at' => 'nullable|timestamp',
         ];
     }
     public function failedValidation(Validator $validator)

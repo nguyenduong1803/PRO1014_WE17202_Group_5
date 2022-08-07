@@ -95,7 +95,7 @@ const NavItem = ({ icon, color, index, linkTo, setOption, onSetMap, onPrev, titl
     const refLi = useRef();
     const [active, setActive] = useState(2)
     const handleToggle = (index) => {
-        const arr = document.querySelectorAll(".Menu_active1__NidsR")
+        const arr = document.querySelectorAll(`.${styles.list_items}`)
         console.log(option)
 
         if (index === 0) {
@@ -104,7 +104,6 @@ const NavItem = ({ icon, color, index, linkTo, setOption, onSetMap, onPrev, titl
         } else if (index === 1) {
             setOption("")
             onSetMap("map")
-            console.log(option)
         } else if (index === 2) {
             if (option === "down") {
                 setOption("up")
@@ -117,11 +116,11 @@ const NavItem = ({ icon, color, index, linkTo, setOption, onSetMap, onPrev, titl
             onPrev()
             setOption("")
         }
-
+console.log(arr)
         for (let item of arr) {
-            item.classList.remove(`Menu_active1__NidsR`)
+            item.classList.remove(`${styles.active1}`)
         }
-        refLi.current.classList.add(`Menu_active1__NidsR`)
+        refLi.current.classList.add(`${styles.active1}`)
     }
     return (
         <li ref={refLi}

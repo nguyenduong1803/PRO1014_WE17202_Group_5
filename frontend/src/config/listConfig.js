@@ -5,25 +5,7 @@ import MenuIcon from "../assets/svg/MenuIcon"
 import OrderIcon from "../assets/svg/OrderIcon"
 import VrIcon from "../assets/svg/VrIcon"
 import FloorIcon from "../assets/svg/FloorIcon"
-// category
-export const listCategory = [
-    {
-        item: "Vegetable",
-        change: "Rau củ"
-    },
-    {
-        item: "Meat",
-        change: "Thịt sạch"
-    },
-    {
-        item: "Fruit",
-        change: "Hoa quả"
-    },
-    {
-        item: "Update",
-        change: ""
-    }
-]
+
 // menu 
 export const menu = [
     {

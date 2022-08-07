@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { api } from "../../../../redux/SliceReducer/AuthSlice";
+import { api } from "../../../../utils/api";
 import { getToken } from "../../../../utils/Common";
 import TastMess from "../../ToastMess/ToastMess";
 // import Calendar from '../../Calendar/Calendar'

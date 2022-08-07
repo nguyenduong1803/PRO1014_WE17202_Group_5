@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import styles from "./AddCategory.module.css";
 import Header from "../../../../components/Admin/Header/Header";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
-import Loadings from "../../../../components/Site/Loadings/Loadings";
 import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
-import { api } from '../../../../redux/SliceReducer/AuthSlice';
-import axios from 'axios';
-import { getToken } from '../../../../utils/Common';
-import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { addCategorys } from '../../../../redux/SliceReducer/CategorySlice';
 import ToastMess from '../../../../components/Site/ToastMess/ToastMess';

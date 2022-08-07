@@ -3,13 +3,13 @@ import styles from "../Alert/alert.module.css";
 import img from "../../../../assets/img/alert2.jpg";
 import Radar from "../Radar/Radar"
 import Menu from "../Menu/Menu"
-
-
+import CloseIcon from '@mui/icons-material/Close';
+import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 // import maximize from "../../assets/img/maximize.svg"
 // import minimize from "../../assets/img/minimize.svg"
 const click = () => {
   const alert = document.getElementById("alertimg");
-  const zoom = document.getElementById("zoom").style.display = "none";
+  document.getElementById("zoom").style.display = "none";
   alert.style.transform = "translateX(600px) scale(3) translateY(-80px)";
   alert.style.width = "25%";
   alert.style.height = "25%";
@@ -27,7 +27,7 @@ const click = () => {
 
 const prew = () => {
   const c = document.getElementById('button').style.display = "none";
-  const zoom = document.getElementById("zoom").style.display = "flex";
+  document.getElementById("zoom").style.display = "flex";
   const alert = document.getElementById("alertimg");
   alert.style.transform = "translateX(0) scale(1) translateY(0)";
   alert.style.width = "20%";
@@ -43,7 +43,6 @@ const prew = () => {
 
 
 const Alert = ({ imageActive, onHandleClick, setOption, option }) => {
-  const [point, setPoint] = React.useState();
   const listPoint = [
     {
       bottom: "39%",
@@ -52,7 +51,7 @@ const Alert = ({ imageActive, onHandleClick, setOption, option }) => {
     },
     {
       bottom: "39%",
-      left: "43%",  
+      left: "43%",
 
     },
     {
@@ -90,62 +89,58 @@ const Alert = ({ imageActive, onHandleClick, setOption, option }) => {
       left: '70%',
 
     },
-    {
-      bottom: '58%',
-      left: '34%',
-    },
+   
   ]
 
   return (
     <>
-
       <div className={styles.Alert}>
-        <img 
-        style={{}}
-        id="alertimg" className={styles.alert_img} src={img} />
-        <div
-          className={styles.demo} id="Mappp"
-          style={{
-            // display: 'none',
-            position: "fixed",
-            bottom: "0",
-            width: "16%",
-            height: "21%",
-          }}
-        >
-          {listPoint.map((point, index) => {
-            return (
-              <div key={index}>
-                <div
-                  style={imageActive === index ? { ...point, transform: "scale(1.3)", transition: "0.3s" } : { ...point }}
-                  onClick={() => onHandleClick(index)}
-                  className={`${styles.dots} ${styles.canvas}`}
+        {option !== "down" &&
+          <>
+            <img
+              style={{}}
+              id="alertimg" className={styles.alert_img} src={img} />
+            <div
+              className={styles.demo} id="Mappp"
+              style={{
+                // display: 'none',
+                position: "fixed",
+                bottom: "0",
+                width: "16%",
+                height: "21%",
+              }}
+            >
+              {listPoint.map((point, index) => {
+                return (
+                  <div key={index}>
+                    <div
+                      style={imageActive === index ? { ...point, transform: "scale(1.3)", transition: "0.3s" } : { ...point }}
+                      onClick={() => onHandleClick(index)}
+                      className={`${styles.dots} ${styles.canvas}`}
 
-                >
-                </div>
-                <div>
-                  {imageActive === index ? <Radar point={point} scale={{ transform: "scale(1.3)" }} /> : ""}
-                </div>
+                    >
+                    </div>
+                    <div>
+                      {imageActive === index ? <Radar point={point} scale={{ transform: "scale(1.3)" }} /> : ""}
+                    </div>
+                  </div>
+                )
+              })}
+
+              <div
+                id="zoom"
+                className={styles.wrapZoom}
+                onClick={click}
+              >
+                <ZoomOutMapIcon fontSize="large" />
               </div>
-            )
-          })}
+              <div className={styles.btn} id="button" onClick={prew}>
+                <CloseIcon />
+              </div>
+            </div>
+          </>
+        }
 
-          <div
-            id="zoom"
-            className={styles.wrapZoom}>
-            <img
-
-              className={styles.zoom}
-              src={""} alt=""
-              onClick={click}
-            />
-          </div>
-          <div className={styles.btn} id="button" onClick={prew}>
-            <img
-              className={styles.minimize}
-              src={""} alt="mini" />
-          </div>
-        </div>
         <Menu
           option={option}
           onPrev={prew}

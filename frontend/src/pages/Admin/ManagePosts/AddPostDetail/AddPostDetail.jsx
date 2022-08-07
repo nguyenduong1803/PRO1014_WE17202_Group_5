@@ -2,15 +2,12 @@ import React, { useContext, useState } from "react";
 import styles from "../Article/Article.module.css";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { BlogContext } from "../../../../contexts/BlogContext";
 import axios from "axios";
 import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
 const AddPostDetail = () => {
   const [img, setImg] = useState("");
-  const { blogs } = useContext(BlogContext);
   const idBlogs = window.location.hash.split("#")[1];
-  const BlogDetail = blogs.find((e) => e?._id === idBlogs);
-  console.log(BlogDetail);
+
 
   const [registerForm, setRegisterForm] = useState({
     author: "",
@@ -47,30 +44,6 @@ const AddPostDetail = () => {
     },
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    var formData = new FormData();
-    formData.append("subTitle", registerForm.subTitle);
-    formData.append("author", registerForm.author);
-    formData.append("category", registerForm.category);
-    formData.append("content", registerForm.content);
-    formData.append("title", registerForm.title);
-
-    axios
-      .post("http://localhost:5000/api/blogs/" + formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MmFhZTI1MzQwOWQ0YThiYjRlMWU1ZTYiLCJpYXQiOjE2NTU3OTkyMjJ9.gpm8o8864y8Y79qwoi5z4jBMIdrl8nvEcOPm44l8CEA",
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
   function getImg(e) {
     const urlImg = URL.createObjectURL(e.target.files[0]);
     setImg(urlImg);
@@ -97,7 +70,7 @@ const AddPostDetail = () => {
               <div className={`${styles.formRow}`}></div>
             </div>
             <form
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
               onChange={(e) => onChangeRegisterForm(e)}
               encType="multipart/form-data"
             >

@@ -4,7 +4,6 @@ import Breadcrumbs from "../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Tablecustom from "../../../components/Admin/TableCustom/Tablecustom";
 import ExportReact from "../../../components/Admin/ExportReact/ExportReact";
-import { DataContext } from "../../../contexts/DataContext";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 import ModalDelete from "../../../components/Admin/ModalDelete/ModalDelete"
 import { tableProduct } from "../../../config/tables"
@@ -12,29 +11,22 @@ import { listPagination } from "../../../config/listConfig"
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
 import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
-import { selectLoadingProduct, selectProducts } from "../../../redux/selector";
+import { selectCategory, selectLoadingProduct, selectProducts } from "../../../redux/selector";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Site/Loading/Loading";
-import { deleteProductById } from "../../../redux/SliceReducer/ManagerProductSlice";
+import { deleteProductById, getProducts } from "../../../redux/SliceReducer/ManagerProductSlice";
 import PaginationMui from "../../../components/Admin/PaginationMui/PaginationMui";
+import useDebounce from "../../../hooks/useDebounce";
 
 const ManageProduct = (id) => {
   const dispatch = useDispatch()
   const listProduct = useSelector(selectProducts)
   const loadingProduct = useSelector(selectLoadingProduct)
-  const { data, setData } = useContext(DataContext);
   const [PageSize, setPageSize] = useState(10)
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchValue, setSearchValue] = useState("");
-  // useEffect(() => {
-  //   if (data) {
-  //     const firstPageIndex = (currentPage - 1) * PageSize;
-  //     const lastPageIndex = firstPageIndex + PageSize;
-  //   }
-  // }, []);
 
   const [idProduct, setIdProduct] = useState();
   const handleDeleteProduct = (e) => {
+    console.log(idProduct)
     dispatch(deleteProductById(idProduct))
   };
   const breadcrumItem = [
@@ -49,16 +41,22 @@ const ManageProduct = (id) => {
       isActive: true,
     },
   ];
-  const list = [{
-    name: "meat",
-  }, {
-    name: "fish",
-  }, {
-    name: "vegetables"
-  }]
 const handleChangePage =(value)=>{
   console.log(value)
 }
+
+const listCategory = useSelector(selectCategory)
+
+const [keySearch, setKeySearch] = React.useState("");
+const debounce = useDebounce(keySearch, 500)
+
+
+const handleSearch = (e) => {
+  setKeySearch(e);
+}
+React.useEffect(() => {
+  dispatch(getProducts({ keySearch: debounce, limit: 30 }))
+}, [debounce])
   return (
     <>
       <Sidebar />
@@ -75,9 +73,9 @@ const handleChangePage =(value)=>{
               Danh sách sản phẩm
             </p>
             <div className="d-flex justify-content-between align-items-center">
-              <InputSearch setSearchValue={setSearchValue} />
+              <InputSearch setSearchValue={handleSearch} />
               <SelectMui
-                list={list}
+                list={listCategory}
                 name="Danh mục"
               />
             </div>

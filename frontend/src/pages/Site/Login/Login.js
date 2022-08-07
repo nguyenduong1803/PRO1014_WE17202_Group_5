@@ -8,11 +8,11 @@ import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux"
 import { isSuccess, selectLoading } from "../../../redux/selector"
 import { LoginAuth } from "../../../redux/SliceReducer/AuthSlice"
-import Loadings from "../../../components/Site/Loadings/Loadings"
 import { InputPassword } from '../../../components/Site/ContentRegister/InputMui'
 import { FormControl } from '@mui/material'
 import BannerAnimation from '../../../components/Site/ContentRegister/BannerAnimation'
 import { getToken } from '../../../utils/Common'
+import Loadings from '../../../components/Site/Loading/Loadings/Loadings'
 function Login(self) {
     return (
         <div className={`${styles.main} d-flex`}>

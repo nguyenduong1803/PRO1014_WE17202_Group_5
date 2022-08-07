@@ -7,15 +7,7 @@
     flex: 1;
 }
 /* Remove Arrows Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-/* Remove Arrows  Firefox */
-input[type="number"] {
-    -moz-appearance: textfield;
-}
+
 .main p {
     margin: 0;
 }
@@ -158,7 +150,10 @@ input[type="number"] {
     opacity: 0.8;
     border: 1px solid #ddd;
 }
-
+.textfull{
+    width: 100%;
+    height: 60px;
+}
 /* -------------------------mobile--------------------- */
 @media only screen and (max-width: 739px) {
     .form {

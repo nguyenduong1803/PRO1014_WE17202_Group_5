@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser, remainingSelector, selectLoadingProduct, selectProducts, selectLoading } from "../redux/selector";
 import { getProducts } from "../redux/SliceReducer/ManagerProductSlice";
 import { getUserAuth } from "../redux/SliceReducer/AuthSlice";
-import { getAllOrder, getListCart, getListTable, getOrder } from "../redux/SliceReducer/OrderTableSlice";
+import { getListCart, getListTable, getOrder } from "../redux/SliceReducer/OrderTableSlice";
 import { getToken } from "../utils/Common";
 import { getCategory } from "../redux/SliceReducer/CategorySlice";
 const AuthContext = createContext("");
@@ -16,12 +16,12 @@ function AuthenProvider({ children }) {
     useEffect(() => {
         if (getToken()) {
             dispatch(getUserAuth(getToken()))
+            
         }
         dispatch(getListTable())
         dispatch(getProducts())
-        dispatch(getListCart())
         dispatch(getCategory())
-        dispatch(getOrder())
+      
 
     }, [])
     return (

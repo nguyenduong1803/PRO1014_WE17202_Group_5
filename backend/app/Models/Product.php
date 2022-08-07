@@ -13,16 +13,21 @@ class Product extends Model
 
     public function create($params) {
         DB::insert('INSERT INTO products
-    (name, short_desscription, id_directory, price, id_code_sale, is_status_product, id_user, id_cart, full_description, time_complete, is_delete, update_at,delete_at, id_img )
-    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?)', $params);
+    (name, short_description, id_directory, price, id_code_sale, is_status_product, id_user, id_cart, full_description, time_complete, id_img )
+    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $params);
     }
 
     public function listsProduct($request) {
         $search = $request -> get('q');
         $sortDateCreateAt = $request -> get('sortCreateAt');
         $limitPage = $request -> get('limit') ? $request -> get('limit'): 10;
+        $idDirectory = $request -> get('id_directory');
+        $priceFrom = $request -> get('priceFrom');
+        $priceTo = $request -> get('priceTo');
         $data = Product::query()
             -> where('is_delete', '1')
+            -> where('id_directory', $idDirectory)
+            -> whereBetween('price', [$priceFrom, $priceTo])
             -> where('name', 'like', '%' . $search . '%')
             -> orderBy('create_at', $sortDateCreateAt)
             -> paginate($limitPage);
