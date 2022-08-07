@@ -14,8 +14,8 @@ class Invoices extends Model
 
     public function create($params) {
         DB::insert('INSERT INTO invoices
-    (id_user ,id_invoice, status_cart_order, total_price, status_envoice, id_staff, user_name_book, time_book, phone, note)
-    values (?, ? , ? , ?, ?, ?, ?, ?, ?, ?)', $params);
+    (id_user ,id_invoice, status_cart_order, total_price, status_envoice, id_staff, user_name_book, time_book, phone, note, purchase_status)
+    values (?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?)', $params);
     }
 
     public function getInvoicesByUser($params) {

@@ -18,8 +18,8 @@ class InvoiceDetail extends Model
 
     public function insertDetailInvoice($params) {
         DB::insert('INSERT INTO detail_invoice
-    (id_user , id_invoice , id_table_book, id_product, amount)
-    values (? , ? , ?, ?, ?)', $params);
+    (id_user , id_invoice, id_product, amount)
+    values (? , ? , ?, ?)', $params);
     }
 
     public function getPriceProductInDetailInvoice($params) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Invoices;
 
 use App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController;
+use App\Http\Controllers\Api\DetailTableInvoice\DetailTableInvoiceController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoices\InvoiceUpdate;
 use App\Models\InvoiceDetail;
@@ -24,17 +25,17 @@ class InvoicesController extends Controller
         $listIdProduct = $request['list_id_product'];
         $listAmount = $request['list_amount'];
         $listTableBook = $request['list_table_book'];
+        $purchaseStatus = $request['purchase_status'];
         $totalPrice = 0;
         $uniIdInvoice = strtoupper(Str::random(10));
         $arrMerge = array();
         foreach ( $listIdProduct as $idx => $val ) {
-            $arrMerge[] = ["id_product" => $val,"amount" => $listAmount[$idx],"id_table_book" => $listTableBook[$idx] ];
+            $arrMerge[] = ["id_product" => $val,"amount" => $listAmount[$idx]];
         }
         for($i = 0; $i < count($arrMerge); $i++) {
                     $params = [
                         $user['id'],
                         $uniIdInvoice,
-                        $arrMerge[$i]['id_table_book'],
                         $arrMerge[$i]['id_product'],
                         $arrMerge[$i]['amount'],
                     ];
@@ -46,6 +47,14 @@ class InvoicesController extends Controller
                     $totalPrice += $priceProduct[0] -> price * $arrMerge[$i]['amount'];
 
 
+        }
+        for($i = 0; $i < count($listTableBook); $i++) {
+            $params = [
+                $listTableBook[$i],
+                $uniIdInvoice
+            ];
+            $detailTableInvoiceController = new DetailTableInvoiceController();
+            $detailTableInvoiceController -> create($params);
         }
         $userStaff = $modelUser ->getUserByRole(2, 3);
         $params2 = [
@@ -59,6 +68,7 @@ class InvoicesController extends Controller
             $request['time_book'],
             $request['phone'],
             $request['note'],
+            $purchaseStatus,
         ];
         $modelInvoices ->create($params2);
         return response() ->json(["msg" => "Tạo hoá đơn thành công!", "status" => true],200);
