@@ -32,6 +32,7 @@ const productsCart = [
 
 
 function CheckOutProducts() {
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -42,13 +43,13 @@ function CheckOutProducts() {
       <div className={styles.content}>
         <div className={styles.contentHeader}>
           <div className={styles.title}>
-            <h3 className={styles.titleH3}>Shopping Cart</h3>
-            <p className={styles.titleP}>You have 4 items in your my cart</p>
+            <h3 className={styles.titleH3}>Giỏ Hàng</h3>
+            <p className={styles.titleP}>Bạn có ... mặt hàng trong giỏ hàng của tôi</p>
           </div>
           <div className={styles.sort}>
             <div>
               <FormControl variant="standard" sx={{ m: 1, minWidth: 100 }}>
-                <InputLabel id="demo-simple-select-standard-label">Sort by</InputLabel>
+                <InputLabel id="demo-simple-select-standard-label">Sắp Xếp</InputLabel>
                 <Select
                   labelId="demo-simple-select-standard-label"
                   id="demo-simple-select-standard"

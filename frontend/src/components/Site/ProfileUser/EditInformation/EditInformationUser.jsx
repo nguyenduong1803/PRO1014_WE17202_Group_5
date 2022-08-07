@@ -11,6 +11,7 @@ import { useState } from "react";
 import axios from "axios";
 import { api } from "../../../../redux/SliceReducer/AuthSlice";
 import { getToken } from "../../../../utils/Common";
+import TastMess from "../../ToastMess/ToastMess";
 // import Calendar from '../../Calendar/Calendar'
 // import TextField from '@mui/material/TextField';
 // import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
@@ -41,7 +42,6 @@ function EditInformationUser() {
   const [newGender, setGender] = useState("");
   const [newDate, setDate] = useState("");
   const [file, setFile] = useState("");
-
   const handleSubmit = async (e) => {
     const params = {
       ten: newUserName,
@@ -70,24 +70,31 @@ function EditInformationUser() {
       },
     };
     try {
-      const res = await axios.post(api + "user/updateInfo", params, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-          "content-type": "multipart/form-data",
-        },
-      });
-      console.log(res);
+      await axios
+        .post(api + "user/updateInfo", params, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+            "content-type": "multipart/form-data",
+          },
+        })
+        .then(function (response) {
+          SetState(true);
+          console.log(response);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
 
-      alert("Đổi Thông tin  thành công !!!");
+      // alert("Đổi Thông tin  thành công !!!");
     } catch (err) {
-      alert(err?.response?.data.msg);
+      // alert(err?.response?.data.msg);
     }
-    
   };
-  function handlDate(e){
-    setDate(e.target.value)
-      console.log(e)
-      console.log(e.target.value);
+  const [state, SetState] = useState(false);
+  function handlDate(e) {
+    setDate(e.target.value);
+    console.log(e);
+    console.log(e.target.value);
   }
   return (
     <div className={styles.Box}>
@@ -148,8 +155,8 @@ function EditInformationUser() {
                   variant="filled"
                   onChange={(e) => handlDate(e)}
                 />
-              {/* <Calendar label="Ngày sinh" value={newDate} setInput={setDate} inputType={"newDate"} /> */}
-              {/* <BasicDatePicker 
+                {/* <Calendar label="Ngày sinh" value={newDate} setInput={setDate} inputType={"newDate"} /> */}
+                {/* <BasicDatePicker 
               setDate={setDate}
               newDate={newDate}
               /> */}
@@ -179,6 +186,11 @@ function EditInformationUser() {
           </div>
         </form>
       </div>
+      <TastMess
+        setState={SetState}
+        state={state}
+        notify={"Đổi thông tin thành công !!!"}
+      />
     </div>
   );
 }
