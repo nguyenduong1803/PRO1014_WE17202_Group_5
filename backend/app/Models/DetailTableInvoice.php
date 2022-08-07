@@ -18,4 +18,20 @@ class DetailTableInvoice extends Model
     public function getLists($params) {
         return DB::select('SELECT * FROM detail_table_invoice WHERE is_delete = 1 AND id_invoice = ?', $params);
     }
+
+    public function checkExistsTableInvoice($id_table) {
+        return DetailTableInvoice::query() -> where('id_table', $id_table)
+            -> where('is_delete', 1)
+            -> first();
+    }
+
+    public function updateTableInvoice($params) {
+        DB::update("UPDATE detail_table_invoice SET `id_table` = ?, `update_at` = ? WHERE `id` = ?", $params);
+    }
+
+    public function getDetailTableInvoice($id) {
+        return DetailTableInvoice::query() -> where('id', $id)
+            -> where('is_delete', 1)
+            -> first();
+    }
 }
