@@ -4,23 +4,31 @@ namespace App\Http\Controllers\Api\Checkout;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Checkout\CheckoutVnPay;
+use App\Models\Invoices;
+
 
 class CheckoutController extends Controller
 {
     //
-    public function paymentVnPay() {
+    public function paymentVnPay(CheckoutVnPay $request) {
+        $validate = $request -> validated();
+        $modelInvoices = new Invoices();
+        $detailInvoice = $modelInvoices ->getDetailInvoice($validate['id_invoices']);
+        if(!isset($detailInvoice)) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
+        $vnp_Returnurl = "http://localhost:3000/dat-hang";
         $vnp_TmnCode = "H5WFAIQG";//Mã website tại VNPAY 
         $vnp_HashSecret = "DFWZZBYGMARFEGHSZPXMBFFRJBEJREEK"; //Chuỗi bí mật
         
-        $vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_TxnRef = mt_rand(100000,999999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toan don hang";
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = 2000 * 100;
+        $vnp_Amount = $detailInvoice['total_price'];
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+        $vnp_ExpireDate = "20220801153333";
         //Add Params of 2.0.1 Version
         //Billing
         $inputData = array(
