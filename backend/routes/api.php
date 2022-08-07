@@ -34,7 +34,7 @@ Route::group(['namespace' => 'Product', 'prefix' => 'product'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('create', [\App\Http\Controllers\Api\Product\ProductController::class, 'create']);
         Route::delete('delete/{id}', [\App\Http\Controllers\Api\Product\ProductController::class, 'deleteProduct']);
-        Route::put('update/{id}', [\App\Http\Controllers\Api\Product\ProductController::class, 'update']);
+        Route::post('update/{id}', [\App\Http\Controllers\Api\Product\ProductController::class, 'update']);
     });
     Route::get('getLists', [\App\Http\Controllers\Api\Product\ProductController::class, 'getListProduct']);
     Route::get('detail/{id}', [\App\Http\Controllers\Api\Product\ProductController::class, 'getDetailProduct']);
@@ -113,6 +113,16 @@ Route::group(['namespace' => 'Directory', 'prefix' => 'directory'], function(){
     });
     Route::get('getLists', [\App\Http\Controllers\Api\Directory\DirectoryController::class, 'getLists']);
 });
+
+Route::group(['namespace' => 'Comments', 'prefix' => 'comments'], function(){
+    Route::middleware('auth:api') -> group(function () {
+        Route::post('create', [\App\Http\Controllers\Api\Comments\CommentsController::class, 'postComment']);
+        Route::put('update/{id_comment}', [\App\Http\Controllers\Api\Comments\CommentsController::class, 'updateComment']);
+        Route::delete('delete/{id}', [\App\Http\Controllers\Api\Comments\CommentsController::class, 'deleteComment']);
+    });
+    Route::get('getListByProduct', [\App\Http\Controllers\Api\Comments\CommentsController::class, 'getListByProduct']);
+});
+
 
 
 

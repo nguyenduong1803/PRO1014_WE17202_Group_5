@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Comments;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ProductUpdate extends FormRequest
+class CommentsUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +26,10 @@ class ProductUpdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'nullable|max:255|string',
-            'short_description' => 'nullable|max:255|string',
-            'id_directory' => 'nullable|integer',
-            'price' => 'nullable|max:50|float',
-            'id_code_sale' => 'nullable|integer',
-            'is_status_product' => 'nullable|integer',
-            'id_cart' => 'nullable|integer',
-            'full_description' => 'nullable|string',
-            'time_complete' => 'nullable|datetime',
+            'description' => 'string|max:255|required',
         ];
     }
+
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response() -> json([$validator -> errors()], 402));

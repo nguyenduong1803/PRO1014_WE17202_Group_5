@@ -21,8 +21,13 @@ class Product extends Model
         $search = $request -> get('q');
         $sortDateCreateAt = $request -> get('sortCreateAt');
         $limitPage = $request -> get('limit') ? $request -> get('limit'): 10;
+        $idDirectory = $request -> get('id_directory');
+        $priceFrom = $request -> get('priceFrom');
+        $priceTo = $request -> get('priceTo');
         $data = Product::query()
             -> where('is_delete', '1')
+            -> where('id_directory', $idDirectory)
+            -> whereBetween('price', [$priceFrom, $priceTo])
             -> where('name', 'like', '%' . $search . '%')
             -> orderBy('create_at', $sortDateCreateAt)
             -> paginate($limitPage);
