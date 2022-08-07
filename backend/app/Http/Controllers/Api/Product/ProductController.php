@@ -94,6 +94,7 @@ class ProductController extends Controller
         $validate = $request -> validated();
         $user = Auth::user();
         $modelProduct = new Product();
+        $modelImageProduct = new ImagesProduct();
         $detailProduct = $modelProduct ->detailProduct($id);
         if(!isset($detailProduct)) return response() ->json(["msg" => "Không tìm thấy sản phẩm!", "status" => false],404);
         $updateName = isset($validate['name']) ? $validate['name'] : $detailProduct['name'];
@@ -107,6 +108,17 @@ class ProductController extends Controller
         $updateTimeComplete = isset($validate['time_complete']) ? $validate['time_complete'] : $detailProduct['time_complete'];
         $updateIdUser = $user['id'];
         $updateTimeUpdateAt = date("Y-m-d H:i:s",time());
+        foreach ($request->file('img') as $imagefile) {
+            $url = Cloudinary::upload($imagefile -> getRealPath(), [
+                'folder' => 'product'
+            ])->getSecurePath();
+            $params = [
+                $user['id'],
+                $detailProduct['id_img'] ,
+                $url,
+            ];
+            $modelImageProduct ->insert($params);
+        }
         $params = [
             $updateName,
             $updateShortDes,
