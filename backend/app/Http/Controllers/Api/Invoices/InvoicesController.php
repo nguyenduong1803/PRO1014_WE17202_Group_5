@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Invoices;
 
 use App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController;
 use App\Http\Controllers\Api\DetailTableInvoice\DetailTableInvoiceController;
+use App\Models\Tables;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoices\InvoiceUpdate;
 use App\Models\InvoiceDetail;
@@ -21,6 +22,7 @@ class InvoicesController extends Controller
         $controllerDetailInvoice = new InvoiceDetailController();
         $modelInvoices = new Invoices();
         $modelDetailInvoice = new InvoiceDetail();
+        $detailTableInvoiceController = new DetailTableInvoiceController();
         $modelUser = new User();
         $listIdProduct = $request['list_id_product'];
         $listAmount = $request['list_amount'];
@@ -29,6 +31,7 @@ class InvoicesController extends Controller
         $totalPrice = 0;
         $uniIdInvoice = strtoupper(Str::random(10));
         $arrMerge = array();
+        $modelTables = new Tables();
         foreach ( $listIdProduct as $idx => $val ) {
             $arrMerge[] = ["id_product" => $val,"amount" => $listAmount[$idx]];
         }
@@ -53,8 +56,12 @@ class InvoicesController extends Controller
                 $listTableBook[$i],
                 $uniIdInvoice
             ];
-            $detailTableInvoiceController = new DetailTableInvoiceController();
             $detailTableInvoiceController -> create($params);
+            $params2 = [
+                2,
+                $listTableBook[$i],
+            ];
+            $modelTables -> updateDetailStatus($params2);
         }
         $userStaff = $modelUser ->getUserByRole(2, 3);
         $params2 = [
