@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Comments;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Comments\CommentsCreate;
+use App\Http\Requests\Comments\CommentsUpdate;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comments;
 
@@ -29,5 +30,21 @@ class CommentsController extends Controller
         $modelComments = new Comments();
         $result = $modelComments -> getListByProduct($request);
         return $result;
+    }
+
+    public function updateComment(CommentsUpdate $request ,$id_comment) {
+        $validate = $request -> validated();
+        $user = Auth::user();
+        $updateTimeUpdateAt = date("Y-m-d H:i:s",time());
+        $params = [
+            $validate['description'],
+            $updateTimeUpdateAt,
+            $user['id'],
+            $id_comment
+        ];
+        $modelComments = new Comments();
+
+        $modelComments -> updateComment($params);
+        return response() ->json(["msg" => "Cập nhật bình luận thành công!", "status" => true],200);
     }
 }

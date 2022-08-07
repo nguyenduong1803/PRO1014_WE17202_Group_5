@@ -30,4 +30,8 @@ class Comments extends Model
         $data->appends(['q' => $search]);
         return $data;
     }
+
+    public function updateComment($params) {
+        DB::update("UPDATE comments SET `description` = ?, `update_at` = ? WHERE `id_user` = ? AND `id` = ? AND is_delete = 1", $params);
+    }
 }
