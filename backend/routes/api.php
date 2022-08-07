@@ -127,6 +127,7 @@ Route::group(['namespace' => 'Comments', 'prefix' => 'comments'], function(){
 Route::group(['namespace' => 'Checkout', 'prefix' => 'checkout'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('vnpay', [\App\Http\Controllers\Api\Checkout\CheckoutController::class, 'paymentVnPay']);
+        Route::post('saveInfoPaymentVNPay', [\App\Http\Controllers\Api\Checkout\CheckoutController::class, 'saveInfoPaymentVNPay']);
     });
 });
 

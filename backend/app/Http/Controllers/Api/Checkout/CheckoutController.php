@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Checkout\CheckoutVnPay;
 use App\Models\Invoices;
+use App\Models\PaymentVnPay;
+use App\Http\Requests\Checkout\CreateInfoPaymentVNPay;
+use Illuminate\Support\Facades\Auth;
 
 
 class CheckoutController extends Controller
@@ -16,6 +19,7 @@ class CheckoutController extends Controller
         $modelInvoices = new Invoices();
         $detailInvoice = $modelInvoices ->getDetailInvoice($validate['id_invoices']);
         if(!isset($detailInvoice)) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
+        session()->put('id_invoices', $detailInvoice['id']);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://localhost:3000/dat-hang";
         $vnp_TmnCode = "H5WFAIQG";//Mã website tại VNPAY 
@@ -84,5 +88,35 @@ class CheckoutController extends Controller
                 echo json_encode($returnData);
             }
             // vui lòng tham khảo thêm tại code demo
+    }
+
+    public function saveInfoPaymentVNPay(CreateInfoPaymentVNPay $request) {
+        $modelPaymentVNpay = new PaymentVnPay();
+        $validate = $request -> validated();
+        $modelInvoices = new Invoices();
+        $user = Auth::user();
+        $idInvoices = session()->get('id_invoices');
+        $params = [
+            $validate['vnp_Amount'],
+            $validate['vnp_BankCode'],
+            $validate['vnp_CardType'],
+            $validate['vnp_BankTranNo'],
+            $validate['vnp_OrderInfo'],
+            $validate['vnp_PayDate'],
+            $validate['vnp_TmnCode'],
+            $user['id'],
+            $validate['vnp_TransactionNo'],
+            $validate['vnp_TransactionStatus'],
+            $validate['vnp_TxnRef'],
+            $idInvoices
+        ];
+        $params2 = [
+            2,
+            $timeStamp = date("Y-m-d H:i:s",time()),
+            $idInvoices
+        ];
+        $modelPaymentVNpay -> create($params);
+        $modelInvoices -> updateStatusInvoice($params2);
+        return response() ->json(["msg" => "Lưu thông tin thanh toán hoá đơn thành công!", "status" => true],200);
     }
 }

@@ -37,4 +37,10 @@ class Invoices extends Model
                     `update_at` = ?
                 WHERE `id` = ?", $params);
     }
+
+    public function updateStatusInvoice($params) {
+        DB::update("UPDATE invoices SET `status_envoice` = ?,
+        `update_at` = ?
+        WHERE `id` = ?", $params);
+    }
 }
