@@ -64,6 +64,9 @@ export const getProducts = createAsyncThunk("product/getProducts", async (payloa
                 sortCreateAt: payload?.sort || "desc",
                 limit: payload?.limit || 10,
                 page: payload?.page || 1,
+                id_directory:payload?.category ||1,
+                priceFrom:payload?.from ||0,
+                priceTo:payload?.to || 2000000,
             }
         })
         .then(response => {

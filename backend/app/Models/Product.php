@@ -24,14 +24,14 @@ class Product extends Model
         $idDirectory = $request -> get('id_directory');
         $priceFrom = $request -> get('priceFrom');
         $priceTo = $request -> get('priceTo');
-        $data = Product::query()
+        $product =  Product::query();
+        $data = $product
             -> where('is_delete', '1')
-            -> where('id_directory', $idDirectory)
-            -> whereBetween('price', [$priceFrom, $priceTo])
             -> where('name', 'like', '%' . $search . '%')
-            -> orderBy('create_at', $sortDateCreateAt)
-            -> paginate($limitPage);
-        $data->appends(['q' => $search]);
+            -> orderBy('create_at', $sortDateCreateAt);
+        if($idDirectory) $data = $product -> where('id_directory', $idDirectory);
+        if($priceFrom && $priceTo) $data = $product -> whereBetween('price', [$priceFrom, $priceTo]);
+        $data = $product -> paginate($limitPage);
         return $data;
     }
     public function detailProduct($id) {
