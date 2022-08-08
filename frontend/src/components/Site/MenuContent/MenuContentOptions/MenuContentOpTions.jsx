@@ -9,15 +9,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../../redux/SliceReducer/ManagerProductSlice";
 import useDebounce from "../../../../hooks/useDebounce";
 
-function MenuContentOpTions({ setModalShow, modalShow }) {
+function MenuContentOpTions() {
   const listCategory = useSelector(selectCategory)
   const [activeCate, setActiveCate] = React.useState("")
   const [value, setValue] = React.useState([0, 500000]);
   const [keySearch, setKeySearch] = React.useState("");
-  const debounce = useDebounce(keySearch, 500)
+  const debounceSearch = useDebounce(keySearch, 500)
   const dispatch = useDispatch()
-  const handleActiveCate = (index) => {
-    setActiveCate(index)
+  const handleActiveCate = (idCate) => {
+    setActiveCate(idCate)
+    dispatch(getProducts({ keySearch: debounceSearch, limit: 30,category:idCate}))
+
   }
   
   const handleChange = (event, newValue) => {
@@ -31,8 +33,8 @@ function MenuContentOpTions({ setModalShow, modalShow }) {
     setKeySearch(e.target.value);
   }
   React.useEffect(() => {
-    dispatch(getProducts({ keySearch: debounce, limit: 30 }))
-  }, [debounce])
+    dispatch(getProducts({ keySearch: debounceSearch, limit: 30,category:activeCate }))
+  }, [debounceSearch])
   return (
     <div className={styles.Menu}>
       <div style={{ display: 'flex', width: '100%' }} className="position-relative">
@@ -76,9 +78,9 @@ function MenuContentOpTions({ setModalShow, modalShow }) {
               <div className={styles.option}>
                 {
                   listCategory.map((category, index) => (
-                    <div className={activeCate === index ? `form-check ${styles.input_space} ${styles.input_space_active}` : `form-check ${styles.input_space}`} key={category.id} >
-                      <input onClick={() => handleActiveCate(index)} className="form-check-input" type="radio" name="flexRadioDefault" id={`${category.name}__category`} />
-                      <label onClick={() => handleActiveCate(index)} className={`form-check-label ${styles.input_label}`} htmlFor={`${category.name}__category`}>
+                    <div className={activeCate === category.id ? `form-check ${styles.input_space} ${styles.input_space_active}` : `form-check ${styles.input_space}`} key={category.id} >
+                      <input className="form-check-input" type="radio" name="flexRadioDefault" id={`${category.name}__category`} />
+                      <label onClick={() => handleActiveCate(category.id)} className={`form-check-label ${styles.input_label}`} htmlFor={`${category.name}__category`}>
                         {category.name}
                       </label>
                     </div>
