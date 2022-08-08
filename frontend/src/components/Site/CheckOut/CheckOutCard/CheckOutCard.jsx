@@ -8,7 +8,7 @@ function CheckOutCard() {
   return (
     <div className={`${styles.row} row`}>
       <div className={styles.title}>
-        <div className={styles.titleName}>Card Detail</div>
+        <div className={styles.titleName}>Chi Tiết Thẻ</div>
         <div className={styles.titleImg}>
             <img src="http://localhost:3000/static/media/seafood-1.d2871097285bb86fdabf.jpg" alt="" />
         </div>
@@ -41,7 +41,7 @@ function CheckOutCard() {
       </div>
       <div className={styles.infomation}>
         <div className={styles.name}>
-          <p className={styles.titleName}>Name on Card</p>
+          <p className={styles.titleName}>Tên Trên Thẻ</p>
           <Stack
             component="form"
             sx={{
@@ -60,7 +60,7 @@ function CheckOutCard() {
           </Stack>
         </div>
         <div className={styles.name}>
-          <p className={styles.titleName}>Name on Card</p>
+          <p className={styles.titleName}>Tên Trên Thẻ</p>
           <Stack
             component="form"
             sx={{
@@ -80,7 +80,7 @@ function CheckOutCard() {
         </div>
         <div className={`${styles.dateCvv} row`}>
           <div className={`${styles.date} col-lg-6`}>
-            <p  className={styles.titleName}>Expiration Date</p>
+            <p  className={styles.titleName}>Ngày Hết Hạn</p>
             <Stack
               component="form"
               sx={{
@@ -123,9 +123,9 @@ function CheckOutCard() {
       <div className={styles.footer}>
         <div className={styles.footerContent}>
             <div className={styles.footerName}>
-                <span>Subtotal</span>
-                <span className={styles.span}>Shipping</span>
-                <span>Total</span>
+                <span>Tổng Phụ</span>
+                <span className={styles.span}>Phí Vận Chuyển</span>
+                <span>Tổng</span>
             </div>
             <div className={styles.footerName}>
                 <span>$300.00</span>
@@ -137,7 +137,7 @@ function CheckOutCard() {
         <div className={styles.button}>
                 <button>
                     <div className={styles.buttonTotal}>$300.000</div>
-                    <div className={styles.buttonNext}>Checkout <ArrowRightAltIcon/></div>
+                    <div className={styles.buttonNext}>Thanh Toán <ArrowRightAltIcon/></div>
                 </button>
             </div>
       </div>
