@@ -4,32 +4,45 @@ import styles from "./TableOption.module.css"
 import AddIcon from "@mui/icons-material/Add";
 import { formatMoney } from '../../../extensions/formatMoney';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOrder, deleteCart } from '../../../redux/SliceReducer/OrderTableSlice';
+import { addOrder } from '../../../redux/SliceReducer/OrderTableSlice';
 import Search from '../../../assets/svg/Search';
 import { Button } from '@mui/material';
 import useDebounce from '../../../hooks/useDebounce';
 import { getProducts } from '../../../redux/SliceReducer/ManagerProductSlice';
 import LoadingSearch from '../Loading/LoadingSearch';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function ChooseProduct({ className }) {
     const [keySearch, setKeySearch] = React.useState("");
-    const debounce = useDebounce(keySearch, 500)
+    const [activeCate, setActiveCate] = React.useState("")
+    const debounceSearch = useDebounce(keySearch, 500)
+    const handleActiveCate = (idCate) => {
+        setActiveCate(idCate)
+        dispatch(getProducts({ keySearch: debounceSearch, limit: 30, category: idCate }))
+    }
     const dispatch = useDispatch()
     const loadingProduct = useSelector(selectLoadingProduct)
     const categories = useSelector(selectCategory)
-    console.log(categories)
-    const itemCategory = categories.map((cate, index) => (
-        <CategoryItem name={"name"} key={index}/>
-      ))
     const handleSearch = (e) => {
         setKeySearch(e.target.value);
     }
     const products = useSelector(selectProducts)
+    const settings = {
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        rows: 1,
+        dots: false,
+        // autoplay: true,
+        // speed: 2000,
+        // slickNext: true,
+        // slickPrev: true,
+    };
     React.useEffect(() => {
-        dispatch(getProducts({ keySearch: debounce, limit: 30 }))
-    }, [debounce])
+        dispatch(getProducts({ keySearch: debounceSearch, limit: 30, category: activeCate }))
+    }, [debounceSearch])
     return (
         <div className={`TableOption__wrapCart ${className}`} >
             <div className={styles.search}>
@@ -41,18 +54,18 @@ function ChooseProduct({ className }) {
                 </div>
             </div>
             <div className={styles.wrapCategory}>
-                {/* <AliceCarousel
-                    items={itemCategory}
-                    responsive={responsive}
-                    // controlsStrategy="alternate"
-                    autoPlay
-                    autoPlayInterval={2000}
-                    animationDuration={1000}
-                    animationType="fadeout"
-                    infinite
-                    renderPrevButton={renderPrevButton}
-                    renderNextButton={renderNextButton}
-                /> */}
+                <Slider {...settings}>
+                    <div className={styles.wrapbutton} >
+                        <div onClick={() => handleActiveCate("")} className={activeCate === "" ? `${styles.category_btn} ${styles.cate_active}` : styles.category_btn}>Tất cả</div>
+                    </div>
+                    {categories.map(cate => {
+                        return (
+                            <div className={`${styles.wrapbutton} `} key={cate.id}>
+                                <div onClick={() => handleActiveCate(cate.id)} className={activeCate === cate.id ? `${styles.category_btn} ${styles.cate_active}` : styles.category_btn}>{cate.name}</div>
+                            </div>
+                        )
+                    })}
+                </Slider>
             </div>
             <div className="content__cart-box row">
                 {loadingProduct === "loading" ? <LoadingSearch /> :
@@ -93,23 +106,9 @@ function ProductChoose({ img, name, price, id }) {
         </div>
     )
 }
-const renderNextButton = ({ isDisabled }) => {
-    return (
-        <ArrowForwardIosIcon
-            style={{ position: "absolute", right: "-2rem", top: "40%" }}
-        />
-    );
-};
 
-const renderPrevButton = ({ isDisabled }) => {
-    return (
-        <ArrowBackIosIcon
-            style={{ position: "absolute", left: "-2rem", top: "40%" }}
-        />
-    );
-};
 
-const CategoryItem = (name) => <div className={styles.wrapbutton}><Button variant="outlined" color="success" margin="2">{name}</Button></div>
+
 
 
 export default ChooseProduct

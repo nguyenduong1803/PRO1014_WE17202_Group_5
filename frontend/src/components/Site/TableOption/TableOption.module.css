@@ -172,14 +172,31 @@
 }
 .wrapCategory{
     margin: 0 24px;
-    overflow-y:auto;
+    /* overflow-y:auto; */
     padding: 0 2px;
+    position: relative;
 }
 .wrapbutton{
-    margin: 0 12px;
-    display: inline-block;
+    width: 100%;
+}
+.cate_active.category_btn{
+    background-color: green;
+    color:#fff;
 }
 .wrapbutton:first-child{
     margin: 0 ;
     display: inline-block;
+}
+.category_btn{
+    border:1px solid green;
+    border-radius: 3px;
+    color:green;
+    height: 34px;
+    text-align: center;
+    line-height: 34px;
+    margin: 0 6px !important;
+
+}
+.category_btn:hover{
+    cursor: pointer;
 }
