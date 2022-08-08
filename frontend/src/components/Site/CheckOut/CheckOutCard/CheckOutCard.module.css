@@ -17,6 +17,7 @@
 .deatilCard img{
     text-align: center;
     width: 98%;
+    height: 50px;
     border-radius: 10px;
 }
 .card{
