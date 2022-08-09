@@ -76,7 +76,7 @@ function OrderTable() {
                                                 <TableOption
                                                     type="circle"
                                                     id={tables && tables[ele.index]?.id}
-                                                    name={tables && tables[ele.index]?.index_table}
+                                                    name={tables && tables[ele.index]?.id}
                                                     status={tables && tables[ele.index]?.status}
                                                 />
                                             </div>)

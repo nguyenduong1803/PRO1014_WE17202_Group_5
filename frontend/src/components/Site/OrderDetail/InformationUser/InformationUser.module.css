@@ -11,10 +11,11 @@
     cursor: pointer !important;
 
 }
-.member h4{
-    font-weight: bold;
-    text-align: center;
-    padding: 15px;
+
+.wrapAvatar{
+    display: flex;
+    justify-content:center;
+    margin: 0 auto;
 }
 .info{
     text-align: center;
@@ -32,10 +33,17 @@
     border: 1px solid #0b0b0b;
 }
 .contacts{
-    color:var(--primaryColor);
+    
     padding: 5px;
     font-size: 1rem;
 }
 .content{
     color:#6d6c6c;
+}
+.nameCustomer_info{
+    font-size: 14px;
+
+}
+.customInfo{
+    font-size: 20px;
 }

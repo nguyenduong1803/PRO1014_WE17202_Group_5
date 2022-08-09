@@ -11,8 +11,9 @@ import product1 from "../../../../assets/img/seafood-1.jpg";
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from "react-redux";
-import { selectOrderDetail, selectProducts } from "../../../../redux/selector";
+import { selectOrderDetail, selectProducts, selectTable } from "../../../../redux/selector";
 import { getDetailOrder } from "../../../../redux/SliceReducer/OrderTableSlice";
+import { formatMoney } from "../../../../extensions/formatMoney";
 
 
 export default function ListOrders() {
@@ -24,7 +25,7 @@ export default function ListOrders() {
    if(productCartDetail){
     productCartDetail.forEach(ele => {
       if (prod.id === ele.id_product) {
-        let newProduct = { ...prod, quantity: ele.quantity }
+        let newProduct = { ...prod, quantity: ele.amount }
         listProduct.push(newProduct);
       }
     })
@@ -33,8 +34,6 @@ export default function ListOrders() {
 const idInvoice = window.location.pathname.split('/')[2]
 React.useEffect(() => {
   dispatch(getDetailOrder(idInvoice))
-
-  console.log(listProduct)
 }, [])
 return (
   <TableContainer className={styles.table} component={Paper} style={{ borderRadius: "20px", backgroundColor: "white" }}>
@@ -71,8 +70,8 @@ return (
               </div>
             </TableCell>
             <TableCell align="center">{product.quantity}</TableCell>
-            <TableCell align="center">{product.price}</TableCell>
-            <TableCell align="center">{product.price*product.quantity}</TableCell>
+            <TableCell align="center">{formatMoney(product.price)} đ</TableCell>
+            <TableCell align="center">{formatMoney(product.price*product.quantity)} đ</TableCell>
             <TableCell align="center"><EditIcon className={styles.editIcon} /> <ClearIcon className={styles.clearIcon} /> </TableCell>
 
           </TableRow>
