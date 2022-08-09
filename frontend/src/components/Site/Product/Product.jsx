@@ -9,6 +9,7 @@ import MuiAlert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
 import { addCart } from '../../../redux/SliceReducer/OrderTableSlice';
 import { getToken } from '../../../utils/Common';
+import { Link } from 'react-router-dom';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -60,9 +61,11 @@ function Product({ img, title, price, id }) {
   const handleClose = () => {
     setState({ ...state, open: false });
   };
+  
   return (
+    
     <div className=' col-lg-3'>
-      <div className={styles.product} style={{ transition: '.6s' }}>
+      <Link to='/chi-tiet-don-hang' className={styles.link}><div className={styles.product} style={{ transition: '.6s' }}>
         <img className={styles.blur_shadow} src={img} alt="" />
         <img src={img} alt="" />
         <h4 className={styles.title}>{title}</h4>
@@ -81,8 +84,9 @@ function Product({ img, title, price, id }) {
         key={vertical + horizontal}
       >
         <Alert severity="success">{notifyAlert}</Alert>
-      </Snackbar>
+      </Snackbar> </Link>
     </div>
+   
   )
 }
 

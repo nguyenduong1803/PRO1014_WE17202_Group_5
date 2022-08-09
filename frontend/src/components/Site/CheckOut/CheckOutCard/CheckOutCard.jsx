@@ -1,10 +1,33 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import styles from "./CheckOutCard.module.css";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { api } from "../../../../utils/api";
+import axios from "axios";
+import { getToken } from "../../../../utils/Common";
+
 function CheckOutCard() {
-  
+  // const [cartName,SetCartName] = useState();
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
+
+  // const handleChangeIndex = (index) => {
+  //   setValue(index);
+  // };
+  // const [value, setValue] = React.useState(0);
+
+  // useEffect(() => {
+  //   async function cart() {
+  //     const res = await axios.get(api + "auth/getInfoUser", {
+  //       headers: { Authorization: `Bearer ${getToken()}` },
+  //     });
+  //     SetCartName(res.data.user);
+  //   }
+  //   cart();
+  // }, []);
   return (
     <div className={`${styles.row} row`}>
       <div className={styles.title}>
@@ -16,25 +39,25 @@ function CheckOutCard() {
       <div className={`${styles.card} row`}>
         <div className={`${styles.deatilCard} col-lg-3`}>
           <img
-            src="http://localhost:3000/static/media/seafood-1.d2871097285bb86fdabf.jpg"
+            src="https://tse4.mm.bing.net/th?id=OIP.OZ3mSjfCbC1rbJOD1FjsoQHaEo&pid=Api&P=0"
             alt=""
           />
         </div>
         <div className={`${styles.deatilCard} col-lg-3`}>
           <img
-            src="http://localhost:3000/static/media/seafood-1.d2871097285bb86fdabf.jpg"
+            src="http://lamthevisa.vn/wp-content/uploads/2018/06/so-the-visa-vietcombank-nam-o-dau-anh3.jpg"
             alt=""
           />
         </div>
         <div className={`${styles.deatilCard} col-lg-3`}>
           <img
-            src="http://localhost:3000/static/media/seafood-1.d2871097285bb86fdabf.jpg"
+            src="https://img.topbank.vn/crop/620x324/2018/10/17/pXubIXvx/techcombank-the-tin--c5c0.jpeg"
             alt=""
           />
         </div>
         <div className={`${styles.deatilCard} col-lg-3`}>
           <img
-            src="http://localhost:3000/static/media/seafood-1.d2871097285bb86fdabf.jpg"
+            src="https://tailanhchanh.com/wp-content/uploads/2018/04/dau-so-tai-khoan-cua-cac-ngan-hang.jpg"
             alt=""
           />
         </div>
@@ -50,17 +73,20 @@ function CheckOutCard() {
             spacing={2}
             noValidate
             autoComplete="off"
+            
           >
             <TextField
               hiddenLabel
               id="filled-hidden-label-small"
               variant="filled"
               size="small"
+             
+            //  value={cartName}
             />
           </Stack>
         </div>
         <div className={styles.name}>
-          <p className={styles.titleName}>Tên Trên Thẻ</p>
+          <p className={styles.titleName}>Mã Trên Thẻ</p>
           <Stack
             component="form"
             sx={{

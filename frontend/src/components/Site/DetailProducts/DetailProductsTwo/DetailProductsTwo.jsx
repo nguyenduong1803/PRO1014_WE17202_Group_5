@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./DetailProductsTwo.module.css";
 import Button from "@mui/material/Button";
 import products1 from '../../../../assets/img/seafood-1.jpg';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-
+import { api } from "../../../../utils/api";
+import axios from "axios";
+import { getToken } from "../../../../utils/Common";
 function BasicRating() {
   const [value, setValue] = React.useState(5);
+  
+
 
   return (
     <>
@@ -62,6 +66,20 @@ const review =[
   }
 ]
 function DetailProductsTwo() {
+  // const [comments, setComments] = useState([]);
+  // const handleChange = (event, newValue) => {
+  //   setComments(newValue);
+  // };
+
+  // useEffect(() => {
+  //   async function comments() {
+  //     const res = await axios.get(api + "comments/getListByProduct?q=&sortCreateAt=desc&limit=10&page=1&id_product=4", {
+  //       headers: { Authorization: `Bearer ${getToken()}` },
+  //     });
+  //     setComments(res.data.user);
+  //   }
+  //   comments();
+  // }, []);
   return (
     <div>
       <div className={`${styles.row} row`}>
