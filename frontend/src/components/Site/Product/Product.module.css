@@ -9,7 +9,9 @@
   object-fit: cover;
   z-index: 2;
 }
-
+.link{
+  color:#333;
+}
 @keyframes rotation {
   from {
     transform: translateX(-50%) rotate(0deg);
