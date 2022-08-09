@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import OrderItem from './OrderItem';
 import style from "./TableOption.scss"
-import { selectProductOrder, selectOrderTable, selectProducts } from '../../../redux/selector';
+import { selectProductOrder, selectOrderTable, selectProducts, selectStatusOrder } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
 import CloseIcon from '@mui/icons-material/Close';
@@ -32,11 +32,12 @@ const steps = [
     },
 ];
 
-export default function StepperMui({ id, setModalShow, activeStep, setActiveStep }) {
+export default function StepperMui({ id, setModalShow, activeStep, setActiveStep,setNotifyOrder }) {
     const dispatch = useDispatch()
     const orders = useSelector(selectOrderTable)
+    const statusOrder = useSelector(selectStatusOrder)
     const orderItems = useSelector(selectProductOrder)
-    
+
     const [notify, setNotify] = React.useState({
         name: "",
         phone: "",
@@ -53,7 +54,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         celendar: orders.celendar,
         note: orders.note,
     });
-   
+
     const handlNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
@@ -90,24 +91,25 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
             dispatch(updateOrderTable(order))
             setActiveStep(1);
         }
-        setActiveStep(1);
+        // setActiveStep(1);
     }
-  
+
     // step3
     const handleOrder = () => {
-        const productId=[];
-        const quantitys=[]
-        orderItems.forEach( value =>{
+        const productId = [];
+        const quantitys = []
+        orderItems.forEach(value => {
             productId.push(value.id)
             quantitys.push(value.quantity)
         })
-        dispatch(createOrder({order,productId,quantitys}))
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        dispatch(createOrder({ order, productId, quantitys }))
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            setNotifyOrder({type:"success",title:"đặt bàn thành công"})
     };
     const handleReset = () => {
         setActiveStep(0);
     };
-
+  
     return (
         <>
             <Box sx={{ maxWidth: "100%" }}>
@@ -126,7 +128,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
                             </StepLabel>
                             <StepContent >
                                 <Typography>{step.description}</Typography>
-                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify}  />) :
+                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify} />) :
                                     index === 1 ? (<InfoFood />) :
                                         index === 2 ? <InfoOrder order={order} /> : ""}
                                 <Box sx={{ mb: 2 }}>
@@ -171,7 +173,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
                 </Stepper>
                 {activeStep === steps.length && (
                     <Paper square elevation={0} sx={{ p: 3 }}>
-                        <Typography>Bạn đã đặt bàn thành công</Typography>
+                        <Typography>{"Đang xác thực"}</Typography>
                         <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
                             Sửa Thông tin
                         </Button>
@@ -209,7 +211,7 @@ const InfoFood = () => {
         <div className="wraplistCart_order ">
             {listOrder && listOrder.map((product, index) => {
                 return (
-                    <ProductCartTable key={index} name={product.name} img={product.path} price={product.price} quantity={product.quantity} id={product.id} />
+                    <ProductCartTable key={index} name={product.name} img={product.listsImg[0]} price={product.price} quantity={product.quantity} id={product.id} />
                 )
             })}
         </div>

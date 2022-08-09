@@ -19,8 +19,10 @@ function TableOption({ id, status, type, name }) {
         open: false,
         vertical: 'bottom', horizontal: 'right'
     });
-    const { vertical, horizontal, open } = state;
+    const { vertical, horizontal } = state;
+    
     const [activeStep, setActiveStep] = React.useState(0);
+    const [notifyOrder, setNotifyOrder] = React.useState({type:"info",title:"Bàn đã có khách đặt "});
     const [modalShow, setModalShow] = React.useState(false)
     const infoUser = useContext(AuthContext)
     let color;
@@ -49,7 +51,7 @@ function TableOption({ id, status, type, name }) {
                 {type === "circle" ?
                     <Table
                         colors={color}
-                        name={name} /> :
+                        name={`A-${name}`} /> :
                     <RectangleTable
                         colors={color}
                         name={name}
@@ -59,7 +61,7 @@ function TableOption({ id, status, type, name }) {
                     <div className="modal_content--item" onClick={e => handleClick(e)} >
                         <div className={`modal-content ${!getToken() && 'modal_mini'} ${activeStep === 1 && "active"}`} >
                             {
-                                getToken() ? <StepperMui setActiveStep={setActiveStep} activeStep={activeStep} setModalShow={setModalShow} id={id} user={infoUser} /> : <ModalLogin />
+                                getToken() ? <StepperMui setActiveStep={setActiveStep} activeStep={activeStep} setModalShow={setModalShow} id={id} user={infoUser} setNotifyOrder={setNotifyOrder}/> : <ModalLogin />
                             }
                         </div>
                         <ChooseProduct className={`${activeStep === 1 && "active"}`} />
@@ -71,7 +73,7 @@ function TableOption({ id, status, type, name }) {
                     message="I love snacks"
                     key={vertical + horizontal}
                 >
-                    <Alert severity="info">Bàn đã có khách đặt </Alert>
+                    <Alert severity={notifyOrder.type}>{notifyOrder.title}</Alert>
                 </Snackbar> : ""}
 
             </div>

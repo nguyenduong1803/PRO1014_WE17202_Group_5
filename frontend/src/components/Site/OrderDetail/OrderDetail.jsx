@@ -6,6 +6,8 @@ import ListOrder from "../OrderDetail/ListOrders/ListOrders";
 import Status from "../OrderDetail/StatusOrders/StatusOrders";
 import StepperMui from "./StatusOrders/StepperMui/StepperMui";
 import Statistical from "./Statistical/Statistical";
+import {  selectOrder } from "../../../redux/selector";
+import { useSelector } from "react-redux";
 const informationuser = [
   {
     img: products1,
@@ -17,25 +19,23 @@ const informationuser = [
   },
 ];
 function OrderDetail() {
+  const orders = useSelector(selectOrder)
+ const orderId= window.location.pathname.split("/")[2]
+ const myOder= orders.find(ele=> ele.id_invoice===orderId)
+ console.log(orderId)
   return (
     <LayoutSite>
       <div className="row">
         <div className="col-lg-3">
-          {informationuser.map((info, index) => {
-            return (
               <InformationUser
-                key={index}
-                img={info.img}
-                name={info.name}
-                contacts={info.contacts}
-                address={info.address}
-                content={info.content}
+                img={""}
+                name={myOder?.user_name_book}
+                contacts={myOder?.phone}
+                time={myOder?.time_book}
+                content={myOder?.note}
               />
-            );
-          })}
           <div>
             <Statistical />
-          
           </div>
         </div>
         <div className="col-lg-9">

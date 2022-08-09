@@ -11,8 +11,7 @@ function ProductCartTable({ img, name, price,quantity,id }) {
     const handleDelete =()=>{
         // dispatch(deleteCart(idCart))
     }
-   React.useEffect(()=>{
-   })
+
     return (
         <div className={styles.contentMain}>
             <div className={styles.info}>

@@ -180,7 +180,7 @@
     width: 100%;
 }
 .cate_active.category_btn{
-    background-color: green;
+    background-color: #1976d2;
     color:#fff;
 }
 .wrapbutton:first-child{
@@ -188,9 +188,9 @@
     display: inline-block;
 }
 .category_btn{
-    border:1px solid green;
+    border:1px solid #1976d2;
     border-radius: 3px;
-    color:green;
+    color:#1976d2;
     height: 34px;
     text-align: center;
     line-height: 34px;

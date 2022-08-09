@@ -22,7 +22,8 @@ const OrderTableSlice = createSlice({
         cart: [],
         tables: [],
         detailOrder: [],
-        statusOrder:false,
+        statusOrder: false,
+        tableById:[]
     },
     reducers: {
         updateOrderTable: (state, action) => {
@@ -102,10 +103,14 @@ const OrderTableSlice = createSlice({
 
             })
             .addCase(createOrder.fulfilled, (state, action) => {
-                if (action.payload.status === true) {
-                   state.statusOrder=true
+                if (action.payload.status === "success") {
+                    state.statusOrder = true
                 } else {
+                    state.statusOrder = false
+
                 }
+            }).addCase(getTableByOrder.fulfilled, (state, action) => {
+                state.tableById= action.payload
             })
 
     }
@@ -214,7 +219,7 @@ export const addOrder = (payload) => {
 export const addQuantityOrder = (payload) => {
     return { type: "orderTable/addQuantityOrder", payload }
 }
-export const createOrder = createAsyncThunk("orderTable/createOrder", async (payload) => {
+export const createOrder = createAsyncThunk("orderTable/createOrder", async (payload, action) => {
     let payloads
     console.log(payload)
     await axios
@@ -222,17 +227,20 @@ export const createOrder = createAsyncThunk("orderTable/createOrder", async (pay
             {
                 list_id_product: payload.productId,
                 list_amount: payload.quantitys,
-                list_table_book:payload.order.tableId,
+                list_table_book: payload.order.tableId,
                 user_name_book: payload.order.name,
                 time_book: payload.order.celendar,
                 phone: payload.order.phone,
-                note: payload.order.note
+                note: payload.order.note,
+                purchase_status: payload?.purchase || 2,
             },
             {
                 headers: { "Authorization": `Bearer ${getToken()}` },
             })
         .then(response => {
             payloads = { data: response.data.data, status: "success" }
+            action.dispatch(getListTable())
+            action.dispatch(getOrder())
         }).catch(function (err) {
             console.log(err)
             payloads = { data: "", status: err.response.status }
@@ -256,9 +264,9 @@ export const getDetailOrder = createAsyncThunk("orderTable/getDetailOrder", asyn
     let payloads
     await axios
         .get(api + `invoice-detail/getListDetailInvoice/${payload}`,
-             {
-            headers: { "Authorization": `Bearer ${getToken()}` },
-        })
+            {
+                headers: { "Authorization": `Bearer ${getToken()}` },
+            })
         .then(response => {
             payloads = { data: response.data.data, status: "success" }
         }).catch(function (err) {
@@ -270,6 +278,19 @@ export const getAllOrder = createAsyncThunk("orderTable/getAllOrder", async () =
     let payloads
     await axios
         .get(api + "invoices/getInvoicesByAdmin", {
+            headers: { "Authorization": `Bearer ${getToken()}` },
+        })
+        .then(response => {
+            payloads = { data: response.data.data, status: "success" }
+        }).catch(function (err) {
+            payloads = { data: "", status: err.response.status }
+        })
+    return payloads
+})
+export const getTableByOrder = createAsyncThunk("orderTable/getTableByOrder", async (payload) => {
+    let payloads
+    await axios
+        .get(api + `detail-table-invoice/getLists/${payload}`, {
             headers: { "Authorization": `Bearer ${getToken()}` },
         })
         .then(response => {
