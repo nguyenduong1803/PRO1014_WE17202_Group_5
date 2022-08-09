@@ -7,12 +7,14 @@ import { selectOrder } from "../../../redux/selector";
 
 function ContentOrders() {
   const orders = useSelector(selectOrder)
+
   return (
     <LayoutSite>
       <h2>Order History</h2>
       <div className="row" style={{ zIndex: "10", position: "relative" }}>
         {orders ?
           orders.map(order => {
+            
             return (
               <OrdersHistory
                 key={order.id}

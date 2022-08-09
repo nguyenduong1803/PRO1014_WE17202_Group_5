@@ -6,7 +6,16 @@ import Button from "@mui/material/Button";
 import { Avatar } from "@mui/material";
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import { formatMoney } from "../../../../extensions/formatMoney";
+import { useDispatch, useSelector } from "react-redux";
+import { getTableByOrder } from "../../../../redux/SliceReducer/OrderTableSlice";
+import { selectTable } from "../../../../redux/selector";
 function OrderHistory({ id, idInvoice, name, phone, status, date, ban, money, totalUser, note }) {
+ const dispatch = useDispatch()
+ const tableList = useSelector(selectTable)
+console.log(tableList)
+  // React.useEffect(() => {
+  //   dispatch(getTableByOrder(idInvoice))
+  // },[])
   return (
     <div className="col-lg-3 col-md-4">
       <div className={styles.orderHistory}>
@@ -33,7 +42,10 @@ function OrderHistory({ id, idInvoice, name, phone, status, date, ban, money, to
             <TableRestaurantIcon fontSize="large" />
           </div>
           <div className={styles.orderIdContentRight}>
-            <h2>Bàn : {ban}</h2>
+            <span>Bàn: {ban}</span>
+             {/* {tableList?.data?.map(table=>(
+              <span>A-{table.id}</span>
+             ))} */}
             <div className={styles.priceNumber}>
               <div><h3>Số khách :</h3> <span>{totalUser}</span></div>
               <div><h3>Tổng tiền :</h3> <span>{formatMoney(money)} đ</span></div>

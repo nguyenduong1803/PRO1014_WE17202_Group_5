@@ -1,35 +1,26 @@
 import React from "react";
 import styles from "./InformationUser.module.css";
-import Button from "@mui/material/Button";
-import PhoneIcon from "@mui/icons-material/Phone";
-import AddLocationIcon from "@mui/icons-material/AddLocation";
-function InformationUser({ img, name, content, address, contacts }) {
+import { Avatar } from "@mui/material";
+function InformationUser({ img, name, content, time, contacts }) {
   return (
-    <div className="row">
       <div className={styles.member}>
         <div className={styles.info}>
-          <img
-            src={img}
-            alt=""
-            style={{ width: "100px", height: "100px", borderRadius: "50%" }}
-          />
-          <h4>{name}</h4>
-          <Button variant="outlined" className={styles.button}>
-            Customers
-          </Button>
+          <div className={styles.wrapAvatar}><Avatar/></div>
           <p className={styles.contacts}>
-            <PhoneIcon /> {contacts}
+           Khách hàng : <span className={styles.customInfo}>{name}</span>
           </p>
           <p className={styles.contacts}>
-            <AddLocationIcon /> {address}
+           Số điện thoại:  <span className={styles.customInfo}>{contacts}</span>
+          </p>
+          <p className={styles.contacts}>
+            Thời gian đặt: <span className={styles.customInfo}>{time}</span>
           </p>
         </div>
         <div>
-          <h4>Note Order</h4>
-          <p className={styles.content}>{content}</p>
+          <h4>Ghi chú: </h4>
+          <p className={styles.contacts}>{content}</p>
         </div>
       </div>
-    </div>
   );
 }
 
