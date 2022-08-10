@@ -85,8 +85,18 @@ class InvoicesController extends Controller
         $user = Auth::user();
         $params = [$user['id']];
         $modelInvoices = new Invoices();
+        $modelDetailInvoice = new InvoiceDetail();
         $data = $modelInvoices -> getInvoicesByUser($params);
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
+        
+        for($i =0;$i < count($data); $i++) {
+            $params2 = [
+                    $data[$i] -> id_invoice,
+                    $user['id']
+                ];
+            $listDetailInvoice = $modelDetailInvoice -> getListDetailInvoice($params2);
+            $data[$i] -> listDetailInvoice = $listDetailInvoice;
+        }
         return response() ->json(["data" => $data, "status" => true],200);
     }
     public function getInvoicesByAdmin() {
