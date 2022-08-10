@@ -42,66 +42,79 @@ const detail = [
   },
   
 ];
-const review =[
-  {
-    avt:products1,
-    name:'Jone Cooper',
-    days:'1 Day Ago',
-    title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui egestas pellentesque tortor suspendisse eget suscipit cras viverra. Leo eget vitae amet, facilisis bibendum. Egestas ac hac amet, nam ultricies nec.',
-  },
-  {
-    avt:products1,
-    name:'Jone Cooper',
-    days:'1 Day Ago',
-    title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui egestas pellentesque tortor suspendisse eget suscipit cras viverra. Leo eget vitae amet, facilisis bibendum. Egestas ac hac amet, nam ultricies nec.',
-  },
-  {
-    avt:products1,
-    name:'Jone Cooper',
-    days:'1 Day Ago',
-    title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui egestas pellentesque tortor suspendisse eget suscipit cras viverra. Leo eget vitae amet, facilisis bibendum. Egestas ac hac amet, nam ultricies nec.',
-  }
-]
+// const review =[
+//   {
+//     avt:products1,
+//     name:'Jone Cooper',
+//     days:'1 Day Ago',
+//     title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+//     content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui egestas pellentesque tortor suspendisse eget suscipit cras viverra. Leo eget vitae amet, facilisis bibendum. Egestas ac hac amet, nam ultricies nec.',
+//   },
+//   {
+//     avt:products1,
+//     name:'Jone Cooper',
+//     days:'1 Day Ago',
+//     title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+//     content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui egestas pellentesque tortor suspendisse eget suscipit cras viverra. Leo eget vitae amet, facilisis bibendum. Egestas ac hac amet, nam ultricies nec.',
+//   },
+//   {
+//     avt:products1,
+//     name:'Jone Cooper',
+//     days:'1 Day Ago',
+//     title:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+//     content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui egestas pellentesque tortor suspendisse eget suscipit cras viverra. Leo eget vitae amet, facilisis bibendum. Egestas ac hac amet, nam ultricies nec.',
+//   }
+// ]
 function DetailProductsTwo() {
-  // const [comments, setComments] = useState([]);
-  // const handleChange = (event, newValue) => {
-  //   setComments(newValue);
-  // };
+  const [comments, setComments] = useState([]);
+  const handleChange = (event, newValue) => {
+    setComments(newValue);
+  };
 
-  // useEffect(() => {
-  //   async function comments() {
-  //     const res = await axios.get(api + "comments/getListByProduct?q=&sortCreateAt=desc&limit=10&page=1&id_product=4", {
-  //       headers: { Authorization: `Bearer ${getToken()}` },
-  //     });
-  //     setComments(res.data.user);
-  //   }
-  //   comments();
-  // }, []);
+  useEffect(() => {
+    async function comment() {
+      const res = await axios.get(api +'comments/getListByProduct?q=&sortCreateAt=desc&limit=10&page=1&id_product=4', {
+        headers: { 'Authorization': `Bearer ${getToken()}` },
+      });
+      setComments(res.data.data);
+      // console.log(res.data.data)
+    }
+    comment();
+    console.log(comment());
+  }, []);
   return (
     <div>
       <div className={`${styles.row} row`}>
         <div className={`${styles.col9} col-lg-7`}>
           <div className={styles.container}>
+            <form action="" className={styles.action}>
+              <div>
+                <textarea name="" id="" cols="50" rows="2" placeholder="Nhập nội dung bình luận" style={{padding:'20px',borderRadius:'20px',backgroundColor:'rgba(255,255,255,0.5)'}}></textarea>
+              </div>
+              <div>
+                <button type="submit" style={{padding:'10px',borderRadius:'20px',background:'#ff5722'}}>Thêm bình luận</button>
+              </div>
+            </form>
+            <br />
+            <hr />
+            <br />
            {
-            review.map((eles,index)=>(
+            comments.map((comments,index)=>(
               <div className={`${styles.comment} row`}>
               <div className="col-lg-3" style={{textAlign: 'center'}}>
                 <div className={styles.img}>
-                  <img src={eles.avt} alt="" />
-                  <p className={styles.name}>{eles.name}</p>
+                  <img src={products1} alt="" />
+                  <p className={styles.name}>{comments.create_at}</p>
                 </div>
               </div>
               <div className="col-lg-9">
                 <div className={styles.header}>
                   <div className={styles.farouite}><BasicRating/></div>
-                  <div className={styles.days}>{eles.days}</div>
+                  <div className={styles.days}>{comments.create_at}</div>
                 </div>
                 <div className={styles.col10Content}>
-                  <h5 className={styles.col9Title}>{eles.title}</h5>
-                  <p className={styles.col9Content}>{eles.content}</p>
+                  <h5 className={styles.col9Title}>Đánh giá chất lượng sản phẩm</h5>
+                  <p className={styles.col9Content}>{comments.description}</p>
                 </div>
                 <div className={styles.footer}>
                 <Button variant="contained" className={styles.button}>
@@ -113,8 +126,8 @@ function DetailProductsTwo() {
               </div>
 
             </div>
-            ))
-           }
+             ))
+           } 
           </div>
         </div>
         <div className={`${styles.col3} col-lg-5`}>

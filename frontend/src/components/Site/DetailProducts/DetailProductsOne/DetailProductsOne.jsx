@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./DetailProductsOne.module.css";
 import products1 from "../../../../assets/img/seafood-1.jpg";
 import Button from '@mui/material/Button';
+import { api } from "../../../../utils/api";
+import axios from "axios";
+import { getToken } from "../../../../utils/Common";
 const listproductsDetail = [
   {
     img: products1,
@@ -20,9 +23,19 @@ const listproductsDetail = [
   },
   
 ];
-function DetailProductsOne() {
+function DetailProductsOne(id) {
+   const [DetailProducts, setDetails] = useState({});
+  useEffect(() => {
+    async function Details() {
+      const res = await axios.get(api + `product/detail/${id}`, {
+        headers: { "Authorization": `Bearer ${getToken()}` },
+      });
+      setDetails(res.data.user);
+    }
+    Details();
+  }, []);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} >
       <h4 className={styles.title}>Product Details</h4>
       <div className={`${styles.row} row`}>
         <div className={`${styles.col5} col-lg-5`}>
@@ -33,8 +46,9 @@ function DetailProductsOne() {
         </div>
         <div className={`${styles.col5} col-lg-7`}>
           <div className="colums">
-            <h5 className={styles.titleContent}>Veg Burger</h5>
+            <h5 className={styles.titleContent}>Veg Burger(name)</h5>
             <p className={styles.content}>
+              (full_description)
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu erat
               adipiscing convallis libero elit et eros pellentesque. Sapien,
               fringilla eget egestas eget. Lorem ipsum dolor sit amet,

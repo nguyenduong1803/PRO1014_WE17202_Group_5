@@ -65,7 +65,7 @@ function Product({ img, title, price, id }) {
   return (
     
     <div className=' col-lg-3'>
-      <Link to='/chi-tiet-don-hang' className={styles.link}><div className={styles.product} style={{ transition: '.6s' }}>
+      <Link to={`/chi-tiet-don-hang/${id}`} className={styles.link}><div className={styles.product} style={{ transition: '.6s' }}>
         <img className={styles.blur_shadow} src={img} alt="" />
         <img src={img} alt="" />
         <h4 className={styles.title}>{title}</h4>

@@ -61,6 +61,10 @@
 .days{
     color: #ff5722;
 }
+.action{
+    display: inline-flex;
+    grid-gap: 20px;
+}
 .col9Title{
     font-size:.8rem;
     padding: 10px 0px;

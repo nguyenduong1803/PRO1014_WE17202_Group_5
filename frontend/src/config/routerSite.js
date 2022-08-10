@@ -25,7 +25,7 @@ const routerSite = [
     { path: "/menu", component: Menu, },
     { path: "/map", component: Map, },
     { path: "/chi-tiet-hoa-don/:name", component: OrderDetail, },
-    { path: "/chi-tiet-don-hang", component: DetailProduct, },
+    { path: "/chi-tiet-don-hang/:name", component: DetailProduct, },
     { path: "/profile", component: Profile, },
     { path: "/dat-lai-mat-khau", component: Checkpass, },
     { path: "/gui-email", component: CheckEmail, },
