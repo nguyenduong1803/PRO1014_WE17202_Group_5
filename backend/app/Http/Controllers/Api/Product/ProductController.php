@@ -71,8 +71,18 @@ class ProductController extends Controller
 
     public function getDetailProduct($id) {
         $modelProduct = new Product();
-        $result = $modelProduct ->detailProduct($id);
-        if(isset($result)) return response() ->json(["data" => $result, "status" => true],200);
+        $detail = $modelProduct ->detailProduct($id);
+        $modelImg = new ImagesProduct();
+        $listsImg = $modelImg -> listsImg();
+        $arr = [];
+        $detail -> listsImg = array();
+        for($j = 0; $j < count($listsImg); $j++) {
+            if($listsImg[$j] -> id_product_img == $detail -> id_img) {
+                array_push( $arr, $listsImg[$j] -> path);
+            }
+        }
+        $detail -> listsImg = $arr;
+        if(isset($detail)) return response() ->json(["data" => $detail, "status" => true],200);
         else return response() ->json(["msg" =>"Lấy chi tiết sản phẩm thất bại!", "status" => false],402);
     }
     public function deleteProduct($id) {
