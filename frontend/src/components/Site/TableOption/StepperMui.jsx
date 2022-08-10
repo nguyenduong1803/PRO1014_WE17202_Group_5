@@ -32,10 +32,9 @@ const steps = [
     },
 ];
 
-export default function StepperMui({ id, setModalShow, activeStep, setActiveStep,setNotifyOrder }) {
+export default function StepperMui({ id, setModalShow, activeStep, setActiveStep, setNotifyOrder, type }) {
     const dispatch = useDispatch()
     const orders = useSelector(selectOrderTable)
-    const statusOrder = useSelector(selectStatusOrder)
     const orderItems = useSelector(selectProductOrder)
 
     const [notify, setNotify] = React.useState({
@@ -44,7 +43,8 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         celendar: "",
         countGuest: "",
         validateTime: "",
-        note: ""
+        note: "",
+        countTable: ""
     })
     const [order, setOrder] = React.useState({
         tableId: [orders.tableId || id],
@@ -53,6 +53,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         countGuest: orders.countGuest,
         celendar: orders.celendar,
         note: orders.note,
+        countTable: orders.countTable
     });
 
     const handlNext = () => {
@@ -91,6 +92,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
             dispatch(updateOrderTable(order))
             setActiveStep(1);
         }
+        console.log(order)
         // setActiveStep(1);
     }
 
@@ -103,13 +105,13 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
             quantitys.push(value.quantity)
         })
         dispatch(createOrder({ order, productId, quantitys }))
-            setActiveStep((prevActiveStep) => prevActiveStep + 1);
-            setNotifyOrder({type:"success",title:"đặt bàn thành công"})
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setNotifyOrder({ type: "success", title: "đặt bàn thành công,nhà hàng sẽ sớm liên hệ lại với bạn" })
     };
     const handleReset = () => {
         setActiveStep(0);
     };
-  
+
     return (
         <>
             <Box sx={{ maxWidth: "100%" }}>
@@ -128,9 +130,9 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
                             </StepLabel>
                             <StepContent >
                                 <Typography>{step.description}</Typography>
-                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify} />) :
+                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify} type={type} />) :
                                     index === 1 ? (<InfoFood />) :
-                                        index === 2 ? <InfoOrder order={order} /> : ""}
+                                        index === 2 ? <InfoOrder order={order} type={type} /> : ""}
                                 <Box sx={{ mb: 2 }}>
                                     <div>
                                         {index === 0 ?
@@ -183,14 +185,24 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
         </>
     );
 }
-const InfoOrder = ({ order }) => {
+const InfoOrder = ({ order, type }) => {
     return (
         <>
-            <h3 className="infoOrder__title-head">Bàn : {order.tableId} </h3>
+            {
+                type === "party" ?
+                    <div>
+                        <h3 className="infoOrder__title-head">Số bàn : {order.countTable} </h3>
+                        <h3 className="infoOrder__title-head">Số khách trong 1 bàn : {order.userOfTable} </h3>
+                    </div>
+                    :
+                    <div>
+                        <h3 className="infoOrder__title-head">Bàn : {order.tableId} </h3>
+                        <h3 className="infoOrder__title-head">Số khách :{order.countGuest}  </h3>
+                    </div>
+            }
             <h3 className="infoOrder__title-head">Chủ tiệc :{order.name}  </h3>
             <h3 className="infoOrder__title-head">Số điện thoại :{order.phone}  </h3>
             <h3 className="infoOrder__title-head">Thời gian :{order.celendar}  </h3>
-            <h3 className="infoOrder__title-head">Số khách :{order.countGuest}  </h3>
         </>
     )
 }

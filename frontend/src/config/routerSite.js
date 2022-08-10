@@ -16,11 +16,15 @@ import CheckOut from "../pages/Site/CheckOuts/CheckOuts";
 const PageNotFound = lazy(() => import("../pages/Site/PageNotFound/PageNotFound"));
 const Home = lazy(() => import("../pages/Site/Home/Home"));
 const Map = lazy(() => import("../pages/Site/Map/Map"));
+const OrderParty = lazy(() => import("../pages/Site/OrderTable/OrderParty"));
+const OrderVip = lazy(() => import("../pages/Site/OrderTable/OrderVip"));
 const routerSite = [
     { path: "/", component: Home, },
     { path: "/dang-nhap", component: Login, },
     { path: "/dang-ky", component: Register, },
     { path: "/dat-ban", component: OrderTable, },
+    { path: "/dat-tiec", component: OrderParty, },
+    { path: "/dat-phong-vip", component: OrderVip, },
     { path: "/hoa-don", component: Orders, },
     { path: "/menu", component: Menu, },
     { path: "/map", component: Map, },

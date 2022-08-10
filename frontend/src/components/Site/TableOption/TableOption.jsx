@@ -20,11 +20,10 @@ function TableOption({ id, status, type, name }) {
         vertical: 'bottom', horizontal: 'right'
     });
     const { vertical, horizontal } = state;
-    
+
     const [activeStep, setActiveStep] = React.useState(0);
-    const [notifyOrder, setNotifyOrder] = React.useState({type:"info",title:"Bàn đã có khách đặt "});
+    const [notifyOrder, setNotifyOrder] = React.useState({ type: "info", title: "Bàn đã có khách đặt " });
     const [modalShow, setModalShow] = React.useState(false)
-    const infoUser = useContext(AuthContext)
     let color;
     if (Number(status) === 1) {
         color = { color: "#A0522D", colorblur: "#FF4500" }
@@ -41,42 +40,38 @@ function TableOption({ id, status, type, name }) {
     }
     const handleClose = () => {
         setModalShow(0)
-
     }
 
     return (
-        <div>
-            <div className="modal-container" onClick={handleShowOrder}>
-                {/* <input id="modal-toggle" type="checkbox" /> */}
-                {type === "circle" ?
-                    <Table
-                        colors={color}
-                        name={`A-${name}`} /> :
-                    <RectangleTable
-                        colors={color}
-                        name={name}
-
-                    />}
-                {modalShow && status === 3 ? <div className="wrap_modal-content" >
-                    <div className="modal_content--item" onClick={e => handleClick(e)} >
-                        <div className={`modal-content ${!getToken() && 'modal_mini'} ${activeStep === 1 && "active"}`} >
-                            {
-                                getToken() ? <StepperMui setActiveStep={setActiveStep} activeStep={activeStep} setModalShow={setModalShow} id={id} user={infoUser} setNotifyOrder={setNotifyOrder}/> : <ModalLogin />
-                            }
-                        </div>
-                        <ChooseProduct className={`${activeStep === 1 && "active"}`} />
+        <div className="modal-container" onClick={handleShowOrder}>
+            {/* <input id="modal-toggle" type="checkbox" /> */}
+            {type === "circle" ?
+                <Table
+                    colors={color}
+                    name={`A-${name}`} /> :
+                <RectangleTable
+                    colors={color}
+                    name={name}
+                />}
+            {modalShow && status === 3 ? <div className="wrap_modal-content" >
+                <div className="modal_content--item" onClick={e => handleClick(e)} >
+                    <div className={`modal-content ${!getToken() && 'modal_mini'} ${activeStep === 1 && "active"}`} >
+                        {
+                            getToken() ? <StepperMui setActiveStep={setActiveStep} activeStep={activeStep} setModalShow={setModalShow} id={id} setNotifyOrder={setNotifyOrder} /> : <ModalLogin />
+                        }
                     </div>
-                </div> : modalShow ? <Snackbar
-                    anchorOrigin={{ vertical, horizontal }}
-                    open={true}
-                    onClose={handleClose}
-                    message="I love snacks"
-                    key={vertical + horizontal}
-                >
-                    <Alert severity={notifyOrder.type}>{notifyOrder.title}</Alert>
-                </Snackbar> : ""}
+                    <ChooseProduct className={`${activeStep === 1 && "active"}`} />
+                </div>
+            </div> : modalShow ? <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={true}
+                onClose={handleClose}
+                message="I love snacks"
+                key={vertical + horizontal}
+            >
+                <Alert severity={notifyOrder.type}>{notifyOrder.title}</Alert>
+            </Snackbar> : ""}
 
-            </div>
         </div>
     )
 }

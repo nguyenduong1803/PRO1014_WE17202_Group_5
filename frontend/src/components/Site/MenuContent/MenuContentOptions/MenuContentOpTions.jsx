@@ -76,10 +76,16 @@ function MenuContentOpTions() {
           >
             <div className="accordion-body" style={{ padding: "0" }}>
               <div className={styles.option}>
+              <div className={activeCate === "" ? `form-check ${styles.input_space} ${styles.input_space_active}` : `form-check ${styles.input_space}`}  >
+                      <input onClick={() => handleActiveCate("")}  className="form-check-input" type="radio" name="flexRadioDefault" id={`all__category`} />
+                      <label onClick={() => handleActiveCate("")} className={`form-check-label ${styles.input_label}`} htmlFor={`all__category`}>
+                        Tất cả 
+                      </label>
+                    </div>
                 {
                   listCategory.map((category, index) => (
                     <div className={activeCate === category.id ? `form-check ${styles.input_space} ${styles.input_space_active}` : `form-check ${styles.input_space}`} key={category.id} >
-                      <input className="form-check-input" type="radio" name="flexRadioDefault" id={`${category.name}__category`} />
+                      <input onClick={() => handleActiveCate(category.id)}  className="form-check-input" type="radio" name="flexRadioDefault" id={`${category.name}__category`} />
                       <label onClick={() => handleActiveCate(category.id)} className={`form-check-label ${styles.input_label}`} htmlFor={`${category.name}__category`}>
                         {category.name}
                       </label>

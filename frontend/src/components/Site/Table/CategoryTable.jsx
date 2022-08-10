@@ -4,35 +4,36 @@ import viproom from "../../../assets/svg/room-service-svgrepo-com (1).svg"
 import room from "../../../assets/svg/room-service-svgrepo-com (2).svg"
 import alacarteroom from "../../../assets/svg/room-service-svgrepo-com.svg"
 import ship from "../../../assets/svg/delivery-truck-svgrepo-com.svg"
+import { Link } from 'react-router-dom'
 
 function CategoryTable() {
     return (
         <div className="categories">
             <ul className="category-list">
-               
-            <li className="category-list__item" id="all">
-                    <a href="#all">
+
+                <li className="category-list__item" id="all">
+                    <Link to="/dat-ban">
                         <div className="category-icon">
                             <img src={room} alt="" />
                         </div>
                         <h4 className="category-name">Ala carte</h4>
-                    </a>
+                    </Link>
                 </li>
                 <li className="category-list__item" id="alacarte">
-                    <a href="#alacarte">
+                    <Link to="/dat-tiec">
                         <div className="category-icon">
                             <img src={alacarteroom} alt="" />
                         </div>
                         <h4 className="category-name">Đặt tiệc</h4>
-                    </a>
+                    </Link>
                 </li>
                 <li className="category-list__item" id="vip">
-                    <a href="#vip">
+                    <Link to="/dat-phong-vip">
                         <div className="category-icon">
                             <img src={viproom} alt="" />
                         </div>
                         <h4 className="category-name">Phòng Vip</h4>
-                    </a>
+                    </Link>
                 </li>
                 <li className="category-list__item" id="ship">
                     <a href="#ship">
@@ -42,10 +43,10 @@ function CategoryTable() {
                         <h4 className="category-name">Đặt ship </h4>
                     </a>
                 </li>
-                
+
             </ul>
         </div>
-  )
+    )
 }
 
 export default CategoryTable

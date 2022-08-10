@@ -45,7 +45,6 @@ function MenuContent() {
       <div className="container-fluid">
         <div className="row position-relative" style={{ zIndex: "4" }}>
           <div className="col-lg-3">
-
             <MenuContentOptions modalShow={modalShow} setModalShow={setModalShow} />
           </div>
 

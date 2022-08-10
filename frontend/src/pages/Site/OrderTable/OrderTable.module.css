@@ -1,101 +1,206 @@
-:root{
+:root {
     --borderColor: rgb(255, 255, 255);
 }
-.borderBottom{
+
+.borderBottom {
     border-bottom: 1px solid var(--borderColor);
     width: 100%;
 }
-.borderRight{
+
+.borderRight {
     border-right: 1px solid var(--borderColor);
     height: 100%;
 }
-.borderLeft{
+
+.borderLeft {
     border-left: 1px solid var(--borderColor);
     height: 100%;
 }
-.borderLeftRight{
+
+.borderLeftRight {
     border-left: 1px solid var(--borderColor);
     height: 100%;
     border-right: 1px solid var(--borderColor);
 }
-.borderTopBot{
+
+.borderTopBot {
     border-top: 1px solid var(--borderColor);
     height: 100%;
     border-bottom: 1px solid var(--borderColor);
 }
-.background{
+
+.background {
     background-color: rgb(228, 180, 180) !important;
 }
-.backgroundWrap{
-  background-color: rgba(255,255,255,0.5);
+
+.backgroundWrap {
+    background-color: rgba(255, 255, 255, 0.5);
 }
-.topLeft{
+
+.topLeft {
     border-top-left-radius: 20px;
-    border-top:2px solid #fff;
-    border-left:2px solid #fff;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
 }
-.topRight{
+
+.topRight {
     border-top-right-radius: 20px;
-    border-top:2px solid #fff;
-    border-right:2px solid #fff;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
 }
-.botLeft{
+
+.botLeft {
     border-bottom-left-radius: 20px;
-    border-bottom:2px solid #fff;
-    border-left:2px solid #fff;
+    border-bottom: 2px solid #fff;
+    border-left: 2px solid #fff;
 }
-.botRight{
+
+.botRight {
     border-bottom-right-radius: 20px;
-    border-right:2px solid #fff;
-    border-bottom:2px solid #fff;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
 }
-.alacart_title{
+
+.alacart_title {
     margin: 12px 0;
     font-weight: 600;
 }
-.bot{
-    border-bottom:2px solid #fff;
+
+.bot {
+    border-bottom: 2px solid #fff;
 }
-.top{
-    border-top:2px solid #fff;
+
+.top {
+    border-top: 2px solid #fff;
 }
-.square_green{
+
+.square_green {
     width: 20px;
     height: 20px;
     background-color: #228B22;
     border-radius: 4px;
     margin-right: 12px;
 }
-.wrapSquare{
+
+.wrapSquare {
     display: flex;
     margin: 12px 0;
 }
-.square_red{
+
+.square_red {
     width: 20px;
     height: 20px;
     background-color: #FF4500;
     border-radius: 4px;
     margin-right: 12px;
 }
-.square_yellow{
+
+.square_yellow {
     width: 20px;
     height: 20px;
     background-color: #FFBF00;
     border-radius: 4px;
     margin-right: 12px;
 }
-.wc{
+
+.wc {
     display: flex;
-    align-items:center;
-    justify-content:center;
+    align-items: center;
+    justify-content: center;
     background-color: #fff;
     height: 100%;
-    border-radius:10px;
+    border-radius: 10px;
 }
-.wcIcon{
+
+.wcIcon {
     width: 20%;
     margin-right: 12px;
 }
-.wc h2{
-    text-align:center;
+
+.wc h2 {
+    text-align: center;
+}
+
+/* party */
+.wrapParty {
+    position: relative;
+    top: -25px;
+    left: -100px;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../../assets/images/luxury-restaurant-grill-bar-interior-with-chandeliers-furniture.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-left: 90px;
+    padding-top: -25px;
+}
+
+.wrapParty_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    margin-top: 40px;
+    height: 56px;
+    width: 180px;
+    border-radius: 4px;
+    background-color: var(--primaryColor);
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+/* room vip */
+.roomVipItem {
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.roomVip_img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+.roomVip_title{
+    margin-top: 12px;
+}
+
+/* animation zoom vip */
+.roomVipItem:hover >.roomVip_img  {
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 0.8;
+}
+.btnOrderVip{
+    border:1px solid #ccc;
+    border-radius: 4px;
+    height: 40px;
+    width: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:var(--primaryColor);
+    color:#fff;
+    margin-top: 12px;
+    transition:0.2s;
+}
+.btnOrderVip:hover{
+    cursor: pointer;
+    background-color: #fff;
+    border:2px solid var(--primaryColor);
+    color: var(--primaryColor);
 }

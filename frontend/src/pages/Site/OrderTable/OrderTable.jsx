@@ -46,7 +46,6 @@ const possitionTable = [
 ]
 function OrderTable() {
     const tables = useSelector(selectListTable)
-
     return (
         <div>
             <LayoutSite>

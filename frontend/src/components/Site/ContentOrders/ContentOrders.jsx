@@ -14,7 +14,6 @@ function ContentOrders() {
       <div className="row" style={{ zIndex: "10", position: "relative" }}>
         {orders ?
           orders.map(order => {
-            
             return (
               <OrdersHistory
                 key={order.id}

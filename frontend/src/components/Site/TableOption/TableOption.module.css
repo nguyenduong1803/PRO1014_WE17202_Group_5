@@ -200,3 +200,7 @@
 .category_btn:hover{
     cursor: pointer;
 }
+.party_countUser_input{
+width: 100%;
+height: 30px;
+}

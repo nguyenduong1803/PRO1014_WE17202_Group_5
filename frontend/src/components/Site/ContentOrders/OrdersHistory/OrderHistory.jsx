@@ -55,7 +55,6 @@ console.log(tableList)
         <div className={styles.lines}></div>
         <div className={styles.orderIdFooter}>
           <div className={styles.orderIdFooterLeft}>
-
             {
               status === 1 ?
                 <button color="secondary" className={styles.buttons} disabled>Đã Đặt</button>
