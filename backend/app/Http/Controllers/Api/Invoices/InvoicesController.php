@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\DetailTableInvoice\DetailTableInvoiceController;
 use App\Models\Tables;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoices\InvoiceUpdate;
+use App\Models\DetailTableInvoice;
 use App\Models\InvoiceDetail;
 use App\Models\Invoices;
 use App\Models\User;
@@ -87,6 +88,8 @@ class InvoicesController extends Controller
         $modelInvoices = new Invoices();
         $modelDetailInvoice = new InvoiceDetail();
         $data = $modelInvoices -> getInvoicesByUser($params);
+       
+        $modelDetailTableInvoice = new DetailTableInvoice();
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
         
         for($i =0;$i < count($data); $i++) {
@@ -96,6 +99,13 @@ class InvoicesController extends Controller
                 ];
             $listDetailInvoice = $modelDetailInvoice -> getListDetailInvoice($params2);
             $data[$i] -> listDetailInvoice = $listDetailInvoice;
+        }
+        for($i =0;$i < count($data); $i++) {
+            $params3 = [
+                $data[$i] -> id_invoice,
+            ];
+            $listDetailTbInvoice = $modelDetailTableInvoice -> getLists($params3);
+            $data[$i] -> listDetailTbInvoice = $listDetailTbInvoice;
         }
         return response() ->json(["data" => $data, "status" => true],200);
     }
