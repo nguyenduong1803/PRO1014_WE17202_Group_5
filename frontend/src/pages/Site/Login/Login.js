@@ -101,14 +101,14 @@ const FormLogin = ({ self }) => {
                         style={{ fontStyle: `italic`, color: `#74788d` }}>Quên mật khẩu?
                     </Link>
                 </div>
-                <a
-                    href="/"
+                <Link
+                    to="/"
                     onClick={e => handleSubmit(e)}
                     type='submit'
                     className={`${styles.btn}`}
                 // onClick={handleLogin}
                 >Đăng nhập
-                </a>
+                </Link>
                 {notify && <p className={styles.error}>{notify}</p>}
             </form>
         </>

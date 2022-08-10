@@ -28,6 +28,7 @@ function OrderDetail() {
       <div className="row">
         <div className="col-lg-3">
               <InformationUser
+                id={1}
                 img={""}
                 name={myOder?.user_name_book}
                 contacts={myOder?.phone}

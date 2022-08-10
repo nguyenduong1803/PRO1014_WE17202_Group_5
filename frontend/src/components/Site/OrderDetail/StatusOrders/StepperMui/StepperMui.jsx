@@ -12,7 +12,7 @@ const steps = [
 export default function StepperMui() {
   return (
     <Box sx={{ width: '100%' }}>
-      <Stepper  activeStep={1} alternativeLabel>
+      <Stepper  activeStep={0} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>

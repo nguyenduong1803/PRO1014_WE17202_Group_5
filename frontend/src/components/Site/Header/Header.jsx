@@ -40,7 +40,7 @@ function Header() {
                                         <ProfileAvatar className={styles.avt} />
                                         <div>
                                             <h4 className={styles.name}>{infoUser?.ten}</h4>
-                                            <p className={styles.possition}>Nhân viên order</p>
+                                            {/* <p className={styles.possition}>Nhân viên order</p> */}
                                         </div>
                                     </div>
                                     :

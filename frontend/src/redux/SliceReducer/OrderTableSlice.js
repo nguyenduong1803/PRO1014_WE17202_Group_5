@@ -9,7 +9,9 @@ const tableOrder = {
     phone: "",
     countGuest: 1,
     celendar: "",
-    note: ""
+    note: "",
+    countTable:0,
+    userOfTable:0,
 }
 const OrderTableSlice = createSlice({
     name: "orderTable",
