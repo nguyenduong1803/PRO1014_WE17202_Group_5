@@ -7,12 +7,15 @@ use App\Http\Controllers\Api\DetailTableInvoice\DetailTableInvoiceController;
 use App\Models\Tables;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoices\InvoiceUpdate;
+use App\Models\DetailTableInvoice;
 use App\Models\InvoiceDetail;
 use App\Models\Invoices;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
+
 
 class InvoicesController extends Controller
 {
@@ -76,17 +79,38 @@ class InvoicesController extends Controller
             $request['phone'],
             $request['note'],
             $purchaseStatus,
+            $request['create_at']
         ];
         $modelInvoices ->create($params2);
         return response() ->json(["msg" => "Tạo hoá đơn thành công!", "status" => true],200);
     }
 
     public function getInvoicesByUser() {
+        $currentDate = Carbon::now('Asia/Ho_Chi_Minh') ->toDateTimeString();
         $user = Auth::user();
-        $params = [$user['id']];
+        $params = [$user['id'], $currentDate];
         $modelInvoices = new Invoices();
+        $modelDetailInvoice = new InvoiceDetail();
         $data = $modelInvoices -> getInvoicesByUser($params);
+       
+        $modelDetailTableInvoice = new DetailTableInvoice();
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
+        
+        for($i =0;$i < count($data); $i++) {
+            $params2 = [
+                    $data[$i] -> id_invoice,
+                    $user['id']
+                ];
+            $listDetailInvoice = $modelDetailInvoice -> getListDetailInvoice($params2);
+            $data[$i] -> listDetailInvoice = $listDetailInvoice;
+        }
+        for($i =0;$i < count($data); $i++) {
+            $params3 = [
+                $data[$i] -> id_invoice,
+            ];
+            $listDetailTbInvoice = $modelDetailTableInvoice -> getLists($params3);
+            $data[$i] -> listDetailTbInvoice = $listDetailTbInvoice;
+        }
         return response() ->json(["data" => $data, "status" => true],200);
     }
     public function getInvoicesByAdmin() {

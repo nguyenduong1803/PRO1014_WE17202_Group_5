@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+
 class Invoices extends Model
 {
     use HasFactory;
@@ -14,12 +15,20 @@ class Invoices extends Model
 
     public function create($params) {
         DB::insert('INSERT INTO invoices
-    (id_user ,id_invoice, status_cart_order, total_price, status_envoice, id_staff, user_name_book, time_book, phone, note, purchase_status)
-    values (?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?)', $params);
+    (id_user ,id_invoice, status_cart_order, total_price, status_envoice, id_staff, user_name_book, time_book, phone, note, purchase_status, create_at)
+    values (?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?)', $params);
     }
 
     public function getInvoicesByUser($params) {
-        return DB::select("SELECT * FROM invoices as iv WHERE iv.id_user = ? and iv.is_delete = 1", $params);
+        return DB::select("SELECT iv.*
+        , users.ten as 'name_user' 
+        FROM invoices as iv 
+        INNER JOIN users 
+        ON users.id = iv.id_user 
+        WHERE iv.id_user = ? 
+        AND iv.create_at >= ?
+        AND iv.is_delete = 1",
+        $params);
     }
     public function getInvoicesByAdmin() {
         return DB::select("SELECT * FROM invoices as iv WHERE iv.is_delete = 1");
