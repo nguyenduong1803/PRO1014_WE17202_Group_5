@@ -21,6 +21,7 @@
 }
 .logo img{
     margin: 30px;
+    margin-left: -2px;
     width: 80px;
     height: 60px;
 }

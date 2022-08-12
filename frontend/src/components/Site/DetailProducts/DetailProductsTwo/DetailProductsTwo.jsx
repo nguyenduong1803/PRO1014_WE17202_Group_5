@@ -7,6 +7,7 @@ import Rating from '@mui/material/Rating';
 import { api } from "../../../../utils/api";
 import axios from "axios";
 import { getToken } from "../../../../utils/Common";
+import {useParams } from 'react-router-dom';
 function BasicRating() {
   const [value, setValue] = React.useState(5);
   
@@ -68,24 +69,37 @@ const detail = [
 function DetailProductsTwo() {
   const [comments, setComments] = useState([]);
   const [content,setContent] = useState('');
+  const {idProduct} = useParams();
   const handleChange = (event) => {
     setContent(event.target.value);
-    console.log(event.target.value)
+    // console.log(event.target.value)
   };
-  const handleSubmit = (event)=>{
+  const handleSubmit = async (event)=>{
     event.preventDefault();
-    console.log(content)
+    const params = {
+      "description": content,
+      "id_product": idProduct
+    };
+    const res = await axios.post(api +'comments/create', params,{
+      headers: { 'Authorization': `Bearer ${getToken()}` },
+    });
+    if(res?.status) {
+      fetchListComment()
+    }
+    console.log(res)
   }
   useEffect(() => {
-    async function comment() {
-      const res = await axios.get(api +'comments/getListByProduct?q=&sortCreateAt=desc&limit=10&page=1&id_product=4', {
+    
+    fetchListComment();
+    // console.log(comment());
+  }, []);
+
+  async function fetchListComment() {
+      const res = await axios.get(api +`comments/getListByProduct?q=&sortCreateAt=desc&limit=10&page=1&id_product=${idProduct}`, {
         headers: { 'Authorization': `Bearer ${getToken()}` },
       });
       setComments(res.data.data);
-    }
-    comment();
-    // console.log(comment());
-  }, []);
+  }
   return (
     <div>
       <div className={`${styles.row} row`}>
