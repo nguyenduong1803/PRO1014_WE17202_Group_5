@@ -74,31 +74,44 @@ function DetailProductsTwo() {
     setContent(event.target.value);
     // console.log(event.target.value)
   };
+  const handleDelete = async (idComment) => {
+    const res = await axios.delete(api + `comments/delete/${idComment}`, {
+      headers: { 'Authorization': `Bearer ${getToken()}` },
+    });
+    // console.log(res)
+    if(res?.data.status){
+      fecthListComment()
+      
+    }else{
+      alert('Xoa that bai');
+    }
+  }
   const handleSubmit = async (event)=>{
     event.preventDefault();
     const params = {
-      "description": content,
+      "description":content,
       "id_product": idProduct
-    };
-    const res = await axios.post(api +'comments/create', params,{
+  }
+    const res = await axios.post(api + 'comments/create',params, {
       headers: { 'Authorization': `Bearer ${getToken()}` },
     });
-    if(res?.status) {
-      fetchListComment()
+    // console.log(res);
+    if(res?.data.status){
+      fecthListComment()
+    }else{
+      alert('Something');
     }
-    console.log(res)
   }
+  
   useEffect(() => {
-    
-    fetchListComment();
+    fecthListComment();
     // console.log(comment());
   }, []);
-
-  async function fetchListComment() {
-      const res = await axios.get(api +`comments/getListByProduct?q=&sortCreateAt=desc&limit=10&page=1&id_product=${idProduct}`, {
-        headers: { 'Authorization': `Bearer ${getToken()}` },
-      });
-      setComments(res.data.data);
+ async function fecthListComment() {
+    const res = await axios.get(api +`comments/getListByProduct?q=&sortCreateAt=desc&limit=10&page=1&id_product=${idProduct}`, {
+      headers: { 'Authorization': `Bearer ${getToken()}` },
+    });
+    setComments(res.data.data);
   }
   return (
     <div>
@@ -139,9 +152,10 @@ function DetailProductsTwo() {
                 </div>
                 <div className={styles.footer}>
                 <Button variant="contained" className={styles.button}>
-                  Reply
-                </Button><Button variant="contained" className={styles.button}>
-                  Report
+                  Chinh sua
+                </Button>
+                <Button onClick={() => handleDelete(comments.id)} variant="contained" className={styles.button}>
+                  Xoa
                 </Button>
                 </div>
               </div>
