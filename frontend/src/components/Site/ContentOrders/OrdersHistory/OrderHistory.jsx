@@ -1,21 +1,11 @@
 import React from "react";
 import styles from "./OrderHistory.module.css";
 import { Link } from "react-router-dom";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { Avatar } from "@mui/material";
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import { formatMoney } from "../../../../extensions/formatMoney";
-import { useDispatch, useSelector } from "react-redux";
-import { getTableByOrder } from "../../../../redux/SliceReducer/OrderTableSlice";
-import { selectTable } from "../../../../redux/selector";
 function OrderHistory({ id, idInvoice, name, phone, status, date, ban, money, totalUser, note }) {
- const dispatch = useDispatch()
- const tableList = useSelector(selectTable)
-console.log(tableList)
-  // React.useEffect(() => {
-  //   dispatch(getTableByOrder(idInvoice))
-  // },[])
   return (
     <div className="col-lg-3 col-md-4">
       <div className={styles.orderHistory}>
@@ -57,7 +47,7 @@ console.log(tableList)
           <div className={styles.orderIdFooterLeft}>
             {
               status === 1 ?
-                <button color="secondary" className={styles.buttons} disabled>Đã Đặt</button>
+                <button color="secondary" className={styles.buttons} disabled>Đang Đặt</button>
                 :
                 <Button variant="contained" color="success" className={styles.button} disabled>
                   Đã Thanh Toán

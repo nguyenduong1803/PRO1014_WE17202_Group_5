@@ -10,7 +10,6 @@ function CelendarOption({ setOrder, values, setNotify }) {
         //    const time = `${crrTime.getFullYear()}-${orderdate.getMonth() + 1}-${orderdate.getDate()} ${orderdate.getHours() + 1}:${orderdate.getMinutes()}:00`
         setOrder(prev => ({ ...prev, celendar: `${time[0]} ${time[1]}:00` }))
         setOrder(prev => ({ ...prev, validateTime:time}))
-        console.log(values)
     }
     const handleBlur = (e) => {
         const time = e.target.value.split("T")

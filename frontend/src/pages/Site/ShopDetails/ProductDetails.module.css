@@ -42,11 +42,14 @@
   /* height: 23px; */
   background: border-box;
   border-radius: 5px;
-  background-color: rgb(255,255,255,0.5);
   padding: 4px ;
   outline: none;
   border: none;
   text-align: center;
+}
+.quantity{
+  display: flex;
+
 }
 .productOption .addToCart {
   background-color: #7ead39;

@@ -19,7 +19,8 @@ const AuthSlice = createSlice({
         status: "idle",
         products: [],
         isSuccess: false,
-        searchText: ""
+        searchText: "",
+        detailProduct:{}
     },
     reducers: {
         searchProduct: (state, action) => {
@@ -52,6 +53,10 @@ const AuthSlice = createSlice({
                 }
             }).addCase(addProduct.fulfilled,(state, action)=>{
                 state.products.push(action.payload)
+            }).addCase(getDetailProduct.fulfilled,(state, action)=>{
+                if(action.payload.status==="success"){
+                    state.detailProduct = action.payload.data
+                }
             })
     }
 })
@@ -110,6 +115,38 @@ export const addProduct = createAsyncThunk("product/addProduct", async (payload,
         })
     return payloads
 })
+export const updateProduct = createAsyncThunk("product/updateProduct", async (payload, action) => {
+    let payloads
+    await axios
+        .post(api + `product/update/${payload.id}`, payload.formData, {
+            headers: {
+                "Authorization": `Bearer ${getToken()}`
+            },
+        })
+        .then(response => {
+            payloads = { data: payload, status: response.data.status }
+            console.log(response)
+            action.dispatch(getProducts())
+        }).catch(function (err) {
+            console.log(err)
+            payloads = { data: "", status: err.response.status }
+        })
+    return payloads
+})
+export const getDetailProduct = createAsyncThunk("product/getDetailProduct", async (payload, action) => {
+    let payloads
+    await axios
+        .get(api + `product/detail/${payload}`, {
+        })
+        .then(response => {
+            payloads = { data: response.data.data, status: "success" }
+        }).catch(function (err) {
+            console.log(err)
+            payloads = { data: "", status: err.response.status }
+        })
+    return payloads
+})
+
 export const searchProduct = (payload) => {
     return { type: "product/searchProduct", payload }
 }

@@ -204,7 +204,7 @@ export const tableOrder = [
   },
   {
     name: "Quản lý",
-    width: 250,
+    width: 150,
     dataKey: "id",
     isFixed: "right",
     type: "postAction"

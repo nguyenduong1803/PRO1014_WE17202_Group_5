@@ -49,8 +49,7 @@ function OrderItem({ order, setOrder, setNotify, notify, id, type }) {
                                 <option value="12">Bàn 12 khách</option>
                             </select>
                             :
-                            <SelectMuiltiMui label=" Chọn nhiều bàn" listName={tableActive} position={"A"} id={id} setOrder={setOrder} order={order} />
-
+                            <SelectMuiltiMui label=" Chọn nhiều bàn" listName={tableActive} id={id} setOrder={setOrder} order={order} />
                     }
                 </div>
                 <div className="delivery">
@@ -61,18 +60,18 @@ function OrderItem({ order, setOrder, setNotify, notify, id, type }) {
             {
                 type === "party" ?
                     <FormControl sx={{ margin: "8px 0", width: '100%' }} >
-                        <InputField name="Số bàn đặt" size="small" values={order.countTable} setOrder={setOrder} setNotify={setNotify} />
+                        <InputField name="Số bàn đặt" size="medium" values={order.countTable} setOrder={setOrder} setNotify={setNotify} />
                         <p className="orderitem_notify">{notify.countTable}</p>
                     </FormControl>
                     : <p className="orderitem_totalUser">Sức chứa :khoảng {totalSitting} khách</p>
             }
 
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
-                <InputField name="Chủ tiệc" size="small" values={order.name} setOrder={setOrder} setNotify={setNotify} />
+                <InputField name="Chủ tiệc" size="medium" values={order.name} setOrder={setOrder} setNotify={setNotify} />
                 <p className="orderitem_notify">{notify.name}</p>
             </FormControl>
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >
-                <InputField name="Số điện thoại" size="small" values={order.phone} setOrder={setOrder} setNotify={setNotify} />
+                <InputField name="Số điện thoại" size="medium" values={order.phone} setOrder={setOrder} setNotify={setNotify} />
                 <p className="orderitem_notify">{notify.phone}</p>
             </FormControl>
             <FormControl sx={{ margin: "8px 0", width: '100%' }} >

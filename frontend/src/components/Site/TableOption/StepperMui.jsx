@@ -213,7 +213,6 @@ const InfoFood = () => {
     products.forEach(product => {
         orders.forEach(order => {
             if (order.id === product.id) {
-                console.log(order.quantity)
                 const newObj = { ...product, quantity: order.quantity }
                 listOrder.push(newObj)
             }
