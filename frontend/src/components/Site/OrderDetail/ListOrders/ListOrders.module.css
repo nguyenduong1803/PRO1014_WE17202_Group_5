@@ -1,5 +1,5 @@
 .header{
-    background-color:var(--primaryColor);
+    background-color:#ccc;
     border-radius: 10px !important;
     font-size: 1.7rem !important;
     color: white !important;
@@ -21,7 +21,7 @@
 .title{
     font-weight: 300;
     font-size:1rem;
-    color:var(--primaryColor);
+    color:#000;
 }
 .name{
     font-size: 1rem;

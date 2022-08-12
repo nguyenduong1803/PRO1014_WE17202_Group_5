@@ -1,47 +1,40 @@
 import React from "react";
 import InformationUser from "./InformationUser/InformationUser";
-import products1 from "../../../assets/img/seafood-1.jpg";
 import LayoutSite from "../LayoutSite/LayoutSite";
 import ListOrder from "../OrderDetail/ListOrders/ListOrders";
 import Status from "../OrderDetail/StatusOrders/StatusOrders";
-import StepperMui from "./StatusOrders/StepperMui/StepperMui";
-import Statistical from "./Statistical/Statistical";
-import {  selectOrder } from "../../../redux/selector";
+// import Statistical from "./Statistical/Statistical";
+import UpdateProduct from "./ListOrders/UpdateProduct"
+import { selectOrder, selectRoleUser } from "../../../redux/selector";
 import { useSelector } from "react-redux";
-const informationuser = [
-  {
-    img: products1,
-    name: "Copyright",
-    contacts: "(480) 555-0103",
-    address: "6391 Elgin St. Celina, Delaware 10299",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
+import { Button } from "@mui/material";
 function OrderDetail() {
+  const [showModal, setShowModal] = React.useState(false)
   const orders = useSelector(selectOrder)
- const orderId= window.location.pathname.split("/")[2]
- const myOder= orders.find(ele=> ele.id_invoice===orderId)
- console.log(orderId)
+  const role = useSelector(selectRoleUser)
+  const orderId = window.location.pathname.split("/")[2]
+  const myOder = orders.find(ele => ele.id_invoice === orderId)
   return (
     <LayoutSite>
       <div className="row">
         <div className="col-lg-3">
-              <InformationUser
-                id={1}
-                img={""}
-                name={myOder?.user_name_book}
-                contacts={myOder?.phone}
-                time={myOder?.time_book}
-                content={myOder?.note}
-              />
-          <div>
+          <InformationUser
+            id={1}
+            img={""}
+            orders={myOder}
+          />
+          {/* <div>
             <Statistical />
-          </div>
+          </div> */}
         </div>
         <div className="col-lg-9">
           <ListOrder />
-          <Status />
+          {((role === 3 || role === 1) && myOder?.status_envoice === 1) &&
+            <div style={{ margin: "24px 0" }}> <Button onClick={() => setShowModal(true)} variant="contained" >Chọn Thêm Sản Phẩm</Button></div>
+          }
+          {showModal && <UpdateProduct setShowModal={setShowModal} />}
+
+          <Status myOder={myOder} />
         </div>
       </div>
     </LayoutSite>

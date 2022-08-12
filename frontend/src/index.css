@@ -204,13 +204,20 @@ html {
   background-color: var(--primaryColor);
   border-color: var(--primaryColor);
 }
-#datetime-local,#datetime-local-label {
-  color:var(--warning-color);
-}
+
 #demo-multiple-checkbox,#datetime-local{
-  color:#fff;;
+  color:#000;;
   padding: 12px 10px 15px 10px;
 }
+.address #demo-multiple-checkbox{
+  color:#fff;
+  padding: 12px 10px 15px 10px;
+}
+.delivery #datetime-local{
+  color:#fff;
+  padding: 12px 10px 15px 10px;
+}
+
 #demo-multiple-checkbox-label{
   color:var(  --warning-color);
 }

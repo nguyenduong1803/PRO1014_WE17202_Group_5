@@ -179,7 +179,7 @@ const PostAction = ({ rowData, dataKey, setIsBlog, path, ...props }) => (
             >
                 Xem chi tiết
             </Link>
-            <button
+            {/* <button
                 className={`${styles.btnDelete}`}
                 onClick={() => setIsBlog(rowData[dataKey])}
                 role="button"
@@ -187,7 +187,7 @@ const PostAction = ({ rowData, dataKey, setIsBlog, path, ...props }) => (
                 data-target="#exampleModal"
             >
                 Xóa
-            </button>
+            </button> */}
         </div>
     </Table.Cell>
 );

@@ -19,7 +19,7 @@ const MenuProps = {
 };
 
 
-export default function SelectMuiltiMui({ label, listName, position, id, setOrder, order }) {
+export default function SelectMuiltiMui({ label, listName, id, setOrder, order }) {
     const indexTable = listName.find((name) => name.id === id)
     const [personName, setPersonName] = React.useState([`${order.tableId.length===1? indexTable.id : order.tableId}`]);
     const handleChange = (event) => {
@@ -39,7 +39,7 @@ export default function SelectMuiltiMui({ label, listName, position, id, setOrde
         })
     },[])
     return (
-        <div>
+        <div >
             <FormControl sx={{ width: '300px', maxWidth: "100%" }}>
                 <InputLabel id="demo-multiple-checkbox-label">{label}</InputLabel>
                 <Select
@@ -53,15 +53,12 @@ export default function SelectMuiltiMui({ label, listName, position, id, setOrde
                     renderValue={(selected) => selected.join(', ')}
                     MenuProps={MenuProps}
                 >
-                    <MenuItem value={`Chọn Toàn bộ khu: ${position}`}>
-                        <Checkbox checked={personName.indexOf(`Chọn Toàn bộ khu: ${position}`) > -1} />
-                        <ListItemText primary={`Chọn Toàn bộ khu: ${position}`} />
-                    </MenuItem>
+                  
                     {listName && listName.map((name) => 
                     (
                         <MenuItem key={name.id} value={`${name.id}`}>
                             <Checkbox checked={personName.indexOf(`${name.id}`) > -1} />
-                            <span>Bàn:{`${position}-`}</span>
+                            <span>Bàn:{`A-`}</span>
                             <ListItemText primary={`${name.id}`} />
                         </MenuItem>
                     ))}

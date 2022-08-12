@@ -1,41 +1,94 @@
 import React from "react";
 import styles from "./InformationUser.module.css";
 import { Avatar } from "@mui/material";
-import StepperEditor from "./StepperEditor";
-function InformationUser({ id, name, content, time, contacts }) {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [modalShow, setModalShow] = React.useState(false)
-  const [notifyOrder, setNotifyOrder] = React.useState({ type: "info", title: "Bàn đã có khách đặt " });
+import { useSelector } from "react-redux"
+import { selectRoleUser } from "../../../../redux/selector";
+import ModalForm from "./ModalForm";
+import Button from '@mui/material/Button';
+import ModalPayment from "./ModalPayment";
+import { formatMoney } from "../../../../extensions/formatMoney";
 
-  const handleShowOrder = () => {
-    setModalShow(1)
+function InformationUser({ orders }) {
+  const [open, setOpen] = React.useState(false);
+  const [openPay, setOpenPay] = React.useState(false);
+  const role = useSelector(selectRoleUser)
+  const handleOpen = () => {
+    setOrder(prev => {
+      return { ...prev, status: 1 }
+    })
+    setOpen(true);
   }
-  const handleClick = (e) => {
-    e.stopPropagation()
-  }
-  const handleClose = () => {
-    setModalShow(0)
-  }
+  const handleClose = () => setOpen(false);
+  const [order, setOrder] = React.useState({
+    tableId: [3, 4, 5],
+    name: orders?.user_name_book,
+    phone: orders?.phone,
+    celendar: orders?.time_book,
+    note: orders?.note,
+    status: orders?.status_envoice,
+    validateTime: ""
+  });
+  const [notify, setNotify] = React.useState({
+    name: "",
+    phone: "",
+    celendar: "",
+    countGuest: "",
+    validateTime: "",
+    note: "",
+  })
+  const handleClickOpen = () => {
+    setOpenPay(true);
+    setOrder(prev => {
+      return { ...prev, status: 2 }
+    })
+  };
+
   return (
     <div className={styles.member}>
       <div className={styles.info}>
         <div className={styles.wrapAvatar}><Avatar /></div>
         <p className={styles.contacts}>
-          Khách hàng : <span className={styles.customInfo}>{name}</span>
+          Khách hàng : <span className={styles.customInfo}>{order?.name || orders?.user_name_book}</span>
         </p>
         <p className={styles.contacts}>
-          Số điện thoại:  <span className={styles.customInfo}>{contacts}</span>
+          Số điện thoại:  <span className={styles.customInfo}>{order?.phone || orders?.phone}</span>
         </p>
         <p className={styles.contacts}>
-          Thời gian đặt: <span className={styles.customInfo}>{time}</span>
+          Thời gian đặt: <span className={styles.customInfo}>{order?.celendar || orders?.time_book}</span>
         </p>
       </div>
       <div>
-        <h4>Ghi chú: </h4>
-        <p className={styles.contacts}>{content}</p>
+        <h4 className={styles.contacts}>Ghi chú: </h4>
+        <span className={styles.contacts}>{order?.note || orders?.note}</span>
       </div>
-      <p onClick={()=>setModalShow(true)}>Sửa thông tin</p>
-      {modalShow && <StepperEditor setActiveStep={setActiveStep} activeStep={activeStep} setModalShow={setModalShow} id={1} setNotifyOrder={setNotifyOrder}/>}
+      <div>
+        <h3 className={styles.contacts}>Tổng thanh toán: </h3>
+        <p className={styles.customInfo}>{orders && formatMoney(orders?.total_price)} đ</p>
+      </div>
+      {
+        ((role === 3 || role === 1) && orders?.status_envoice === 1) && <div style={{ margin: "24px 0" }} className="d-flex justify-content-between align-items-center">
+          <Button onClick={handleOpen} variant="outlined">Sửa thông tin</Button>
+          <Button onClick={handleClickOpen} variant="outlined" color="success"  >Thanh toán</Button>
+
+        </div>
+      }
+      <ModalForm
+        setNotify={setNotify}
+        notify={notify}
+        handleClose={handleClose}
+        open={open}
+        setOrder={setOrder}
+        order={order}
+        id={orders?.id}
+      />
+      <ModalPayment
+        setOpenPay={setOpenPay}
+        openPay={openPay}
+        orders={orders}
+        order={order}
+        id={orders?.id}
+        setOrder={setOrder}
+      />
     </div>
   );
 }

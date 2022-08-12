@@ -14,7 +14,6 @@ function SelectMui({ list, name, setPageSize }) {
         dispatch(getProducts({limit:event.target.value}))
     };
     const handleClick = () => {
-        console.log("@")
     }
     return (
         <FormControl sx={{ m: 0, minWidth: 145 }} size="small">
