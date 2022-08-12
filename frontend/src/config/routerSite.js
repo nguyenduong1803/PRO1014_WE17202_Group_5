@@ -11,6 +11,8 @@ import Profile from '../pages/Site/ProfileUser/ProfileUser'
 import Checkpass from '../pages/Site/CheckPass/CheckPass';
 import CheckEmail from "../pages/Site/CheckEmail/CheckEmail";
 import CheckOut from "../pages/Site/CheckOuts/CheckOuts";
+import Pay from "../pages/Site/Pay/Pay";
+
 // import EditUser from '../../pages/Site/EditInformation/EditInformation';
 // import EditPassWord from '../../pages/Site/EditPassWord/EditPassWord'
 const PageNotFound = lazy(() => import("../pages/Site/PageNotFound/PageNotFound"));
@@ -30,6 +32,8 @@ const routerSite = [
     { path: "/dat-lai-mat-khau", component: Checkpass, },
     { path: "/gui-email", component: CheckEmail, },
     { path: "/dat-hang", component: CheckOut, },
+    { path: "/thong-bao-thanh-toan", component: Pay, },
+
     // { path: "/edit-user", component: EditUser , },
     // { path: "/edit-password", component: EditPassWord , },
     { path: "*", component: PageNotFound, },

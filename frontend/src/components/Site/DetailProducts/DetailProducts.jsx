@@ -3,10 +3,13 @@ import DetailProductsOne from "../DetailProducts/DetailProductsOne/DetailProduct
 import DetailProductsTwo from "../DetailProducts/DetailProductsTwo/DetailProductsTwo";
 import LayoutSite from "../LayoutSite/LayoutSite";
 function DetailProducts() {
+
   return (
     <LayoutSite>
       <div className="row">
-      <DetailProductsOne />
+      <DetailProductsOne
+    
+      />
       </div>
       <div className='row'>
       <DetailProductsTwo />

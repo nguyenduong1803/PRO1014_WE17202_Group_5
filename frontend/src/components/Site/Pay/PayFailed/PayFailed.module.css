@@ -1,0 +1,60 @@
+.boxx{
+    text-align: center;
+    padding:50px 200px;
+    height:100vh; 
+}
+
+.boxHeader{
+    margin: 0 auto;
+    width: 350px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 1px 2px 6px 2px;
+
+    padding:20px 30px;
+}
+.previous{
+    float: left;
+}
+.previous:hover{
+    color:red;
+}
+.logo img{
+    margin: 30px;
+    width: 80px;
+    height: 60px;
+}
+.icon{
+    width: 200px;
+    height: 200px;
+    color:red;
+}
+.button{
+    margin: 20px 0;
+}
+.button button{
+
+    background-color:red;
+    border-radius: 20px;
+    
+}
+.button button:hover{
+    background-color:red;
+    
+}
+.content{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.home{
+    margin: 0 auto;
+    width: 350px;
+    padding: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: 1px 2px 6px 2px;
+
+    background:linear-gradient(to right, #e08566, #c54620, #980c02);
+}
+.home button{
+    color:aliceblue;
+}

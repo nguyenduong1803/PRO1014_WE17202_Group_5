@@ -67,20 +67,24 @@ const detail = [
 // ]
 function DetailProductsTwo() {
   const [comments, setComments] = useState([]);
-  const handleChange = (event, newValue) => {
-    setComments(newValue);
+  const [content,setContent] = useState('');
+  const handleChange = (event) => {
+    setContent(event.target.value);
+    console.log(event.target.value)
   };
-
+  const handleSubmit = (event)=>{
+    event.preventDefault();
+    console.log(content)
+  }
   useEffect(() => {
     async function comment() {
       const res = await axios.get(api +'comments/getListByProduct?q=&sortCreateAt=desc&limit=10&page=1&id_product=4', {
         headers: { 'Authorization': `Bearer ${getToken()}` },
       });
       setComments(res.data.data);
-      // console.log(res.data.data)
     }
     comment();
-    console.log(comment());
+    // console.log(comment());
   }, []);
   return (
     <div>
@@ -89,18 +93,21 @@ function DetailProductsTwo() {
           <div className={styles.container}>
             <form action="" className={styles.action}>
               <div>
-                <textarea name="" id="" cols="50" rows="2" placeholder="Nhập nội dung bình luận" style={{padding:'20px',borderRadius:'20px',backgroundColor:'rgba(255,255,255,0.5)'}}></textarea>
+                <textarea name=""  onChange={(e) => handleChange(e)} id="" cols="50" rows="1" placeholder="Nhập nội dung bình luận" style={{padding:'20px',borderRadius:'20px',backgroundColor:'rgba(255,255,255,0.5)'}}></textarea>
               </div>
               <div>
-                <button type="submit" style={{padding:'10px',borderRadius:'20px',background:'#ff5722'}}>Thêm bình luận</button>
+              <Button variant="contained" type="submit" onClick={handleSubmit}  className={styles.button}>
+                  Thêm bình luận
+                </Button>
+                {/* <button type="submit" onClick={handleSubmit} style={{padding:'10px',borderRadius:'20px',background:'#ff5722'}}>Thêm bình luận</button> */}
               </div>
             </form>
             <br />
             <hr />
             <br />
            {
-            comments.map((comments,index)=>(
-              <div className={`${styles.comment} row`}>
+            comments?.map((comments,index)=>(
+              <div className={`${styles.comment} row`} key={comments.id} >
               <div className="col-lg-3" style={{textAlign: 'center'}}>
                 <div className={styles.img}>
                   <img src={products1} alt="" />
