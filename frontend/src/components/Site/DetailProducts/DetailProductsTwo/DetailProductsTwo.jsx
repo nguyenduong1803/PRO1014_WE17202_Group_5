@@ -69,11 +69,35 @@ const detail = [
 function DetailProductsTwo() {
   const [comments, setComments] = useState([]);
   const [content,setContent] = useState('');
+  const [isUpdate,setIsUpdate] = useState(false);
+  const [idComment,setIdComment] = useState(''); 
   const {idProduct} = useParams();
   const handleChange = (event) => {
     setContent(event.target.value);
     // console.log(event.target.value)
   };
+  const handleUpdate = async (comment) => {
+    console.log(comment)
+    setIsUpdate(true);
+    setContent(comment.description)
+    setIdComment(comment.id)
+  
+  }
+
+  async function updateComment() {
+    const params = {
+      "description": content
+  }
+    const res = await axios.put(api + `comments/update/${idComment}`, params,{
+      headers: { 'Authorization': `Bearer ${getToken()}` },
+    });
+    if(res?.data.status){
+      fecthListComment()
+      setContent('')
+    }else{
+      alert('Cap nhat that bai');
+    }
+  }
   const handleDelete = async (idComment) => {
     const res = await axios.delete(api + `comments/delete/${idComment}`, {
       headers: { 'Authorization': `Bearer ${getToken()}` },
@@ -86,8 +110,15 @@ function DetailProductsTwo() {
       alert('Xoa that bai');
     }
   }
-  const handleSubmit = async (event)=>{
+  const handleSubmit = (event)=>{
     event.preventDefault();
+    setIsUpdate(false);
+
+    isUpdate ? updateComment() : createComment()
+    
+  }
+
+  async function createComment() {
     const params = {
       "description":content,
       "id_product": idProduct
@@ -97,7 +128,8 @@ function DetailProductsTwo() {
     });
     // console.log(res);
     if(res?.data.status){
-      fecthListComment()
+      fecthListComment();
+      setContent('')
     }else{
       alert('Something');
     }
@@ -120,11 +152,11 @@ function DetailProductsTwo() {
           <div className={styles.container}>
             <form action="" className={styles.action}>
               <div>
-                <textarea name=""  onChange={(e) => handleChange(e)} id="" cols="50" rows="1" placeholder="Nhập nội dung bình luận" style={{padding:'20px',borderRadius:'20px',backgroundColor:'rgba(255,255,255,0.5)'}}></textarea>
+                <textarea name="" value={content}  onChange={(e) => handleChange(e)} id="" cols="50" rows="1" placeholder="Nhập nội dung bình luận" style={{padding:'20px',borderRadius:'20px',backgroundColor:'rgba(255,255,255,0.5)'}}></textarea>
               </div>
               <div>
               <Button variant="contained" type="submit" onClick={handleSubmit}  className={styles.button}>
-                  Thêm bình luận
+                  {isUpdate ? 'Sua' : 'Them'} binh luan
                 </Button>
                 {/* <button type="submit" onClick={handleSubmit} style={{padding:'10px',borderRadius:'20px',background:'#ff5722'}}>Thêm bình luận</button> */}
               </div>
@@ -133,28 +165,28 @@ function DetailProductsTwo() {
             <hr />
             <br />
            {
-            comments?.map((comments,index)=>(
-              <div className={`${styles.comment} row`} key={comments.id} >
+            comments?.map((comment,index)=>(
+              <div className={`${styles.comment} row`} key={comment.id} >
               <div className="col-lg-3" style={{textAlign: 'center'}}>
                 <div className={styles.img}>
                   <img src={products1} alt="" />
-                  <p className={styles.name}>{comments.create_at}</p>
+                  <p className={styles.name}>{comment.create_at}</p>
                 </div>
               </div>
               <div className="col-lg-9">
                 <div className={styles.header}>
                   <div className={styles.farouite}><BasicRating/></div>
-                  <div className={styles.days}>{comments.create_at}</div>
+                  <div className={styles.days}>{comment.create_at}</div>
                 </div>
                 <div className={styles.col10Content}>
                   <h5 className={styles.col9Title}>Đánh giá chất lượng sản phẩm</h5>
-                  <p className={styles.col9Content}>{comments.description}</p>
+                  <p className={styles.col9Content}>{comment.description}</p>
                 </div>
                 <div className={styles.footer}>
-                <Button variant="contained" className={styles.button}>
+                <Button variant="contained" className={styles.button} onClick={() => handleUpdate(comment)}>
                   Chinh sua
                 </Button>
-                <Button onClick={() => handleDelete(comments.id)} variant="contained" className={styles.button}>
+                <Button onClick={() => handleDelete(comment.id)} variant="contained" className={styles.button}>
                   Xoa
                 </Button>
                 </div>
