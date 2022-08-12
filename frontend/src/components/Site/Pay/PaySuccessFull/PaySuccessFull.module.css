@@ -20,6 +20,8 @@
     color:rgb(37, 157, 0);
 }
 .logo img{
+    margin-left: -2px !important;
+
     margin: 30px;
     width: 80px;
     height: 60px;
