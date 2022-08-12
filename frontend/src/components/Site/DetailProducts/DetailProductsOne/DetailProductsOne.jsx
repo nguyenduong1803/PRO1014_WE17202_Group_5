@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./DetailProductsOne.module.css";
 import products1 from "../../../../assets/img/seafood-1.jpg";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import { api } from "../../../../utils/api";
 import axios from "axios";
 import { getToken } from "../../../../utils/Common";
@@ -21,51 +21,39 @@ const listproductsDetail = [
     name: "Tôm Càng Xanh",
     content: "Lorem ipsum",
   },
-  
 ];
-function DetailProductsOne(id) {
-   const [DetailProducts, setDetails] = useState({});
+function DetailProductsOne() {
+  const id = window.location.pathname.split("/")[2];
+  const [DetailProducts, setDetails] = useState({
+    listsImg: [],
+  });
   useEffect(() => {
     async function Details() {
       const res = await axios.get(api + `product/detail/${id}`, {
-        headers: { "Authorization": `Bearer ${getToken()}` },
+        headers: { Authorization: `Bearer ${getToken()}` },
       });
-      setDetails(res.data.user);
+      setDetails(res.data.data);
+      // console.log(res.data.data)
     }
     Details();
   }, []);
   return (
-    <div className={styles.container} >
+    <div className={styles.container}>
       <h4 className={styles.title}>Product Details</h4>
       <div className={`${styles.row} row`}>
         <div className={`${styles.col5} col-lg-5`}>
-          <img
-            src="https://templates.iqonic.design/aprycot/html/dashboard/dist/assets/images/layouts/dish-detail/01.png"
-            alt=""
-          />
+          <img src={DetailProducts && DetailProducts?.listsImg[0]} alt="" />
         </div>
         <div className={`${styles.col5} col-lg-7`}>
           <div className="colums">
-            <h5 className={styles.titleContent}>Veg Burger(name)</h5>
-            <p className={styles.content}>
-              (full_description)
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu erat
-              adipiscing convallis libero elit et eros pellentesque. Sapien,
-              fringilla eget egestas eget. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Eu erat adipiscing convallis libero
-              elit et eros pellentesque. Sapien, fringilla eget egestas eget.
-            </p>
+            <h5 className={styles.titleContent}>{DetailProducts.name}</h5>
+            <p className={styles.content}>{DetailProducts.full_description}</p>
           </div>
           <div className="colums">
-            <h5 className={styles.titleContent}>Ingredients</h5>
+            <h5 className={styles.titleContent}>
+              {DetailProducts.short_description}
+            </h5>
             <div className="contentIng">
-              {/* <div className={styles.img}>
-            <img src="" alt="" />
-            </div>
-            <div className={styles.detail}>
-              <p>Name</p>
-              <p>Content</p>
-            </div> */}
               <div
                 style={{
                   width: "100%",
@@ -76,7 +64,11 @@ function DetailProductsOne(id) {
                 className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2 g-lg-3"
               >
                 {listproductsDetail.map((ele, index) => (
-                  <div key={index} style={{ width: "200px",display:'flex' }} className="col-lg-4">
+                  <div
+                    key={index}
+                    style={{ width: "200px", display: "flex" }}
+                    className="col-lg-4"
+                  >
                     <div className={styles.colImg}>
                       <img src={ele.img} alt="" />
                     </div>
@@ -92,11 +84,13 @@ function DetailProductsOne(id) {
                 ))}
               </div>
             </div>
-            <Button variant="contained"  className={styles.button}>
-        View Of Ingredients
-    </Button>
+              <Button variant="contained" className={styles.button}>
+                Thêm vào giỏ hàng
+              </Button>{" "}
+            {/* <Button variant="contained" className={styles.button}>
+              Đăt hàng
+            </Button> */}
           </div>
-          
         </div>
       </div>
     </div>

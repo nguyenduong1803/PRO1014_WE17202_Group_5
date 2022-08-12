@@ -61,7 +61,7 @@ export default function ProfileAvatar() {
               fontSize="small"
               style={{ width: "25px", height: "25px" }}
             />
-            My account
+           Trang quản trị
           </a>
         </li> */}
         <li>
