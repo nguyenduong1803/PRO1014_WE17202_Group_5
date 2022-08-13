@@ -61,6 +61,7 @@ const FormLogin = ({ self }) => {
        await dispatch(LoginAuth({ email: email, password: password.password }))
         if (getToken()) {
             history.push("/")
+            alert('Đăng Nhập Thành Công !!!');
         } else {
             e.preventDefault();
             console.log(success)

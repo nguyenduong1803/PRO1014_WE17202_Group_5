@@ -11,9 +11,9 @@ function Banner() {
         {/* <img src={banner} alt="" /> */}
       </div>
       <div className={styles.content}>
-        <p className={styles.deal}><SvgIcon className={styles.SvgIcon}/> Deal of the weekend</p>
-        <h3 className={styles.contents}>Welcome to seafood !!! </h3>
-        <p className={styles.note}>Wonderfully fresh</p>
+        <p className={styles.deal}><SvgIcon className={styles.SvgIcon}/>Ưu đãi cuối tuần</p>
+        <h3 className={styles.contents}>Chào mừng bạn đến với hải sản !!!</h3>
+        <p className={styles.note}>Tươi tuyệt vời</p>
        <Link to='/dat-ban'>
        <Button variant="contained" size="large" className={styles.button}>
           Đặt bàn ngay
