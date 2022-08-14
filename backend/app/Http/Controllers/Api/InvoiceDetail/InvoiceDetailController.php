@@ -7,6 +7,7 @@ use App\Http\Requests\InvoiceDetail\InvoiceDetailUpdate;
 use App\Models\InvoiceDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\InvoiceDetail\InvoiceDetailCreate;
 
 class InvoiceDetailController extends Controller
 {
@@ -81,5 +82,18 @@ class InvoiceDetailController extends Controller
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Không có dữ liệu!", "status" => false],404);
         $modelDetailInvoice -> deleteDetailInvoice($params2);
         return response() ->json(["msg" => "Xoá thành công!", "status" => true],200);
+    }
+    public function createDetailInvoice(InvoiceDetailCreate $request) {
+        $validate = $request -> validated();
+        $modelDetailInvoice = new InvoiceDetail();
+        $user = Auth::user();
+        $params = [
+            $validate['id_invoice'],
+            $validate['id_product'],
+            $validate['amount'],
+            $user['id'],
+        ];
+        $modelDetailInvoice -> create($params);
+        return response() ->json(["msg" => "Thêm mới chi tiết hoá đơn thành công!", "status" => true],200);
     }
 }
