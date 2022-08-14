@@ -19,16 +19,22 @@ class Invoices extends Model
     values (?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?)', $params);
     }
 
-    public function getInvoicesByUser($params) {
-        return DB::select("SELECT iv.*
-        , users.ten as 'name_user' 
-        FROM invoices as iv 
-        INNER JOIN users 
-        ON users.id = iv.id_user 
-        WHERE iv.id_user = ? 
-        AND iv.create_at >= ?
-        AND iv.is_delete = 1",
-        $params);
+    public function getInvoicesByUser($id_user, $currentDate, $request) {
+        $search = $request -> get('q');
+        $limitPage = $request -> get('limit') ? $request -> get('limit'): 10;
+        $statusInvoice = $request -> get('status_envoice');
+        $invoices = Invoices::query();
+        $data = $invoices
+            -> join('users', 'users.id', '=', 'invoices.id_user')
+            -> select('invoices.*','users.ten')
+            -> where('invoices.is_delete', '1')
+            -> where('invoices.create_at', '>=', $currentDate)
+            -> where('invoices.id_user', $id_user)
+            -> where('invoices.user_name_book', 'like', '%' . $search . '%')
+            -> where('users.is_delete', '1')
+            -> paginate($limitPage);
+        if($statusInvoice) $data = $invoices -> where('status_envoice', $statusInvoice);
+        return $data;
     }
     public function getInvoicesByAdmin($request) {
         $search = $request -> get('q');
@@ -37,7 +43,7 @@ class Invoices extends Model
         $invoices =  Invoices::query();
         $data = $invoices
             -> where('is_delete', '1')
-            -> where('id_invoice', 'like', '%' . $search . '%');
+            -> where('user_name_book', 'like', '%' . $search . '%');
         if($statusInvoice) $data = $invoices -> where('status_envoice', $statusInvoice);
         $data = $invoices -> paginate($limitPage);
         return $data;
