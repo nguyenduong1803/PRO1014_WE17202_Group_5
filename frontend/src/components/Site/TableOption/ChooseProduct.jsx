@@ -13,6 +13,7 @@ import LoadingSearch from '../Loading/LoadingSearch';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import PaginationMui from '../../Admin/PaginationMui/PaginationMui';
 
 function ChooseProduct({ className }) {
     const [keySearch, setKeySearch] = React.useState("");
@@ -78,6 +79,7 @@ function ChooseProduct({ className }) {
                     }) : <h2 className={styles.emptyTitle}>Không tìm thấy sản phẩm nào</h2>
                 }
             </div>
+                <div className="d-flex justify-content-end m-3"><PaginationMui /></div>
         </div>
     )
 }

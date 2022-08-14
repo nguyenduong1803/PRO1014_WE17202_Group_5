@@ -1,10 +1,8 @@
 import React, { useContext } from 'react'
-import SelectMui from "../../Admin/SelectMui/SelectMui"
 import MenuContentOptions from './MenuContentOptions/MenuContentOpTions';
 import LayoutSite from '../LayoutSite/LayoutSite';
-import product1 from '../../../assets/img/seafood-1.jpg';
-import { useSelector } from 'react-redux';
-import {   selectLoadingProduct, selectProducts } from '../../../redux/selector';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectLoadingProduct, selectProducts } from '../../../redux/selector';
 import Product from '../Product/Product';
 import { AuthContext } from '../../../contexts/AuthenContext';
 import StepperMui from '../TableOption/StepperMui';
@@ -12,23 +10,24 @@ import { ModalLogin } from '../TableOption/OrderItem';
 import { getToken } from '../../../utils/Common';
 import LoadingProduct from '../Loading/LoadingProduct';
 import ChooseProduct from '../TableOption/ChooseProduct';
-
+import PaginationMui from "../../../components/Admin/PaginationMui/PaginationMui"
+import { getProducts } from '../../../redux/SliceReducer/ManagerProductSlice';
 
 function MenuContent() {
   const listProduct = useSelector(selectProducts)
   const loadingProduct = useSelector(selectLoadingProduct)
 
-  const category = [
-    { name: "category" },
-    { name: "category" },
-    { name: "category" },
-  ]
+
   const [modalShow, setModalShow] = React.useState(false)
   const infoUser = useContext(AuthContext)
+  const dispatch = useDispatch()
   const handleClick = (e) => {
     e.stopPropagation()
   }
+  const handleChange = (e) => {
+    dispatch(getProducts({ sort:e.target.value}))
 
+  }
   return (
     <LayoutSite>
       {/* <ButtonCart /> */}
@@ -51,10 +50,11 @@ function MenuContent() {
           <div className='col-lg-9'>
             <div className="d-flex justify-content-between align-items-center pb-2 mb-2" style={{ borderBottom: "2px solid #fff" }}>
               <p>Có {listProduct && listProduct.length} sản phẩm</p>
-              <SelectMui
-                name="Lọc sản phẩm"
-                list={category}
-              />
+              <select onChange={e => handleChange(e)} className="form-select" style={{ width: "150px" }} aria-label="Default select example">
+                <option selected>Sắp xếp</option>
+                <option value="desc">Mới nhất</option>
+                <option value="asc">Cũ nhất</option>
+              </select>
             </div>
             {loadingProduct === "loading" ? <LoadingProduct /> : <div className="row" style={{ transition: "0.3s" }}>
               {
@@ -71,6 +71,7 @@ function MenuContent() {
                 })
               }
             </div>}
+            <div className="d-flex justify-content-end mt-4"><PaginationMui /></div>
           </div>
         </div>
       </div>

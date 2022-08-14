@@ -15,6 +15,7 @@ function MenuContentOpTions() {
   const [value, setValue] = React.useState([0, 500000]);
   const [keySearch, setKeySearch] = React.useState("");
   const debounceSearch = useDebounce(keySearch, 500)
+  const debounceRange = useDebounce(value, 500)
   const dispatch = useDispatch()
   const handleActiveCate = (idCate) => {
     setActiveCate(idCate)
@@ -33,8 +34,9 @@ function MenuContentOpTions() {
     setKeySearch(e.target.value);
   }
   React.useEffect(() => {
-    dispatch(getProducts({ keySearch: debounceSearch, limit: 30,category:activeCate }))
-  }, [debounceSearch])
+    dispatch(getProducts({ keySearch: debounceSearch, limit: 30,category:activeCate,from:debounceRange[0],to:debounceRange[1] }))
+    console.log(debounceRange)
+  }, [debounceSearch,debounceRange])
   return (
     <div className={styles.Menu}>
       <div style={{ display: 'flex', width: '100%' }} className="position-relative">
@@ -120,9 +122,9 @@ function MenuContentOpTions() {
               <Slider
                 onChange={handleChange}
                 getAriaLabel={() => "Price range"}
-                min={0}
+                min={1}
                 step={1000}
-                max={600000}
+                max={2000000}
                 value={value}
                 valueLabelDisplay="auto"
                 color="secondary"
@@ -133,47 +135,6 @@ function MenuContentOpTions() {
           <div className="accordion-body" style={{ padding: "0" }}></div>
         </div>
       </div>
-
-      {/* <div
-        style={{ borderRadius: "20px", marginTop: "30px" }}
-        className={styles.optionss}
-      >
-        <div className={styles.accordionItem}>
-          <h2
-            id="flush-headingOne"
-            className={styles.accordionButton}
-          >
-            <div className={styles.accordTitle}>
-              <div className={styles.accordTitleH4}>
-                <h4>Tags</h4>
-              </div>
-
-            </div>
-          </h2>
-          <div className={styles.line}></div> <br />
-          <div className={styles.sliderPrice} style={{ color: 'white !important' }}>
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  // value={ac}
-                  label="Age"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </div>
-          <div className="accordion-body" style={{ padding: "0" }}></div>
-        </div>
-      </div> */}
-
-
     </div>
   );
 }

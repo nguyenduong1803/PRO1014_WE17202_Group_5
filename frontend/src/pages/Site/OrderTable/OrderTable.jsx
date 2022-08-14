@@ -50,7 +50,7 @@ function OrderTable() {
         <div>
             <LayoutSite>
                 <div className="container-fluid">
-                    <CategoryTable />
+                    <CategoryTable active="AlaCarte"/>
                     <h2 className={styles.alacart_title}>Sảnh tầng 1 AlaCarte</h2>
                     <div className={styles.wrapSquare}>
                         <div className={styles.square_green}></div>
