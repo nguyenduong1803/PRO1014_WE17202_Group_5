@@ -29,7 +29,7 @@ class ProductUpdate extends FormRequest
             'name' => 'nullable|max:255|string',
             'short_description' => 'nullable|max:255|string',
             'id_directory' => 'nullable|integer',
-            'price' => 'nullable|max:50|float',
+            'price' => 'nullable|max:50|string',
             'id_code_sale' => 'nullable|integer',
             'is_status_product' => 'nullable|integer',
             'id_cart' => 'nullable|integer',
