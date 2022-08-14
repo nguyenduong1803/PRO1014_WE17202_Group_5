@@ -14,7 +14,7 @@ class StatisticalController extends Controller
         $statisticalModel = new Statistical();
         $dayNow = Carbon::now('Asia/Ho_Chi_Minh') ->toDateString();
         $filterDate = $request -> get('filterDate');
-        $subDays = $filterDate ? Carbon::now('Asia/Ho_Chi_Minh') -> subdays($filterDate) ->toDateString() : $dayNow;
+        $subDays = isset($filterDate) ? Carbon::now('Asia/Ho_Chi_Minh') -> subdays($filterDate) ->toDateString() : $dayNow;
         $params = [
             $subDays,
             $dayNow
