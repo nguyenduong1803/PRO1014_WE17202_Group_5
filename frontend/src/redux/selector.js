@@ -23,7 +23,12 @@ export const selectLoadingProduct = (state) => state.ManagerProduct.status
 export const selectSearchText = (state) => state.ManagerProduct.searchText
 export const selectProductDetail = (state) => state.ManagerProduct.detailProduct
 // tables
-export const selectListTable = (state) => state.OrderTableSlice.tables
+export const selectListTable = (state) => {
+    return state.OrderTableSlice.tables.filter((table) => Number(table.floor) === 2)
+}
+export const selectVipRoom = (state) => {
+    return state.OrderTableSlice.tables.filter((table) => Number(table.floor) === 3)
+}
 export const selectTable = (state) => state.OrderTableSlice.tableById
 export const selectOrderTable = (state) => state.OrderTableSlice.orderTable
 export const selectTableActive = (state) => {

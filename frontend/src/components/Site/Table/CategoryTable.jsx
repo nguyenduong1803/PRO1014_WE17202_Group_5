@@ -5,44 +5,45 @@ import room from "../../../assets/svg/room-service-svgrepo-com (2).svg"
 import alacarteroom from "../../../assets/svg/room-service-svgrepo-com.svg"
 import ship from "../../../assets/svg/delivery-truck-svgrepo-com.svg"
 import { Link } from 'react-router-dom'
+const listCategory = [
+    {
+        path: "/dat-ban",
+        name: "AlaCarte",
+        img: room
+    },
+    {
+        path: "/dat-tiec",
+        name: "Đặt tiệc",
+        img: alacarteroom
+    },
+    {
+        path: "/dat-phong-vip",
+        name: "Phòng VIP",
+        img: viproom
+    },
+    {
+        path: "/menu",
+        name: "Đặt ship",
+        img: ship
+    },
+]
+function CategoryTable({ active }) {
 
-function CategoryTable() {
     return (
         <div className="categories">
             <ul className="category-list">
-
-                <li className="category-list__item" id="all">
-                    <Link to="/dat-ban">
-                        <div className="category-icon">
-                            <img src={room} alt="" />
-                        </div>
-                        <h4 className="category-name">Ala carte</h4>
-                    </Link>
-                </li>
-                <li className="category-list__item" id="alacarte">
-                    <Link to="/dat-tiec">
-                        <div className="category-icon">
-                            <img src={alacarteroom} alt="" />
-                        </div>
-                        <h4 className="category-name">Đặt tiệc</h4>
-                    </Link>
-                </li>
-                <li className="category-list__item" id="vip">
-                    <Link to="/dat-phong-vip">
-                        <div className="category-icon">
-                            <img src={viproom} alt="" />
-                        </div>
-                        <h4 className="category-name">Phòng Vip</h4>
-                    </Link>
-                </li>
-                <li className="category-list__item" id="ship">
-                    <a href="#ship">
-                        <div className="category-icon">
-                            <img src={ship} alt="" />
-                        </div>
-                        <h4 className="category-name">Đặt ship </h4>
-                    </a>
-                </li>
+                {
+                    listCategory.map(cate => (
+                        <li key={cate.name} className={`${active===cate.name && "active"} category-list__item`} id="all">
+                            <Link to={cate.path}>
+                                <div className="category-icon">
+                                    <img src={cate.img} alt="" />
+                                </div>
+                                <h4 className="category-name">{cate.name}</h4>
+                            </Link>
+                        </li>
+                    ))
+                }
 
             </ul>
         </div>

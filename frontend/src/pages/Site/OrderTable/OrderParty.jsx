@@ -22,7 +22,7 @@ function OrderParty() {
     return (
         <LayoutSite>
             <div className={styles.wrapParty}>
-                <CategoryTable />
+                <CategoryTable active="Đặt tiệc"/>
                 <div>
                     <div className={styles.wrapParty_content}>
                         <p onClick={handleShowOrder} className={styles.btn}>Đặt Tiệc</p>

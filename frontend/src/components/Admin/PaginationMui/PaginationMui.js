@@ -11,7 +11,7 @@ export default function PaginationMui() {
     }
   return (
     <Stack spacing={2} >
-      <Pagination count={10} color="primary" onChange={e=>handerChange(e)} />
+      <Pagination count={3} color="primary" onChange={e=>handerChange(e)} />
     </Stack>
   );
 }
