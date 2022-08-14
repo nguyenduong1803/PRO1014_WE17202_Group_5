@@ -75,7 +75,7 @@ export const getProducts = createAsyncThunk("product/getProducts", async (payloa
             }
         })
         .then(response => {
-            payloads = { data: response.data.data, status: "success" }
+            payloads = { data: response.data, status: "success" }
         }).catch(function (err) {
             console.log(err)
             payloads = { data: "", status: err.response.status }

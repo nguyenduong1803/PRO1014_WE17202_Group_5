@@ -9,7 +9,6 @@ import { Chart as ChartJS } from "chart.js/auto";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 
 function Dashboard() {
-    const name = getName()
 
 
   
@@ -46,7 +45,7 @@ function Dashboard() {
                     <div className={`${styles.greeting}`}>
                         <div>
                             <h2 style={{ color: `#1A358F`, fontSize: `38px` }}>Xin chào !</h2>
-                            <p>Chào mừng {name} đến với trang Admin</p>
+                            <p>Chào mừng {} đến với trang Admin</p>
                         </div>
                         <div>
                             <div className={`${styles.addBtn}`} >
@@ -71,7 +70,7 @@ function Dashboard() {
                     <div className={`${styles.chartSection}`} >
 
                         <Bar
-                            // data={state}
+                            data={stateDoughnut}
                         />
                     </div>
                 </div>

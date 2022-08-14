@@ -13,7 +13,7 @@ function OrderDetail() {
   const orders = useSelector(selectOrder)
   const role = useSelector(selectRoleUser)
   const orderId = window.location.pathname.split("/")[2]
-  const myOder = orders.find(ele => ele.id_invoice === orderId)
+  const myOder = orders.data.find(ele => ele.id_invoice === orderId)
   return (
     <LayoutSite>
       <div className="row">

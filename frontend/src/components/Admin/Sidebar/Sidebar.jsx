@@ -15,6 +15,8 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import CategoryIcon from '@mui/icons-material/Category';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import { selectUser } from "../../../redux/selector";
+import { useSelector } from "react-redux";
 const listManagement = [
 
   {
@@ -66,6 +68,7 @@ const SidebarItem = function ({ Icon, name, path, setShowNoti }) {
 function Sidebar() {
   let a = useLocation()
   const [showNoti, setShowNoti] = useState(false);
+  const nameAdmin = useSelector(selectUser)
 
   useEffect(() => {
 
@@ -195,9 +198,9 @@ function Sidebar() {
         </div>
         <div className={`${styles.accountContent}`}>
           <>
-            <p className={`${styles.accountName}`}>Name</p>
+            <p className={`${styles.accountName}`}>Admin</p>
             <div className={`${styles.accountBtn}`}>
-              <Link to="/admin/dang-nhap">Đăng nhập</Link>
+            {nameAdmin?.ten}
             </div>
           </>
         </div>

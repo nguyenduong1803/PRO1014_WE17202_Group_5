@@ -19,7 +19,7 @@ function Tablecustom({ tables, data, setIdProduct, path }) {
                         (<Table
                             data={data}
                             rowHeight={55}
-                            height={data.length > 9 ? (550 * data.length) / 10 : 600}
+                            height={data?.length > 9 ? (550 * data?.length) / 10 : 600}
 
                         // affixHorizontalScrollbar
                         >

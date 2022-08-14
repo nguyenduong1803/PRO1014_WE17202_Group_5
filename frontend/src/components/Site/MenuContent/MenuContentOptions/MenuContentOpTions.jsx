@@ -20,9 +20,7 @@ function MenuContentOpTions() {
   const handleActiveCate = (idCate) => {
     setActiveCate(idCate)
     dispatch(getProducts({ keySearch: debounceSearch, limit: 30,category:idCate}))
-
   }
-  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -35,7 +33,6 @@ function MenuContentOpTions() {
   }
   React.useEffect(() => {
     dispatch(getProducts({ keySearch: debounceSearch, limit: 30,category:activeCate,from:debounceRange[0],to:debounceRange[1] }))
-    console.log(debounceRange)
   }, [debounceSearch,debounceRange])
   return (
     <div className={styles.Menu}>

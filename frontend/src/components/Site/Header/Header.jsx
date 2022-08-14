@@ -10,9 +10,11 @@ import LoginIcon from '@mui/icons-material/Login';
 import { Link } from 'react-router-dom'
 import logo from "../../../assets/img/logoSea.png"
 import Cart from './Cart/Cart';
+import { selectRoleUser } from '../../../redux/selector'
+import { useSelector } from 'react-redux'
 function Header() {
     const infoUser = useContext(AuthContext)
-    
+    const role = useSelector(selectRoleUser)
     return (
         <div className="container-fluid">
             <header className={`${styles.header} `} >
@@ -40,6 +42,13 @@ function Header() {
                                         <ProfileAvatar className={styles.avt} />
                                         <div>
                                             <h4 className={styles.name}>{infoUser?.ten}</h4>
+                                            {
+                                                role === 1 ?
+                                                    <Link to="admin/dashboard" className={styles.possition}>Trang quản trị</Link>
+                                                    : role === 3 ?
+                                                        <p className={styles.possition}>Nhân viên order</p>
+                                                        : ""
+                                            }
                                             {/* <p className={styles.possition}>Nhân viên order</p> */}
                                         </div>
                                     </div>
@@ -53,7 +62,7 @@ function Header() {
                     </div>
                 </div>
             </header >
-        </div>
+        </div >
     )
 }
 

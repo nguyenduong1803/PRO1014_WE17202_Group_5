@@ -134,12 +134,13 @@
 }
 .accountBtn {
     border: 1px solid#1A358F;
-    width: 91px;
+    min-width: 91px;
     height: 24px;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 6px;
 }
 .accountBtn * {
     font-size: 10px;

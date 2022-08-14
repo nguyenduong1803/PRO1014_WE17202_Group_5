@@ -17,13 +17,10 @@ function AuthenProvider({ children }) {
         if (getToken()) {
             dispatch(getUserAuth(getToken()))
             dispatch(getListCart())
-           
         }
         dispatch(getListTable())
         dispatch(getProducts())
         dispatch(getCategory())
-
-
 
     }, [])
     return (

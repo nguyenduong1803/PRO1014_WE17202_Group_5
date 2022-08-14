@@ -18,7 +18,8 @@ export const selectLoading = (state) => state.AuthSlice.status
 export const selectLoadingRegister = (state) => state.AccountSlice.status
 export const selectIsuccess = (state) => state.AccountSlice.mess
 // product
-export const selectProducts = (state) => state.ManagerProduct.products
+export const selectProducts = (state) => state.ManagerProduct.products.data
+export const selectProductsPage = (state) => state.ManagerProduct.products.last_page
 export const selectLoadingProduct = (state) => state.ManagerProduct.status
 export const selectSearchText = (state) => state.ManagerProduct.searchText
 export const selectProductDetail = (state) => state.ManagerProduct.detailProduct
@@ -40,6 +41,7 @@ export const selectCart = (state) => state.OrderTableSlice.cart
 
 // order
 export const selectOrder = (state) => state.OrderTableSlice.listOrder
+export const selectOrderPage = (state) => state.OrderTableSlice.listOrder.last_page
 export const selectOrderDetail = (state) => state.OrderTableSlice.detailOrder
 export const selectProductOrder = (state) => state.OrderTableSlice.order
 export const selectStatusOrder = (state) => state.OrderTableSlice.statusOrder
