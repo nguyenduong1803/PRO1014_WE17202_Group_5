@@ -28,7 +28,7 @@ class CheckoutController extends Controller
         $vnp_TxnRef = mt_rand(100000,999999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toan don hang";
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = $detailInvoice['total_price'];
+        $vnp_Amount = (float) $detailInvoice['total_price'] * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];

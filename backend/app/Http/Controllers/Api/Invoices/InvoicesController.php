@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Models\Product;
 
 
 class InvoicesController extends Controller
@@ -103,6 +104,18 @@ class InvoicesController extends Controller
                 ];
             $listDetailInvoice = $modelDetailInvoice -> getListDetailInvoice($params2);
             $data[$i] -> listDetailInvoice = $listDetailInvoice;
+            $totalPrice = 0;
+            for($j = 0; $j < count($listDetailInvoice); $j++) {
+                $timeUpdateAt = date("Y-m-d H:i:s",time());
+                $detail = $modelProduct ->detailProduct($listDetailInvoice[$j] -> id_product);
+                $totalPrice += (float) $detail['price'] * $listDetailInvoice[$j] -> amount;
+            }
+            $params4 = [
+                $totalPrice,
+                $timeUpdateAt,
+                $data[$i] -> id
+            ];
+            $modelInvoices -> updatePrice($params4);
         }
         for($i =0;$i < count($data); $i++) {
             $params3 = [
@@ -115,6 +128,7 @@ class InvoicesController extends Controller
     }
     public function getInvoicesByAdmin(Request $request) {
         $user = Auth::user();
+        $modelProduct = new Product();
         $modelDetailInvoice = new InvoiceDetail();
         $modelInvoices = new Invoices();
         $modelDetailTableInvoice = new DetailTableInvoice();
@@ -128,6 +142,18 @@ class InvoicesController extends Controller
                 ];
             $listDetailInvoice = $modelDetailInvoice -> getListDetailInvoice($params2);
             $data[$i] -> listDetailInvoice = $listDetailInvoice;
+            $totalPrice = 0;
+            for($j = 0; $j < count($listDetailInvoice); $j++) {
+                $timeUpdateAt = date("Y-m-d H:i:s",time());
+                $detail = $modelProduct ->detailProduct($listDetailInvoice[$j] -> id_product);
+                $totalPrice += (float) $detail['price'] * $listDetailInvoice[$j] -> amount;
+            }
+            $params4 = [
+                $totalPrice,
+                $timeUpdateAt,
+                $data[$i] -> id
+            ];
+            $modelInvoices -> updatePrice($params4);
         }
         for($i =0;$i < count($data); $i++) {
             $params3 = [

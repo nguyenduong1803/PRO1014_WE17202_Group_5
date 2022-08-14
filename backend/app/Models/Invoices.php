@@ -67,4 +67,9 @@ class Invoices extends Model
         `update_at` = ?
         WHERE `id` = ?", $params);
     }
+    public function updatePrice($params) {
+        DB::update("UPDATE invoices SET `total_price` = ?,
+        `update_at` = ?
+        WHERE `id` = ?", $params);
+    }
 }
