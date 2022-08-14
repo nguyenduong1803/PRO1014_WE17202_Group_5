@@ -14,4 +14,8 @@ class PaymentVnPay extends Model
     (amount, bank_code, card_type, bank_tran_no, order_info, paydate, tmn_code, id_user, transaction_no, txn_ref, transaction_status, id_invoices)
     values (?, ? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?)', $params);
     }
+
+    public function checkStatusPayment($params) {
+        return DB::select('SELECT * FROM payment_vnpay WHERE id_invoices = ? AND txn_ref = ?', $params);
+    }
 }

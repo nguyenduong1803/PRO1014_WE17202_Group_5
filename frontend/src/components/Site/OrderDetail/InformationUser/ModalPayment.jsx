@@ -9,19 +9,44 @@ import ToastMess from '../../ToastMess/ToastMess';
 import { formatMoney } from '../../../../extensions/formatMoney';
 import { useDispatch } from 'react-redux';
 import { updateOrder } from '../../../../redux/SliceReducer/OrderTableSlice';
+import { api } from '../../../../utils/api';
+import { getToken } from '../../../../utils/Common';
+import axios from 'axios';
 
 export default function ModalPayment({ setOpenPay, openPay, orders, id, order }) {
-  const [state, setState] = React.useState(false)
-  const dispatch = useDispatch()
+  const [state, setState] = React.useState(false);
+  const [messToast, setMessToast] = React.useState('');
   const handleClose = () => {
     setOpenPay(false);
   };
   const handlePayment = () => {
-    dispatch(updateOrder({ id, order }))
+    checkoutPaymentVnPay();
+    localStorage.setItem('id_invoices', id)
+    localStorage.setItem('order', JSON.stringify(order));
     setOpenPay(false);
-    setState(true)
+  
 
   };
+  async function checkoutPaymentVnPay() {
+    const params = {
+      "id_invoices": id
+  }
+    const res = await axios.post(api + `checkout/vnpay`, params,{
+      headers: { 'Authorization': `Bearer ${getToken()}` },
+    });
+    console.log(res)
+    if(res?.data?.code === '00'){
+      setState(true)
+      setMessToast('Bạn vui lòng chờ chuyển trang để thanh toán!');
+
+      setTimeout(() => {
+        window.open(res?.data?.data);
+      }, 1500);
+    }else{
+      setMessToast('Đã xảy ra lỗi vui lòng thử lại!')
+    }
+    setState(true)
+  }
   return (
     <div>
       <Dialog
@@ -44,7 +69,7 @@ export default function ModalPayment({ setOpenPay, openPay, orders, id, order })
         </DialogActions>
       </Dialog>
       <ToastMess
-        notify="Đã Thanh toán thành công"
+        notify={messToast}
         setState={setState}
         state={state}
       />

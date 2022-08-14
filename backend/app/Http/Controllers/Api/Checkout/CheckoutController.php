@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Auth;
 class CheckoutController extends Controller
 {
     //
+    private $idInvoices = NULL;
     public function paymentVnPay(CheckoutVnPay $request) {
         $validate = $request -> validated();
         $modelInvoices = new Invoices();
         $detailInvoice = $modelInvoices ->getDetailInvoice($validate['id_invoices']);
         if(!isset($detailInvoice)) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
-        session()->put('id_invoices', $detailInvoice['id']);
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:3000/dat-hang";
+        $vnp_Returnurl = "http://localhost:3000/thong-bao-thanh-toan";
         $vnp_TmnCode = "H5WFAIQG";//Mã website tại VNPAY 
         $vnp_HashSecret = "DFWZZBYGMARFEGHSZPXMBFFRJBEJREEK"; //Chuỗi bí mật
         
@@ -32,7 +32,7 @@ class CheckoutController extends Controller
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-        $vnp_ExpireDate = "20220801153333";
+        $vnp_ExpireDate = "20220816153333";
         //Add Params of 2.0.1 Version
         //Billing
         $inputData = array(
@@ -95,7 +95,9 @@ class CheckoutController extends Controller
         $validate = $request -> validated();
         $modelInvoices = new Invoices();
         $user = Auth::user();
-        $idInvoices = session()->get('id_invoices');
+        $orderDate = date("Y-m-d",time());
+        $updateAt = date("Y-m-d H:i:s",time());
+        $statusInvoice = 1;
         $params = [
             $validate['vnp_Amount'],
             $validate['vnp_BankCode'],
@@ -108,15 +110,23 @@ class CheckoutController extends Controller
             $validate['vnp_TransactionNo'],
             $validate['vnp_TransactionStatus'],
             $validate['vnp_TxnRef'],
-            $idInvoices
+            $validate['id_invoices']
         ];
+        if($validate['vnp_TransactionStatus'] == '00') $statusInvoice = 2;
         $params2 = [
-            2,
-            $timeStamp = date("Y-m-d H:i:s",time()),
-            $idInvoices
+            $statusInvoice,
+            $orderDate,
+            $updateAt,
+            $validate['id_invoices']
         ];
+        $params3 = [
+            $validate['id_invoices'],
+            "00"
+        ];
+        $dataCheck = $modelPaymentVNpay -> checkStatusPayment($params3);
+        if(isset($dataCheck) || count($dataCheck) > 1) return response() ->json(["msg" => "Hoá đơn này đã thanh toán, vui lòng thử lại sau!", "status" => false],410);
         $modelPaymentVNpay -> create($params);
-        $modelInvoices -> updateStatusInvoice($params2);
+        $modelInvoices -> updateStatusOrderDateInvoice($params2);
         return response() ->json(["msg" => "Lưu thông tin thanh toán hoá đơn thành công!", "status" => true],200);
     }
 }
