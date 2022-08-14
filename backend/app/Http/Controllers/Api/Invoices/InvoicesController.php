@@ -113,11 +113,11 @@ class InvoicesController extends Controller
         }
         return response() ->json(["data" => $data, "status" => true],200);
     }
-    public function getInvoicesByAdmin() {
+    public function getInvoicesByAdmin(Request $request) {
         $modelInvoices = new Invoices();
-        $data = $modelInvoices -> getInvoicesByAdmin();
+        $data = $modelInvoices -> getInvoicesByAdmin($request);
         if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
-        return response() ->json(["data" => $data, "status" => true],200);
+        return $data;
     }
 
     public function updateInvoice(InvoiceUpdate $request,$id) {

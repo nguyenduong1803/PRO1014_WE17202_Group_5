@@ -30,8 +30,17 @@ class Invoices extends Model
         AND iv.is_delete = 1",
         $params);
     }
-    public function getInvoicesByAdmin() {
-        return DB::select("SELECT * FROM invoices as iv WHERE iv.is_delete = 1");
+    public function getInvoicesByAdmin($request) {
+        $search = $request -> get('q');
+        $limitPage = $request -> get('limit') ? $request -> get('limit'): 10;
+        $statusInvoice = $request -> get('status_envoice');
+        $invoices =  Invoices::query();
+        $data = $invoices
+            -> where('is_delete', '1')
+            -> where('id_invoice', 'like', '%' . $search . '%');
+        if($statusInvoice) $data = $invoices -> where('status_envoice', $statusInvoice);
+        $data = $invoices -> paginate($limitPage);
+        return $data;
     }
 
     public function getDetailInvoice($id) {
