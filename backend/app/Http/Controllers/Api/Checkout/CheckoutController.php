@@ -124,7 +124,7 @@ class CheckoutController extends Controller
             "00"
         ];
         $dataCheck = $modelPaymentVNpay -> checkStatusPayment($params3);
-        if(isset($dataCheck) || count($dataCheck) > 1) return response() ->json(["msg" => "Hoá đơn này đã thanh toán, vui lòng thử lại sau!", "status" => false],410);
+        if(count($dataCheck) > 1) return response() ->json(["msg" => "Hoá đơn này đã thanh toán, vui lòng thử lại sau!", "status" => false],410);
         $modelPaymentVNpay -> create($params);
         $modelInvoices -> updateStatusOrderDateInvoice($params2);
         return response() ->json(["msg" => "Lưu thông tin thanh toán hoá đơn thành công!", "status" => true],200);

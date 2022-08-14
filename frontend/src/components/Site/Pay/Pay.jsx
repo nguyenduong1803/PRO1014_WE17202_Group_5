@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PaySucces from "./PaySuccessFull/PaySuccessFull";
 import PayFail from "./PayFailed/PayFailed";
 import { useQuery } from "../../../hooks/useQuery";
@@ -10,6 +10,7 @@ import { updateOrder } from "../../../redux/SliceReducer/OrderTableSlice";
 
 function Pay() {
   const query = useQuery();
+  const [statusPayment, setStatusPayment] = useState(true);
 
   const vnpResponseCode = query.get("vnp_ResponseCode");
   const vnp_Amount = query.get("vnp_Amount");
@@ -45,14 +46,20 @@ function Pay() {
       };
 
       if (vnpResponseCode === "00") {
-        await axios.post(api + `checkout/saveInfoPaymentVNPay`, params, {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        });
-        dispatch(updateOrder(params2));
+        try {
+          await axios.post(api + `checkout/saveInfoPaymentVNPay`, params, {
+            headers: { Authorization: `Bearer ${getToken()}` },
+          });
+          dispatch(updateOrder(params2));
+        } catch (error) {
+          setStatusPayment(false);
+        }
       }
     })();
   }, []);
-  return <div>{vnpResponseCode === "00" ? <PaySucces /> : <PayFail />}</div>;
+  console.log(statusPayment)
+  if(!statusPayment) return <PayFail />;
+  return <div>{vnpResponseCode === "00"? <PaySucces /> : <PayFail />}</div>;
 }
 
 export default Pay;

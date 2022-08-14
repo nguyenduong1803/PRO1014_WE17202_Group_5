@@ -110,7 +110,7 @@ class ProductController extends Controller
         $updateName = isset($validate['name']) ? $validate['name'] : $detailProduct['name'];
         $updateShortDes = isset($validate['short_description']) ? $validate['short_description'] : $detailProduct['short_description'];
         $updateIdDirectory = isset($validate['id_directory']) ? $validate['id_directory'] : $detailProduct['id_directory'];
-        $updatePrice = isset($validate['price']) ? $validate['price'] : $detailProduct['price'];
+        $updatePrice = isset($validate['price']) ? (float) $validate['price'] : $detailProduct['price'];
         $updateIdCodeSale = isset($validate['id_code_sale']) ? $validate['id_code_sale'] : $detailProduct['id_code_sale'];
         $updateIsStatusProduct = isset($validate['is_status_product']) ? $validate['is_status_product'] : $detailProduct['is_status_product'];
         $updateIdCart = isset($validate['id_cart']) ? $validate['id_cart'] : $detailProduct['id_cart'];

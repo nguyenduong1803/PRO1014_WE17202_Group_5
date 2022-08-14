@@ -22,4 +22,8 @@ class StatisticalController extends Controller
         $data = $statisticalModel -> statisticalByInvoices($params);
         return response() ->json(["data" => $data, "status" => true],200);
     }
+    public function statisticalByRevenue(Request $request) {
+        $statisticalModel = new Statistical();
+        
+    }
 }
