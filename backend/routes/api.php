@@ -96,6 +96,7 @@ Route::group(['namespace' => 'InvoiceDetail', 'prefix' => 'invoice-detail'], fun
         Route::get('getDetailInvoice/{id}', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'getDetailInvoice']);
         Route::post('update/{id}', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'updateDetailInvoice']);
         Route::delete('delete/{id}', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'deleteDetailInvoice']);
+        Route::post('create', [\App\Http\Controllers\Api\InvoiceDetail\InvoiceDetailController::class, 'createDetailInvoice']);
     });
 });
 

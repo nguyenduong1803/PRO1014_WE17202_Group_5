@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 class InvoiceDetail extends Model
 {
     use HasFactory;
+    public function create($params) {
+        DB::insert('INSERT INTO detail_invoice
+        (id_invoice,id_product, amount, id_user)
+        values (?, ? , ?, ?)', $params);
+    }
+
     public function getListDetailInvoice($params) {
         return DB::select("SELECT * FROM detail_invoice as dt WHERE dt.is_delete = 1 AND dt.id_invoice = ? AND id_user = ?", $params);
     }
