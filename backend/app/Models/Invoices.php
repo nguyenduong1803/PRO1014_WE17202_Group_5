@@ -57,7 +57,7 @@ class Invoices extends Model
     }
 
     public function updateStatusOrderDateInvoice($params) {
-        DB::update("UPDATE invoices SET `status_envoice` = ?, `order_date`,
+        DB::update("UPDATE invoices SET `status_envoice` = ?, `order_date` = ?,
         `update_at` = ?
         WHERE `id` = ?", $params);
     }

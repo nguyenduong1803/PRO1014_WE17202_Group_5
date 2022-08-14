@@ -16,13 +16,13 @@ import axios from 'axios';
 export default function ModalPayment({ setOpenPay, openPay, orders, id, order }) {
   const [state, setState] = React.useState(false);
   const [messToast, setMessToast] = React.useState('');
-  const dispatch = useDispatch()
   const handleClose = () => {
     setOpenPay(false);
   };
   const handlePayment = () => {
     checkoutPaymentVnPay();
-    // dispatch(updateOrder({ id, order }))
+    localStorage.setItem('id_invoices', id)
+    localStorage.setItem('order', JSON.stringify(order));
     setOpenPay(false);
   
 
