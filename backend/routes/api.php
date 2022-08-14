@@ -131,6 +131,12 @@ Route::group(['namespace' => 'Checkout', 'prefix' => 'checkout'], function(){
     });
 });
 
+Route::group(['namespace' => 'Statistical', 'prefix' => 'statistical'], function(){
+    Route::middleware('auth:api') -> group(function () {
+        Route::post('statisticalByInvoices', [\App\Http\Controllers\Api\Statistical\StatisticalController::class, 'statisticalByInvoices']);
+    });
+});
+
 
 
 
