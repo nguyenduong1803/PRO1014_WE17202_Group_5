@@ -96,6 +96,8 @@ class CheckoutController extends Controller
         $modelInvoices = new Invoices();
         $user = Auth::user();
         $idInvoices = session()->get('id_invoices');
+        $orderDate = date("Y-m-d",time());
+        $updateAt = date("Y-m-d H:i:s",time());
         $params = [
             $validate['vnp_Amount'],
             $validate['vnp_BankCode'],
@@ -112,11 +114,12 @@ class CheckoutController extends Controller
         ];
         $params2 = [
             2,
-            $timeStamp = date("Y-m-d H:i:s",time()),
+            $orderDate,
+            $updateAt,
             $idInvoices
         ];
         $modelPaymentVNpay -> create($params);
-        $modelInvoices -> updateStatusInvoice($params2);
+        $modelInvoices -> updateStatusOrderDateInvoice($params2);
         return response() ->json(["msg" => "Lưu thông tin thanh toán hoá đơn thành công!", "status" => true],200);
     }
 }
