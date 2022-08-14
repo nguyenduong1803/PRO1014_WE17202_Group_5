@@ -32,7 +32,7 @@ class CheckoutController extends Controller
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-        $vnp_ExpireDate = "20220801153333";
+        $vnp_ExpireDate = "20220816153333";
         //Add Params of 2.0.1 Version
         //Billing
         $inputData = array(
