@@ -11,7 +11,7 @@ import { listPagination } from "../../../config/listConfig"
 import SelectMui from "../../../components/Admin/SelectMui/SelectMui";
 import InputSearch from "../../../components/Admin/InputSearch/InputSearch";
 import ButtonAdd from "../../../components/Admin/ButtonAdd/ButtonAdd";
-import { selectCategory, selectLoadingProduct, selectProducts } from "../../../redux/selector";
+import { selectCategory, selectLoadingProduct, selectProducts, selectProductsPage } from "../../../redux/selector";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Site/Loading/Loading";
 import { deleteProductById, getProducts } from "../../../redux/SliceReducer/ManagerProductSlice";
@@ -21,6 +21,7 @@ import useDebounce from "../../../hooks/useDebounce";
 const ManageProduct = (id) => {
   const dispatch = useDispatch()
   const listProduct = useSelector(selectProducts)
+  const lastPage = useSelector(selectProductsPage)
   const loadingProduct = useSelector(selectLoadingProduct)
   const [PageSize, setPageSize] = useState(10)
 
@@ -41,22 +42,22 @@ const ManageProduct = (id) => {
       isActive: true,
     },
   ];
-const handleChangePage =(value)=>{
-  console.log(value)
-}
+  const handleChangePage = (value) => {
 
-const listCategory = useSelector(selectCategory)
+  }
 
-const [keySearch, setKeySearch] = React.useState("");
-const debounce = useDebounce(keySearch, 500)
+  const listCategory = useSelector(selectCategory)
+
+  const [keySearch, setKeySearch] = React.useState("");
+  const debounce = useDebounce(keySearch, 500)
 
 
-const handleSearch = (e) => {
-  setKeySearch(e);
-}
-React.useEffect(() => {
-  dispatch(getProducts({ keySearch: debounce, limit: 30 }))
-}, [debounce])
+  const handleSearch = (e) => {
+    setKeySearch(e);
+  }
+  React.useEffect(() => {
+    dispatch(getProducts({ keySearch: debounce, limit: 30 }))
+  }, [debounce])
   return (
     <>
       <Sidebar />
@@ -83,14 +84,14 @@ React.useEffect(() => {
           <div className={`${styles.rightSide} col-4`}>
             <div className={`${styles.rightSideBtn}`}>
               <ButtonAdd name="Thêm sản phẩm" path="them-san-pham" />
-              <ExportReact csvData={listProduct||[]} fileName="Danh sách sản phẩm" />
+              <ExportReact csvData={listProduct || []} fileName="Danh sách sản phẩm" />
             </div>
           </div>
         </div>
         <div className={styles.profile}>
           {loadingProduct === "loading" ? <Loading /> :
             <Tablecustom
-              data={listProduct ||[]}
+              data={listProduct || []}
               PageSize={PageSize}
               tables={tableProduct}
               setIdProduct={setIdProduct}
@@ -110,9 +111,10 @@ React.useEffect(() => {
                 </span>{" "}
                 bản ghi
               </span>
-              <PaginationMui 
-               count={10}
-               onPageChange={value=>handleChangePage(value)}
+              <PaginationMui
+                lastPage={lastPage}
+                count={10}
+                onPageChange={value => handleChangePage(value)}
               />
               {/* {searchValue === "" ? (
                 <Pagination

@@ -4,14 +4,14 @@ import Stack from '@mui/material/Stack';
 import { useDispatch } from 'react-redux';
 import { getProducts } from '../../../redux/SliceReducer/ManagerProductSlice';
 
-export default function PaginationMui() {
+export default function PaginationMui({lastPage}) {
     const dispatch = useDispatch()
     const handerChange =(e)=>{
         dispatch(getProducts({page:e.target.innerText}))
     }
   return (
     <Stack spacing={2} >
-      <Pagination count={3} color="primary" onChange={e=>handerChange(e)} />
+      <Pagination count={lastPage} color="primary" onChange={e=>handerChange(e)} />
     </Stack>
   );
 }
