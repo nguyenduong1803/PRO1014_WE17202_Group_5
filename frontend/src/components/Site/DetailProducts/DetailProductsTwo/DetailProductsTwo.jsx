@@ -95,7 +95,7 @@ function DetailProductsTwo() {
       fecthListComment()
       setContent('')
     }else{
-      alert('Cap nhat that bai');
+      alert('Cập Nhật Thất Bại');
     }
   }
   const handleDelete = async (idComment) => {
@@ -107,7 +107,7 @@ function DetailProductsTwo() {
       fecthListComment()
       
     }else{
-      alert('Xoa that bai');
+      alert('Xóa Thất Bại');
     }
   }
   const handleSubmit = (event)=>{
@@ -152,11 +152,11 @@ function DetailProductsTwo() {
           <div className={styles.container}>
             <form action="" className={styles.action}>
               <div>
-                <textarea name="" value={content}  onChange={(e) => handleChange(e)} id="" cols="50" rows="1" placeholder="Nhập nội dung bình luận" style={{padding:'20px',borderRadius:'20px',backgroundColor:'rgba(255,255,255,0.5)'}}></textarea>
+                <textarea name="" value={content}  onChange={(e) => handleChange(e)} id="" cols="40" rows="1" placeholder="Nhập nội dung bình luận" style={{padding:'20px',borderRadius:'20px',backgroundColor:'rgba(255,255,255,0.5)'}}></textarea>
               </div>
               <div>
               <Button variant="contained" type="submit" onClick={handleSubmit}  className={styles.button}>
-                  {isUpdate ? 'Sua' : 'Them'} binh luan
+                  {isUpdate ? 'Sửa' : 'Thêm'} Bình Luận
                 </Button>
                 {/* <button type="submit" onClick={handleSubmit} style={{padding:'10px',borderRadius:'20px',background:'#ff5722'}}>Thêm bình luận</button> */}
               </div>
@@ -169,8 +169,8 @@ function DetailProductsTwo() {
               <div className={`${styles.comment} row`} key={comment.id} >
               <div className="col-lg-3" style={{textAlign: 'center'}}>
                 <div className={styles.img}>
-                  <img src={products1} alt="" />
-                  <p className={styles.name}>{comment.create_at}</p>
+                  <img src={comment.img} alt="" />
+                  <p className={styles.name}>{comment.ten}</p>
                 </div>
               </div>
               <div className="col-lg-9">
@@ -184,10 +184,10 @@ function DetailProductsTwo() {
                 </div>
                 <div className={styles.footer}>
                 <Button variant="contained" className={styles.button} onClick={() => handleUpdate(comment)}>
-                  Chinh sua
+                  Chỉnh Sửa
                 </Button>
                 <Button onClick={() => handleDelete(comment.id)} variant="contained" className={styles.button}>
-                  Xoa
+                  Xóa
                 </Button>
                 </div>
               </div>

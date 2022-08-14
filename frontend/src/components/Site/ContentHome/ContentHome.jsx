@@ -17,19 +17,19 @@ import InformationChef from'./InformationChef/BlogSection';
 const mycart = [
   {
     img: product1,
-    title: "Top One",
+    title: "Top 1",
     price: 10,
   },{
     img: product1,
-    title: "Top Two",
+    title: "Top 2",
     price: 10,
   },{
     img: product1,
-    title: "Top Three",
+    title: "Top 3",
     price: 10,
   },{
     img: product1,
-    title: "Top For",
+    title: "Top 4",
     price: 10,
   },
 ];
@@ -37,7 +37,7 @@ const SaleFood = [
   {
     img: product1,
     title: "50 % OFF",
-    content: "The full price of burgers !!!",
+    content: "Giá đủ của tất cả món ăn !!!",
   },
 ];
 const Products = [
@@ -116,9 +116,9 @@ function ContentHome() {
               className="justify-content-between d-flex align-items-center "
               style={{ padding: "10px 0" }}
             >
-              <div className={styles.title}>Trending Orders</div>
+              <div className={styles.title}>Đơn hàng thịnh hành</div>
               <div className={styles.viewAll}>
-                ViewAll <span className={styles.iconView}><ChevronRightIcon /></span>
+                Tất cả <span className={styles.iconView}><ChevronRightIcon /></span>
               </div>
             </div>
             <div className="row">
@@ -152,7 +152,7 @@ function ContentHome() {
             <div style={{marginTop:"66px"}}>
               <div style={{backgroundColor:'rgba(255, 255, 255,0.5)',border:'1px solid #fff',padding:'23px',borderRadius:'20px',paddingBottom:'40px'}}>
               <div style={{padding: '20px 0',fontSize: '20px',borderBottom: '1px solid #8A8480',width:'100%'}}>
-                <h3>Top Farouites</h3>
+                <h3>Món ăn yêu thích !!!</h3>
               </div>
               <div >
                 {

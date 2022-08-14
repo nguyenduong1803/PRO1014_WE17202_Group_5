@@ -9,29 +9,29 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 // import logo from "../../assets/img/blog"
 const useLink = [
   {
-    name: "WordPress Themes",
+    name: "Các chủ đề",
     href: "#",
   },
   {
-    name: "WordPress Plugins",
+    name: "Chủ đề bổ sung",
     href: "#",
   },
   {
-    name: "Admin Templates",
+    name: "Mẫu dành cho quản trị viên",
     href: "#",
   },
   {
-    name: "Website Templates",
+    name: "Mẫu trang website",
     href: "#",
   },
   {
-    name: "Flutter Apps",
+    name: "Ứng dụng Flutter",
     href: "#",
   },
 ];
 const serviceLink = [
   {
-    name: "Freebies",
+    name: "Tiền thưởng",
     href: "#",
   },
   {
@@ -43,7 +43,7 @@ const serviceLink = [
     href: "#",
   },
   {
-    name: "Business",
+    name: "Kinh doanh",
     href: "#",
   },
   {
@@ -51,29 +51,29 @@ const serviceLink = [
     href: "#",
   },
   {
-    name: "Mobile App Development",
+    name: "Phát triển ứng dụng dành cho điện thoại di động",
     href: "#",
   },
 ];
 const contacts = [
   {
-    name: "Tech Support",
+    name: "Hỗ trợ kỹ thuật",
     href: "#",
   },
   {
-    name: "Get A Quote",
+    name: "Nhận báo giá",
     href: "#",
   },
   {
-    name: "Contact Us",
+    name: "Liên hệ chúng tôi",
     href: "#",
   },
   {
-    name: "Support Policy",
+    name: "Chính sách hỗ trợ",
     href: "#",
   },
   {
-    name: "Licenses",
+    name: "Giấy phép",
     href: "#",
   },
 ];
@@ -106,7 +106,9 @@ const company = [
 function Footer() {
   return (
     <footer className="footer_home spad" style={{ paddingLeft: "24px" }}>
+      
       <div className="containerss">
+        
         <div
           className="row"
           style={{
@@ -121,7 +123,7 @@ function Footer() {
               className="footer__about footer__widget"
               style={{ width: "100%", paddingLeft: "24px",borderRight: "1px solid #3331" }}
             >
-              <h6>Products</h6>
+              <h6>Sản phẩm</h6>
               <ul style={{ width: "100%" }}>
                 {useLink.map((ele, index) => (
                   <li key={index}>
@@ -155,7 +157,7 @@ function Footer() {
               className="footer__widget"
               style={{ width: "100%", paddingLeft: "24px" ,borderRight: "1px solid #3331"}}
             >
-              <h6>Support</h6>
+              <h6>Hỗ trợ</h6>
               <ul style={{ width: "100%" }}>
                 {contacts.map((ele, index) => (
                   <li key={index}>
@@ -172,7 +174,7 @@ function Footer() {
               className="footer__widget"
               style={{ width: "100%", paddingLeft: "24px" }}
             >
-              <h6>Support</h6>
+              <h6>Liên hệ</h6>
               <ul style={{ width: "100%" }}>
                 {company.map((ele, index) => (
                   <li key={index}>
