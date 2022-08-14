@@ -85,16 +85,16 @@ class InvoicesController extends Controller
         return response() ->json(["msg" => "Tạo hoá đơn thành công!", "status" => true],200);
     }
 
-    public function getInvoicesByUser() {
+    public function getInvoicesByUser(Request $request) {
         $currentDate = Carbon::now('Asia/Ho_Chi_Minh') ->toDateTimeString();
         $user = Auth::user();
         $params = [$user['id'], $currentDate];
         $modelInvoices = new Invoices();
         $modelDetailInvoice = new InvoiceDetail();
-        $data = $modelInvoices -> getInvoicesByUser($params);
-       
+        $data = $modelInvoices -> getInvoicesByUser($user['id'], $currentDate, $request);
+        $listData = $data -> items();
         $modelDetailTableInvoice = new DetailTableInvoice();
-        if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
+        if(!isset($listData) || count($listData) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
         
         for($i =0;$i < count($data); $i++) {
             $params2 = [
@@ -111,12 +111,31 @@ class InvoicesController extends Controller
             $listDetailTbInvoice = $modelDetailTableInvoice -> getLists($params3);
             $data[$i] -> listDetailTbInvoice = $listDetailTbInvoice;
         }
-        return response() ->json(["data" => $data, "status" => true],200);
+        return $data;
     }
     public function getInvoicesByAdmin(Request $request) {
+        $user = Auth::user();
+        $modelDetailInvoice = new InvoiceDetail();
         $modelInvoices = new Invoices();
+        $modelDetailTableInvoice = new DetailTableInvoice();
         $data = $modelInvoices -> getInvoicesByAdmin($request);
-        if(!isset($data) || count($data) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
+        $listData = $data -> items();
+        if(!isset($listData) || count($listData) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
+        for($i =0;$i < count($data); $i++) {
+            $params2 = [
+                    $data[$i] -> id_invoice,
+                    $user['id']
+                ];
+            $listDetailInvoice = $modelDetailInvoice -> getListDetailInvoice($params2);
+            $data[$i] -> listDetailInvoice = $listDetailInvoice;
+        }
+        for($i =0;$i < count($data); $i++) {
+            $params3 = [
+                $data[$i] -> id_invoice,
+            ];
+            $listDetailTbInvoice = $modelDetailTableInvoice -> getLists($params3);
+            $data[$i] -> listDetailTbInvoice = $listDetailTbInvoice;
+        }
         return $data;
     }
 

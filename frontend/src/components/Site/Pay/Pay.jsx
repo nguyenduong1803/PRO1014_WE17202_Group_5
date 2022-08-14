@@ -57,9 +57,8 @@ function Pay() {
       }
     })();
   }, []);
-  console.log(statusPayment)
-  if(!statusPayment) return <PayFail />;
-  return <div>{vnpResponseCode === "00"? <PaySucces /> : <PayFail />}</div>;
+  if(!statusPayment || vnpResponseCode !== "00") return <PayFail />;
+  return <PaySucces />;
 }
 
 export default Pay;

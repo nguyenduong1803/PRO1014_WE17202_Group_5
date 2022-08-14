@@ -26,8 +26,9 @@ class DetailTableInvoiceUpdate extends FormRequest
     public function rules()
     {
         return [
-            'id_invoice' => 'string|max:12|required|exists:invoices',
-            'id_table' => 'integer|required',
+            'list_id_table_invoice' => 'present|array|required',
+            'list_id_table' => 'present|array|required',
+            'id_invoice' => "string|max:20|required"
         ];
     }
 

@@ -102,7 +102,7 @@ Route::group(['namespace' => 'InvoiceDetail', 'prefix' => 'invoice-detail'], fun
 Route::group(['namespace' => 'InvoiceDetailTableInvoice', 'prefix' => 'detail-table-invoice'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::get('getLists/{id_invoice}', [\App\Http\Controllers\Api\DetailTableInvoice\DetailTableInvoiceController::class, 'getLists']);
-        Route::put('update/{id_table_invoice}', [\App\Http\Controllers\Api\DetailTableInvoice\DetailTableInvoiceController::class, 'updateTable']);
+        Route::put('update', [\App\Http\Controllers\Api\DetailTableInvoice\DetailTableInvoiceController::class, 'updateTable']);
     });
 });
 
