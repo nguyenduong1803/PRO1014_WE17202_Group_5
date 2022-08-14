@@ -43,11 +43,13 @@ function Pay() {
         id: localStorage.getItem("id_invoices"),
         order: JSON.parse(localStorage.getItem("order")),
       };
-      dispatch(updateOrder(params2));
-      if (vnpResponseCode === "00")
+
+      if (vnpResponseCode === "00") {
         await axios.post(api + `checkout/saveInfoPaymentVNPay`, params, {
           headers: { Authorization: `Bearer ${getToken()}` },
         });
+        dispatch(updateOrder(params2));
+      }
     })();
   }, []);
   return <div>{vnpResponseCode === "00" ? <PaySucces /> : <PayFail />}</div>;
