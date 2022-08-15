@@ -33,7 +33,7 @@ const routerSite = [
     { path: "/chi-tiet-hoa-don/:name", component: OrderDetail, },
     { path: "/chi-tiet-don-hang/:idProduct", component: DetailProduct, },
     { path: "/profile", component: Profile, },
-    { path: "/dat-lai-mat-khau", component: Checkpass, },
+    { path: "/dat-lai-mat-khau/:id/:token", component: Checkpass, },
     { path: "/gui-email", component: CheckEmail, },
     { path: "/dat-hang", component: CheckOut, },
     { path: "/thong-bao-thanh-toan", component: Pay, },

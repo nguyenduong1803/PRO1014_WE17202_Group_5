@@ -98,7 +98,7 @@ const FormLogin = ({ self }) => {
                     <span>
                         <input type="checkbox" /> Nhớ tài khoản
                     </span>
-                    <Link to='/checkemail'
+                    <Link to='/gui-email'
                         style={{ fontStyle: `italic`, color: `#74788d` }}>Quên mật khẩu?
                     </Link>
                 </div>
