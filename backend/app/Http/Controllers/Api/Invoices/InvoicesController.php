@@ -95,6 +95,7 @@ class InvoicesController extends Controller
         $data = $modelInvoices -> getInvoicesByUser($user['id'], $currentDate, $request);
         $listData = $data -> items();
         $modelDetailTableInvoice = new DetailTableInvoice();
+        $timeUpdateAt = date("Y-m-d H:i:s",time());
         if(!isset($listData) || count($listData) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
         
         for($i =0;$i < count($data); $i++) {
@@ -106,7 +107,6 @@ class InvoicesController extends Controller
             $data[$i] -> listDetailInvoice = $listDetailInvoice;
             $totalPrice = 0;
             for($j = 0; $j < count($listDetailInvoice); $j++) {
-                $timeUpdateAt = date("Y-m-d H:i:s",time());
                 $detail = $modelProduct ->detailProduct($listDetailInvoice[$j] -> id_product);
                 $totalPrice += (float) $detail['price'] * $listDetailInvoice[$j] -> amount;
             }
