@@ -39,7 +39,8 @@ class UserController extends Controller
         $modelUser = new User();
         $user = $modelUser -> checkExistsUserById($id);
         if($user['token_verify'] === $token) {
-            return response() ->json(["msg" => "Get link success!"],200);
+            header('Location: ' . 'http://localhost:3000/dat-lai-mat-khau/'.$id.'/'.$token.'');
+            die();
         } else {
             return response() ->json(["msg" => "Get link failed!"],404);
         }

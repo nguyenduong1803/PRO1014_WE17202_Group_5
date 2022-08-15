@@ -39,8 +39,8 @@ return [
             'host' => 'smtp.gmail.com',
             'port' => 587,
             'encryption' => 'tls',
-            'username' => 'duongltph19040@fpt.edu.vn',
-            'password' => 'zztdkeolsatxfkjt',
+            'username' => 'letrungduongxx3@gmail.com',
+            'password' => 'dmjczbxbblfggzze',
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -92,7 +92,7 @@ return [
     */
 
     'from' => [
-        'address' => 'duongltph19040@fpt.edu.vn',
+        'address' => 'letrungduongxx3@gmail.com',
         'name' => 'PRO1014_WE17202_Group_5',
     ],
 
