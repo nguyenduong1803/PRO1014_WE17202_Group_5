@@ -14,7 +14,6 @@ class Statistical extends Model
         return DB::select('SELECT
         i.id_invoice,
         i.total_price,
-        COUNT(dtbi.id_table) AS total_table_order,
         COUNT(dti.amount) as total_product_order
         FROM
             invoices AS i
