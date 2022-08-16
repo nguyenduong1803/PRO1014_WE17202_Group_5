@@ -12,9 +12,11 @@ import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from "react-redux";
 import { selectOrderDetail, selectProducts, selectTable } from "../../../../redux/selector";
-import { getDetailOrder } from "../../../../redux/SliceReducer/OrderTableSlice";
+import { getDetailOrder, updateDetailOrder } from "../../../../redux/SliceReducer/OrderTableSlice";
 import { formatMoney } from "../../../../extensions/formatMoney";
 import ModalDeleteProduct from "../InformationUser/ModalDeleteProduct";
+import { Button } from "@mui/material";
+import ToastMess from "../../ToastMess/ToastMess";
 
 
 export default function ListOrders() {
@@ -22,24 +24,31 @@ export default function ListOrders() {
   const productCartDetail = useSelector(selectOrderDetail)
   const products = useSelector(selectProducts)
   const [openDelete, setOpenDelete] = React.useState(false)
+  const [state, setState] = React.useState(false)
+  const [idDetailOrder, setIdDetailOrder] = React.useState("")
   const listProduct = [];
-  products.forEach(prod => {
-    if (productCartDetail) {
-      productCartDetail.forEach(ele => {
-        if (prod.id === ele.id_product) {
-          let newProduct = { ...prod, quantity: ele.amount, idDetailOrder: ele.id }
-          listProduct.push(newProduct);
-        }
-      })
-    }
-  });
-  const idInvoice = window.location.pathname.split('/')[2]
-  const handleOpenDelete = () => {
-    setOpenDelete(true)
+  if (products) {
+    products.forEach(prod => {
+      if (productCartDetail) {
+        productCartDetail.forEach(ele => {
+          if (prod.id === ele.id_product) {
+            let newProduct = { ...prod, quantity: ele.amount, idDetailOrder: ele.id }
+            listProduct.push(newProduct);
+          }
+        })
+      }
+    });
   }
+
+  const idInvoice = window.location.pathname.split('/')[2]
+  const handleOpenDelete = (id) => {
+    setOpenDelete(true)
+    setIdDetailOrder(id)
+  }
+
   React.useEffect(() => {
     dispatch(getDetailOrder(idInvoice))
-  }, [])
+  }, [idInvoice])
   return (
     <TableContainer className={styles.table} component={Paper} style={{ borderRadius: "20px", backgroundColor: "white" }}>
       <Table sx={{ minWidth: 650 }} aria-label="a dense table">
@@ -49,38 +58,70 @@ export default function ListOrders() {
             <TableCell align="center" style={{ fontSize: '1.1rem', color: "#fff", fontWeight: "500" }} >Số lượng</TableCell>
             <TableCell align="center" style={{ fontSize: '1.1rem', color: "#fff", fontWeight: "500" }}>Đơn giá</TableCell>
             <TableCell align="center" style={{ fontSize: '1.1rem', color: "#fff", fontWeight: "500" }}>Tổng tiền</TableCell>
-            <TableCell align="center" style={{ fontSize: '1.1rem', color: "#fff", fontWeight: "500" }}>Update</TableCell>
+            <TableCell align="center" style={{ fontSize: '1.1rem', color: "#fff", fontWeight: "500" }}>Hành động</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody style={{}}>
-          {listProduct && listProduct?.map((product, index) => (
-            <TableRow
-              key={index}
-              sx={{ "&:last-child td, &:last-child th": { border: "20px" } }}
-            >
-              <TableCell align="left">
-                <div className={`${styles.tableDetailProducts} d-flex  align-items-center`}>
-                  <div>
-                    <img className={styles.img} src={product.listsImg[0]} />
-                  </div>
-                  <div className={styles.titleProducts}>
-                    <h4 style={{ fontSize: '1.1rem' }} className={styles.title}>{product.name}</h4>
-                  </div>
-                </div>
-              </TableCell>
-              <TableCell style={{ fontSize: '1.1rem' }} align="center">{product.quantity}</TableCell>
-              <TableCell style={{ fontSize: '1.1rem' }} align="center">{formatMoney(product.price)} đ</TableCell>
-              <TableCell style={{ fontSize: '1.1rem' }} align="center">{formatMoney(product.price * product.quantity)} đ</TableCell>
-              <TableCell style={{ fontSize: '1.1rem' }} align="center"> <ClearIcon onClick={handleOpenDelete} className={styles.clearIcon} /> </TableCell>
-              <ModalDeleteProduct
-                setOpenDelete={setOpenDelete}
-                openDelete={openDelete}
-                id={product.idDetailOrder}
-              />
-            </TableRow>
+        <TableBody>
+
+          {listProduct && listProduct?.map((product) => (
+            <ProductListOrder product={product} handleOpenDelete={handleOpenDelete} setState={setState} />
           ))}
+
         </TableBody>
+        <ModalDeleteProduct
+          setOpenDelete={setOpenDelete}
+          openDelete={openDelete}
+          idInvoice={idInvoice}
+          id={idDetailOrder}
+        />
       </Table>
+      <ToastMess
+        notify={`Đã cập nhật sản phẩm`}
+        setState={setState}
+        state={state}
+      />
     </TableContainer>
   );
+}
+const ProductListOrder = ({ product, handleOpenDelete, setState }) => {
+  const [quantity, setQuantity] = React.useState(product.quantity);
+  const [isEdit, setIEdit] = React.useState(false)
+  const dispatch = useDispatch()
+
+  const handleChangeQuantity = (e) => {
+    setQuantity(e.target.value)
+    setIEdit(true)
+  }
+  const handleUpdate = async (idDetailOrder, id) => {
+    await setIEdit(false)
+    await dispatch(updateDetailOrder({ idDetailOrder, idProduct: id, quantity }))
+    setState(true)
+  }
+  return (
+    <TableRow
+      key={product.idDetailOrder}
+      sx={{ "&:last-child td, &:last-child th": { border: "20px" } }}
+    >
+      <TableCell align="left">
+        <div className={`${styles.tableDetailProducts} d-flex  align-items-center`}>
+          <div>
+            <img className={styles.img} src={product.listsImg[0]} />
+          </div>
+          <div className={styles.titleProducts}>
+            <h4 style={{ fontSize: '1.1rem' }} className={styles.title}>{product.name}</h4>
+          </div>
+        </div>
+      </TableCell>
+      <TableCell style={{ fontSize: '1.1rem' }} align="center">
+        <input type="number" onChange={e => handleChangeQuantity(e)} value={quantity} className={styles.quantityInput} />
+      </TableCell>
+      <TableCell style={{ fontSize: '1.1rem' }} align="center">{formatMoney(product.price)} đ</TableCell>
+      <TableCell style={{ fontSize: '1.1rem' }} align="center">{formatMoney(product.price * product.quantity)} đ</TableCell>
+      <TableCell style={{ fontSize: '1.1rem' }} align="center">
+        {isEdit && <Button onClick={() => handleUpdate(product.idDetailOrder, product.id)} variant="contained">Cập nhật</Button>}
+        <ClearIcon onClick={() => handleOpenDelete(product.idDetailOrder)} className={styles.clearIcon} />
+      </TableCell>
+
+    </TableRow>
+  )
 }

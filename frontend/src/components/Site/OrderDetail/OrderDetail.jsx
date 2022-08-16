@@ -6,14 +6,23 @@ import Status from "../OrderDetail/StatusOrders/StatusOrders";
 // import Statistical from "./Statistical/Statistical";
 import UpdateProduct from "./ListOrders/UpdateProduct"
 import { selectOrder, selectRoleUser } from "../../../redux/selector";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
+import { getAllOrder, getOrder } from "../../../redux/SliceReducer/OrderTableSlice";
 function OrderDetail() {
   const [showModal, setShowModal] = React.useState(false)
   const orders = useSelector(selectOrder)
+  const dispatch= useDispatch()
   const role = useSelector(selectRoleUser)
   const orderId = window.location.pathname.split("/")[2]
-  const myOder = orders.data.find(ele => ele.id_invoice === orderId)
+  const myOder = orders?.data?.find(ele => ele.id_invoice === orderId)
+  React.useEffect(() => {
+    if (role === 1 || role === 3) {
+      dispatch(getAllOrder())
+    } else {
+      dispatch(getOrder())
+    }
+  },[role])
   return (
     <LayoutSite>
       <div className="row">

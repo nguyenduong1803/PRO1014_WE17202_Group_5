@@ -12,18 +12,19 @@ import { selectCategory, selectLoadingProduct, selectProducts } from '../../../.
 import { getProducts } from '../../../../redux/SliceReducer/ManagerProductSlice';
 import Search from '../../../../assets/svg/Search';
 import LoadingSearch from '../../Loading/LoadingSearch';
-import { addOrder } from '../../../../redux/SliceReducer/OrderTableSlice';
+import { addDetailOrder, addOrder, getDetailOrder } from '../../../../redux/SliceReducer/OrderTableSlice';
 import { formatMoney } from '../../../../extensions/formatMoney';
+import ToastMess from '../../ToastMess/ToastMess';
 
 function ChooseProduct({ setShowModal }) {
     const [keySearch, setKeySearch] = React.useState("");
     const [activeCate, setActiveCate] = React.useState("")
+    const dispatch = useDispatch()
     const debounceSearch = useDebounce(keySearch, 500)
     const handleActiveCate = (idCate) => {
         setActiveCate(idCate)
         dispatch(getProducts({ keySearch: debounceSearch, limit: 30, category: idCate }))
     }
-    const dispatch = useDispatch()
     const loadingProduct = useSelector(selectLoadingProduct)
     const categories = useSelector(selectCategory)
     const handleSearch = (e) => {
@@ -70,28 +71,36 @@ function ChooseProduct({ setShowModal }) {
                     {loadingProduct === "loading" ? <LoadingSearch /> :
                         products && products.length > 0 ? products.map((product, index) => {
                             return (
-                                <div className={" col-lg-6"} key={index}>
-                                    <ProductChoose name={product.name} price={product.price} id={product.id} img={product.listsImg[0]} />
+                                <div className={" col-lg-6"} key={product.id}>
+                                    <ProductChoose name={product.name} price={product.price} id={product.id} img={product.listsImg[0]}  />
                                 </div>
                             )
                         }) : <h2 className={styles.emptyTitle}>Không tìm thấy sản phẩm nào</h2>
                     }
                 </div>
             </div>
+           
         </div>
     )
 }
 
 function ProductChoose({ img, name, price, id }) {
-    const [quantity,setQuantity]= React.useState(1)
+    const [quantity, setQuantity] = React.useState(1)
+    const [state, setState] = React.useState(false)
+
     const dispatch = useDispatch()
-    const handleAddOrder = () => {
-        console.log(id,quantity)
-        // dispatch(addOrder({ id, quantity: 1 }))
+    const idInvoice = window.location.pathname.split('/')[2]
+    const handleAddOrder = async () => {
+        await dispatch(addDetailOrder({ idInvoice, idProduct: id, quantity }))
+        await dispatch(getDetailOrder(idInvoice))
+        await setState(true)
     }
-    const handleChange = (e)=>{
+    const handleChange = (e) => {
         setQuantity(e.target.value)
     }
+    React.useEffect(()=>{
+
+    },[])
     return (
         <div className={styles.wrapchoose}>
             <div className={styles.info_choose}>
@@ -104,12 +113,17 @@ function ProductChoose({ img, name, price, id }) {
                 </div>
 
             </div>
-            <div className={styles.wrapInputNumber}><input  onChange={e=>handleChange(e)} value={quantity} type="number" className={styles.inputNumber} placeholder="Số lượng"/></div>
+            <div className={styles.wrapInputNumber}><input onChange={e => handleChange(e)} value={quantity} type="number" className={styles.inputNumber} placeholder="Số lượng" /></div>
             <div className={styles.detail}>
                 <div className={styles.icon} onClick={handleAddOrder}>
                     <AddIcon />
                 </div>
             </div>
+            <ToastMess
+                notify={`Đã thêm ${name} vào sản phẩm`}
+                setState={setState}
+                state={state}
+            />
         </div>
     )
 }

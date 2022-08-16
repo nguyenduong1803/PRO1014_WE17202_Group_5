@@ -112,7 +112,9 @@
 .orderIdFooterRight .buttonLink a:hover{
     color:#000;
 }
- 
+ .titleTable{
+    font-size: 18px;
+ }
 
 /* .orderIdFooterRight a:hover{
     color:#000000;

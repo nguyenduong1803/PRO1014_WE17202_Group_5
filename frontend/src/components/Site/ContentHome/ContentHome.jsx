@@ -35,7 +35,7 @@ const mycart = [
 ];
 const SaleFood = [
   {
-    img: product1,
+    img: "https://img.freepik.com/premium-photo/lobster-with-spices-dark-background-top-view-free-copy-space_187166-13108.jpg?size=626&ext=jpg&ga=GA1.2.123007111.1654571791",
     title: "50 % OFF",
     content: "Giá đủ của tất cả món ăn !!!",
   },

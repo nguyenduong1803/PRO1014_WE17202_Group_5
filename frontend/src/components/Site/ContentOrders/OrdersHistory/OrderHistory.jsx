@@ -11,7 +11,7 @@ function OrderHistory({ id, idInvoice, name, phone, status, date, ban, money, to
       <div className={styles.orderHistory}>
         <div className={styles.orderIdHeader}>
           <div className={styles.orderIdHeaderLeft}>
-            <div>Orders #{id}</div>
+            <div>Orders: {id}</div>
             <div className={styles.date}>{date}</div>
           </div>
 
@@ -32,8 +32,8 @@ function OrderHistory({ id, idInvoice, name, phone, status, date, ban, money, to
             <TableRestaurantIcon fontSize="large" />
           </div>
           <div className={styles.orderIdContentRight}>
-            <span>Bàn: {ban}</span>
-             {/* {tableList?.data?.map(table=>(
+            <span>Bàn: {ban.map(item => <span className={styles.titleTable}>{item},</span>)}</span>
+            {/* {tableList?.data?.map(table=>(
               <span>A-{table.id}</span>
              ))} */}
             <div className={styles.priceNumber}>

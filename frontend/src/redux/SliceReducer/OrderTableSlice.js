@@ -88,7 +88,6 @@ const OrderTableSlice = createSlice({
                         }
                     })
                 } else {
-                    console.log(action.payload)
                 }
             }).addCase(getOrder.fulfilled, (state, action) => {
                 state.status = "idle"
@@ -134,7 +133,7 @@ export const getListTable = createAsyncThunk("orderTable/getListTable", async (p
 })
 export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", async (payload, action) => {
     let payloads
-    console.log(payload.tableId[0][0].join(""))
+    // console.log(payload.tableId[0][0].join(""))
 
     await axios
         .post(api + "tableBook/create",
@@ -152,7 +151,6 @@ export const createOrderTable = createAsyncThunk("orderTable/createOrderTable", 
                 headers: { "Authorization": `Bearer ${getToken()}` },
             })
         .then(response => {
-            console.log(response)
             payloads = { data: response.data.data, status: "success" }
             action.dispatch(createOrder())
         }).catch(function (err) {
@@ -236,6 +234,8 @@ export const createOrder = createAsyncThunk("orderTable/createOrder", async (pay
                 phone: payload.order.phone,
                 note: payload.order.note,
                 purchase_status: payload?.purchase || 2,
+                create_at: payload.order.celendar,
+                id_staff: 2
             },
             {
                 headers: { "Authorization": `Bearer ${getToken()}` },
@@ -285,14 +285,13 @@ export const getAllOrder = createAsyncThunk("orderTable/getAllOrder", async (pay
         .get(api + "invoices/getInvoicesByAdmin", {
             params: {
                 q: payload?.keySearch || "",
-                limit: payload?.limit || 10,
+                status_envoice: payload?.status,
                 page: payload?.page || 1,
-                status_envoice: payload?.status ,
+                limit: payload?.limit || 10,
             },
             headers: { "Authorization": `Bearer ${getToken()}` },
         })
         .then(response => {
-            console.log(response.data);
             payloads = { data: response.data, status: "success" }
         }).catch(function (err) {
             payloads = { data: "", status: err.response.status }
@@ -341,9 +340,9 @@ export const updateOrder = createAsyncThunk("orderTable/updateOrder", async (pay
 export const updateDetailOrder = createAsyncThunk("orderTable/updateDetailOrder", async (payload) => {
     let payloads
     await axios
-        .post(api + `invoice-detail/update/${payload.id}`, {
-            amount: 1,
-            id_product: 2,
+        .post(api + `invoice-detail/update/${payload.idDetailOrder}`, {
+            amount: payload.quantity,
+            id_product: payload.idProduct,
         }, {
             headers: {
                 "Authorization": `Bearer ${getToken()}`
@@ -358,6 +357,26 @@ export const updateDetailOrder = createAsyncThunk("orderTable/updateDetailOrder"
     return payloads
 })
 
+export const addDetailOrder = createAsyncThunk("orderTable/addDetailOrder", async (payload, action) => {
+    let payloads
+    await axios
+        .post(api + `invoice-detail/create`, {
+            id_invoice: payload.idInvoice,
+            id_product: payload.idProduct,
+            amount: payload.quantity,
+        }, {
+            headers: {
+                "Authorization": `Bearer ${getToken()}`
+            },
+        })
+        .then(response => {
+            payloads = { data: payload, status: response.data.status }
+        }).catch(function (err) {
+            console.log(err)
+            payloads = { data: "", status: err.response.status }
+        })
+    return payloads
+})
 export const deleteDetailOrder = createAsyncThunk("orderTable/deleteDetailOrder", async (payload, action) => {
     let payloads
     await axios
@@ -366,13 +385,35 @@ export const deleteDetailOrder = createAsyncThunk("orderTable/deleteDetailOrder"
         })
         .then(response => {
             payloads = { data: payload, status: response.data.status }
-            action.dispatch(getAllOrder())
+            // action.dispatch(getAllOrder())
         }).catch(function (err) {
             console.log(err)
             payloads = { data: "", status: err.response.status }
         })
     return payloads
 })
+// detail table 
+export const updateDetailTable = createAsyncThunk("orderTable/updateDetailTable", async (payload) => {
+    let payloads
+    await axios
+        .post(api + `detail-table-invoice/update`, {
+            id_invoice: payload.id,
+            list_id_table_invoice: payload.idTable,
+            list_id_table: payload.idProduct,
+        }, {
+            headers: {
+                "Authorization": `Bearer ${getToken()}`
+            },
+        })
+        .then(response => {
+            payloads = { data: payload, status: response.data.status }
+        }).catch(function (err) {
+            console.log(err)
+            payloads = { data: "", status: err.response.status }
+        })
+    return payloads
+})
+
 // invoice-detail/delete
 
 // export const addCart = (payload, action) => {

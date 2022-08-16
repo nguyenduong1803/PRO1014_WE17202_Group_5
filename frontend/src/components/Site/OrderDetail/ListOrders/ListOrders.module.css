@@ -41,7 +41,7 @@
     padding: -5px;
     color:rgb(249, 13, 13);
     border-radius: 3px;
-
+    margin-left: 12px;
 }
 .clearIcon:hover{
     transition: all 0.3s ease-in;
@@ -56,4 +56,10 @@
 .editIcon:hover{
     transition: all 0.3s ease-in;
     background-color:#FF7272;
+}
+.quantityInput{
+    width: 90px;
+    padding: 2px 4px;
+    border:1px solid #ccc;
+    border-radius: 4px;
 }
