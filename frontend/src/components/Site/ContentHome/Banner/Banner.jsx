@@ -12,12 +12,10 @@ function Banner() {
       </div>
       <div className={styles.content}>
         <p className={styles.deal}><SvgIcon className={styles.SvgIcon}/>Ưu đãi cuối tuần</p>
-        <h3 className={styles.contents}>Chào mừng bạn đến với hải sản !!!</h3>
-        <p className={styles.note}>Tươi tuyệt vời</p>
+        <h3 className={styles.contents}>Chào mừng bạn đến với nhà hàng !!!</h3>
+        <p className={styles.note}>Tươi ngon tuyệt vời</p>
        <Link to='/dat-ban'>
-       <Button variant="contained" size="large" className={styles.button}>
-          Đặt bàn ngay
-        </Button>
+        <button className={`${styles.custom_btn} ${styles.btn_11}`}> Đặt bàn ngay<div className={styles.dot}></div></button>
        </Link>
       </div>
     </div>

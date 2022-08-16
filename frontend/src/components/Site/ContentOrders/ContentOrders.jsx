@@ -13,7 +13,6 @@ function ContentOrders() {
   const role = useSelector(selectRoleUser)
   const lastPage = useSelector(selectOrderPage);
   const [page, setPage] = useState(1)
-  const [keySearch, setKeySearch] = useState("")
   const [status, setStatus] = useState("")
   const handerChange = (e) => {
     setPage(e.target.innerText)
@@ -39,17 +38,17 @@ function ContentOrders() {
       <div className="row" style={{ zIndex: "10", position: "relative" }}>
         {orders ?
           orders?.data?.map(order => {
+          const  listTables =order.listDetailTbInvoice.map(item=>item.id_table)
             return (
               <OrdersHistory
                 key={order.id}
                 name={order.user_name_book}
-                id={order.id}
+                id={order.id_invoice}
                 date={order.time_book}
-                img={product1}
                 phone={order.phone}
                 totalUser={22}
                 imgUser={product1}
-                ban={[1, 2]}
+                ban={listTables||[]}
                 money={order.total_price}
                 status={order.status_envoice}
                 idInvoice={order.id_invoice}

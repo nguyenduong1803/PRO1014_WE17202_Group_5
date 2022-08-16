@@ -7,20 +7,22 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ToastMess from '../../ToastMess/ToastMess';
 import { useDispatch } from 'react-redux';
-import { deleteDetailOrder } from '../../../../redux/SliceReducer/OrderTableSlice';
+import { deleteDetailOrder, getDetailOrder } from '../../../../redux/SliceReducer/OrderTableSlice';
 
-export default function ModalDeleteProduct({ setOpenDelete, openDelete, orders, id, order }) {
+export default function ModalDeleteProduct({ setOpenDelete, openDelete, idInvoice, id }) {
   const [state, setState] = React.useState(false)
   const dispatch = useDispatch()
   const handleClose = () => {
     setOpenDelete(false);
   };
-  const handleDelete = () => {
-    dispatch(deleteDetailOrder(id))
+  const handleDelete = async() => {
+   await dispatch(deleteDetailOrder(id))
+    dispatch(getDetailOrder(idInvoice))
     setOpenDelete(false);
     setState(true)
 
   };
+ 
   return (
     <div>
       <Dialog
