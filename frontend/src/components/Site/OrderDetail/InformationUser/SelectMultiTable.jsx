@@ -30,18 +30,18 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function SelectMultiTable({setOrder}) {
+export default function SelectMultiTable({ setOrder, listTables }) {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [personName, setPersonName] = React.useState(listTables);
   const tableActive = useSelector(selectTableActive)
-
+  console.log(listTables);
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
     setOrder(prev => {
-      return { ...prev, tableId:value }
-  })
+      return { ...prev, tableId: value }
+    })
     setPersonName(
       typeof value === 'string' ? value.split(',') : value,
     );
@@ -49,7 +49,7 @@ export default function SelectMultiTable({setOrder}) {
 
   return (
     <div>
-      <FormControl sx={{  width: "100%" }}>
+      <FormControl sx={{ width: "100%" }}>
         <InputLabel id="demo-multiple-chip-label">Chọn nhiều bàn</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
@@ -67,15 +67,26 @@ export default function SelectMultiTable({setOrder}) {
           )}
           MenuProps={MenuProps}
         >
+          {listTables.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, personName, theme)}
+            >
+              {`Bàn A-${name}`}
+            </MenuItem>
+          ))}
           {tableActive.map((name) => (
             <MenuItem
               key={name.id}
               value={name.id}
               style={getStyles(name.id, personName, theme)}
             >
-              {`Bàn A-${name.id}` }
+              {`Bàn A-${name.id}`}
             </MenuItem>
           ))}
+
+
         </Select>
       </FormControl>
     </div>

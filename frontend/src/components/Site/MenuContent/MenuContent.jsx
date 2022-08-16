@@ -52,17 +52,21 @@ function MenuContent() {
               <p>Có {listProduct && listProduct.length} sản phẩm</p>
               <select onChange={e => handleChange(e)} className="form-select" style={{ width: "150px" }} aria-label="Default select example">
                 <option selected>Sắp xếp</option>
-                <option value="desc">Mới nhất</option>
-                <option value="asc">Cũ nhất</option>
+                <option value="asc">Mới nhất</option>
+                <option value="desc">Cũ nhất</option>
               </select>
             </div>
             {loadingProduct === "loading" ? <LoadingProduct /> : <div className="row" style={{ transition: "0.3s" }}>
               {
                 listProduct && listProduct.map((products, index) => {
+                  let indexImg=0
+                  if(products.listsImg.length>1){
+                    indexImg =products.listsImg.length-1
+                  }
                   return (
                     <Product
                       key={index}
-                      img={products.listsImg[0]}
+                      img={products.listsImg[indexImg]}
                       title={products.name}
                       price={products.price}
                       id={products.id}

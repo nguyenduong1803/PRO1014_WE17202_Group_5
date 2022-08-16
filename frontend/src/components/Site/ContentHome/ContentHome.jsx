@@ -42,28 +42,7 @@ const SaleFood = [
     content: "Giá đủ của tất cả món ăn !!!",
   },
 ];
-const Products = [
-  {
-    img: product1,
-    title: "Lẩu Cua",
-    price: 1200000,
-  },
-  {
-    img: "https://img.freepik.com/free-photo/thai-food-shrimp-spicy-fish-sauce_1150-38077.jpg?t=st=1658235944~exp=1658236544~hmac=53051792149dc74df6cc7d9b3360e2a04cb3300569bba2e865b63c88fc01972c&w=996",
-    title: "Lẩu Cua",
-    price: 490000,
-  },
-  {
-    img: product3,
-    title: "Lẩu Cua",
-    price: 159000,
-  },
-  {
-    img: product4,
-    title: "Lẩu Cua",
-    price: 19999,
-  },
-];
+
 const trendingOrder = [
   {
     top: "Top of the day",
@@ -105,12 +84,17 @@ function ContentHome() {
             <Categories />
             <div className="row" style={{ marginTop: "30px" }}>
               {products && products.map((product, index) => {
+                let indexImg=0
                 if (index < 4) {
+                  if(product.listsImg.length>1){
+                    indexImg =product.listsImg.length-1
+                  }
+                  console.log(indexImg);
                   return (
                     <Product
                       key={index}
                       id={product.id}
-                      img={product.listsImg[0]}
+                      img={product.listsImg[indexImg]}
                       title={product.name}
                       price={product.price}
                     />
