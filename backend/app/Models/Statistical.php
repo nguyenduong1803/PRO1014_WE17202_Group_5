@@ -14,23 +14,18 @@ class Statistical extends Model
         return DB::select('SELECT * FROM invoices WHERE `order_date` BETWEEN ? AND ? ORDER BY `order_date` ASC', $params);
     }
 
-    public function statisticalByProduct($params) {
+    public function statisticalByProduct() {
         return DB::select('SELECT
         p.name AS name_product,
         COUNT(dti.amount) AS total_product_order,
         p.price * COUNT(dti.amount) AS total_price
-        FROM
-            products AS p
-        INNER JOIN detail_invoice AS dti
-        ON
-            p.id = dti.id_product
-        WHERE dti.create_at
-        BETWEEN ? 
-        AND ? 
-        ORDER BY dti.create_at
-        ASC
-        GROUP BY
-            p.name', 
-        $params);
+    FROM
+        products AS p
+    INNER JOIN detail_invoice AS dti
+    ON
+        p.id = dti.id_product
+    GROUP BY
+        p.id,
+        p.name,p.price');
     }
 }
