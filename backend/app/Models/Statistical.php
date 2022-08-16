@@ -38,9 +38,11 @@ class Statistical extends Model
 
     public function statisticalWithMostFrequent() {
         return DB::select('SELECT
-        i.id_user
+        i.id_user, users.ten, users.img, users.dia_chi
         FROM
             invoices AS i
+        INNER JOIN users
+        ON users.id = i.id_user
         GROUP BY
             i.id_user
         ORDER BY
