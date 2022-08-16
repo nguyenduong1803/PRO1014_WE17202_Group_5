@@ -137,6 +137,7 @@ Route::group(['namespace' => 'Statistical', 'prefix' => 'statistical'], function
     Route::middleware('auth:api') -> group(function () {
         Route::post('statisticalByInvoices', [\App\Http\Controllers\Api\Statistical\StatisticalController::class, 'statisticalByInvoices']);
         Route::get('statisticalByProduct', [\App\Http\Controllers\Api\Statistical\StatisticalController::class, 'statisticalByProduct']);
+        Route::get('statisticalWithMostFrequent', [\App\Http\Controllers\Api\Statistical\StatisticalController::class, 'statisticalWithMostFrequent']);
     });
 });
 
