@@ -35,4 +35,17 @@ class Statistical extends Model
         p.id,
         p.name,p.price');
     }
+
+    public function statisticalWithMostFrequent() {
+        return DB::select('SELECT
+        i.id_user
+        FROM
+            invoices AS i
+        GROUP BY
+            i.id_user
+        ORDER BY
+            COUNT(*)
+        DESC
+        LIMIT 10');
+    }
 }

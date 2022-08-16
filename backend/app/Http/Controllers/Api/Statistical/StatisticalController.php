@@ -28,4 +28,11 @@ class StatisticalController extends Controller
         return response() ->json(["data" => $data, "status" => true],200);
         
     }
+
+    public function statisticalWithMostFrequent() {
+        $statisticalModel = new Statistical();
+        $data = $statisticalModel -> statisticalWithMostFrequent();
+        return response() ->json(["data" => $data, "status" => true],200);
+        
+    }
 }
