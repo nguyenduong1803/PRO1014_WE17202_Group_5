@@ -11,7 +11,25 @@ class Statistical extends Model
     use HasFactory;
 
     public function statisticalByInvoices($params) {
-        return DB::select('SELECT * FROM invoices WHERE `order_date` BETWEEN ? AND ? ORDER BY `order_date` ASC', $params);
+        return DB::select('SELECT
+        i.id_invoice,
+        i.total_price,
+        COUNT(dtbi.id_table) AS total_table_order,
+        COUNT(dti.amount) as total_product_order
+        FROM
+            invoices AS i
+        INNER JOIN detail_table_invoice AS dtbi
+        ON
+            dtbi.id_invoice = i.id_invoice
+        INNER JOIN detail_invoice AS dti
+        ON
+            dtbi.id_invoice = dti.id_invoice
+        WHERE
+            `order_date` BETWEEN ? AND ?
+        GROUP BY
+            i.id_invoice, i.total_price
+        ORDER BY
+            `order_date` ASC', $params);
     }
 
     public function statisticalByProduct() {
