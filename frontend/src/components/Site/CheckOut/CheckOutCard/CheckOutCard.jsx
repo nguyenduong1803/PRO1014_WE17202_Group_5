@@ -90,7 +90,7 @@ function CheckOutCard() {
       </div>
       <div className={styles.infomation}>
         <div className={styles.name}>
-          <p className={styles.titleName}>Tên Trên Thẻ</p>
+          <p className={styles.titleName}>Tên người nhận</p>
           <Stack
             component="form"
             sx={{
@@ -112,7 +112,7 @@ function CheckOutCard() {
           </Stack>
         </div>
         <div className={styles.name}>
-          <p className={styles.titleName}>Mã Trên Thẻ</p>
+          <p className={styles.titleName}>Địa Chỉ</p>
           <Stack
             component="form"
             sx={{
@@ -132,7 +132,7 @@ function CheckOutCard() {
         </div>
         <div className={`${styles.dateCvv} row`}>
           <div className={`${styles.date} col-lg-6`}>
-            <p  className={styles.titleName}>Ngày Hết Hạn</p>
+            <p  className={styles.titleName}>Số điện thoại</p>
             <Stack
               component="form"
               sx={{
@@ -151,7 +151,7 @@ function CheckOutCard() {
             </Stack>
           </div>
           <div className={`${styles.date} col-lg-6`}>
-            <p  className={styles.titleName}>CVV</p>
+            <p  className={styles.titleName}>Ghi chú</p>
             <Stack
               component="form"
               sx={{

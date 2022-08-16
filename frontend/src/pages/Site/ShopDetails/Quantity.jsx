@@ -12,27 +12,18 @@ function Quantity({ setQuantity, quantity, id }) {
         else dispatch(addQuantityOrder({ id, quantity: Number(value) }));
 
     };
-    const decreaseQuantity = () => {
-        if (quantity > 0) {
-            dispatch(addQuantityOrder({ id, quantity: quantity - 1 }));
-        }
-    };
-    const increaseQuantity = () => {
-        dispatch(addQuantityOrder({ id, quantity: quantity + 1 }));
-
-    };
+    
 
     return (
         <div className={styles.quantity}>
-            <button onClick={() => decreaseQuantity()}><RemoveIcon className={styles.RemoveIcon} /></button>
             <input
-                type="text"
+                type="number"
                 className={styles.productQuantity}
                 value={quantity}
                 onChange={(e) => handleChange(e)}
+                
                 onKeyPress={(event) => { !(/^[0-9]/.test(event.key)) && event.preventDefault(); }}
             />
-            <button onClick={() => increaseQuantity()}><AddIcon className={styles.RemoveIcon} /></button>
         </div>
     )
 }
