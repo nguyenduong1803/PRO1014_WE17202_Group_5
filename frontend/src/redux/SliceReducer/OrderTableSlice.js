@@ -287,7 +287,7 @@ export const getAllOrder = createAsyncThunk("orderTable/getAllOrder", async (pay
                 q: payload?.keySearch || "",
                 status_envoice: payload?.status,
                 page: payload?.page || 1,
-                limit: payload?.limit || 10,
+                limit: payload?.limit || 1,
             },
             headers: { "Authorization": `Bearer ${getToken()}` },
         })
