@@ -47,7 +47,7 @@ function Dashboard() {
             }).catch(function (err) {
             })
 
-    })
+    }, [])
     return (
         <>
             <Sidebar />
