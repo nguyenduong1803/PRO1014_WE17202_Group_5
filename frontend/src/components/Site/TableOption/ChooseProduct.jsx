@@ -71,9 +71,13 @@ function ChooseProduct({ className }) {
             <div className="content__cart-box row">
                 {loadingProduct === "loading" ? <LoadingSearch /> :
                     products && products.length > 0 ? products.map((product, index) => {
+                        let indexImg=0
+                        if(product.listsImg.length>1){
+                          indexImg =product.listsImg.length-1
+                        }
                         return (
                             <div className={" col-lg-6"} key={index}>
-                                <ProductChoose name={product.name} price={product.price} id={product.id} img={product.listsImg[0]} />
+                                <ProductChoose name={product.name} price={product.price} id={product.id} img={product.listsImg[indexImg]} />
                             </div>
                         )
                     }) : <h2 className={styles.emptyTitle}>Không tìm thấy sản phẩm nào</h2>

@@ -287,7 +287,7 @@ export const getAllOrder = createAsyncThunk("orderTable/getAllOrder", async (pay
                 q: payload?.keySearch || "",
                 status_envoice: payload?.status,
                 page: payload?.page || 1,
-                limit: payload?.limit || 1,
+                limit: payload?.limit || 10,
             },
             headers: { "Authorization": `Bearer ${getToken()}` },
         })
@@ -396,10 +396,10 @@ export const deleteDetailOrder = createAsyncThunk("orderTable/deleteDetailOrder"
 export const updateDetailTable = createAsyncThunk("orderTable/updateDetailTable", async (payload) => {
     let payloads
     await axios
-        .post(api + `detail-table-invoice/update`, {
+        .put(api + `detail-table-invoice/update`, {
             id_invoice: payload.id,
-            list_id_table_invoice: payload.idTable,
-            list_id_table: payload.idProduct,
+            list_id_table_invoice: payload.oldIdTables,
+            list_id_table: payload.newIdTables,
         }, {
             headers: {
                 "Authorization": `Bearer ${getToken()}`

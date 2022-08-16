@@ -16,6 +16,8 @@ function OrderDetail() {
   const role = useSelector(selectRoleUser)
   const orderId = window.location.pathname.split("/")[2]
   const myOder = orders?.data?.find(ele => ele.id_invoice === orderId)
+  
+  const  listTables =myOder?.listDetailTbInvoice?.map(item=>item.id_table)
   React.useEffect(() => {
     if (role === 1 || role === 3) {
       dispatch(getAllOrder())
@@ -31,6 +33,7 @@ function OrderDetail() {
             id={1}
             img={""}
             orders={myOder}
+            listTables={listTables}
           />
           {/* <div>
             <Statistical />

@@ -92,7 +92,6 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
             dispatch(updateOrderTable(order))
             setActiveStep(1);
         }
-        console.log(order)
         // setActiveStep(1);
     }
 

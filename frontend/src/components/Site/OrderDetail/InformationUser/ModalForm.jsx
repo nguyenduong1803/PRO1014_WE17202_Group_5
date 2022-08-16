@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import styles from "./InformationUser.module.css";
 import SelectMultiTable from './SelectMultiTable';
 import CelendarOption from '../../Calendar/CelendarOption';
-import { updateOrder } from '../../../../redux/SliceReducer/OrderTableSlice';
+import { updateDetailTable, updateOrder } from '../../../../redux/SliceReducer/OrderTableSlice';
 import { useDispatch } from 'react-redux';
 import ToastMess from '../../ToastMess/ToastMess';
 
@@ -20,12 +20,14 @@ const style = {
     p: 4,
 };
 
-export default function ModalForm({ open, handleClose, order, setOrder, setNotify, notify, id }) {
+export default function ModalForm({ open, handleClose, order, setOrder, setNotify, notify, id ,listTables}) {
     const dispatch = useDispatch()
     const [state, setState] = React.useState(false)
+   const idInvoice=window.location.pathname.split("/")[2]
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateOrder({ id, order }))
+        dispatch(updateDetailTable({id:idInvoice,oldIdTables:listTables,newIdTables:order.tableId}))
         handleClose()
         setState(true)
     }
@@ -41,7 +43,7 @@ export default function ModalForm({ open, handleClose, order, setOrder, setNotif
                 <Box sx={style}>
                     <h4 className={styles.formTitle}>Sửa thông tin </h4>
                     <form onSubmit={e => handleSubmit(e)}>
-                        <SelectMultiTable setOrder={setOrder} />
+                        <SelectMultiTable setOrder={setOrder} listTables={listTables} />
                         <div className={`${styles.wrapCelandar} form-group`}>
                             <CelendarOption
                                 setNotify={setNotify}
