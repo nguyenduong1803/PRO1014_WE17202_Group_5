@@ -143,8 +143,8 @@ class InvoicesController extends Controller
             $listDetailInvoice = $modelDetailInvoice -> getListDetailInvoice($params2);
             $data[$i] -> listDetailInvoice = $listDetailInvoice;
             $totalPrice = 0;
+            $timeUpdateAt = date("Y-m-d H:i:s",time());
             for($j = 0; $j < count($listDetailInvoice); $j++) {
-                $timeUpdateAt = date("Y-m-d H:i:s",time());
                 $detail = $modelProduct ->detailProduct($listDetailInvoice[$j] -> id_product);
                 $totalPrice += (float) $detail['price'] * $listDetailInvoice[$j] -> amount;
             }
