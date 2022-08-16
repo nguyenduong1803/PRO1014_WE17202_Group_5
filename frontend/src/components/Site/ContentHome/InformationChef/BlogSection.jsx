@@ -28,7 +28,7 @@ function BlogSection() {
                 <div className="section-heading text-center">
                     <div className="row">
                         <div className="col-lg-8 offset-lg-2">
-                            <div className={styles.subTitle}>INFOMATION</div>
+                            <div className={styles.subTitle}>Về chúng tôi</div>
                             <h2 className={styles.sectionTitle}>About us</h2>
                             <p className={styles.contentitle}>Đầu bếp hàng đầu Việt Nam</p>
                         </div>

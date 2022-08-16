@@ -18,7 +18,7 @@ function Categories() {
         className="justify-content-between d-flex align-items-center "
         style={{ padding: "20px 0" }}
       >
-        <div className={styles.title}>Danh mục</div>
+        <div className={styles.title} style={{fontWeight:"600",fontSize:"20px"}}>Danh mục</div>
         <div className={styles.viewAll}>Xem tất cả <span className={styles.icon}><ChevronRightIcon /></span> </div>
       </div>
       <div className='row'>
