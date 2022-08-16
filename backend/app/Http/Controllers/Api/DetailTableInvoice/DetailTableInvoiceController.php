@@ -30,33 +30,34 @@ class DetailTableInvoiceController extends Controller
         
         $listIdTableInvoice = $validate['list_id_table_invoice'];
         $listIdTable = $validate['list_id_table'];
+        $timeStamp = date("Y-m-d H:i:s",time());
         for($i = 0; $i < count($listIdTableInvoice); $i++) {
-            for($j = 0; $j < count($listIdTable); $j++) {
-                $detailTables = $modelDetailTableInvoice -> getDetailTableInvoice($listIdTableInvoice[$i]);
-                $result = $modelDetailTableInvoice -> checkExistsTableInvoice($listIdTable[$j]);
-                $resultCheckTable = $modelTables -> checkStatusTable($listIdTable[$j], 3);
-                if(isset($result)) return response() ->json(["msg" => "Bàn này đã tồn tại, vui lòng chọn bàn khác!", "status" => false],402);
-                if(!isset($resultCheckTable)) return response() ->json(["msg" => "Bàn này không tôn tại, vui lòng chọn bàn khác!", "status" => false],404);
-                $updateTimeUpdateAt = date("Y-m-d H:i:s",time());
-                $currTableInvoice = $detailTables['id_table'];
-                $params = [
-                    $listIdTable[$j],
-                    $updateTimeUpdateAt,
-                    $listIdTableInvoice[$i]
-                ];
-                $paramsUpdateTables = [
+            $detailTables = $modelDetailTableInvoice -> getDetailTableInvoice($listIdTableInvoice[$i]);
+            $currTableInvoice = $detailTables['id_table'];
+            $paramsDelete = [
                     2,
-                    $listIdTable[$j]
-                ];
-                $paramsUpdateTables2 = [
-                    3,
-                    $currTableInvoice
-                ];
-                $modelTables ->updateDetailStatus($paramsUpdateTables2);
-                $modelTables ->updateDetailStatus($paramsUpdateTables);
-                $modelDetailTableInvoice -> updateTableInvoice($params);
-            }
-        }        
+                    $timeStamp,
+                    $listIdTableInvoice[$i]
+            ];
+            $paramsUpdateTables2 = [
+                3,
+                $currTableInvoice
+            ];
+            $modelDetailTableInvoice -> deleteDetailTableIv($params);
+            $modelTables ->updateDetailStatus($paramsUpdateTables2);
+        }
+        for($j = 0; $j < count($listIdTable); $j++) {
+            $params = [
+                $listIdTable[$i],
+                $uniIdInvoice
+            ];
+            $this -> create($params);
+            $paramsUpdateTables = [
+                2,
+                $listIdTable[$j]
+            ];
+            $modelTables ->updateDetailStatus($paramsUpdateTables);
+        }     
         return response() ->json(["msg" => "Cập nhật bàn thành công!", "status" => true],200);
     }
 }
