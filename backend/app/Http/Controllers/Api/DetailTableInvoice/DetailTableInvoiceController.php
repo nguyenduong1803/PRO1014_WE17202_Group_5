@@ -33,6 +33,7 @@ class DetailTableInvoiceController extends Controller
         $timeStamp = date("Y-m-d H:i:s",time());
         for($i = 0; $i < count($listIdTableInvoice); $i++) {
             $detailTables = $modelDetailTableInvoice -> getDetailTableInvoice($listIdTableInvoice[$i]);
+            if(!isset($detailTables)) return response() ->json(["msg" => "Không có dữ liệu phù hợp", "status" => false],404);
             $currTableInvoice = $detailTables['id_table'];
             $paramsDelete = [
                     2,
@@ -43,13 +44,13 @@ class DetailTableInvoiceController extends Controller
                 3,
                 $currTableInvoice
             ];
-            $modelDetailTableInvoice -> deleteDetailTableIv($params);
+            $modelDetailTableInvoice -> deleteDetailTableIv($paramsDelete);
             $modelTables ->updateDetailStatus($paramsUpdateTables2);
         }
         for($j = 0; $j < count($listIdTable); $j++) {
             $params = [
-                $listIdTable[$i],
-                $uniIdInvoice
+                $listIdTable[$j],
+                $validate['id_invoice']
             ];
             $this -> create($params);
             $paramsUpdateTables = [
