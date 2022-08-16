@@ -34,4 +34,7 @@ class DetailTableInvoice extends Model
             -> where('is_delete', 1)
             -> first();
     }
+    public function deleteDetailTableIv($params) {
+        DB::update("UPDATE detail_table_invoice SET `is_delete` = ?, `delete_at` = ? WHERE `id` = ?", $params);
+    }
 }

@@ -22,8 +22,17 @@ class StatisticalController extends Controller
         $data = $statisticalModel -> statisticalByInvoices($params);
         return response() ->json(["data" => $data, "status" => true],200);
     }
-    public function statisticalByRevenue(Request $request) {
+    public function statisticalByProduct(Request $request) {
         $statisticalModel = new Statistical();
+        $dayNow = Carbon::now('Asia/Ho_Chi_Minh') ->toDateTimeString();
+        $filterDate = $request -> get('filterDate');
+        $subDays = isset($filterDate) ? Carbon::now('Asia/Ho_Chi_Minh') -> subdays($filterDate) ->toDateTimeString() : $dayNow;
+        $params = [
+            $subDays,
+            $dayNow
+        ];
+        $data = $statisticalModel -> statisticalByProduct($params);
+        return response() ->json(["data" => $data, "status" => true],200);
         
     }
 }
