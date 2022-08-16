@@ -47,26 +47,7 @@ function CheckOutProducts() {
             <p className={styles.titleP}>Bạn có ... mặt hàng trong giỏ hàng của tôi</p>
           </div>
           <div className={styles.sort}>
-            <div>
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 100 }}>
-                <InputLabel id="demo-simple-select-standard-label">Sắp Xếp</InputLabel>
-                <Select
-                  labelId="demo-simple-select-standard-label"
-                  id="demo-simple-select-standard"
-                  value={0}
-                  onChange={() => { }}
-                  label="Age"
-                  defaultValue=""
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
+            
           </div>
         </div>
         {productsCart.map((list, index) => {
