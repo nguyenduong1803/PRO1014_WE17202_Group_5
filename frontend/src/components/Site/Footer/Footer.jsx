@@ -79,29 +79,18 @@ const contacts = [
 ];
 const company = [
   {
-    name: "Freebies",
+    name: "Số Điện thoại: 0982967644",
     href: "#",
   },
   {
-    name: "Hope UI",
+    name: "Email: duongcoi1803@gmail.com",
     href: "#",
   },
   {
-    name: "Graphina",
+    name: "Địa chỉ: 26 Phú Kiều-Kiều Mai-Phúc Diễn-Từ Liêm-Hà Nội",
     href: "#",
   },
-  {
-    name: "Business",
-    href: "#",
-  },
-  {
-    name: "WordPress",
-    href: "#",
-  },
-  {
-    name: "Mobile App Development",
-    href: "#",
-  },
+ 
 ];
 function Footer() {
   return (

@@ -30,6 +30,14 @@
     position: absolute;
     margin: -250px 50px;
 }
+.phoneNumber{
+    position: relative;
+    top:-2px;
+    right: -5px;
+    font-size: 17px;
+    font-weight: 600;
+    color:var(--primaryColor);
+}
 /* .content::after{
     display: block;
     position: absolute;
@@ -54,6 +62,7 @@
     font-size: 2.2rem;
     text-shadow: 2px -2px 2px #fff;
     font-family: "Playfair Display",serif;
+    margin-bottom: 12px;
 }
 .note{
     padding: 20px 0;
@@ -143,3 +152,50 @@
 }
 
   
+/* Base Styling */
+
+.phone {
+    height:32px;
+    line-height:32px;
+    font-size:18px;
+    font-weight:bold;
+    color:#333333;
+    margin-bottom: 12px;
+  }
+  .phone svg {
+    width:24px;
+    height:24px;
+  }
+  .phone svg path {
+    fill:#f03454;
+  }
+  .phone svg path:nth-child(2) {
+    -webkit-animation: header-phone 1s infinite cubic-bezier(.1, .57, .5, 1);
+    animation: header-phone 1s infinite cubic-bezier(.1, .57, .5, 1);
+  }
+  .phone svg path:nth-child(3) {
+    -webkit-animation:header-phone2 1s infinite cubic-bezier(.1, .57, .5, 1);
+    animation:header-phone2 1s infinite cubic-bezier(.1, .57, .5, 1);
+  }
+  
+  
+  
+  
+  /* Animate phone */
+  
+  @-webkit-keyframes header-phone {
+    0%,30% {opacity:0; -webkit-transform:translate3d(-20px, 20px, 0); transform:translate3d(-20px, 20px, 0)}
+    80% {opacity:1; -webkit-transform:translate3d(0, 0, 0); transform:translate3d(0, 0, 0)}
+    100%{opacity:0}}
+  @keyframes header-phone {
+    0%,30%{opacity:0; -webkit-transform:translate3d(-20px, 20px, 0); transform:translate3d(-20px, 20px, 0)}
+    80%{opacity:1; -webkit-transform:translate3d(0, 0, 0); transform:translate3d(0, 0, 0)}
+    100%{opacity:0}}
+  @-webkit-keyframes header-phone2 {
+    0%{opacity:0; -webkit-transform:translate3d(-20px, 20px, 0); transform:translate3d(-20px, 20px, 0)}
+    70%,90%{opacity:1; -webkit-transform:translate3d(0, 0, 0); transform:translate3d(0, 0, 0)}
+    100%{opacity:0}}
+  @keyframes header-phone2 {
+    0%{opacity:0; -webkit-transform:translate3d(-20px, 20px, 0); transform:translate3d(-20px, 20px, 0)}
+    70%,90%{opacity:1; -webkit-transform:translate3d(0, 0, 0); transform:translate3d(0, 0, 0)}
+    100%{opacity:0}}
