@@ -12,7 +12,7 @@ class Statistical extends Model
 
     public function statisticalByInvoices($params) {
         return DB::select('SELECT
-        SUM(i.total_price)
+        SUM(i.total_price) as total_price
         FROM
             invoices AS i
         WHERE
