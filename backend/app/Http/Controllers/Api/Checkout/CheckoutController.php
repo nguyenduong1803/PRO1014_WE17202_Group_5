@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Checkout\CheckoutVnPay;
 use App\Models\Invoices;
 use App\Models\PaymentVnPay;
+use App\Models\PaymentCash;
 use App\Http\Requests\Checkout\CreateInfoPaymentVNPay;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Checkout\CheckoutPaymentCash;
 
 
 class CheckoutController extends Controller
@@ -128,5 +130,19 @@ class CheckoutController extends Controller
         $modelPaymentVNpay -> create($params);
         $modelInvoices -> updateStatusOrderDateInvoice($params2);
         return response() ->json(["msg" => "Lưu thông tin thanh toán hoá đơn thành công!", "status" => true],200);
+    }
+
+    public function checkoutPaymentCash(CheckoutPaymentCash $request) {
+        $validate = $request -> validated();
+        $modelPaymentCash = new PaymentCash();
+        $params = [
+            $validate['name'],
+            $validate['description'],
+            $validate['phone'],
+            $validate['address'],
+            $validate['purchase_status'],
+            $validate['status_order']
+        ];
+        return response() ->json(["msg" => "Vui lòng thanh toán sau khi nhận được đơn hàng, cảm ơn quý khách đã sử dụng dịch cụ của chúng tôi!", "status" => true],200);
     }
 }

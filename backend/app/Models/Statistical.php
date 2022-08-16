@@ -12,23 +12,13 @@ class Statistical extends Model
 
     public function statisticalByInvoices($params) {
         return DB::select('SELECT
-        i.id_invoice,
-        i.total_price,
-        COUNT(dti.amount) as total_product_order
+        SUM(i.total_price)
         FROM
             invoices AS i
-        INNER JOIN detail_table_invoice AS dtbi
-        ON
-            dtbi.id_invoice = i.id_invoice
-        INNER JOIN detail_invoice AS dti
-        ON
-            dtbi.id_invoice = dti.id_invoice
         WHERE
             `order_date` BETWEEN ? AND ?
-        GROUP BY
-            i.id_invoice, i.total_price
         ORDER BY
-            `order_date` ASC', $params);
+        `order_date` ASC', $params);
     }
 
     public function statisticalByProduct() {
