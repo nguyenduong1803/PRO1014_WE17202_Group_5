@@ -20,14 +20,14 @@ const style = {
     p: 4,
 };
 
-export default function ModalForm({ open, handleClose, order, setOrder, setNotify, notify, id ,listTables}) {
+export default function ModalForm({ open, handleClose, order, setOrder, setNotify, notify, id ,listIdDetail,listTables}) {
     const dispatch = useDispatch()
     const [state, setState] = React.useState(false)
    const idInvoice=window.location.pathname.split("/")[2]
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(updateOrder({ id, order }))
-        dispatch(updateDetailTable({id:idInvoice,oldIdTables:listTables,newIdTables:order.tableId}))
+        dispatch(updateDetailTable({id:idInvoice,oldIdTables:listIdDetail,newIdTables:order.tableId}))
         handleClose()
         setState(true)
     }

@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import ModalPayment from "./ModalPayment";
 import { formatMoney } from "../../../../extensions/formatMoney";
 
-function InformationUser({ orders, listTables }) {
+function InformationUser({ orders, listTables,listIdDetail}) {
   const [open, setOpen] = React.useState(false);
   const [openPay, setOpenPay] = React.useState(false);
   const role = useSelector(selectRoleUser)
@@ -81,6 +81,7 @@ function InformationUser({ orders, listTables }) {
         setOrder={setOrder}
         order={order}
         id={orders?.id}
+        listIdDetail={listIdDetail}
         listTables={listTables}
       />
       <ModalPayment
