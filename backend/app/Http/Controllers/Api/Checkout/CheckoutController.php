@@ -134,6 +134,7 @@ class CheckoutController extends Controller
 
     public function checkoutPaymentCash(CheckoutPaymentCash $request) {
         $validate = $request -> validated();
+        $user = Auth::user();
         $modelPaymentCash = new PaymentCash();
         $params = [
             $validate['name'],
@@ -141,8 +142,11 @@ class CheckoutController extends Controller
             $validate['phone'],
             $validate['address'],
             $validate['purchase_status'],
-            $validate['status_order']
+            $validate['status_order'],
+            $validate['price'],
+            $user['id']
         ];
+        $modelPaymentCash -> create($params);
         return response() ->json(["msg" => "Vui lòng thanh toán sau khi nhận được đơn hàng, cảm ơn quý khách đã sử dụng dịch cụ của chúng tôi!", "status" => true],200);
     }
 }
