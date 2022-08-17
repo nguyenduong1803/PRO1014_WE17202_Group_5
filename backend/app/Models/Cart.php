@@ -32,7 +32,7 @@ class Cart extends Model
         ON
             c.id_product = p.id
         WHERE
-            c.id_user = 5 AND c.is_delete = 1 AND p.is_delete = 1
+            c.id_user = ? AND c.is_delete = 1 AND p.is_delete = 1
         GROUP BY
             c.id_product
         ORDER BY

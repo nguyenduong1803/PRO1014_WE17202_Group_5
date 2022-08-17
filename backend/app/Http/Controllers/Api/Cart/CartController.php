@@ -27,7 +27,6 @@ class CartController extends Controller
         $user = Auth::user();
         $params = [
             $user['id'],
-            $user['id'],
         ];
         $modelCart = new Cart();
         $data = $modelCart ->getCart($params);
