@@ -28,6 +28,7 @@ function Pay() {
   const dispatch = useDispatch();
   useEffect(() => {
     (async function () {
+      const typeCheckout = localStorage.getItem("typeCheckout");
       const params = {
         vnp_Amount,
         vnp_BankCode: "NCB",
@@ -39,7 +40,8 @@ function Pay() {
         vnp_TransactionNo,
         vnp_TransactionStatus,
         vnp_TxnRef,
-        id_invoices: localStorage.getItem("id_invoices"),
+        id_invoices:
+          typeCheckout === "2" ? "" : localStorage.getItem("id_invoices"),
       };
       const params2 = {
         id: localStorage.getItem("id_invoices"),
@@ -51,13 +53,27 @@ function Pay() {
           await axios.post(api + `checkout/saveInfoPaymentVNPay`, params, {
             headers: { Authorization: `Bearer ${getToken()}` },
           });
-          dispatch(updateOrder(params2));
+
+          if (typeCheckout === "2") clearAllOrderCartUser();
+          else dispatch(updateOrder(params2));
         } catch (error) {
           setStatusPayment(false);
         }
       }
     })();
   }, []);
+  async function clearAllOrderCartUser() {
+    try {
+      await axios.get(
+        api + `cart/clearAllOrderCartUser`,
+        {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        }
+      );
+    } catch (error) {
+      alert("That bai");
+    }
+  }
   useEffect(() => {
     if (paymentMethod && paymentMethod === "1") {
       const params2 = {
@@ -67,9 +83,8 @@ function Pay() {
       dispatch(updateOrder(params2));
     }
   }, [paymentMethod]);
-  if(paymentMethod === '1') return <PaySucces />
-  if (!statusPayment || vnpResponseCode !== "00")
-  return <PayFail />;
+  if (paymentMethod === "1") return <PaySucces />;
+  if (!statusPayment || vnpResponseCode !== "00") return <PayFail />;
   return <PaySucces />;
 }
 

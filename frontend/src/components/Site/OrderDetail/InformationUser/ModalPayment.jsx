@@ -49,7 +49,9 @@ export default function ModalPayment({
   async function checkoutPaymentVnPay() {
     const params = {
       id_invoices: id,
+      typeCheckout: 1
     };
+    localStorage.setItem("typeCheckout",params.typeCheckout);
     const res = await axios.post(api + `checkout/vnpay`, params, {
       headers: { Authorization: `Bearer ${getToken()}` },
     });

@@ -57,21 +57,23 @@ function CheckOutCard() {
     setPaymentMethod(event.target.value);
   };
   async function checkoutPaymentVnPay() {
-    // const params = {
-    //   id_user: id,
-    // };
-    // const res = await axios.post(api + `checkout/vnpay`, params, {
-    //   headers: { Authorization: `Bearer ${getToken()}` },
-    // });
-    // if (res?.data?.code === "00") {
-    //   setMessToast("Bạn vui lòng chờ chuyển trang để thanh toán!");
-    //   setTimeout(() => {
-    //     window.open(res?.data?.data);
-    //   }, 1500);
-    // } else {
-    //   setMessToast("Đã xảy ra lỗi vui lòng thử lại!");
-    // }
-    // setState(true);
+    const params = {
+      id_invoices: 9999,
+      typeCheckout: 2
+    };
+    localStorage.setItem("typeCheckout",params.typeCheckout);
+    const res = await axios.post(api + `checkout/vnpay`, params, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    if (res?.data?.code === "00") {
+      setMessToast("Bạn vui lòng chờ chuyển trang để thanh toán!");
+      setTimeout(() => {
+        window.open(res?.data?.data);
+      }, 1500);
+    } else {
+      setMessToast("Đã xảy ra lỗi vui lòng thử lại!");
+    }
+    setState(true);
   }
   async function checkoutPaymentCash() {
     const params = {

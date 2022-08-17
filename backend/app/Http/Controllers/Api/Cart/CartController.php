@@ -66,4 +66,49 @@ class CartController extends Controller
         $modelCart -> updateOrder($params);
         return response() ->json(["msg" => "Cập nhật thành công!", "status" => true],200);
     }
+
+    public function getCart2() {
+        $user = Auth::user();
+        $params = [
+            $user['id'],
+            $user['id'],
+        ];
+        $modelCart = new Cart();
+        $data = $modelCart ->getCart($params);
+        return $data;
+    }
+
+    public function getAllPrices() {
+        $user = Auth::user();
+        $params = [
+            $user['id'],
+            $user['id'],
+        ];
+        $modelCart = new Cart();
+        $data = $modelCart ->getCart($params);
+        $sumPrice = 0;
+        for ($i=0; $i < count($data); $i++) { 
+            $sumPrice += (int) $data[$i]->total_amount * (float) $data[$i]->price;
+        }
+        return $sumPrice;
+    }
+
+    public function clearAllOrderCartUser() {
+        $user = Auth::user();
+        $modelCart = new Cart();
+        $params2 = [
+            $user['id']
+        ];
+        $allOrder = $modelCart -> getAllOrderCheckoutByUser($params2);
+        for($i = 0; $i < count($allOrder); $i++) {
+            $timeStamp = date("Y-m-d H:i:s",time());
+            $params3 = [
+                2,
+                $timeStamp,
+                $user['id']
+            ];
+            $modelCart -> deleteAllOrderCheckByUser($params3);
+        }
+        return response() ->json(["msg" => "Cập nhật thành công!", "status" => true],200);
+    }
 }
