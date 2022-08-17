@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Cart\SaveCart;
 use App\Http\Requests\Cart\UpdateOrder;
 use App\Models\Cart;
-use App\Models\Tables;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -16,12 +14,11 @@ class CartController extends Controller
         $validate = $request -> validated();
         $user = Auth::user();
         $modelCart = new Cart();
-        $purchaseStatus = isset($validate['id_table_book']) ? 2 : 1;
+        $purchaseStatus = $validate['purchase_status'];
         $params = [
             $user['id'],
             $validate['id_product'],
             $validate['amount'],
-            $validate['id_table_book'],
             $purchaseStatus,
         ];
         $modelCart ->saveCart($params);
@@ -31,6 +28,7 @@ class CartController extends Controller
     public function getCart() {
         $user = Auth::user();
         $params = [
+            $user['id'],
             $user['id'],
         ];
         $modelCart = new Cart();
@@ -62,14 +60,12 @@ class CartController extends Controller
         if(!isset($detailOrder)) return response() ->json(["msg" => "Đã xảy ra lỗi", "status" => false],405);
         $user = Auth::user();
         $updateAmount=  isset($validate['amount']) ? $validate['amount'] : $detailOrder['amount'];
-        $updateIdTableBook=  isset($validate['id_table_book']) ? $validate['id_table_book'] : $detailOrder['id_table_book'];
         $updateStatusCartOrder=  isset($validate['status_cart_order']) ? $validate['status_cart_order'] : $detailOrder['status_cart_order'];
-        $purchaseStatus = isset($validate['id_table_book']) ? 2 : 1;
+        $purchaseStatus = isset($validate['purchase_status']) ? $validate['purchase_status'] :$detailOrder['purchase_status'];
         $timeUpdateAt = date("Y-m-d H:i:s",time());
         $params = [
             $user['id'],
             $updateAmount,
-            $updateIdTableBook,
             $purchaseStatus,
             $updateStatusCartOrder,
             $timeUpdateAt,

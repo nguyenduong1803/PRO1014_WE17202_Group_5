@@ -48,7 +48,7 @@ function Product({ img, title, price, id }) {
   const { vertical, horizontal, open } = state;
   const handleClick = (newState) => () => {
     if (getToken()) {
-      dispatch(addCart({ id: id, amount: 1 }))
+      dispatch(addCart({ id: id, amount: 1, purchase_status: 1 }))
       setState({ open: true, ...newState });
       setNotifyAlert("Đã thêm vào giỏ hàng")
     } else {
