@@ -8,9 +8,14 @@ import { Bar } from "react-chartjs-2";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 import axios from 'axios';
 import { api } from '../../../utils/api';
-const listDay=[1,10,20,30,40,50,100,150,200,365]
+import { formatMoney } from '../../../extensions/formatMoney';
+const listDay = [1, 10, 20, 30, 40, 50, 100, 150, 200, 365]
 function Dashboard() {
     const [productStatic, setProductStatic] = React.useState([])
+    const [lastTime, setLastTime] = React.useState(listDay[10])
+    const [totalMoney, setTotalMoney] = React.useState(0)
+    const [userSold,setUserSold] = React.useState([])
+
     const stateDoughnut = {
         labels: productStatic?.map(ele => ele.name_product),
         datasets: [
@@ -34,7 +39,49 @@ function Dashboard() {
             }
         ]
     }
-    React.useEffect(async () => {
+    const stateUser = {
+        labels: userSold?.map(ele => ele.id_user),
+        datasets: [
+            {
+                label: 'Món ăn best seller',
+                backgroundColor: [
+                    '#B21F00',
+                    '#C9DE00',
+                    '#2FDE00',
+                    '#00A6B4',
+                    '#6800B4'
+                ],
+                hoverBackgroundColor: [
+                    '#501800',
+                    '#4B5000',
+                    '#175000',
+                    '#003350',
+                    '#35014F'
+                ],
+                data: userSold?.map(ele => ele.id_user)
+            }
+        ]
+    }
+    const handleChange = async (e) => {
+        setLastTime(e.target.value)
+        await axios
+            .post(api + `statistical/statisticalByInvoices`,
+                {
+                    "filterDate": e.target.value
+                },
+                {
+                    headers: {
+                        "Authorization": `Bearer ${getToken()}`
+                    },
+                })
+            .then(response => {
+                setTotalMoney(response.data.data[0].total_price)
+            }).catch(function (err) {
+            })
+    }
+
+    React.useEffect(async (e) => {
+        
         await axios
             .get(api + `statistical/statisticalByProduct`, {
                 headers: {
@@ -45,6 +92,33 @@ function Dashboard() {
                 setProductStatic(response.data.data)
             }).catch(function (err) {
             })
+        await axios
+            .post(api + `statistical/statisticalByInvoices`,
+                {
+                    "filterDate": lastTime
+                },
+                {
+                    headers: {
+                        "Authorization": `Bearer ${getToken()}`
+                    },
+                })
+            .then(response => {
+                setTotalMoney(response.data.data[0].total_price)
+            }).catch(function (err) {
+            })
+        await axios
+            .get(api + `statistical/statisticalWithMostFrequent`,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${getToken()}`
+                    },
+                })
+            .then(response => {
+                setUserSold(response.data.data)
+            }).catch(function (err) {
+            })
+
+
 
     }, [])
     return (
@@ -64,17 +138,17 @@ function Dashboard() {
                             <h3>Thống kê</h3>
                             <p style={{ color: `#75767E`, margin: "12px 0", fontSize: "17px" }}>5 món ăn bán được nhiều nhất</p>
                         </div>
-                        <div style={{margin:"0 24px"}}>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <div style={{ margin: "0 24px" }}>
+                            <select onChange={e => handleChange(e)} className="form-select form-select-sm" aria-label=".form-select-sm example">
                                 <option selected>Thống kê doanh thu</option>
-                               {listDay.map(day=>(
-                                <option value={day}>{day} Ngày trước</option>
-                               ))}
+                                {listDay.map(day => (
+                                    <option value={day}>{day} Ngày trước</option>
+                                ))}
                             </select>
                         </div>
                         <div style={{}}>
                             <h3>Tổng doanh thu: </h3>
-                            <p style={{ marginTop: `12px` }}>320000000 đ</p>
+                            <p style={{ marginTop: `12px` }}>{totalMoney&&formatMoney(totalMoney)} đ</p>
                         </div>
                     </div>
                     <div className={`${styles.chartSection}`} >
@@ -90,7 +164,7 @@ function Dashboard() {
                         <p style={{ marginTop: `30px`, textAlign: `center`, fontSize: `27px`, fontWeight: `600` }}>Khách đặt nhiều nhất </p>
 
                         <Doughnut
-                            data={stateDoughnut}
+                            data={stateUser}
                             options={{
                                 title: {
                                     display: true,
