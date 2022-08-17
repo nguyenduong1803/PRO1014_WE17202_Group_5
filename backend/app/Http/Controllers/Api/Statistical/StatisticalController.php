@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Statistical;
 use Carbon\Carbon;
+use App\Models\Invoices;
 
 class StatisticalController extends Controller
 {
@@ -31,7 +32,15 @@ class StatisticalController extends Controller
 
     public function statisticalWithMostFrequent() {
         $statisticalModel = new Statistical();
+        $modelInvoices = new Invoices();
         $data = $statisticalModel -> statisticalWithMostFrequent();
+        for($i = 0; $i < count($data); $i++) {
+            $params = [
+                $data[$i] -> id_user
+            ];
+            $data[$i] -> listInvoices = $modelInvoices -> getInvoicesStatisticalWithMostFrequent($params);
+
+        }
         return response() ->json(["data" => $data, "status" => true],200);
         
     }

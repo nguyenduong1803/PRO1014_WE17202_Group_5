@@ -72,4 +72,8 @@ class Invoices extends Model
         `update_at` = ?
         WHERE `id` = ?", $params);
     }
+
+    public function getInvoicesStatisticalWithMostFrequent($params) {
+        return DB::select('SELECT * FROM `invoices` WHERE `id_user` = ? AND `is_delete` = 1', $params);
+    }
 }
