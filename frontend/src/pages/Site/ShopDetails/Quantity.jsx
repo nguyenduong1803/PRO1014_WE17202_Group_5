@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./ProductDetails.module.css";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import { useDispatch } from "react-redux";
-import { addQuantityOrder } from "../../../redux/SliceReducer/OrderTableSlice";
-import axios from "axios";
-import { api } from "../../../utils/api";
-import { getToken } from "../../../utils/Common";
-function Quantity({ setQuantity, quantity, idCart }) {
+
+function Quantity({  quantity }) {
     const handleChange = (event) => {
-        const value = event.target.value.replace(/[^0-9]/g, "");
-        console.log(value);
+        // const value = event.target.value.replace(/[^0-9]/g, "");
     };
     // const decreaseQuantity = () => {
     //     if (quantity < 1) return;

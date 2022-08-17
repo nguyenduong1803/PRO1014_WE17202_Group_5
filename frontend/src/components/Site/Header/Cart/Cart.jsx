@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Cart.module.css";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
-import CloseIcon from "@mui/icons-material/Close";
 import ProductCart from "./ProductCart";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../../../redux/selector";

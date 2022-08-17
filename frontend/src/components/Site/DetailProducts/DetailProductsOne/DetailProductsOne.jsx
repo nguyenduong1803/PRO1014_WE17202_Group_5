@@ -84,7 +84,7 @@ function DetailProductsOne() {
                 ))}
               </div>
             </div>
-              <Button variant="contained" className={styles.button}>
+              <Button onClick={()=>{}} variant="contained" className={styles.button}>
                 Thêm vào giỏ hàng
               </Button>{" "}
             {/* <Button variant="contained" className={styles.button}>
