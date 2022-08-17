@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import styles from './Register.module.css'
-import FBImg from '../../../assets/images/social-icons/FBImg.png'
-import GmailImg from '../../../assets/images/social-icons/GmailImg.png'
 import logoMau from "../../../assets/img/logoSea.png"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom";
@@ -10,17 +8,13 @@ import { InputPassword, InputTextField } from './InputMui'
 import UploadImage from './UploadImage'
 import BannerAnimation from './BannerAnimation'
 import { registerAccounts } from '../../../redux/SliceReducer/AccountSlice'
-import { selectIsuccess, selectLoadingRegister } from '../../../redux/selector'
-import Loadings from '../Loading/Loadings/Loadings'
-import { Alert } from 'react-bootstrap'
 
 
 function ContentRegister() {
-    const load = useSelector(selectLoadingRegister)
 
     return (
         <>
-            {load === "loading" ? <Loadings /> : Alert("đăng kí thành công")}
+            
             <div className={`${styles.main} d-flex`}>
                 <div className={`${styles.sideBar}`}>
                     <div className={`${styles.signUp}`}>
@@ -54,7 +48,7 @@ const FormRegister = () => {
         gender: '',
         image: ''
     })
-    
+
     const { email, name, dob, address, phone, gender, image } = input
     const ngaySinh = `${dob.getFullYear()}-${dob.getMonth() + 1}-${dob.getDate()}`
     const formRegister = new FormData();
@@ -93,8 +87,6 @@ const FormRegister = () => {
         //     showPassword: false,
         // })
     }
-    const isSuccess = useSelector(selectIsuccess)
-    console.log(isSuccess)
     return (
 
         <form className={`${styles.form}`} >
