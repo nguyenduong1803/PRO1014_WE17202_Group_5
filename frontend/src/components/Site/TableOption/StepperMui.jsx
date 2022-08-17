@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import OrderItem from './OrderItem';
 import style from "./TableOption.scss"
-import { selectProductOrder, selectOrderTable, selectProducts, selectStatusOrder } from '../../../redux/selector';
+import { selectProductOrder, selectOrderTable, selectProducts } from '../../../redux/selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { createOrder, updateOrderTable } from '../../../redux/SliceReducer/OrderTableSlice';
 import CloseIcon from '@mui/icons-material/Close';
@@ -32,11 +32,10 @@ const steps = [
     },
 ];
 
-export default function StepperMui({ id, setModalShow, activeStep, setActiveStep, setNotifyOrder, type }) {
+export default function StepperMui({ id, setModalShow, activeStep, setActiveStep, setNotifyOrder, type, nameRoom }) {
     const dispatch = useDispatch()
     const orders = useSelector(selectOrderTable)
     const orderItems = useSelector(selectProductOrder)
-
     const [notify, setNotify] = React.useState({
         name: "",
         phone: "",
@@ -98,7 +97,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
     // step3
     const handleOrder = () => {
         const productId = [];
-        const quantitys = []
+        const quantitys = [];
         orderItems.forEach(value => {
             productId.push(value.id)
             quantitys.push(value.quantity)
@@ -129,7 +128,7 @@ export default function StepperMui({ id, setModalShow, activeStep, setActiveStep
                             </StepLabel>
                             <StepContent >
                                 <Typography>{step.description}</Typography>
-                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify} type={type} />) :
+                                {index === 0 ? (<OrderItem order={order} setOrder={setOrder} id={id} setNotify={setNotify} notify={notify} type={type} nameRoom={nameRoom} />) :
                                     index === 1 ? (<InfoFood />) :
                                         index === 2 ? <InfoOrder order={order} type={type} /> : ""}
                                 <Box sx={{ mb: 2 }}>

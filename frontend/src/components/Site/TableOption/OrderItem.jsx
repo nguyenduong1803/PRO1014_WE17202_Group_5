@@ -8,7 +8,7 @@ import { selectTableActive } from '../../../redux/selector';
 import { isPhoneNumber, isRequired } from '../../../utils/Validate';
 import SelectMuiltiMui from '../../Admin/SelectMui/SelectMuiltiMui';
 
-function OrderItem({ order, setOrder, setNotify, notify, id, type }) {
+function OrderItem({ order, setOrder, setNotify, notify, id, type, nameRoom }) {
     const tableActive = useSelector(selectTableActive)
     let totalSitting
     const handleNote = (e) => {
@@ -23,7 +23,7 @@ function OrderItem({ order, setOrder, setNotify, notify, id, type }) {
     } else {
         const listTable = [];
         tableActive.forEach(table => {
-            order.tableId.forEach(tb => {
+            order.tableId?.forEach(tb => {
                 if (table.id === Number(tb)) {
                     listTable.push(table)
                 }
@@ -33,6 +33,11 @@ function OrderItem({ order, setOrder, setNotify, notify, id, type }) {
             return init + value.total_user_sitting
         }, 0)
     }
+    React.useEffect(() => {
+        if (type === "vip") {
+            setOrder(prev => ({ ...prev, tableId: [id] }))
+        }
+    }, [])
     return (
         <section className="section" id="order">
             <div className="order-info">
@@ -40,16 +45,16 @@ function OrderItem({ order, setOrder, setNotify, notify, id, type }) {
                     {
                         type === "party" ?
                             <select
-                            value={order.userOfTable}
-                            onChange={(e) => handleUserOfTable(e)}>
+                                value={order.userOfTable}
+                                onChange={(e) => handleUserOfTable(e)}>
                                 <option disabled>Chọn số khách trong 1 bàn</option>
                                 <option value="6">Bàn 6 khách</option>
                                 <option value="8">Bàn 8 khách</option>
                                 <option value="10">Bàn 10 khách</option>
                                 <option value="12">Bàn 12 khách</option>
                             </select>
-                            :
-                            <SelectMuiltiMui label=" Chọn nhiều bàn" listName={tableActive} id={id} setOrder={setOrder} order={order} />
+                            : type === "vip" ? <h2 >Phòng {nameRoom}</h2> :
+                                <SelectMuiltiMui label=" Chọn nhiều bàn" listName={tableActive} id={id} setOrder={setOrder} order={order} />
                     }
                 </div>
                 <div className="delivery">
@@ -88,7 +93,7 @@ function InputField({ name, setOrder, values, size, setNotify }) {
                 return { ...prev, name: e.target.value }
             } else if (name === "Số điện thoại") {
                 return { ...prev, phone: e.target.value }
-            }else if(name === "Số bàn đặt"){
+            } else if (name === "Số bàn đặt") {
                 return { ...prev, countTable: e.target.value }
 
             } else

@@ -2,7 +2,6 @@ import React from 'react'
 import styles from "./Tablecustom.module.css"
 import { Link } from "react-router-dom";
 import Table from "rsuite/Table";
-import {toSlug} from "../../../extensions/toSlug"
 import "rsuite-table/dist/css/rsuite-table.css";
 import Loadings from "../../Site/Loading/Loadings/Loadings"
 import { searchProduct } from '../../../redux/SliceReducer/ManagerProductSlice';

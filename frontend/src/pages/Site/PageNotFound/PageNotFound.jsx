@@ -9,7 +9,7 @@ function PageNotFound() {
             <div className={styles.stars}>
                 <div className={styles.custom_navbar}>
                     <div className={styles.brand_logo}>
-                        <img src={logo} style={{ width: "180px" }} />
+                        <img alt="img" src={logo} style={{ width: "180px" }} />
                     </div>
                     
                 </div>
@@ -21,13 +21,13 @@ function PageNotFound() {
                     <Link to="/" className={styles.btn_go_home} target="_blank">Về trang chủ</Link>
                 </div>
                 <div className={styles.objects}>
-                    <img className={styles.object_rocket} src="http://salehriaz.com/404Page/img/rocket.svg" style={{ width: "100px" }} />
+                    <img className={styles.object_rocket} alt="img" src="http://salehriaz.com/404Page/img/rocket.svg" style={{ width: "100px" }} />
                     <div className={styles.earth_moon}>
-                        <img className={styles.object_earth} src="http://salehriaz.com/404Page/img/earth.svg" style={{ width: "120px" }} />
-                        <img className={styles.object_moon} src="http://salehriaz.com/404Page/img/moon.svg" style={{ width: "100px" }} />
+                        <img className={styles.object_earth} alt="img" src="http://salehriaz.com/404Page/img/earth.svg" style={{ width: "120px" }} />
+                        <img className={styles.object_moon} alt="img" src="http://salehriaz.com/404Page/img/moon.svg" style={{ width: "100px" }} />
                     </div>
                     <div className={styles.nabox_astronautme} >
-                        <img className={styles.object_astronaut} src="http://salehriaz.com/404Page/img/astronaut.svg" style={{ width: "180px" }} />
+                        <img className={styles.object_astronaut} alt="img" src="http://salehriaz.com/404Page/img/astronaut.svg" style={{ width: "180px" }} />
                     </div >
                 </div >
                 <div className={styles.glowing_stars} >

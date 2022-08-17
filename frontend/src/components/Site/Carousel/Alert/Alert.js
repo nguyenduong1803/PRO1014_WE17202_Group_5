@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React from "react";
 import styles from "../Alert/alert.module.css";
 import img from "../../../../assets/img/alert2.jpg";
 import Radar from "../Radar/Radar"

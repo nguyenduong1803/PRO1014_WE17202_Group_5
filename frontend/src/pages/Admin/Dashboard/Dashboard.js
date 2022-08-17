@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { getName, getToken } from '../../../utils/Common'
+import React  from 'react'
+import {  getToken } from '../../../utils/Common'
 import styles from "./Dashboard.module.css"
-import AddIcon from '@mui/icons-material/Add';
-import { Table } from 'react-bootstrap'
 import { Doughnut } from 'react-chartjs-2';
 import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS } from "chart.js/auto";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 import axios from 'axios';
 import { api } from '../../../utils/api';
@@ -14,7 +13,7 @@ function Dashboard() {
     const [productStatic, setProductStatic] = React.useState([])
     const [lastTime, setLastTime] = React.useState(listDay[10])
     const [totalMoney, setTotalMoney] = React.useState(0)
-    const [userSold,setUserSold] = React.useState([])
+    const [userSold, setUserSold] = React.useState([])
 
     const stateDoughnut = {
         labels: productStatic?.map(ele => ele.name_product),
@@ -40,7 +39,7 @@ function Dashboard() {
         ]
     }
     const stateUser = {
-        labels: userSold?.map(ele => ele.id_user),
+        labels: userSold?.map(ele => ele.ten),
         datasets: [
             {
                 label: 'Món ăn best seller',
@@ -58,7 +57,7 @@ function Dashboard() {
                     '#003350',
                     '#35014F'
                 ],
-                data: userSold?.map(ele => ele.id_user)
+                data: userSold?.map(ele => ele.listInvoices.length)
             }
         ]
     }
@@ -81,7 +80,7 @@ function Dashboard() {
     }
 
     React.useEffect(async (e) => {
-        
+
         await axios
             .get(api + `statistical/statisticalByProduct`, {
                 headers: {
@@ -117,9 +116,9 @@ function Dashboard() {
                 setUserSold(response.data.data)
             }).catch(function (err) {
             })
+        return () => {
 
-
-
+        }
     }, [])
     return (
         <>
@@ -148,7 +147,7 @@ function Dashboard() {
                         </div>
                         <div style={{}}>
                             <h3>Tổng doanh thu: </h3>
-                            <p style={{ marginTop: `12px` }}>{totalMoney&&formatMoney(totalMoney)} đ</p>
+                            <p tyle={{ marginTop: `12px` }}>{totalMoney && formatMoney(totalMoney)} đ</p>
                         </div>
                     </div>
                     <div className={`${styles.chartSection}`} >

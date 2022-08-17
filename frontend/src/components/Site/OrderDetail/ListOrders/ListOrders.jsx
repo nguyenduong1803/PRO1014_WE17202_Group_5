@@ -11,7 +11,7 @@ import product1 from "../../../../assets/img/seafood-1.jpg";
 import ClearIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch, useSelector } from "react-redux";
-import { selectOrderDetail, selectProducts, selectTable } from "../../../../redux/selector";
+import { selectOrderDetail, selectProducts, selectRoleUser, selectTable } from "../../../../redux/selector";
 import { getDetailOrder, updateDetailOrder } from "../../../../redux/SliceReducer/OrderTableSlice";
 import { formatMoney } from "../../../../extensions/formatMoney";
 import ModalDeleteProduct from "../InformationUser/ModalDeleteProduct";
@@ -27,6 +27,7 @@ export default function ListOrders() {
   const [state, setState] = React.useState(false)
   const [idDetailOrder, setIdDetailOrder] = React.useState("")
   const listProduct = [];
+
   if (products) {
     products.forEach(prod => {
       if (productCartDetail) {
@@ -86,6 +87,7 @@ export default function ListOrders() {
 const ProductListOrder = ({ product, handleOpenDelete, setState }) => {
   const [quantity, setQuantity] = React.useState(product.quantity);
   const [isEdit, setIEdit] = React.useState(false)
+  const role = useSelector(selectRoleUser)
   const dispatch = useDispatch()
 
   const handleChangeQuantity = (e) => {
@@ -117,10 +119,10 @@ const ProductListOrder = ({ product, handleOpenDelete, setState }) => {
       </TableCell>
       <TableCell style={{ fontSize: '1.1rem' }} align="center">{formatMoney(product.price)} đ</TableCell>
       <TableCell style={{ fontSize: '1.1rem' }} align="center">{formatMoney(product.price * product.quantity)} đ</TableCell>
-      <TableCell style={{ fontSize: '1.1rem' }} align="center">
+      {(role === 1 || role === 3) && <TableCell style={{ fontSize: '1.1rem' }} align="center">
         {isEdit && <Button onClick={() => handleUpdate(product.idDetailOrder, product.id)} variant="contained">Cập nhật</Button>}
         <ClearIcon onClick={() => handleOpenDelete(product.idDetailOrder)} className={styles.clearIcon} />
-      </TableCell>
+      </TableCell>}
 
     </TableRow>
   )

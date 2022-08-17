@@ -1,4 +1,4 @@
-import React, { useContext, } from "react";
+import React from "react";
 import styles from "../Profile/Profile.module.css";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import OrderHistory from "./OrderItems/ordersHistory/orderHistory";
@@ -6,6 +6,7 @@ import Sidebar from "../../../../components/Admin/Sidebar/Sidebar"
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllUser, selectOrder } from "../../../../redux/selector";
 import { getAllOrder } from "../../../../redux/SliceReducer/OrderTableSlice";
+import { getAllUser } from "../../../../redux/SliceReducer/AuthSlice";
 const breadcrumItem = [
   {
     href: "/",
@@ -30,16 +31,16 @@ const Profile = () => {
   const orders = useSelector(selectOrder)
   console.log(orders)
   const idUser = window.location.pathname.split("/")[3]
-  const userInfo = listUser.find(e => e.id === Number(idUser))
-  // .filter(ele => ele.status_envoice===2)
-  const completedOrders = orders.filter(e => idUser?.includes(e.id_user)).filter(ele => ele.status_envoice === 1)
-  const inCompletedOrders = orders.filter(e => idUser?.includes(e.id_user)).filter(ele => ele.status_envoice === 2)
+  const userInfo = listUser?.find(e => e.id === Number(idUser))
+  const completedOrders = orders?.data?.filter(e => idUser?.includes(e.id_user))?.filter(ele => ele.status_envoice === 1)
+  const inCompletedOrders = orders?.data?.filter(e => idUser?.includes(e.id_user))?.filter(ele => ele.status_envoice === 2)
   function handleDeleteUser() {
-    console.log(idUser);
   }
+  console.log(completedOrders);
 
   React.useEffect(() => {
     dispatch(getAllOrder())
+    dispatch(getAllUser())
   }, [])
   return (
 
@@ -106,14 +107,14 @@ const Profile = () => {
             </label>
             <input
               type="number"
-              value={orders.filter(e => idUser?.includes(e.id_user)).length}
+              value={orders?.data?.filter(e => idUser?.includes(e.id_user)).length}
               disabled
               className={styles.formcontrol}
             />
           </div>
           <div className="col-6">
             <h2 style={{ fontWeight: `600`, marginBottom: `10px` }}>
-              Lịch sử mua hàng
+              Lịch sử đặt hàng
             </h2>
 
             <div className={styles.ordersHistory}>

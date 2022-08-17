@@ -29,7 +29,7 @@ export const routerAdmin =[
     },
     {
         component :OrderDetail,
-        path:"chi-tiet-don-hang",
+        path:"chi-tiet-don-hang/:name",
     },
     {
         component :EditProduct,
@@ -69,7 +69,7 @@ export const routerAdmin =[
         path:"quan-ly-san-pham",
     },
     {
-        component :ManageMasterial,
+        component :ManageProduct,
         path:"quan-ly-vat-lieu",
     },
     {

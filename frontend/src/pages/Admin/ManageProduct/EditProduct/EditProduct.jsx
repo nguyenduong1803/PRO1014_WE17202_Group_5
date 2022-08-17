@@ -108,7 +108,7 @@ function EditProduct() {
         <h2 style={{ fontSize: `30px`, fontWeight: `bold`, color: `#1A358F` }}>
           Sửa sản phẩm
         </h2>
-        <div style={!status ? { filter: `brightness(80%)` } : {}}>
+        <div style={!status ? { filter: `brightness(60%)` } : {}}>
           <form
             onSubmit={handleSubmit}
             onChange={(e) => onChangeRegisterForm(e)}

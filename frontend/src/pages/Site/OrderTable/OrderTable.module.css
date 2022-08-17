@@ -164,7 +164,7 @@
 /* room vip */
 .roomVipItem {
     box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
-    background-color: rgba(255, 255, 255,0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     width: 100%;
     padding: 12px;
     border-radius: 10px;
@@ -176,37 +176,51 @@
     height: 230px;
     object-fit: cover;
 }
-.roomVip_title{
+
+.roomVip_title {
     margin-top: 6px;
     margin-bottom: 6px;
 }
 
 /* animation zoom vip */
-.roomVipItem:hover >.roomVip_img  {
+.roomVipItem:hover>.roomVip_img {
     backdrop-filter: blur(4px);
     background: rgba(255, 255, 255, 0.2);
     opacity: 0.8;
 }
-.btnOrderVip{
-    border:1px solid #ccc;
+
+.btnOrderVip {
+    border: 1px solid #ccc;
     border-radius: 4px;
     height: 40px;
     width: 140px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:var(--primaryColor);
-    color:#fff;
+    background-color: var(--primaryColor);
+    color: #fff;
     margin-top: 12px;
-    transition:0.2s;
+    transition: 0.2s;
 }
-.btnOrderVip:hover{
+
+.btnOrderVip:hover {
     cursor: pointer;
     background-color: #fff;
-    border:2px solid var(--primaryColor);
+    border: 2px solid var(--primaryColor);
     color: var(--primaryColor);
 }
-.titleRoom{
+
+.titleRoom {
     margin: 24px 0;
     font-weight: 500;
+}
+
+.disible {
+}
+
+.disible:hover {
+    cursor: default;
+    background-color: var(--primaryColor);
+    border: 1px solid #ccc;
+    color: #fff;
 }
