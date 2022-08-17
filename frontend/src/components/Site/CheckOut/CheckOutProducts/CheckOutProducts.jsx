@@ -1,38 +1,13 @@
 import React from "react";
 import styles from "./CheckOutProducts.module.css";
 import WestIcon from "@mui/icons-material/West";
-import imgProducts from "../../../../assets/img/seafood-1.jpg";
 
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import ProductCart from "./ProductCart"
-import Select from '@mui/material/Select';
-const productsCart = [
-  {
-    img: imgProducts,
-    name: "One Plus 7T Pro",
-    content: "256 Go,Nebula Blue",
-    price: "$800.00",
-  },
-  {
-    img: imgProducts,
-    name: "One Plus 7T Pro",
-    content: "256 Go,Nebula Blue",
-    price: "$800.00",
-  },
-  {
-    img: imgProducts,
-    name: "One Plus 7T Pro",
-    content: "256 Go,Nebula Blue",
-    price: "$800.00",
-  },
-];
-
-
+import ProductCart from "./ProductCart";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../../../redux/selector";
 
 function CheckOutProducts() {
-
+  const carts = useSelector(selectCart);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -44,40 +19,22 @@ function CheckOutProducts() {
         <div className={styles.contentHeader}>
           <div className={styles.title}>
             <h3 className={styles.titleH3}>Giỏ Hàng</h3>
-            <p className={styles.titleP}>Bạn có ... mặt hàng trong giỏ hàng của tôi</p>
-          </div>
-          <div className={styles.sort}>
-            <div>
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 100 }}>
-                <InputLabel id="demo-simple-select-standard-label">Sắp Xếp</InputLabel>
-                <Select
-                  labelId="demo-simple-select-standard-label"
-                  id="demo-simple-select-standard"
-                  value={0}
-                  onChange={() => { }}
-                  label="Age"
-                  defaultValue=""
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
+            <p className={styles.titleP}>
+              Bạn có {carts?.length} mặt hàng trong giỏ hàng của tôi
+            </p>
           </div>
         </div>
-        {productsCart.map((list, index) => {
-          return (<ProductCart
-            key={index}
-            img={list.img}
-            name={list.name}
-            content={list.content}
-            price={list.price}
-          />
-
+        {carts.map((cart, index) => {
+          return (
+            <ProductCart
+              key={index}
+              name={cart.name}
+              idCart={cart.id}
+              content={cart.total_amount}
+              img={cart.path}
+              price={cart.price}
+              quantity={Number(cart.total_amount)}
+            />
           );
         })}
       </div>

@@ -10,6 +10,8 @@ use App\Models\PaymentCash;
 use App\Http\Requests\Checkout\CreateInfoPaymentVNPay;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Checkout\CheckoutPaymentCash;
+use App\Models\Cart;
+
 
 
 class CheckoutController extends Controller
@@ -133,6 +135,7 @@ class CheckoutController extends Controller
     public function checkoutPaymentCash(CheckoutPaymentCash $request) {
         $validate = $request -> validated();
         $user = Auth::user();
+        $modelCart = new Cart();
         $modelPaymentCash = new PaymentCash();
         $params = [
             $validate['name'],
@@ -145,6 +148,21 @@ class CheckoutController extends Controller
             $user['id']
         ];
         $modelPaymentCash -> create($params);
+        if($validate['typeCheckout'] === 2) {
+            $params2 = [
+                $user['id']
+            ];
+            $allOrder = $modelCart -> getAllOrderCheckoutByUser($params2);
+            for($i = 0; $i < count($allOrder); $i++) {
+                $timeStamp = date("Y-m-d H:i:s",time());
+                $params3 = [
+                    2,
+                    $timeStamp,
+                    $user['id']
+                ];
+                $modelCart -> deleteAllOrderCheckByUser($params3);
+            }
+        }
         return response() ->json(["msg" => "Vui lòng thanh toán sau khi nhận được đơn hàng, cảm ơn quý khách đã sử dụng dịch cụ của chúng tôi!", "status" => true],200);
     }
 }

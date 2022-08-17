@@ -3,64 +3,104 @@ import { useEffect, useState } from "react";
 import styles from "./CheckOutCard.module.css";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { api } from "../../../../utils/api";
 import axios from "axios";
 import { getToken } from "../../../../utils/Common";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-function ControlledRadioButtonsGroup() {
-  const [value, setValue] = React.useState('female');
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../../../redux/selector";
+import { formatMoney } from "../../../../extensions/formatMoney";
+import ToastMess from "../../ToastMess/ToastMess";
+import { useHistory } from "react-router";
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  return (
-    <FormControl>
-      <FormLabel className={styles.titlePay}>Phương thức thanh toán</FormLabel>
-      <RadioGroup
-        aria-labelledby="demo-controlled-radio-buttons-group"
-        name="controlled-radio-buttons-group"
-        value={value}
-        onChange={handleChange}
-      >
-        <FormControlLabel value="female" control={<Radio />} label="Thanh toán tiền mặt" />
-        <FormControlLabel value="male" control={<Radio />} label="Thanh toán chuyển khoản" />
-      </RadioGroup>
-    </FormControl>
-  );
-}
 function CheckOutCard() {
-  // const [cartName,SetCartName] = useState();
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
+  const carts = useSelector(selectCart);
+  const [dataCarts, setDataCarts] = useState([]);
+  const [userName, setUserName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [description, setDescription] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [paymentMethod, setPaymentMethod] = React.useState("1");
+  const [state, setState] = React.useState(false);
+  const [messToast, setMessToast] = React.useState("");
+  const history = useHistory();
+  useEffect(() => {
+    setDataCarts(carts);
+  }, [carts]);
 
-  // const handleChangeIndex = (index) => {
-  //   setValue(index);
-  // };
-  // const [value, setValue] = React.useState(0);
+  useEffect(() => {
+    let sum = 0;
+    for (let i = 0; i < dataCarts.length; i++) {
+      sum += Number(dataCarts[i].price) * Number(dataCarts[i].total_amount);
+    }
+    setTotalPrice(sum);
+  }, [dataCarts]);
+  function handlePayment() {
+    if (
+      (userName === "" || phone === "" || address === "") &&
+      paymentMethod === "1"
+    ) {
+      alert("Vui lòng nhập đầy đủ thông tin");
+      return;
+    }
 
-  // useEffect(() => {
-  //   async function cart() {
-  //     const res = await axios.get(api + "auth/getInfoUser", {
-  //       headers: { Authorization: `Bearer ${getToken()}` },
-  //     });
-  //     SetCartName(res.data.user);
-  //   }
-  //   cart();
-  // }, []);
+    if (paymentMethod === "1") checkoutPaymentCash();
+    else checkoutPaymentVnPay();
+  }
+  const handleChangeRadio = (event) => {
+    setPaymentMethod(event.target.value);
+  };
+  async function checkoutPaymentVnPay() {
+    // const params = {
+    //   id_user: id,
+    // };
+    // const res = await axios.post(api + `checkout/vnpay`, params, {
+    //   headers: { Authorization: `Bearer ${getToken()}` },
+    // });
+    // if (res?.data?.code === "00") {
+    //   setMessToast("Bạn vui lòng chờ chuyển trang để thanh toán!");
+    //   setTimeout(() => {
+    //     window.open(res?.data?.data);
+    //   }, 1500);
+    // } else {
+    //   setMessToast("Đã xảy ra lỗi vui lòng thử lại!");
+    // }
+    // setState(true);
+  }
+  async function checkoutPaymentCash() {
+    const params = {
+      name: userName,
+      description: description,
+      phone: phone,
+      address,
+      purchase_status: 1,
+      status_order: 2,
+      price: String(`${totalPrice}`),
+      typeCheckout: 2
+    };
+
+    const res = await axios.post(api + `checkout/paymentCash`, params, {
+      headers: { Authorization: `Bearer ${getToken()}` },
+    });
+    if (res?.status === 200) {
+      setMessToast(res?.data?.msg);
+
+      history.push("/thong-bao-thanh-toan?paymentMethod=1");
+    } else {
+      setMessToast("Đã xảy ra lỗi vui lòng thử lại!");
+    }
+    setState(true);
+  }
   return (
     <div className={`${styles.row} row`}>
       <div className={styles.title}>
-        <div className={styles.titleName}>Chi Tiết Thẻ</div>
-        <div className={styles.titleImg}>
-            <img src="http://localhost:3000/static/media/seafood-1.d2871097285bb86fdabf.jpg" alt="" />
-        </div>
+        <div className={styles.titleName}>Thanh toán</div>
       </div>
       <div className={`${styles.card} row`}>
         <div className={`${styles.deatilCard} col-lg-3`}>
@@ -88,51 +128,10 @@ function CheckOutCard() {
           />
         </div>
       </div>
-      <div className={styles.infomation}>
-        <div className={styles.name}>
-          <p className={styles.titleName}>Tên Trên Thẻ</p>
-          <Stack
-            component="form"
-            sx={{
-              width: "100%",
-            }}
-            spacing={2}
-            noValidate
-            autoComplete="off"
-            
-          >
-            <TextField
-              hiddenLabel
-              id="filled-hidden-label-small"
-              variant="filled"
-              size="small"
-             
-            //  value={cartName}
-            />
-          </Stack>
-        </div>
-        <div className={styles.name}>
-          <p className={styles.titleName}>Mã Trên Thẻ</p>
-          <Stack
-            component="form"
-            sx={{
-              width: "100%",
-            }}
-            spacing={2}
-            noValidate
-            autoComplete="off"
-          >
-            <TextField
-              hiddenLabel
-              id="filled-hidden-label-small"
-              variant="filled"
-              size="small"
-            />
-          </Stack>
-        </div>
-        <div className={`${styles.dateCvv} row`}>
-          <div className={`${styles.date} col-lg-6`}>
-            <p  className={styles.titleName}>Ngày Hết Hạn</p>
+      {paymentMethod === "1" && (
+        <div className={styles.infomation}>
+          <div className={styles.name}>
+            <p className={styles.titleName}>Tên người nhận</p>
             <Stack
               component="form"
               sx={{
@@ -147,11 +146,12 @@ function CheckOutCard() {
                 id="filled-hidden-label-small"
                 variant="filled"
                 size="small"
+                onChange={(e) => setUserName(e.target.value)}
               />
             </Stack>
           </div>
-          <div className={`${styles.date} col-lg-6`}>
-            <p  className={styles.titleName}>CVV</p>
+          <div className={styles.name}>
+            <p className={styles.titleName}>Số điện thoại</p>
             <Stack
               component="form"
               sx={{
@@ -166,37 +166,102 @@ function CheckOutCard() {
                 id="filled-hidden-label-small"
                 variant="filled"
                 size="small"
+                onChange={(e) => setPhone(e.target.value)}
               />
             </Stack>
           </div>
-          
+          <div className={styles.name}>
+            <p className={styles.titleName}>Địa chỉ</p>
+            <Stack
+              component="form"
+              sx={{
+                width: "100%",
+              }}
+              spacing={2}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                hiddenLabel
+                id="filled-hidden-label-small"
+                variant="filled"
+                size="small"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </Stack>
+          </div>
+          <div className={styles.name}>
+            <p className={styles.titleName}>Mô tả</p>
+            <Stack
+              component="form"
+              sx={{
+                width: "100%",
+              }}
+              spacing={2}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                hiddenLabel
+                id="filled-hidden-label-small"
+                variant="filled"
+                size="small"
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </Stack>
+          </div>
         </div>
-        <div>
-<ControlledRadioButtonsGroup/>
-        </div>
+      )}
+      <div>
+        <FormControl>
+          <FormLabel className={styles.titlePay}>
+            Phương thức thanh toán
+          </FormLabel>
+          <RadioGroup
+            aria-labelledby="demo-controlled-radio-buttons-group"
+            name="controlled-radio-buttons-group"
+            value={paymentMethod}
+            onChange={handleChangeRadio}
+          >
+            <FormControlLabel
+              value="1"
+              control={<Radio />}
+              label="Thanh toán tiền mặt"
+            />
+            <FormControlLabel
+              value="2"
+              control={<Radio />}
+              label="Thanh toán chuyển khoản"
+            />
+          </RadioGroup>
+        </FormControl>
       </div>
       <div className={styles.line}></div>
       <div className={styles.footer}>
-        <div className={styles.footerContent}>
-            <div className={styles.footerName}>
-                <span>Tổng Phụ</span>
-                <span className={styles.span}>Phí Vận Chuyển</span>
-                <span>Tổng</span>
-            </div>
-            <div className={styles.footerName}>
-                <span>$300.00</span>
-                <span className={styles.span}>$300.00</span>
-                <span>$300.00</span>
-            </div>
-           
-        </div>
+        {/* <div className={styles.footerContent}>
+          <div className={styles.footerName}>
+            <span>Tổng Phụ</span>
+            <span className={styles.span}>Phí Vận Chuyển</span>
+            <span>Tổng</span>
+          </div>
+          <div className={styles.footerName}>
+            <span>$300.00</span>
+            <span className={styles.span}>$300.00</span>
+            <span>$300.00</span>
+          </div>
+        </div> */}
         <div className={styles.button}>
-                <button>
-                    <div className={styles.buttonTotal}>$300.000</div>
-                    <div className={styles.buttonNext}>Thanh Toán <ArrowRightAltIcon/></div>
-                </button>
+          <button>
+            <div className={styles.buttonTotal}>
+              {formatMoney(totalPrice)} đ
             </div>
+            <div onClick={handlePayment} className={styles.buttonNext}>
+              Thanh Toán <ArrowRightAltIcon />
+            </div>
+          </button>
+        </div>
       </div>
+      <ToastMess notify={messToast} setState={setState} state={state} />
     </div>
   );
 }

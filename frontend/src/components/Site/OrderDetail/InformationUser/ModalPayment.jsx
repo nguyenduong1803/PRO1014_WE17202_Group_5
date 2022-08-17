@@ -25,7 +25,6 @@ export default function ModalPayment({
   id,
   order,
 }) {
-  console.log(order)
   const [state, setState] = React.useState(false);
   const [messToast, setMessToast] = React.useState("");
   const handleClose = () => {
@@ -72,9 +71,10 @@ export default function ModalPayment({
       description: orders.note,
       phone: orders.phone,
       address: "Thanh toán tại quầy",
-      purchase_status: 1,
+      purchase_status: 2,
       status_order: 2,
       price: String(`${orders.total_price}`),
+      typeCheckout: 1
     };
 
     const res = await axios.post(api + `checkout/paymentCash`, params, {

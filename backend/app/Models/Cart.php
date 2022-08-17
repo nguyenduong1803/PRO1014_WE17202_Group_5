@@ -14,16 +14,14 @@ class Cart extends Model
 
     public function saveCart($params) {
         DB::insert('INSERT INTO cart
-    (id_user , id_product , amount, purchase_status)
-    values (? , ? , ?, ?)', $params);
+    (id_user , id_product , amount)
+    values (? , ? , ?)', $params);
     }
 
     public function getCart($params) {
         return DB::select("SELECT
         c.id,
         SUM(c.amount) AS total_amount,
-        c.purchase_status,
-        c.status_cart_order,
         p.price,
         p.id_code_sale,
         p.name,
@@ -55,8 +53,16 @@ class Cart extends Model
     }
 
     public function updateOrder($params) {
-            DB::update("UPDATE cart SET `id_user` = ? , `amount` = ?, `purchase_status` = ?,`status_cart_order` = ?,`update_at` = ?
+            DB::update("UPDATE cart SET `amount` = ?,`update_at` = ?
                     WHERE `id` = ?", $params);
 
+    }
+
+    public function deleteAllOrderCheckByUser($params) {
+        DB::update("UPDATE cart SET `is_delete` = ?, `delete_at` = ? WHERE `id_user` = ?", $params);
+    }
+
+    public function getAllOrderCheckoutByUser($params) {
+        return DB::select("SELECT * FROM cart WHERE is_delete = 1 AND id_user = ?", $params);
     }
 }
