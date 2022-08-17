@@ -32,6 +32,7 @@ class CheckoutPaymentCash extends FormRequest
             'address' => 'required|string|max:255',
             'purchase_status' => 'required|integer',
             'status_order' => 'required|integer',
+            'price' => "string|max:20|required"
         ];
     }
 
