@@ -5,7 +5,6 @@ import AddIcon from '@mui/icons-material/Add';
 import { Table } from 'react-bootstrap'
 import { Doughnut } from 'react-chartjs-2';
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
 import axios from 'axios';
 import { api } from '../../../utils/api';
@@ -118,6 +117,7 @@ function Dashboard() {
                 setUserSold(response.data.data)
             }).catch(function (err) {
             })
+
 
 
     }, [])
