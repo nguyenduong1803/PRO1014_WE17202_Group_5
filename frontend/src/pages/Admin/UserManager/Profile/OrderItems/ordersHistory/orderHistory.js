@@ -12,11 +12,11 @@ function orderHistory(props) {
                         <div className='d-flex flex-column justify-content-between' style={{ height: `70%` }}>
                             <p>Mã đơn hàng: <span>{e.id_invoice}</span></p>
                             <p>Thời gian: {e.time_book}</p>
-                            <p >Địa chỉ: <span>{e.dia_chi}</span></p>
+                            <p >Số điện thoại: <span>{e.phone}</span></p>
                         </div>
                         <span>
                             {
-                                e.completedOrders===1
+                                e.status_envoice===1
                                     ? "Đã thanh toán..."
                                     : "Chưa thanh toán..."
                             }

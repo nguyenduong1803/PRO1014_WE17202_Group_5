@@ -2,11 +2,34 @@ import React from "react";
 import styles from "../../OrderManager/OrderDetail/OrderDetail.module.css";
 import Breadcrumbs from "../../../../components/Admin/BreadCrumb/Breadcrumb";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Sidebar from "../../../../components/Admin/Sidebar/Sidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { selectOrder, selectOrderDetail, selectProducts } from "../../../../redux/selector";
+import { getAllOrder, getDetailOrder } from "../../../../redux/SliceReducer/OrderTableSlice";
+import { Button } from "@mui/material";
 
 const OrderDetail = () => {
-  const idOrder = window.location.hash.split("#")[1];
-  
-const orderDetail = {}
+  const orders = useSelector(selectOrder)
+  const dispatch = useDispatch()
+  const orderId = window.location.pathname.split("/")[3]
+  const myOder = orders?.data?.find(ele => ele.id === Number(orderId))
+
+  const listTables = myOder?.listDetailTbInvoice?.map(item => item.id)
+  const products = useSelector(selectProducts)
+  const listProduct = [];
+  if (products) {
+    products.forEach(prod => {
+      if (myOder) {
+        myOder?.listDetailInvoice?.forEach(ele => {
+          if (prod.id === ele.id_product) {
+            let newProduct = { ...prod, quantity: ele.amount, idDetailOrder: ele.id }
+            listProduct.push(newProduct);
+          }
+        })
+      }
+    });
+  }
+
   const breadcrumItem = [
     {
       href: "/",
@@ -24,9 +47,12 @@ const orderDetail = {}
       isActive: true,
     },
   ];
-
+  React.useEffect(() => {
+    dispatch(getAllOrder())
+  }, [])
   return (
     <>
+      <Sidebar />
       <div className={styles.OrderDetail}>
         <Breadcrumbs breadItem={breadcrumItem} />
         <div className={`${styles.DetailsMain} row`}>
@@ -38,7 +64,7 @@ const orderDetail = {}
           </div>
         </div>
         <div className={`${styles.Details} row mt-5`}>
-            <div className={`${styles.formRow} col-md-6`}>
+          <div className={`${styles.formRow} col-md-6`}>
             <div className="mb-3">
               <label htmlFor="User" className={styles.formlabel}>
                 Mã đơn hàng
@@ -46,43 +72,43 @@ const orderDetail = {}
               <input
                 type="text"
                 id="User"
-                value={orderDetail?.id}
+                value={myOder?.id_invoice}
                 disabled
                 className={styles.formcontrol}
               />
             </div>
             <div className="mb-3">
               <label htmlFor="User" className={styles.formlabel}>
-                Tên đơn hàng
+                Tên khách hàng
               </label>
               <input
                 type="text"
                 id="User"
-                value={orderDetail?.name}
+                value={myOder?.user_name_book}
                 disabled
                 className={styles.formcontrol}
               />
             </div>
             <div className="mb-3">
               <label htmlFor="User" className={styles.formlabel}>
-                Email
+                Tổng tiền
               </label>
               <input
                 type="text"
                 id="User"
-                value={orderDetail?.email}
+                value={myOder?.total_price}
                 disabled
                 className={styles.formcontrol}
               />
             </div>
             <div className="mb-3">
               <label htmlFor="Address" className={styles.formlabel}>
-                Địa chỉ
+                Ngày đặt
               </label>
               <input
                 type="text"
                 id="Address"
-                value={orderDetail?.address}
+                value={myOder?.time_book}
                 disabled
                 className={styles.formcontrol}
               />
@@ -94,7 +120,7 @@ const orderDetail = {}
               <input
                 type="text"
                 id="phone"
-                value={orderDetail?.phoneNumber}
+                value={myOder?.phone}
                 disabled
                 className={styles.formcontrol}
               />
@@ -102,7 +128,39 @@ const orderDetail = {}
           </div>
           <div className="col-md-6">
             <div className={styles.Describe}>
-              <h2>Mô tả chi tiết đơn hàng</h2>
+              <div className="mb-3" >
+                <h2>Danh sách bàn đặt</h2>
+                <input
+                  type="text"
+                  id="phone"
+                  value={listTables?.join(",")}
+                  disabled
+                  className={styles.formcontrol}
+                />
+              </div>
+              <div className="mb-3">
+                <h3>Ghi chú</h3>
+                <input
+                  type="text"
+                  id="phone"
+                  value={myOder?.note}
+                  disabled
+                  className={styles.formcontrol}
+                />
+              </div>
+              <div className="mb-3">
+                <h3 style={{ margin: "12px 0" }}>Sản phẩm đã đặt</h3>
+                {listProduct?.map(item => (
+                  <div style={{ margin: "12px 0" }} className="d-flex  align-items-center">
+                    <img className={styles.imgOrder} src={item.listsImg[0]} alt="" />
+                    <div>
+                      <h3>Sản phẩm : {item.name}</h3>
+                      <h3>Số lượng : {item.quantity}</h3>
+                    </div>
+
+                  </div>
+                ))}
+              </div>
               {/* {dataProduct && dataProduct.map((e,index) => (
                 <div key={index} className={styles.DescribText}>
                 <div className="row d-flex border-bottom">
@@ -116,7 +174,7 @@ const orderDetail = {}
                   <div className="col-md-6">
                     <h6 className={styles.unpaid}>
                       {
-                        orderDetail.status === true ? <div style={{color: "#198754"}}>Đã giao hàng thành công</div> : <div style={{color: "#dc3545"}}>Chưa giao hàng</div>
+                        myOder.status === true ? <div style={{color: "#198754"}}>Đã giao hàng thành công</div> : <div style={{color: "#dc3545"}}>Chưa giao hàng</div>
                       }
                     </h6>
                   </div>
@@ -143,7 +201,7 @@ const orderDetail = {}
                   <div className={styles.pay}>
                     <h3>
                       Tổng số tiền : <p>{
-                      orderDetail?.items[0].price
+                      myOder?.items[0].price
                       }</p>
                     </h3>
                   </div>
@@ -151,7 +209,9 @@ const orderDetail = {}
               </div>   
               ))}            */}
             </div>
+
           </div>
+          <Button color="info" variant="contained">  {myOder?.status_envoice === 2 ? "đã thanh toán" : "chưa thanh toán"}</Button>
 
           <div className={`${styles.from}`}></div>
         </div>

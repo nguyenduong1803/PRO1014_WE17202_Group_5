@@ -3,12 +3,12 @@ import { createSelector } from "@reduxjs/toolkit"
 
 // user
 export const selectUser = (state) => state.AuthSlice.user
-export const selectRoleUser = (state) => state.AuthSlice.user.vai_tro
+export const selectRoleUser = (state) => state.AuthSlice.user?.vai_tro
 export const selectAllUser = (state) => {
-    return state.AuthSlice.listUser.filter(user => user.vai_tro === 2)
+    return state.AuthSlice.listUser.filter(user => user?.vai_tro === 2)
 }
 export const selectStaff = (state) => {
-    return state.AuthSlice.listUser.filter(user => user.vai_tro === 3)
+    return state.AuthSlice.listUser.filter(user => user?.vai_tro === 3)
 }
 // export const selectAllUser = (state) => state.AuthSlice.listUser
 export const isSuccess = (state) => state.AuthSlice.isSuccess

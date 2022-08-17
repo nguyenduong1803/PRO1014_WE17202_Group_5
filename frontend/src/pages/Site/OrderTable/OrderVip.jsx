@@ -1,4 +1,4 @@
-import { Box, Rating } from '@mui/material'
+import { Alert, Box, Rating, Snackbar } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import LayoutSite from '../../../components/Site/LayoutSite/LayoutSite'
@@ -10,37 +10,15 @@ import { selectVipRoom } from '../../../redux/selector'
 import { getToken } from '../../../utils/Common'
 import styles from "./OrderTable.module.css"
 
-const listRoomVip = [
-    {
-        img: "",
-        name: "Phòng VIP 1",
-        limit: 20
-    },
-    {
-        img: "",
-        name: "Phòng VIP 3",
-        limit: 30
-    },
-    {
-        img: "",
-        name: "Phòng VIP 1",
-        limit: 20
-    },
-    {
-        img: "",
-        name: "Phòng VIP 4",
-        limit: 15
-    },
-
-
-]
 function OrderVip() {
     const [modalShow, setModalShow] = React.useState(false)
     const [activeStep, setActiveStep] = React.useState(0);
+    const [ids, setIds] = React.useState();
     const [notifyOrder, setNotifyOrder] = React.useState({ type: "info", title: "Bàn đã có khách đặt " });
-    const listVipRoom= useSelector(selectVipRoom)
-    const handleShowOrder = () => {
-        setModalShow(1)
+    const listVipRoom = useSelector(selectVipRoom)
+    const handleShowOrder = (id) => {
+        setIds(id)
+        setModalShow(true)
     }
     const handleClick = (e) => {
         e.stopPropagation()
@@ -56,33 +34,45 @@ function OrderVip() {
                     <div className={"container-fluid"}>
                         <div className="row">
                             <h2 className={styles.titleRoom}>Danh sách phòng</h2>
-                            {listVipRoom&&
+                            {listVipRoom &&
                                 listVipRoom.map(room => (
-                                    <div className="col-lg-3" key={room.id}>
+                                    <div style={(room.status === 2 || room.status === 1) ? { filter: "grayscale(80%)" } : {}} className="col-lg-3" key={room.id}>
                                         <div className={styles.roomVipItem}>
                                             <img className={styles.roomVip_img} src={room.img} alt="" />
                                             <BasicRating />
                                             <h4 className={styles.roomVip_title}>Phòng VIP {room.index_table}</h4>
                                             <p>Sức chứa khoảng {room.total_user_sitting} khách</p>
-                                            <div className={styles.btnOrderVip}>Đặt Phòng</div>
+                                            {(room.status === 3) ? <div onClick={() => handleShowOrder({ id: room.id, name: room.index_table })} className={styles.btnOrderVip}>Đặt Phòng</div> :
+                                                <div className={`${styles.btnOrderVip} ${styles.disible}`}>Đã có khách đặt</div>
+                                            }
                                         </div>
                                     </div>
                                 ))
                             }
-
+                            {modalShow ? <div className="wrap_modal-content" >
+                                <div className="modal_content--item" onClick={e => handleClick(e)} >
+                                    <div className={`modal-content ${!getToken() && 'modal_mini'} ${activeStep === 1 && "active"}`} >
+                                        {
+                                            getToken() ? <StepperMui setActiveStep={setActiveStep} activeStep={activeStep}
+                                                setModalShow={setModalShow} id={ids.id} setNotifyOrder={setNotifyOrder}
+                                                type="vip" nameRoom={ids.name} /> : <ModalLogin />
+                                        }
+                                    </div>
+                                    <ChooseProduct className={`${activeStep === 1 && "active"}`} />
+                                </div>
+                            </div> : modalShow ? <Snackbar
+                                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                                open={true}
+                                onClose={handleClose}
+                                message="I love snacks"
+                                key={"bottom" + "right"}
+                            >
+                                <Alert severity={notifyOrder.type}>{notifyOrder.title}</Alert>
+                            </Snackbar> : ""}
                         </div>
                     </div>
                     {/* <OrderPartyContent/> */}
-                    {modalShow ? <div className="wrap_modal-content" >
-                        <div className="modal_content--item" onClick={e => handleClick(e)} >
-                            <div className={`modal-content ${!getToken() && 'modal_mini'} ${activeStep === 1 && "active"}`} >
-                                {
-                                    getToken() ? <StepperMui setActiveStep={setActiveStep} activeStep={activeStep} setModalShow={setModalShow} id={12} setNotifyOrder={setNotifyOrder} type={"party"} /> : <ModalLogin />
-                                }
-                            </div>
-                            <ChooseProduct className={`${activeStep === 1 && "active"}`} />
-                        </div>
-                    </div> : modalShow ? <h2>notify</h2> : ""}
+
                 </div>
             </div>
         </LayoutSite>

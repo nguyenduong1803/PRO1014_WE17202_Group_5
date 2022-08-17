@@ -4,10 +4,9 @@ import Quantity from "../../../pages/Site/ShopDetails/Quantity";
 import styles from "./TableOption.module.css";
 import { formatMoney } from '../../../extensions/formatMoney';
 import { useDispatch } from 'react-redux';
-import { deleteCart } from '../../../redux/SliceReducer/OrderTableSlice';
 
 function ProductCartTable({ img, name, price,quantity,id }) {
-    const dispatch = useDispatch()
+   
     const handleDelete =()=>{
         // dispatch(deleteCart(idCart))
     }

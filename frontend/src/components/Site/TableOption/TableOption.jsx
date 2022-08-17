@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import RectangleTable from '../Table/RectangleTable';
 import Table from '../Table/Table'
 import { ModalLogin } from './OrderItem'
 import styles from "./TableOption.scss"
-import { AuthContext } from '../../../contexts/AuthenContext';
 import StepperMui from "./StepperMui"
 import { getToken } from '../../../utils/Common';
 import Snackbar from '@mui/material/Snackbar';
@@ -15,7 +14,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 function TableOption({ id, status, type, name }) {
-    const [state, setState] = React.useState({
+    const [state, ] = React.useState({
         open: false,
         vertical: 'bottom', horizontal: 'right'
     });
@@ -44,7 +43,6 @@ function TableOption({ id, status, type, name }) {
 
     return (
         <div className="modal-container" onClick={handleShowOrder}>
-            {/* <input id="modal-toggle" type="checkbox" /> */}
             {type === "circle" ?
                 <Table
                     colors={color}

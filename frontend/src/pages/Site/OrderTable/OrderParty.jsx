@@ -9,16 +9,14 @@ import styles from "./OrderTable.module.css"
 function OrderParty() {
     const [modalShow, setModalShow] = React.useState(false)
     const [activeStep, setActiveStep] = React.useState(0);
-    const [notifyOrder, setNotifyOrder] = React.useState({ type: "info", title: "Bàn đã có khách đặt " });
+    const [, setNotifyOrder] = React.useState({ type: "info", title: "Bàn đã có khách đặt " });
     const handleShowOrder = () => {
         setModalShow(1)
     }
     const handleClick = (e) => {
         e.stopPropagation()
     }
-    const handleClose = () => {
-        setModalShow(0)
-    }
+ 
     return (
         <LayoutSite>
             <div className={styles.wrapParty}>

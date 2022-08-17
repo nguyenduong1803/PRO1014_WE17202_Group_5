@@ -39,14 +39,16 @@ function BasicRating() {
 }
 function Product({ img, title, price, id }) {
   const dispatch = useDispatch();
-  const [notifyAlert,setNotifyAlert]=React.useState("")
+  const [notifyAlert, setNotifyAlert] = React.useState("")
   const [state, setState] = React.useState({
     open: false,
     vertical: 'top',
     horizontal: 'center',
   });
   const { vertical, horizontal, open } = state;
-  const handleClick = (newState) => () => {
+  const handleClick = (newState) => (e) => {
+    e.stopPropagation();
+    e.preventDefault();
     if (getToken()) {
       dispatch(addCart({ id: id, amount: 1, purchase_status: 1 }))
       setState({ open: true, ...newState });
@@ -61,9 +63,9 @@ function Product({ img, title, price, id }) {
   const handleClose = () => {
     setState({ ...state, open: false });
   };
-  
+
   return (
-    
+
     <div className=' col-lg-3'>
       <Link to={`/chi-tiet-don-hang/${id}`} className={styles.link}><div className={styles.product} style={{ transition: '.6s' }}>
         <img className={styles.blur_shadow} src={img} alt="" />
@@ -76,17 +78,17 @@ function Product({ img, title, price, id }) {
             <AddIcon /></p>
         </div>
       </div>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        open={open}
-        onClose={handleClose}
-        message="I love snacks"
-        key={vertical + horizontal}
-      >
-        <Alert severity="success">{notifyAlert}</Alert>
-      </Snackbar> </Link>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={handleClose}
+          message="I love snacks"
+          key={vertical + horizontal}
+        >
+          <Alert severity="success">{notifyAlert}</Alert>
+        </Snackbar> </Link>
     </div>
-   
+
   )
 }
 
