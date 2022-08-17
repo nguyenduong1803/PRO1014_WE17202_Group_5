@@ -59,6 +59,10 @@ export const remainingSelector = createSelector(selectUser, isSuccess, selectLoa
         return success === true && loading === 'idle' ? user : {}
     })
 
+    // statictial 
+
+export const selectStaticProduct = (state) => state.StatictialSlice.orderProduct
+
 // slect user
 // export const remainingUserbyOrder = createSelector(selectOrder, selectAllUser
 //     (order, user) => {

@@ -393,7 +393,7 @@ export const deleteDetailOrder = createAsyncThunk("orderTable/deleteDetailOrder"
     return payloads
 })
 // detail table 
-export const updateDetailTable = createAsyncThunk("orderTable/updateDetailTable", async (payload) => {
+export const updateDetailTable = createAsyncThunk("orderTable/updateDetailTable", async (payload,action) => {
     let payloads
     await axios
         .put(api + `detail-table-invoice/update`, {
@@ -406,6 +406,7 @@ export const updateDetailTable = createAsyncThunk("orderTable/updateDetailTable"
             },
         })
         .then(response => {
+            action.dispatch()
             payloads = { data: payload, status: response.data.status }
         }).catch(function (err) {
             console.log(err)

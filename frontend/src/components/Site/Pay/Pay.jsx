@@ -24,6 +24,7 @@ function Pay() {
   const vnp_TransactionNo = query.get("vnp_TransactionNo");
   const vnp_TxnRef = query.get("vnp_TxnRef");
   const vnp_TransactionStatus = query.get("vnp_TransactionStatus");
+  const paymentMethod = query.get("paymentMethod");
   const dispatch = useDispatch();
   useEffect(() => {
     (async function () {
@@ -57,7 +58,18 @@ function Pay() {
       }
     })();
   }, []);
-  if(!statusPayment || vnpResponseCode !== "00") return <PayFail />;
+  useEffect(() => {
+    if (paymentMethod && paymentMethod === "1") {
+      const params2 = {
+        id: localStorage.getItem("id_invoices"),
+        order: JSON.parse(localStorage.getItem("order")),
+      };
+      dispatch(updateOrder(params2));
+    }
+  }, [paymentMethod]);
+  if(paymentMethod === '1') return <PaySucces />
+  if (!statusPayment || vnpResponseCode !== "00")
+  return <PayFail />;
   return <PaySucces />;
 }
 

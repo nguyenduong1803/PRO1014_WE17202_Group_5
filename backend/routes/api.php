@@ -129,13 +129,15 @@ Route::group(['namespace' => 'Checkout', 'prefix' => 'checkout'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('vnpay', [\App\Http\Controllers\Api\Checkout\CheckoutController::class, 'paymentVnPay']);
         Route::post('saveInfoPaymentVNPay', [\App\Http\Controllers\Api\Checkout\CheckoutController::class, 'saveInfoPaymentVNPay']);
+        Route::post('paymentCash', [\App\Http\Controllers\Api\Checkout\CheckoutController::class, 'checkoutPaymentCash']);
     });
 });
 
 Route::group(['namespace' => 'Statistical', 'prefix' => 'statistical'], function(){
     Route::middleware('auth:api') -> group(function () {
         Route::post('statisticalByInvoices', [\App\Http\Controllers\Api\Statistical\StatisticalController::class, 'statisticalByInvoices']);
-        Route::post('statisticalByProduct', [\App\Http\Controllers\Api\Statistical\StatisticalController::class, 'statisticalByProduct']);
+        Route::get('statisticalByProduct', [\App\Http\Controllers\Api\Statistical\StatisticalController::class, 'statisticalByProduct']);
+        Route::get('statisticalWithMostFrequent', [\App\Http\Controllers\Api\Statistical\StatisticalController::class, 'statisticalWithMostFrequent']);
     });
 });
 

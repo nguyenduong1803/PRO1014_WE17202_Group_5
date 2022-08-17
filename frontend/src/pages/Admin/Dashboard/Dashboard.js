@@ -1,23 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { getName } from '../../../utils/Common'
+import { getName, getToken } from '../../../utils/Common'
 import styles from "./Dashboard.module.css"
 import AddIcon from '@mui/icons-material/Add';
 import { Table } from 'react-bootstrap'
 import { Doughnut } from 'react-chartjs-2';
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
 import Sidebar from "../../../components/Admin/Sidebar/Sidebar"
-
+import axios from 'axios';
+import { api } from '../../../utils/api';
+const listDay=[1,10,20,30,40,50,100,150,200,365]
 function Dashboard() {
-
-
-  
+    const [productStatic, setProductStatic] = React.useState([])
     const stateDoughnut = {
-        labels: ['January', 'February', 'March',
-            'April', 'May'],
+        labels: productStatic?.map(ele => ele.name_product),
         datasets: [
             {
-                label: 'Rainfall',
+                label: 'Món ăn best seller',
                 backgroundColor: [
                     '#B21F00',
                     '#C9DE00',
@@ -32,39 +30,51 @@ function Dashboard() {
                     '#003350',
                     '#35014F'
                 ],
-                data: [65, 59, 80, 81, 56]
+                data: productStatic?.map(ele => ele.total_price)
             }
         ]
     }
+    React.useEffect(async () => {
+        await axios
+            .get(api + `statistical/statisticalByProduct`, {
+                headers: {
+                    "Authorization": `Bearer ${getToken()}`
+                },
+            })
+            .then(response => {
+                setProductStatic(response.data.data)
+            }).catch(function (err) {
+            })
 
+    }, [])
     return (
         <>
-            <Sidebar/>
+            <Sidebar />
             <div className={`${styles.main} row`}>
-                <div className={`${styles.leftSide} col-9   `}>
+                <div className={`${styles.leftSide} col-8   `}>
                     <div className={`${styles.greeting}`}>
                         <div>
                             <h2 style={{ color: `#1A358F`, fontSize: `38px` }}>Xin chào !</h2>
-                            <p>Chào mừng {} đến với trang Admin</p>
+                            <p>Chào mừng { } đến với trang Admin</p>
                         </div>
-                        <div>
-                            <div className={`${styles.addBtn}`} >
-                                <AddIcon />QUÉT MÃ VẠCH
-                            </div>
-                        </div>
+
                     </div>
                     <div className={`${styles.myDevice}`}>
                         <div>
-                            <h3>Thiết bị của tôi</h3>
-                            <p style={{ color: `#75767E` }}>6 thiết bị</p>
+                            <h3>Thống kê</h3>
+                            <p style={{ color: `#75767E`, margin: "12px 0", fontSize: "17px" }}>5 món ăn bán được nhiều nhất</p>
                         </div>
-                        <div style={{ transform: `translateX(-30px)`, paddingRight: `30px`, borderRight: `1px solid #ddd` }}>
-                            <h3>4</h3>
-                            <p style={{ color: `#1A358F` }}>Đang sử dụng</p>
+                        <div style={{margin:"0 24px"}}>
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected>Thống kê doanh thu</option>
+                               {listDay.map(day=>(
+                                <option value={day}>{day} Ngày trước</option>
+                               ))}
+                            </select>
                         </div>
                         <div style={{}}>
-                            <h3>2</h3>
-                            <p style={{ color: `#ED942B` }}>Đã sử dụng</p>
+                            <h3>Tổng doanh thu: </h3>
+                            <p style={{ marginTop: `12px` }}>320000000 đ</p>
                         </div>
                     </div>
                     <div className={`${styles.chartSection}`} >
@@ -74,10 +84,10 @@ function Dashboard() {
                         />
                     </div>
                 </div>
-                <div className={`${styles.rightSide} col-3`}>
+                <div className={`${styles.rightSide} col-4`}>
                     <div className={`${styles.topRight} row`}>
 
-                        <p style={{ marginTop: `30px`, textAlign: `center`, fontSize: `32px`, fontWeight: `600` }}>ĐƠN HÀNG </p>
+                        <p style={{ marginTop: `30px`, textAlign: `center`, fontSize: `27px`, fontWeight: `600` }}>Khách đặt nhiều nhất </p>
 
                         <Doughnut
                             data={stateDoughnut}
@@ -96,7 +106,7 @@ function Dashboard() {
 
                     </div>
                     <div className={`${styles.staffRequest} row`}>
-                        <div className={`${styles.content} `}>
+                        {/* <div className={`${styles.content} `}>
 
                             <h3>Yêu cầu của nhân viên</h3>
                             <p><span style={{ fontSize: `24px`, fontWeight: `600`, color: `#1a358f`, width: `10px`, display: `inline-block`, width: `25px`, textAlign: `center` }}>
@@ -146,7 +156,7 @@ function Dashboard() {
                                     </tr>
                                 </tbody>
                             </Table>
-                        </div>
+                        </div> */}
                     </div>
 
                 </div>
