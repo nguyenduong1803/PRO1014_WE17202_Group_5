@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\Checkout;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Checkout\CheckoutVnPay;
 use App\Models\Invoices;
 use App\Models\PaymentVnPay;
@@ -16,7 +15,6 @@ use App\Http\Requests\Checkout\CheckoutPaymentCash;
 class CheckoutController extends Controller
 {
     //
-    private $idInvoices = NULL;
     public function paymentVnPay(CheckoutVnPay $request) {
         $validate = $request -> validated();
         $modelInvoices = new Invoices();

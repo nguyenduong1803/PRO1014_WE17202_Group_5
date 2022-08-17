@@ -88,8 +88,8 @@ class InvoicesController extends Controller
 
     public function getInvoicesByUser(Request $request) {
         $currentDate = Carbon::now('Asia/Ho_Chi_Minh') ->toDateTimeString();
+        $modelProduct = new Product();
         $user = Auth::user();
-        $params = [$user['id'], $currentDate];
         $modelInvoices = new Invoices();
         $modelDetailInvoice = new InvoiceDetail();
         $data = $modelInvoices -> getInvoicesByUser($user['id'], $currentDate, $request);
@@ -135,13 +135,13 @@ class InvoicesController extends Controller
         $data = $modelInvoices -> getInvoicesByAdmin($request);
         $listData = $data -> items();
         if(!isset($listData) || count($listData) < 1) return response() ->json(["msg" => "Bạn chưa có hoá đơn nào, vui lòng đặt hàng!", "status" => false],404);
-        for($i =0;$i < count($data); $i++) {
+        for($i =0;$i < count($listData); $i++) {
             $params2 = [
-                    $data[$i] -> id_invoice,
+                    $listData[$i] -> id_invoice,
                     $user['id']
                 ];
             $listDetailInvoice = $modelDetailInvoice -> getListDetailInvoice($params2);
-            $data[$i] -> listDetailInvoice = $listDetailInvoice;
+            $listData[$i] -> listDetailInvoice = $listDetailInvoice;
             $totalPrice = 0;
             $timeUpdateAt = date("Y-m-d H:i:s",time());
             for($j = 0; $j < count($listDetailInvoice); $j++) {
@@ -151,16 +151,16 @@ class InvoicesController extends Controller
             $params4 = [
                 $totalPrice,
                 $timeUpdateAt,
-                $data[$i] -> id
+                $listData[$i] -> id
             ];
             $modelInvoices -> updatePrice($params4);
         }
-        for($i =0;$i < count($data); $i++) {
+        for($i =0;$i < count($listData); $i++) {
             $params3 = [
-                $data[$i] -> id_invoice,
+                $listData[$i] -> id_invoice,
             ];
             $listDetailTbInvoice = $modelDetailTableInvoice -> getLists($params3);
-            $data[$i] -> listDetailTbInvoice = $listDetailTbInvoice;
+            $listData[$i] -> listDetailTbInvoice = $listDetailTbInvoice;
         }
         return $data;
     }
