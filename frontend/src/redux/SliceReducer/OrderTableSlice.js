@@ -167,7 +167,7 @@ export const addCart = createAsyncThunk("orderTable/addCart", async (payload, ac
             {
                 id_product: payload.id,
                 amount: payload.amount,
-                id_table_book: "5"
+                purchase_status: payload.purchase_status
             },
             {
                 headers: { "Authorization": `Bearer ${getToken()}` },

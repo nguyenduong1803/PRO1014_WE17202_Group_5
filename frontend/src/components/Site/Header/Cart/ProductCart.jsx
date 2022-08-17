@@ -5,10 +5,14 @@ import { useDispatch } from 'react-redux';
 import Quantity from '../../../../pages/Site/ShopDetails/Quantity';
 import { formatMoney } from '../../../../extensions/formatMoney';
 import { deleteCart } from '../../../../redux/SliceReducer/OrderTableSlice';
+import { useEffect } from 'react';
 
 function ProductCart({ img, name, idCart, price,quantity }) {
     const dispatch = useDispatch()
-    const [quantityCart,setQuantityCart]=React.useState(quantity)
+    const [quantityCart,setQuantityCart]=React.useState('')
+    useEffect((() => {
+        setQuantityCart(quantity)
+    }),[quantity])
     const handleDelete =()=>{
         dispatch(deleteCart(idCart))
     }

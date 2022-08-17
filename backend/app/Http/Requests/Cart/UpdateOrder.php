@@ -27,7 +27,7 @@ class UpdateOrder extends FormRequest
     {
         return [
             'amount' => 'integer|nullable',
-            'id_table_book' => 'nullable|integer',
+            'purchase_status' => 'integer|required',
             'status_cart_order' => 'integer|required',
             'id' => 'integer|required|exists:cart',
         ];

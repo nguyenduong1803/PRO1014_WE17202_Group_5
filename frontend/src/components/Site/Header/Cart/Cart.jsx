@@ -43,7 +43,7 @@ function Cart() {
                     <ul className={styles.shoppingCartItems}>
                       {carts && carts.map((cart, index) => {
                         return (
-                          <ProductCart key={index} name={cart.name} idCart={cart.id} content="content" img={cart.path} price={cart.price} quantity={cart.amount} />
+                          <ProductCart key={index} name={cart.name} idCart={cart.id} content="content" img={cart.path} price={cart.price} quantity={Number(cart.total_amount)} />
                         )
                       })}
                     </ul>
