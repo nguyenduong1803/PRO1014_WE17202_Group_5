@@ -27,6 +27,7 @@ class CheckoutVnPay extends FormRequest
     {
         return [
             'id_invoices' => 'integer|required',
+            'typeCheckout' => 'required|integer'
         ];
     }
 

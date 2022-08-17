@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Cart.module.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded';
-import CloseIcon from '@mui/icons-material/Close';
+import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
+import CloseIcon from "@mui/icons-material/Close";
 import ProductCart from "./ProductCart";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../../../redux/selector";
-import { getToken } from '../../../../utils/Common'
+import { getToken } from "../../../../utils/Common";
 import { Link } from "react-router-dom";
 import { formatMoney } from "../../../../extensions/formatMoney";
+import { useEffect } from "react";
 
 function Cart() {
-  const carts = useSelector(selectCart)
-  let totalMoney =0
-  if (carts) {
-    totalMoney = carts.reduce((init, value) => init + value.price, 0)
-  }
-  
+  const carts = useSelector(selectCart);
+  const [dataCarts, setDataCarts] = useState([]);
+
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    setDataCarts(carts);
+  }, [carts]);
+
+  useEffect(() => {
+    let sum = 0;
+    for (let i = 0; i < dataCarts.length; i++) {
+      sum += Number(dataCarts[i].price) * Number(dataCarts[i].total_amount);
+    }
+    setTotalPrice(sum);
+  }, [dataCarts]);
+
   return (
     <>
       <nav className={styles.navbar}>
@@ -25,7 +37,9 @@ function Cart() {
             <li>
               <a href="#" id="cart">
                 <LocalMallRoundedIcon color="#000" />
-                {getToken() && <span className={styles.badges}>{carts && carts.length}</span>}
+                {getToken() && (
+                  <span className={styles.badges}>{carts && carts.length}</span>
+                )}
               </a>
             </li>
             <div className={`${styles.container} ${styles.content}`}>
@@ -35,31 +49,45 @@ function Cart() {
                   <span className={styles.badge}>3</span>
                   <div className={styles.shoppingCartTotal}>
                     <span className={styles.lighterText}>Tổng:</span>
-                    <span className={styles.mainColorText}>{formatMoney(totalMoney)} đ</span>
+                    <span className={styles.mainColorText}>
+                      {formatMoney(totalPrice)} đ
+                    </span>
                   </div>
                 </div>
-                {getToken() ?
+                {getToken() ? (
                   <>
                     <ul className={styles.shoppingCartItems}>
-                      {carts && carts.map((cart, index) => {
+                      {dataCarts.map((cart, index) => {
                         return (
-                          <ProductCart key={index} name={cart.name} idCart={cart.id} content="content" img={cart.path} price={cart.price} quantity={Number(cart.total_amount)} />
-                        )
+                          <ProductCart
+                            key={index}
+                            name={cart.name}
+                            idCart={cart.id}
+                            content="content"
+                            img={cart.path}
+                            price={cart.price}
+                            quantity={Number(cart.total_amount)}
+                          />
+                        );
                       })}
                     </ul>
                     <div className={styles.footerButton}>
-                      <div className=""> <Link to="/dat-hang" className={styles.button}>
-                        Đặt hàng
-                      </Link></div>
+                      <div className="">
+                        {" "}
+                        <Link to="/dat-hang" className={styles.button}>
+                          Đặt hàng
+                        </Link>
+                      </div>
                     </div>
                   </>
-                  :
+                ) : (
                   <div className={styles.shoppingCartItems}>
                     <p className={styles.cartEmpty}>Vui lòng đăng nhập</p>
-                    <Link className={styles.cartRequire} to="/dang-nhap">Đăng nhập</Link>
+                    <Link className={styles.cartRequire} to="/dang-nhap">
+                      Đăng nhập
+                    </Link>
                   </div>
-                }
-
+                )}
               </div>
             </div>
           </ul>

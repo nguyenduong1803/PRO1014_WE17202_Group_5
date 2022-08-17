@@ -28,7 +28,6 @@ class SaveCart extends FormRequest
         return [
             'id_product' => 'integer|required',
             'amount' => 'integer|required',
-            'purchase_status' => 'integer|required'
         ];
     }
     public function failedValidation(Validator $validator)

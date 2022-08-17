@@ -30,7 +30,7 @@ function ProductCart({ img, name, idCart, price,quantity }) {
             </div>
             <div className={styles.detail}>
                 <div className={styles.quantity}>
-                    <Quantity quantity={quantityCart} setQuantity={setQuantityCart} />
+                    <Quantity idCart={idCart} quantity={quantityCart} setQuantity={setQuantityCart} />
                 </div>
                 <div className={styles.deleteIcon} onClick={handleDelete}>
                     <DeleteIcon />

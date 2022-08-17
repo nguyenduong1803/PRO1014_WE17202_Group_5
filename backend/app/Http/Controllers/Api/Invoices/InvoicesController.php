@@ -36,24 +36,26 @@ class InvoicesController extends Controller
         $uniIdInvoice = strtoupper(Str::random(10));
         $arrMerge = array();
         $modelTables = new Tables();
-        foreach ( $listIdProduct as $idx => $val ) {
-            $arrMerge[] = ["id_product" => $val,"amount" => $listAmount[$idx]];
-        }
-        for($i = 0; $i < count($arrMerge); $i++) {
-                    $params = [
-                        $user['id'],
-                        $uniIdInvoice,
-                        $arrMerge[$i]['id_product'],
-                        $arrMerge[$i]['amount'],
-                    ];
-                    $controllerDetailInvoice ->insertDetailInvoice($params);
-                    $params3 = [
-                        $listIdProduct[$i]
-                    ];
-                    $priceProduct = $modelDetailInvoice ->getPriceProductInDetailInvoice($params3);
-                    $totalPrice += $priceProduct[0] -> price * $arrMerge[$i]['amount'];
-
-
+        if(count($listIdProduct) > 0) {
+            foreach ( $listIdProduct as $idx => $val ) {
+                $arrMerge[] = ["id_product" => $val,"amount" => $listAmount[$idx]];
+            }
+            for($i = 0; $i < count($arrMerge); $i++) {
+                        $params = [
+                            $user['id'],
+                            $uniIdInvoice,
+                            $arrMerge[$i]['id_product'],
+                            $arrMerge[$i]['amount'],
+                        ];
+                        $controllerDetailInvoice ->insertDetailInvoice($params);
+                        $params3 = [
+                            $listIdProduct[$i]
+                        ];
+                        $priceProduct = $modelDetailInvoice ->getPriceProductInDetailInvoice($params3);
+                        $totalPrice += $priceProduct[0] -> price * $arrMerge[$i]['amount'];
+    
+    
+            }
         }
         for($i = 0; $i < count($listTableBook); $i++) {
             $params = [

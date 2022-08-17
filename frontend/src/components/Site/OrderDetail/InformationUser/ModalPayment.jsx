@@ -25,7 +25,6 @@ export default function ModalPayment({
   id,
   order,
 }) {
-  console.log(order)
   const [state, setState] = React.useState(false);
   const [messToast, setMessToast] = React.useState("");
   const handleClose = () => {
@@ -50,7 +49,9 @@ export default function ModalPayment({
   async function checkoutPaymentVnPay() {
     const params = {
       id_invoices: id,
+      typeCheckout: 1
     };
+    localStorage.setItem("typeCheckout",params.typeCheckout);
     const res = await axios.post(api + `checkout/vnpay`, params, {
       headers: { Authorization: `Bearer ${getToken()}` },
     });
@@ -72,9 +73,10 @@ export default function ModalPayment({
       description: orders.note,
       phone: orders.phone,
       address: "Thanh toán tại quầy",
-      purchase_status: 1,
+      purchase_status: 2,
       status_order: 2,
       price: String(`${orders.total_price}`),
+      typeCheckout: 1
     };
 
     const res = await axios.post(api + `checkout/paymentCash`, params, {

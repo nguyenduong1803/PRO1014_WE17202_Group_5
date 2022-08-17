@@ -10,6 +10,9 @@ use App\Models\PaymentCash;
 use App\Http\Requests\Checkout\CreateInfoPaymentVNPay;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Checkout\CheckoutPaymentCash;
+use App\Http\Controllers\Api\Cart\CartController;
+
+
 
 
 class CheckoutController extends Controller
@@ -18,8 +21,16 @@ class CheckoutController extends Controller
     public function paymentVnPay(CheckoutVnPay $request) {
         $validate = $request -> validated();
         $modelInvoices = new Invoices();
-        $detailInvoice = $modelInvoices ->getDetailInvoice($validate['id_invoices']);
-        if(!isset($detailInvoice)) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
+        $modelCartController = new CartController();
+        if($validate['typeCheckout'] == 2) {
+            $dataCart = $modelCartController -> getCart2();
+            if(isset($dataCart) && count($dataCart) < 1) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
+            $totalPriceCart = $modelCartController -> getAllPrices();
+        } else {
+            $detailInvoice = $modelInvoices ->getDetailInvoice($validate['id_invoices']);
+            if(!isset($detailInvoice)) return response() ->json(["msg" => "Lấy dữ liệu thất bại!", "status" => false],404);
+        }
+        
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://localhost:3000/thong-bao-thanh-toan";
         $vnp_TmnCode = "H5WFAIQG";//Mã website tại VNPAY 
@@ -28,7 +39,7 @@ class CheckoutController extends Controller
         $vnp_TxnRef = mt_rand(100000,999999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toan don hang";
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = (float) $detailInvoice['total_price'] * 100;
+        $vnp_Amount = $validate['typeCheckout'] == 2 ? (float) $totalPriceCart * 100 : (float) $detailInvoice['total_price'] * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -133,6 +144,7 @@ class CheckoutController extends Controller
     public function checkoutPaymentCash(CheckoutPaymentCash $request) {
         $validate = $request -> validated();
         $user = Auth::user();
+        $modelCartController = new CartController();
         $modelPaymentCash = new PaymentCash();
         $params = [
             $validate['name'],
@@ -145,6 +157,9 @@ class CheckoutController extends Controller
             $user['id']
         ];
         $modelPaymentCash -> create($params);
+        if($validate['typeCheckout'] === 2) {
+            $modelCartController -> clearAllOrderCartUser();
+        }
         return response() ->json(["msg" => "Vui lòng thanh toán sau khi nhận được đơn hàng, cảm ơn quý khách đã sử dụng dịch cụ của chúng tôi!", "status" => true],200);
     }
 }

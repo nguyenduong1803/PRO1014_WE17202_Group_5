@@ -36,7 +36,7 @@ class CreateInfoPaymentVNPay extends FormRequest
             "vnp_TransactionNo" => "required|max:50|string",
             "vnp_TransactionStatus" => "required|max:50|string",
             "vnp_TxnRef" => "required|max:50|string",
-            "id_invoices" => "required|integer",
+            "id_invoices" => "nullable|integer",
         ];
     }
 

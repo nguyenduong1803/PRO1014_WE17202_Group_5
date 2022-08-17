@@ -78,6 +78,7 @@ Route::group(['namespace' => 'Cart', 'prefix' => 'cart'], function(){
         Route::post('updateOrder', [\App\Http\Controllers\Api\Cart\CartController::class, 'updateOrder']);
         Route::get('getCart', [\App\Http\Controllers\Api\Cart\CartController::class, 'getCart']);
         Route::delete('deleteOrder/{id}', [\App\Http\Controllers\Api\Cart\CartController::class, 'deleteOrder']);
+        Route::get('clearAllOrderCartUser', [\App\Http\Controllers\Api\Cart\CartController::class, 'clearAllOrderCartUser']);
     });
 });
 
