@@ -7,7 +7,6 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ContentRight from "./ContentHomeRight/SaleFood/SaleFood";
 import product1 from "../../../../src/assets/img/seafood-1.jpg";
 import product3 from "../../../../src/assets/img/seafood-3.jpg";
-import product4 from "../../../../src/assets/img/seafood-10.jpg";
 import product5 from "../../../../src/assets/img/seafood-14.webp";
 import styles from "../ContentHome/TrendingOrder/TrendingOrder.module.css";
 import MyCart from "../../Site/ContentHome/ContentHomeRight/MyCart/MyCart";
@@ -89,7 +88,7 @@ function ContentHome() {
                   if(product.listsImg.length>1){
                     indexImg =product.listsImg.length-1
                   }
-                  console.log(indexImg);
+            
                   return (
                     <Product
                       key={index}

@@ -7,33 +7,34 @@ import Panolens from "../Panolens/Panolens"
 
 const arrImage = [
     {
-        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822447/product/l1v9gpzpc90gszn7uvgp.jpg",
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1660770223/product/wbbiyqxbmlxthkb81syd.jpg",
     },
     {
-        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822723/product/q6tvz6csfo73aksy1b0w.jpg",
+        src:"https://res.cloudinary.com/dlvtzpxce/image/upload/v1660770402/product/lfprefvyjsvthk5koqa9.jpg"
+     
 
     },
     {
-        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822613/product/ozexm6vwgbflul4tb70b.jpg",
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1660770351/product/soqfpwxt7utvm21zmrun.jpg",
 
     },
     {
-        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822781/product/sfiyk0x4iwiwhzd0fmew.jpg",
+        src:"https://res.cloudinary.com/dlvtzpxce/image/upload/v1660770487/product/thhcmj4zn9ymbpdmdacw.jpg",
     },
     {
-        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822879/product/fjw2f4efbvnic7wnxw7t.jpg",
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1660770530/product/iygmz9uwtkeqtjxph8vg.jpg",
     },
     {
-        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822903/product/smka68hvau8djtffz2qr.jpg",
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1660770563/product/chqhbwyju2sl4ebomzcf.jpg",
     },
     {
-        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822933/product/xs05ltchuq8xfspvy01e.jpg",
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1660770626/product/or6vcou735vgubbyp22x.jpg",
     },
     {
-        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822933/product/xs05ltchuq8xfspvy01e.jpg",
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1660770602/product/j4vaoqjwq7kjevouupbf.jpg",
     },
     {
-        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1659822955/product/qxmltixitp2wdnw1rkdk.jpg",
+        src: "https://res.cloudinary.com/dlvtzpxce/image/upload/v1660770626/product/or6vcou735vgubbyp22x.jpg",
     }
 
 

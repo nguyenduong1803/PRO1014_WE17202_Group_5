@@ -61,7 +61,7 @@ function Pay() {
         }
       }
     })();
-  }, []);
+  }, [dispatch]);
   async function clearAllOrderCartUser() {
     try {
       await axios.get(
@@ -82,7 +82,7 @@ function Pay() {
       };
       dispatch(updateOrder(params2));
     }
-  }, [paymentMethod]);
+  }, [paymentMethod,dispatch]);
   if (paymentMethod === "1") return <PaySucces />;
   if (!statusPayment || vnpResponseCode !== "00") return <PayFail />;
   return <PaySucces />;

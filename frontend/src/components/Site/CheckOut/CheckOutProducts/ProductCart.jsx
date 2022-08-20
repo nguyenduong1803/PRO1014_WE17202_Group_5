@@ -1,5 +1,4 @@
 import React from 'react'
-import DeleteIcon from "@mui/icons-material/Delete";
 import Quantity from "../../../../pages/Site/ShopDetails/Quantity";
 import styles from "./CheckOutProducts.module.css";
 import { formatMoney } from '../../../../extensions/formatMoney';

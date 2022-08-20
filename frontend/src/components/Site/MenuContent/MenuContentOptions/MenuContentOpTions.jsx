@@ -19,7 +19,7 @@ function MenuContentOpTions() {
   const dispatch = useDispatch()
   const handleActiveCate = (idCate) => {
     setActiveCate(idCate)
-    dispatch(getProducts({ keySearch: debounceSearch, limit: 30,category:idCate}))
+    dispatch(getProducts({ keySearch: debounceSearch, limit: 12,category:idCate}))
   }
   const handleChange = (event, newValue) => {
     setValue(newValue);
