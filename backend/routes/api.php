@@ -142,6 +142,11 @@ Route::group(['namespace' => 'Statistical', 'prefix' => 'statistical'], function
     });
 });
 
+Route::group(['namespace' => 'ImgUpload', 'prefix' => 'imgUpload'], function(){
+        Route::post('jsAdvanced', [\App\Http\Controllers\Api\ImgUpload\ImgUploadController::class, 'imgUpload']);
+});
+
+
 
 
 
