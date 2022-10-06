@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from '../../../components/Site/ContentRegister/Register.module.css'
 import FBImg from '../../../assets/images/social-icons/FBImg.png'
 import GmailImg from '../../../assets/images/social-icons/GmailImg.png'
@@ -7,7 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux"
 import { isSuccess, selectLoading } from "../../../redux/selector"
-import { getUserAuth, LoginAuth } from "../../../redux/SliceReducer/AuthSlice"
+import {  LoginAuth } from "../../../redux/SliceReducer/AuthSlice"
 import { InputPassword } from '../../../components/Site/ContentRegister/InputMui'
 import { FormControl } from '@mui/material'
 import BannerAnimation from '../../../components/Site/ContentRegister/BannerAnimation'

@@ -9,7 +9,7 @@ import Tablecustom from '../../../components/Admin/TableCustom/Tablecustom';
 import { customerTable } from '../../../config/tables';
 import InputSearch from '../../../components/Admin/InputSearch/InputSearch';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAllUser, selectUser } from '../../../redux/selector';
+import { selectAllUser } from '../../../redux/selector';
 import { getAllUser } from '../../../redux/SliceReducer/AuthSlice';
 import { getToken } from '../../../utils/Common';
 const breadcrumItem = [

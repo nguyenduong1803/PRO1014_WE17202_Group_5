@@ -1,12 +1,10 @@
 import React from "react";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import styles from "./EditInformationUser.module.css";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import Stack from "@mui/material/Stack";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { api } from "../../../../utils/api";
@@ -53,7 +51,6 @@ function EditInformationUser() {
       file: file,
     };
     e.preventDefault();
-    console.log(newUserName);
     // const ngaySinh = `${newDate.getFullYear()}-${newDate.getMonth() + 1}-${newDate.getDate()}`
     const formData = new FormData();
     formData.append("ten", newUserName);
@@ -63,12 +60,7 @@ function EditInformationUser() {
     formData.append("gioi_tinh", newGender);
     formData.append("ngay_sinh", newDate);
     formData.append("file", file);
-    console.log(params);
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
+  
     try {
       await axios
         .post(api + "user/updateInfo", params, {

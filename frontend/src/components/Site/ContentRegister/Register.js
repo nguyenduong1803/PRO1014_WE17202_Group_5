@@ -12,6 +12,7 @@ import BannerAnimation from './BannerAnimation'
 import { registerAccounts } from '../../../redux/SliceReducer/AccountSlice'
 import { selectIsuccess, selectLoadingRegister } from '../../../redux/selector'
 import Loadings from '../Loading/Loadings/Loadings'
+import { Alert } from 'react-bootstrap'
 
 
 function ContentRegister() {
@@ -19,7 +20,7 @@ function ContentRegister() {
 
     return (
         <>
-            {load === "loading" ? <Loadings /> : ""}
+            {load === "loading" ? <Loadings /> : Alert("đăng kí thành công")}
             <div className={`${styles.main} d-flex`}>
                 <div className={`${styles.sideBar}`}>
                     <div className={`${styles.signUp}`}>

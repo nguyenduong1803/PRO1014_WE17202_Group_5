@@ -6,7 +6,6 @@ import { formatMoney } from '../../../extensions/formatMoney';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrder } from '../../../redux/SliceReducer/OrderTableSlice';
 import Search from '../../../assets/svg/Search';
-import { Button } from '@mui/material';
 import useDebounce from '../../../hooks/useDebounce';
 import { getProducts } from '../../../redux/SliceReducer/ManagerProductSlice';
 import LoadingSearch from '../Loading/LoadingSearch';
@@ -43,7 +42,7 @@ function ChooseProduct({ className }) {
     };
     React.useEffect(() => {
         dispatch(getProducts({ keySearch: debounceSearch, limit: 30, category: activeCate }))
-    }, [debounceSearch])
+    }, [debounceSearch,activeCate,dispatch])
     return (
         <div className={`TableOption__wrapCart ${className}`} >
             <div className={styles.search}>
